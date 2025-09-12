@@ -1,4 +1,4 @@
-package com.cognizant.ecommerce.admin.dto;
+package com.cognizant.ecommerce.dto.payment;
 
 /**
  * Request DTO for creating or updating a payment method.

@@ -1,4 +1,4 @@
-package com.cognizant.ecommerce.admin.dto;
+package com.cognizant.ecommerce.dto.analyticsreport;
 
 import java.util.Date;
 

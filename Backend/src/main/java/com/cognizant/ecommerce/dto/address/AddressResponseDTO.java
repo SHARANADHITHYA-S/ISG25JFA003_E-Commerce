@@ -1,4 +1,4 @@
-package com.cognizant.ecommerce.admin.dto;
+package com.cognizant.ecommerce.dto.address;
 
 /**
  * Response DTO for retrieving address details.

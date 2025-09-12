@@ -1,4 +1,4 @@
-package com.cognizant.ecommerce.admin.dto;
+package com.cognizant.ecommerce.dto.address;
 
 /**
  * Request DTO for creating or updating an address.
