@@ -1,0 +1,14 @@
+package com.cognizant.ecommerce.dao;
+
+import com.cognizant.ecommerce.model.OrderItem;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
+
+
+
+}
