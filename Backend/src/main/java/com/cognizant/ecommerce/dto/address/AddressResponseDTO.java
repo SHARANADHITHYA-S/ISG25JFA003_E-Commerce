@@ -16,4 +16,5 @@ public class AddressResponseDTO {
     private String state;
     private String postalCode;
     private String country;
+
 }
