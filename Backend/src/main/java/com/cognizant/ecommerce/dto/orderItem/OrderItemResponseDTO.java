@@ -20,5 +20,4 @@ public class OrderItemResponseDTO {
     private String productName;
     private int quantity;
     private BigDecimal price;
-    private BigDecimal subtotal;
 }
