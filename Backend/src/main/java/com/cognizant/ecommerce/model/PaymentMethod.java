@@ -3,6 +3,7 @@ package com.cognizant.ecommerce.model;
 import com.cognizant.ecommerce.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,6 +21,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "payment_methods")
+@Builder
 public class PaymentMethod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,10 +34,10 @@ public class PaymentMethod {
     private boolean is_default;
 
     @CreationTimestamp
-    private Date created_at;
+    private LocalDateTime created_at;
 
     @UpdateTimestamp
-    private Date updated_at;
+    private LocalDateTime updated_at;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)

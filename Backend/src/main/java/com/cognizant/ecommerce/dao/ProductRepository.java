@@ -1,10 +1,9 @@
 package com.cognizant.ecommerce.dao;
 
-import com.cognizant.ecommerce.model.PaymentMethod;
+import com.cognizant.ecommerce.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-
 @Repository
-public interface PaymentMethodRepository extends JpaRepository<PaymentMethod, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 }
