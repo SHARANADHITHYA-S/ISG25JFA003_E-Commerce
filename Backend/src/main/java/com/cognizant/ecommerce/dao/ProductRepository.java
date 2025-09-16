@@ -1,4 +1,4 @@
-package com.cognizant.ecommerce.repository;
+package com.cognizant.ecommerce.dao;
 
 import com.cognizant.ecommerce.model.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
