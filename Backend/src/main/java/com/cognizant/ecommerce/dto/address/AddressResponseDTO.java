@@ -1,63 +1,38 @@
 package com.cognizant.ecommerce.dto.address;
 
-/**
- * Response DTO for retrieving address details.
- * Includes the read-only address ID.
- */
-public class AddressResponseDTO {
+import com.cognizant.ecommerce.model.Address;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
+import java.util.Date;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class AddressResponseDTO extends Address {
     private Long addressId;
     private String street;
+    private String addressLine2;
     private String city;
     private String state;
     private String zipCode;
     private String country;
+    private String phone;
+    private boolean isDefault;
+    private Date createdAt;
+    private Date updatedAt;
+    private String addressLine1;
+    private String postalCode;
 
-    // Getters and setters
-    public Long getAddressId() {
-        return addressId;
+    public AddressResponseDTO(Long id, Object addressLine1, Object addressLine2, String city, String country, boolean aDefault, String phone, Object postalCode, String state) {
     }
 
-    public void setAddressId(Long addressId) {
-        this.addressId = addressId;
+    public void setAddressLine1(String addressLine1) {
+        this.addressLine1 = addressLine1;
     }
 
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 }
