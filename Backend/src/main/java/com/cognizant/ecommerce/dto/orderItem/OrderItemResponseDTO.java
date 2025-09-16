@@ -15,7 +15,6 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 public class OrderItemResponseDTO {
     private Long id;
-    private Order order;
     private Long productId;
     private String productName;
     private int quantity;
