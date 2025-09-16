@@ -1,6 +1,5 @@
 package com.cognizant.ecommerce.dto.order;
 
-import com.cognizant.ecommerce.dto.address.AddressResponseDTO;
 import com.cognizant.ecommerce.dto.orderItem.OrderItemResponseDTO;
 import com.cognizant.ecommerce.dto.payment.PaymentMethodResponseDTO;
 import com.cognizant.ecommerce.dto.user.UserResponseDTO;
@@ -20,7 +19,6 @@ public class OrderResponseDTO {
     private Date placedAt;
     private Date updatedAt;
     private UserResponseDTO user;
-    private AddressResponseDTO address;
     private PaymentMethodResponseDTO DTO;
     private List<OrderItemResponseDTO> orderItems;
 }
