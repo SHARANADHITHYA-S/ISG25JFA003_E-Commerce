@@ -8,10 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-<<<<<<< HEAD
-    // This method will automatically be implemented by Spring Data JPA
     Optional<Category> findByName(String name);
 }
-=======
-}
->>>>>>> d894a8dc0c82e3b5bfd10bfc2ec9ee207806ca54
