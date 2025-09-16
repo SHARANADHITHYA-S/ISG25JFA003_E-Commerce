@@ -2,6 +2,7 @@ package com.cognizant.ecommerce.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "products")
 public class Product {
     @Id
@@ -32,7 +34,7 @@ public class Product {
 
     @Column(nullable = false)
     private String image_url;
-    private boolean is_active;
+    private boolean isActive;
 
     @CreationTimestamp
     private Date created_at;
