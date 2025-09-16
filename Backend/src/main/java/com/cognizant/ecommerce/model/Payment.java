@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -26,8 +28,8 @@ public class Payment {
     private String status;
     private String transaction_reference;
 
-    @CreationTimestamp
-    private Date paid_at;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", referencedColumnName = "id", nullable = false)

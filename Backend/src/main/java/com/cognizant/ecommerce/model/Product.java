@@ -2,6 +2,7 @@ package com.cognizant.ecommerce.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Builder
 @Table(name = "products")
 public class Product {
     @Id
@@ -34,6 +36,8 @@ public class Product {
     private String image_url;
     private boolean is_active;
 
+
+
     @CreationTimestamp
     private Date created_at;
 
@@ -42,7 +46,7 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
-    private com.cognizant.ecommerce.model.Category category;
+    private Category category;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
