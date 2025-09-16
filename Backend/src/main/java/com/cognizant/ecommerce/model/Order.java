@@ -2,20 +2,21 @@ package com.cognizant.ecommerce.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -25,13 +26,15 @@ public class Order {
 
     @Column(nullable = false)
     private String status;
-    @Column(nullable = false)
-    private BigDecimal total_amount;
+
+    @Column(name="total_amount", nullable = false)
+    private BigDecimal totalAmount;
 
     @CreationTimestamp
-    private Date placed_at;
+    private LocalDateTime placed_at;
+
     @UpdateTimestamp
-    private Date updated_at;
+    private LocalDateTime updated_at;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)

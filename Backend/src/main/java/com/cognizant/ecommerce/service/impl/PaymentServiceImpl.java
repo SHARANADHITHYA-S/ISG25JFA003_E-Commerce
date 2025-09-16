@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -50,7 +51,7 @@ public class PaymentServiceImpl implements PaymentService {
                 .order(order)
                 .paymentMethod(order.getPaymentMethod())
                 .status("PENDING")
-                .paid_at(new Date())
+                .createdAt(LocalDateTime.now())
                 .build();
 
         Payment saved= paymentRepository.save(payment);
@@ -60,14 +61,13 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public PaymentResponseDTO getPaymentByOrderId(Long orderId){
-        Order order= orderRepository.findById(orderId)
-                .orElseThrow(()->new RuntimeException("Order not found "));
+    public PaymentResponseDTO getPaymentByOrderId(Long orderId) {
+        Payment payment = paymentRepository.findByOrderId(orderId)
+                .orElseThrow(() -> new RuntimeException("Payment not found for order id: " + orderId));
 
-        return modelMapper.map(order, PaymentResponseDTO.class);
-
-
+        return modelMapper.map(payment, PaymentResponseDTO.class);
     }
+
 
     @Override
     public PaymentResponseDTO updatePaymentStatus(Long paymentId, String status){
