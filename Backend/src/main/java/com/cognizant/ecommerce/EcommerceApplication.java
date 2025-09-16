@@ -12,15 +12,6 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 public class EcommerceApplication {
 
-//	@Bean
-//	public Module hibernateModule() {
-//		Hibernate5Module module = new Hibernate5Module();
-//		// Optional: configure to not force lazy loading
-//		module.disable(Hibernate5Module.Feature.FORCE_LAZY_LOADING);
-//		return module;
-//	}
-
-
 	@Bean
 	public ModelMapper modelMapper(){
 		return new ModelMapper();
