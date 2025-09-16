@@ -1,12 +1,15 @@
 package com.cognizant.ecommerce.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -14,6 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "payments")
+@Builder
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +28,8 @@ public class Payment {
     private String status;
     private String transaction_reference;
 
-    @CreationTimestamp
-    private Date paid_at;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", referencedColumnName = "id", nullable = false)
