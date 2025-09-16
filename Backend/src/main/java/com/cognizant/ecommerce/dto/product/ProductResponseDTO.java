@@ -1,6 +1,9 @@
 package com.cognizant.ecommerce.dto.product;
 import com.cognizant.ecommerce.dto.category.CategoryResponseDTO;
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.JsonProperty;
+=======
+>>>>>>> d894a8dc0c82e3b5bfd10bfc2ec9ee207806ca54
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

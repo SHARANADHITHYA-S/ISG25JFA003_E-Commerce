@@ -36,6 +36,8 @@ public class Product {
     private String image_url;
     private boolean isActive;
 
+
+
     @CreationTimestamp
     private Date created_at;
 
@@ -44,7 +46,7 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
-    private com.cognizant.ecommerce.model.Category category;
+    private Category category;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
