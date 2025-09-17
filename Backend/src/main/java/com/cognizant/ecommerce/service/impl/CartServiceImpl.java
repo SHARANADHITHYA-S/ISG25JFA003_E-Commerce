@@ -48,6 +48,8 @@ public class CartServiceImpl implements CartService {
     private CartResponseDTO convertToCartResponseDTO(Cart cart) {
         CartResponseDTO cartResponseDTO = new CartResponseDTO();
         cartResponseDTO.setId(cart.getId());
+        cartResponseDTO.setCreatedAt(cart.getCreated_at());
+        cartResponseDTO.setUpdatedAt(cart.getUpdated_at());
 
         List<CartItemResponseDTO> cartItemDTOs = cart.getCartItems().stream()
                 .map(this::convertToCartItemResponseDTO)
