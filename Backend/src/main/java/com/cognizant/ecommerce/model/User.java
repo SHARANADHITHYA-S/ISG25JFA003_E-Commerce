@@ -66,4 +66,5 @@ public class User {
     public void setPasswordHash(String newPassword) {
 
     }
+
 }

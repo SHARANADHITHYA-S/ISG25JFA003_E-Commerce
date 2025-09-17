@@ -65,16 +65,16 @@ public class AddressServiceImpl implements AddressService {
         // Correctly populate the `id` and `addressId` fields.
         responseDTO.setId(address.getId());
         responseDTO.setAddressId(address.getId());
-        responseDTO.setAddressLine1(address.getAddress_line1());
-        responseDTO.setAddressLine2(address.getAddress_line2());
+        responseDTO.setAddress_line1(address.getAddress_line1());
+        responseDTO.setAddress_line2(address.getAddress_line2());
         responseDTO.setCity(address.getCity());
         responseDTO.setState(address.getState());
-        responseDTO.setPostalCode((String) address.getPostal_code());
+        responseDTO.setPostal_code((String) address.getPostal_code());
         responseDTO.setCountry(address.getCountry());
         responseDTO.setPhone(address.getPhone());
         responseDTO.setDefault((Boolean) address.isDefault());
-        responseDTO.setCreatedAt(address.getCreated_at());
-        responseDTO.setUpdatedAt(address.getUpdated_at());
+        responseDTO.setCreated_at(address.getCreated_at());
+        responseDTO.setUpdated_at(address.getUpdated_at());
         return responseDTO;
     }
 }
