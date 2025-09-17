@@ -37,7 +37,7 @@ public class CartController {
     @DeleteMapping("/{userId}/clear")
     public ResponseEntity<Void> clearCart(@PathVariable Long userId) {
         // Security check: ensure the user ID matches the authenticated user.
-        cartService.clearCart(userId);
+        cartService.deleteCartByUserId(userId);
         return ResponseEntity.noContent().build();
     }
 }
