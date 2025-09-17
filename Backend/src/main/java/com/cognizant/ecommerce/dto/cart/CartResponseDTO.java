@@ -5,8 +5,10 @@ import com.cognizant.ecommerce.dto.cartItem.CartItemResponseDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import org.springframework.cglib.core.Local;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -15,8 +17,8 @@ import java.util.List;
 @AllArgsConstructor
 public class CartResponseDTO {
     private Long id;
-    private Date createdAt;
-    private Date updatedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private BigDecimal totalPrice;
     private List<CartItemResponseDTO> items;
 }

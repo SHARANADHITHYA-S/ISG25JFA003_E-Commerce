@@ -45,17 +45,11 @@ public class CartServiceImpl implements CartService {
         cartRepository.delete(cart);
     }
 
-    @Override
-    @Transactional
-    public void clearCart(Long userId) {
-        Cart cart = cartRepository.findByUserId(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("Cart not found for user with ID: " + userId));
-        cartItemRepository.deleteAll(cart.getCartItems());
-    }
-
     private CartResponseDTO convertToCartResponseDTO(Cart cart) {
         CartResponseDTO cartResponseDTO = new CartResponseDTO();
         cartResponseDTO.setId(cart.getId());
+        cartResponseDTO.setCreatedAt(cart.getCreated_at());
+        cartResponseDTO.setUpdatedAt(cart.getUpdated_at());
 
         List<CartItemResponseDTO> cartItemDTOs = cart.getCartItems().stream()
                 .map(this::convertToCartItemResponseDTO)

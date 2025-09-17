@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.cglib.core.Local;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Data
@@ -20,10 +22,10 @@ public class Cart {
     private Long id;
 
     @CreationTimestamp
-    private Date created_at;
+    private LocalDateTime created_at;
 
     @UpdateTimestamp
-    private Date updated_at;
+    private LocalDateTime updated_at;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)

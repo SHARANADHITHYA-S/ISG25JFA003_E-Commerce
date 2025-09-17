@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -22,7 +23,7 @@ public class CartItem {
     private Integer quantity;
 
     @CreationTimestamp
-    private Date added_at;
+    private LocalDateTime added_at;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id", referencedColumnName = "id", nullable = false)
