@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -53,8 +55,8 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
         paymentMethod.setAccount_number(requestDTO.getCardNumber());
         paymentMethod.setExpiry_date(requestDTO.getExpirationDate());
         paymentMethod.setIs_default(requestDTO.isDefault());
-        paymentMethod.setCreated_at(new Date());
-        paymentMethod.setUpdated_at(new Date());
+        paymentMethod.setCreated_at(LocalDateTime.now());
+        paymentMethod.setUpdated_at(LocalDateTime.now());
 
         PaymentMethod savedPaymentMethod = paymentMethodRepository.save(paymentMethod);
         return mapToResponseDTO(savedPaymentMethod);

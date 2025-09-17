@@ -1,0 +1,202 @@
+2025-09-17T16:38:57.982+05:30  INFO 14296 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Starting EcommerceApplication using Java 21 with PID 14296 (C:\Users\2440575\Downloads\ISG25JFA003_E-Commerce\Backend\target\classes started by 2440575 in C:\Users\2440575\Downloads\ISG25JFA003_E-Commerce)
+2025-09-17T16:38:57.985+05:30 DEBUG 14296 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-17T16:38:57.986+05:30  INFO 14296 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-09-17T16:38:58.081+05:30  INFO 14296 --- [ecommerce] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-17T16:38:58.083+05:30  INFO 14296 --- [ecommerce] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-17T16:39:00.055+05:30  INFO 14296 --- [ecommerce] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-17T16:39:00.347+05:30  INFO 14296 --- [ecommerce] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 260 ms. Found 12 JPA repository interfaces.
+2025-09-17T16:39:01.488+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-17T16:39:01.529+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-17T16:39:01.529+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-17T16:39:01.640+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-17T16:39:01.641+05:30  INFO 14296 --- [ecommerce] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3556 ms
+2025-09-17T16:39:02.021+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-17T16:39:02.145+05:30  INFO 14296 --- [ecommerce] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-17T16:39:02.196+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-17T16:39:02.704+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-17T16:39:02.756+05:30  INFO 14296 --- [ecommerce] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-17T16:39:03.173+05:30  INFO 14296 --- [ecommerce] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1ebd1d40
+2025-09-17T16:39:03.175+05:30  INFO 14296 --- [ecommerce] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-17T16:39:03.290+05:30  INFO 14296 --- [ecommerce] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.42
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-17T16:39:04.792+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-17T16:39:04.987+05:30  INFO 14296 --- [ecommerce] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-17T16:39:06.312+05:30  WARN 14296 --- [ecommerce] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-17T16:39:07.270+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-09-17T16:39:07.333+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-17T16:39:07.350+05:30  INFO 14296 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Started EcommerceApplication in 10.511 seconds (process running for 11.863)
+2025-09-17T16:39:12.977+05:30  INFO 14296 --- [ecommerce] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-17T16:39:12.978+05:30  INFO 14296 --- [ecommerce] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-17T16:39:12.979+05:30  INFO 14296 --- [ecommerce] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-09-17T16:39:13.412+05:30  WARN 14296 --- [ecommerce] [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [java.util.ConcurrentModificationException]
+2025-09-17T16:41:44.224+05:30  INFO 14296 --- [ecommerce] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 1 deletion, 0 modifications)
+2025-09-17T16:41:44.230+05:30  INFO 14296 --- [ecommerce] [Thread-5] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-17T16:41:44.244+05:30  INFO 14296 --- [ecommerce] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-17T16:41:44.252+05:30  INFO 14296 --- [ecommerce] [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-17T16:41:44.258+05:30  INFO 14296 --- [ecommerce] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-17T16:41:44.273+05:30  INFO 14296 --- [ecommerce] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-17T16:41:44.446+05:30  INFO 14296 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Starting EcommerceApplication using Java 21 with PID 14296 (C:\Users\2440575\Downloads\ISG25JFA003_E-Commerce\Backend\target\classes started by 2440575 in C:\Users\2440575\Downloads\ISG25JFA003_E-Commerce)
+2025-09-17T16:41:44.446+05:30 DEBUG 14296 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-17T16:41:44.447+05:30  INFO 14296 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-09-17T16:41:45.338+05:30  INFO 14296 --- [ecommerce] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-17T16:41:45.427+05:30  WARN 14296 --- [ecommerce] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: java.lang.TypeNotPresentException: Type com.cognizant.ecommerce.model.Cart not present
+2025-09-17T16:41:45.437+05:30  INFO 14296 --- [ecommerce] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-09-17T16:41:45.525+05:30 ERROR 14296 --- [ecommerce] [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+java.lang.TypeNotPresentException: Type com.cognizant.ecommerce.model.Cart not present
+	at java.base/sun.reflect.generics.factory.CoreReflectionFactory.makeNamedType(CoreReflectionFactory.java:117) ~[na:na]
+	at java.base/sun.reflect.generics.visitor.Reifier.visitClassTypeSignature(Reifier.java:125) ~[na:na]
+	at java.base/sun.reflect.generics.tree.ClassTypeSignature.accept(ClassTypeSignature.java:49) ~[na:na]
+	at java.base/sun.reflect.generics.visitor.Reifier.reifyTypeArguments(Reifier.java:68) ~[na:na]
+	at java.base/sun.reflect.generics.visitor.Reifier.visitClassTypeSignature(Reifier.java:138) ~[na:na]
+	at java.base/sun.reflect.generics.tree.ClassTypeSignature.accept(ClassTypeSignature.java:49) ~[na:na]
+	at java.base/sun.reflect.generics.repository.ClassRepository.computeSuperInterfaces(ClassRepository.java:117) ~[na:na]
+	at java.base/sun.reflect.generics.repository.ClassRepository.getSuperInterfaces(ClassRepository.java:95) ~[na:na]
+	at java.base/java.lang.Class.getGenericInterfaces(Class.java:1296) ~[na:na]
+	at org.springframework.core.ResolvableType.getInterfaces(ResolvableType.java:553) ~[spring-core-6.2.10.jar:6.2.10]
+	at org.springframework.core.ResolvableType.as(ResolvableType.java:501) ~[spring-core-6.2.10.jar:6.2.10]
+	at org.springframework.data.util.TypeDiscoverer.getSuperTypeInformation(TypeDiscoverer.java:263) ~[spring-data-commons-3.5.3.jar:3.5.3]
+	at org.springframework.data.util.ClassTypeInformation.getSuperTypeInformation(ClassTypeInformation.java:37) ~[spring-data-commons-3.5.3.jar:3.5.3]
+	at org.springframework.data.util.TypeInformation.getRequiredSuperTypeInformation(TypeInformation.java:327) ~[spring-data-commons-3.5.3.jar:3.5.3]
+	at org.springframework.data.repository.core.support.DefaultRepositoryMetadata.<init>(DefaultRepositoryMetadata.java:55) ~[spring-data-commons-3.5.3.jar:3.5.3]
+	at org.springframework.data.repository.core.support.AbstractRepositoryMetadata.getMetadata(AbstractRepositoryMetadata.java:79) ~[spring-data-commons-3.5.3.jar:3.5.3]
+	at org.springframework.data.repository.config.RepositoryConfigurationExtensionSupport.getRepositoryConfigurations(RepositoryConfigurationExtensionSupport.java:93) ~[spring-data-commons-3.5.3.jar:3.5.3]
+	at org.springframework.data.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn(RepositoryConfigurationDelegate.java:170) ~[spring-data-commons-3.5.3.jar:3.5.3]
+	at org.springframework.boot.autoconfigure.data.AbstractRepositoryConfigurationSourceSupport.registerBeanDefinitions(AbstractRepositoryConfigurationSourceSupport.java:62) ~[spring-boot-autoconfigure-3.5.5.jar:3.5.5]
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.lambda$loadBeanDefinitionsFromRegistrars$1(ConfigurationClassBeanDefinitionReader.java:401) ~[spring-context-6.2.10.jar:6.2.10]
+	at java.base/java.util.LinkedHashMap.forEach(LinkedHashMap.java:986) ~[na:na]
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsFromRegistrars(ConfigurationClassBeanDefinitionReader.java:400) ~[spring-context-6.2.10.jar:6.2.10]
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForConfigurationClass(ConfigurationClassBeanDefinitionReader.java:148) ~[spring-context-6.2.10.jar:6.2.10]
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitions(ConfigurationClassBeanDefinitionReader.java:120) ~[spring-context-6.2.10.jar:6.2.10]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:430) ~[spring-context-6.2.10.jar:6.2.10]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:290) ~[spring-context-6.2.10.jar:6.2.10]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:349) ~[spring-context-6.2.10.jar:6.2.10]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:118) ~[spring-context-6.2.10.jar:6.2.10]
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:791) ~[spring-context-6.2.10.jar:6.2.10]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:609) ~[spring-context-6.2.10.jar:6.2.10]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146) ~[spring-boot-3.5.5.jar:3.5.5]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752) ~[spring-boot-3.5.5.jar:3.5.5]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) ~[spring-boot-3.5.5.jar:3.5.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:318) ~[spring-boot-3.5.5.jar:3.5.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.5.5.jar:3.5.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.5.5.jar:3.5.5]
+	at com.cognizant.ecommerce.EcommerceApplication.main(EcommerceApplication.java:21) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50) ~[spring-boot-devtools-3.5.5.jar:3.5.5]
+Caused by: java.lang.ClassNotFoundException: com.cognizant.ecommerce.model.Cart
+	at java.base/jdk.internal.loader.BuiltinClassLoader.loadClass(BuiltinClassLoader.java:641) ~[na:na]
+	at java.base/jdk.internal.loader.ClassLoaders$AppClassLoader.loadClass(ClassLoaders.java:188) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526) ~[na:na]
+	at java.base/java.lang.Class.forName0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.forName(Class.java:534) ~[na:na]
+	at java.base/java.lang.Class.forName(Class.java:513) ~[na:na]
+	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:121) ~[spring-boot-devtools-3.5.5.jar:3.5.5]
+	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:526) ~[na:na]
+	at java.base/java.lang.Class.forName0(Native Method) ~[na:na]
+	at java.base/java.lang.Class.forName(Class.java:534) ~[na:na]
+	at java.base/java.lang.Class.forName(Class.java:513) ~[na:na]
+	at java.base/sun.reflect.generics.factory.CoreReflectionFactory.makeNamedType(CoreReflectionFactory.java:114) ~[na:na]
+	... 39 common frames omitted
+
+2025-09-17T16:41:48.233+05:30  INFO 14296 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Starting EcommerceApplication using Java 21 with PID 14296 (C:\Users\2440575\Downloads\ISG25JFA003_E-Commerce\Backend\target\classes started by 2440575 in C:\Users\2440575\Downloads\ISG25JFA003_E-Commerce)
+2025-09-17T16:41:48.234+05:30 DEBUG 14296 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-17T16:41:48.234+05:30  INFO 14296 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-09-17T16:41:49.257+05:30  INFO 14296 --- [ecommerce] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-17T16:41:49.525+05:30  INFO 14296 --- [ecommerce] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 265 ms. Found 12 JPA repository interfaces.
+2025-09-17T16:41:49.744+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-17T16:41:49.746+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-17T16:41:49.747+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-17T16:41:49.828+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-17T16:41:49.828+05:30  INFO 14296 --- [ecommerce] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1590 ms
+2025-09-17T16:41:49.878+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-17T16:41:49.883+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-17T16:41:49.903+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-17T16:41:49.905+05:30  INFO 14296 --- [ecommerce] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2025-09-17T16:41:49.988+05:30  INFO 14296 --- [ecommerce] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection com.mysql.cj.jdbc.ConnectionImpl@671ee054
+2025-09-17T16:41:49.989+05:30  INFO 14296 --- [ecommerce] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2025-09-17T16:41:49.993+05:30  INFO 14296 --- [ecommerce] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-2)']
+	Database driver: undefined/unknown
+	Database version: 8.0.42
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-17T16:41:50.377+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-17T16:41:50.549+05:30  INFO 14296 --- [ecommerce] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-17T16:41:50.758+05:30  WARN 14296 --- [ecommerce] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'cartController': Unsatisfied dependency expressed through field 'cartService': No qualifying bean of type 'com.cognizant.ecommerce.service.CartService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2025-09-17T16:41:50.760+05:30  INFO 14296 --- [ecommerce] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-17T16:41:50.761+05:30  INFO 14296 --- [ecommerce] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2025-09-17T16:41:50.771+05:30  INFO 14296 --- [ecommerce] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2025-09-17T16:41:50.772+05:30  INFO 14296 --- [ecommerce] [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-09-17T16:41:50.781+05:30  INFO 14296 --- [ecommerce] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-09-17T16:41:50.808+05:30 ERROR 14296 --- [ecommerce] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field cartService in com.cognizant.ecommerce.controller.CartController required a bean of type 'com.cognizant.ecommerce.service.CartService' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'com.cognizant.ecommerce.service.CartService' in your configuration.
+
+2025-09-17T16:43:24.170+05:30  INFO 12124 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Starting EcommerceApplication using Java 21 with PID 12124 (C:\Users\2440575\Downloads\ISG25JFA003_E-Commerce\Backend\target\classes started by 2440575 in C:\Users\2440575\Downloads\ISG25JFA003_E-Commerce)
+2025-09-17T16:43:24.178+05:30 DEBUG 12124 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-17T16:43:24.180+05:30  INFO 12124 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-09-17T16:43:24.295+05:30  INFO 12124 --- [ecommerce] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-17T16:43:24.295+05:30  INFO 12124 --- [ecommerce] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-17T16:43:25.973+05:30  INFO 12124 --- [ecommerce] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-17T16:43:26.267+05:30  INFO 12124 --- [ecommerce] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 267 ms. Found 12 JPA repository interfaces.
+2025-09-17T16:43:28.091+05:30  INFO 12124 --- [ecommerce] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-17T16:43:28.131+05:30  INFO 12124 --- [ecommerce] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-17T16:43:28.131+05:30  INFO 12124 --- [ecommerce] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.44]
+2025-09-17T16:43:28.284+05:30  INFO 12124 --- [ecommerce] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-17T16:43:28.284+05:30  INFO 12124 --- [ecommerce] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3988 ms
+2025-09-17T16:43:28.660+05:30  INFO 12124 --- [ecommerce] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-17T16:43:28.864+05:30  INFO 12124 --- [ecommerce] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-17T16:43:28.941+05:30  INFO 12124 --- [ecommerce] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-17T16:43:29.426+05:30  INFO 12124 --- [ecommerce] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-17T16:43:29.506+05:30  INFO 12124 --- [ecommerce] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-17T16:43:29.938+05:30  INFO 12124 --- [ecommerce] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4942c842
+2025-09-17T16:43:29.941+05:30  INFO 12124 --- [ecommerce] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-17T16:43:30.044+05:30  INFO 12124 --- [ecommerce] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.42
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-17T16:43:31.504+05:30  INFO 12124 --- [ecommerce] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-17T16:43:31.736+05:30  INFO 12124 --- [ecommerce] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-17T16:43:33.085+05:30  WARN 12124 --- [ecommerce] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-17T16:43:34.090+05:30  INFO 12124 --- [ecommerce] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-09-17T16:43:34.152+05:30  INFO 12124 --- [ecommerce] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-17T16:43:34.168+05:30  INFO 12124 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Started EcommerceApplication in 10.841 seconds (process running for 11.662)
+2025-09-17T16:43:38.870+05:30  INFO 12124 --- [ecommerce] [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-17T16:43:38.870+05:30  INFO 12124 --- [ecommerce] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-17T16:43:38.871+05:30  INFO 12124 --- [ecommerce] [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2025-09-17T16:43:52.990+05:30  INFO 12124 --- [ecommerce] [SpringApplicationShutdownHook] o.s.b.w.e.tomcat.GracefulShutdown        : Commencing graceful shutdown. Waiting for active requests to complete
+2025-09-17T16:43:53.028+05:30  INFO 12124 --- [ecommerce] [tomcat-shutdown] o.s.b.w.e.tomcat.GracefulShutdown        : Graceful shutdown complete
+2025-09-17T16:43:53.039+05:30  INFO 12124 --- [ecommerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-17T16:43:53.044+05:30  INFO 12124 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-17T16:43:53.057+05:30  INFO 12124 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
