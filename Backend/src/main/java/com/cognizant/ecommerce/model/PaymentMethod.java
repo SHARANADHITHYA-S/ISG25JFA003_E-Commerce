@@ -52,4 +52,11 @@ public class PaymentMethod {
     private Set<Payment> payments = new HashSet<>();
 
 
+    public void setIs_default(boolean aDefault) {
+        this.is_default = aDefault;
+    }
+
+    public boolean isIs_default() {
+        return is_default;
+    }
 }

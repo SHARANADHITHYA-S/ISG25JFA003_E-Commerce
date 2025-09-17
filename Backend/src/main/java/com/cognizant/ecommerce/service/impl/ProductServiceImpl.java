@@ -90,13 +90,24 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteById(id);
     }
 
+    public List<ProductResponseDTO> getProductsByCategoryId(Long categoryId) {
+        return productRepository.findByCategoryId(categoryId).stream()
+                .map(product -> {
+                    ProductResponseDTO dto = new ProductResponseDTO();
+                    BeanUtils.copyProperties(product, dto);// optional
+                    dto.setCategory_id(categoryId);
+                    return dto;
+                })
+                .collect(Collectors.toList());
+    }
+
     private ProductResponseDTO mapToProductResponseDTO(Product product) {
         ProductResponseDTO responseDTO = new ProductResponseDTO();
         BeanUtils.copyProperties(product, responseDTO);
 
         CategoryResponseDTO categoryResponseDTO = new CategoryResponseDTO();
         BeanUtils.copyProperties(product.getCategory(), categoryResponseDTO);
-        responseDTO.setCategory(categoryResponseDTO);
+        responseDTO.setCategory_id(categoryResponseDTO.getId());
 
         return responseDTO;
     }

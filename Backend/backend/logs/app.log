@@ -1,0 +1,35 @@
+2025-09-17T10:11:18.293+05:30  INFO 38684 --- [ecommerce] [main] c.c.e.service.PaymentServiceImplTest     : Starting PaymentServiceImplTest using Java 21 with PID 38684 (started by 2440657 in C:\Users\2440657\OneDrive - Cognizant\Desktop\E-Commerce\Backend)
+2025-09-17T10:11:18.296+05:30 DEBUG 38684 --- [ecommerce] [main] c.c.e.service.PaymentServiceImplTest     : Running with Spring Boot v3.5.5, Spring v6.2.10
+2025-09-17T10:11:18.298+05:30  INFO 38684 --- [ecommerce] [main] c.c.e.service.PaymentServiceImplTest     : No active profile set, falling back to 1 default profile: "default"
+2025-09-17T10:11:21.145+05:30  INFO 38684 --- [ecommerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-17T10:11:21.518+05:30  INFO 38684 --- [ecommerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 336 ms. Found 12 JPA repository interfaces.
+2025-09-17T10:11:23.150+05:30  INFO 38684 --- [ecommerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-17T10:11:23.462+05:30  INFO 38684 --- [ecommerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.26.Final
+2025-09-17T10:11:23.675+05:30  INFO 38684 --- [ecommerce] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-17T10:11:24.885+05:30  INFO 38684 --- [ecommerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-17T10:11:24.997+05:30  INFO 38684 --- [ecommerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-17T10:11:26.130+05:30  INFO 38684 --- [ecommerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@46de118b
+2025-09-17T10:11:26.135+05:30  INFO 38684 --- [ecommerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-17T10:11:26.414+05:30  INFO 38684 --- [ecommerce] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 8.0.42
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-09-17T10:11:30.348+05:30  INFO 38684 --- [ecommerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-17T10:11:30.822+05:30  INFO 38684 --- [ecommerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-17T10:11:33.020+05:30  WARN 38684 --- [ecommerce] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-17T10:11:34.447+05:30  INFO 38684 --- [ecommerce] [main] c.c.e.service.PaymentServiceImplTest     : Started PaymentServiceImplTest in 17.079 seconds (process running for 20.451)
+2025-09-17T10:11:35.890+05:30  INFO 38684 --- [ecommerce] [main] c.c.e.service.impl.PaymentServiceImpl    : Creating payment for orderId=54 with amount=1000
+2025-09-17T10:11:35.922+05:30 DEBUG 38684 --- [ecommerce] [main] c.c.e.service.impl.PaymentServiceImpl    : Payment saved: Payment(id=2, amount=1000, status=PENDING, transaction_reference=null, createdAt=2025-09-17T10:11:35.907874900, order=com.cognizant.ecommerce.model.Order@38e46ea, paymentMethod=PaymentMethod(id=96, type=Credit Card, provider=Visa, account_number=null, expiry_date=null, is_default=false, created_at=2025-09-17T10:11:35.863004, updated_at=2025-09-17T10:11:35.863004, user=com.cognizant.ecommerce.model.User@62325b44, orders=null, payments=null))
+2025-09-17T10:11:36.105+05:30  INFO 38684 --- [ecommerce] [main] c.c.e.service.impl.PaymentServiceImpl    : Fetching all payments
+2025-09-17T10:11:36.401+05:30 DEBUG 38684 --- [ecommerce] [main] c.c.e.service.impl.PaymentServiceImpl    : Found 2 payments
+2025-09-17T10:11:36.463+05:30  INFO 38684 --- [ecommerce] [main] c.c.e.service.impl.PaymentServiceImpl    : Updating payment status for paymentId=4 to 'COMPLETED'
+2025-09-17T10:11:36.469+05:30 DEBUG 38684 --- [ecommerce] [main] c.c.e.service.impl.PaymentServiceImpl    : Payment updated: Payment(id=4, amount=1000, status=COMPLETED, transaction_reference=null, createdAt=null, order=com.cognizant.ecommerce.model.Order@5f33123, paymentMethod=PaymentMethod(id=98, type=Credit Card, provider=Visa, account_number=null, expiry_date=null, is_default=false, created_at=2025-09-17T10:11:36.450543, updated_at=2025-09-17T10:11:36.450543, user=com.cognizant.ecommerce.model.User@2ff9a06, orders=null, payments=null))
+2025-09-17T10:11:36.515+05:30  INFO 38684 --- [ecommerce] [main] c.c.e.service.impl.PaymentServiceImpl    : Fetching payment with id=5
+2025-09-17T10:11:36.517+05:30 DEBUG 38684 --- [ecommerce] [main] c.c.e.service.impl.PaymentServiceImpl    : Payment fetched: Payment(id=5, amount=1000, status=PENDING, transaction_reference=null, createdAt=null, order=com.cognizant.ecommerce.model.Order@4d001a14, paymentMethod=PaymentMethod(id=99, type=Credit Card, provider=Visa, account_number=null, expiry_date=null, is_default=false, created_at=2025-09-17T10:11:36.502380, updated_at=2025-09-17T10:11:36.502380, user=com.cognizant.ecommerce.model.User@12ef8410, orders=null, payments=null))
+2025-09-17T10:11:36.550+05:30  INFO 38684 --- [ecommerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-17T10:11:36.555+05:30  INFO 38684 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-17T10:11:36.585+05:30  INFO 38684 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
