@@ -31,4 +31,4 @@ build/
 
 ### VS Code ###
 .vscode/
-Backend/logs/app.log
+/backend/logs
