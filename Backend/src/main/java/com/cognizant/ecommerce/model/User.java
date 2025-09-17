@@ -62,4 +62,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<PasswordResetToken> passwordResetTokens = new HashSet<>();
+
+    public void setPasswordHash(String newPassword) {
+
+    }
 }
