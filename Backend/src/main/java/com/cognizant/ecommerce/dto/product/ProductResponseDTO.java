@@ -23,4 +23,5 @@ public class ProductResponseDTO {
     private Date created_at;
     private Date updated_at;
     private Long category_id;
+    private Long quantity;
 }
