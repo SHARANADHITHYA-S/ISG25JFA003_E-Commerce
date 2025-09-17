@@ -1,20 +1,29 @@
 package com.cognizant.ecommerce.dto.address;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.cognizant.ecommerce.model.Address;
+import lombok.*;
 
-@Data
-@Builder
-@AllArgsConstructor
+import java.util.Date;
+
+@Setter
+@Getter
 @NoArgsConstructor
-public class AddressResponseDTO {
-    private Long id;
-    private String street;
+@AllArgsConstructor
+public class AddressResponseDTO extends Address {
+    private Long addressId;
+    private String address_line2;
     private String city;
     private String state;
-    private String postalCode;
+    private String postal_code;
     private String country;
+    private String phone;
+    private boolean isDefault;
+    private Long user_id;
+    private Date created_at;
+    private Date updated_at;
+    private String address_line1;
+
+
+
 
 }

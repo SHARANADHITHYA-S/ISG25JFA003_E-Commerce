@@ -7,6 +7,7 @@ import com.cognizant.ecommerce.model.User;
 import com.cognizant.ecommerce.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +16,9 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
@@ -29,7 +33,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setName(userRequestDTO.getName());
         user.setEmail(userRequestDTO.getEmail());
-        user.setPassword_hash(userRequestDTO.getPassword()); // Storing password as plain text (DANGEROUS!)
+        user.setPassword_hash(passwordEncoder.encode(userRequestDTO.getPassword())); // Storing password as plain text (DANGEROUS!)
         user.setRole(userRequestDTO.getRole());
         User savedUser = userRepository.save(user);
         return convertToDto(savedUser);

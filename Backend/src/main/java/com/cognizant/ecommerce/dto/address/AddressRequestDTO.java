@@ -1,14 +1,19 @@
 package com.cognizant.ecommerce.dto.address;
 
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Data
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AddressRequestDTO {
     private String street;
+    private String addressLine2;
     private String city;
     private String state;
-    private String postalCode;
+    private String zipCode;
     private String country;
+    private String phone;
+    private boolean isDefault;
 }

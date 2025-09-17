@@ -22,5 +22,5 @@ public class ProductResponseDTO {
     private boolean isActive;
     private Date created_at;
     private Date updated_at;
-    private CategoryResponseDTO category;
+    private Long category_id;
 }
