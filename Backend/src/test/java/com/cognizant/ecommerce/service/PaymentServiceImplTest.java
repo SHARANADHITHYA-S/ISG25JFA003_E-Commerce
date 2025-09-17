@@ -113,7 +113,7 @@ public class PaymentServiceImplTest {
         payment.setPaymentMethod(testPaymentMethod);
         payment.setAmount(BigDecimal.valueOf(1000));
         payment.setStatus("PENDING");
-        payment.setPaid_at(LocalDateTime.now());
+
         paymentRepository.save(payment);
 
         List<PaymentResponseDTO> payments = paymentService.getAllPayments();
@@ -128,7 +128,7 @@ public class PaymentServiceImplTest {
         payment.setPaymentMethod(testPaymentMethod);
         payment.setAmount(BigDecimal.valueOf(1000));
         payment.setStatus("COMPLETED");
-        payment.setPaid_at(LocalDateTime.now());
+
         payment = paymentRepository.save(payment);
 
         PaymentResponseDTO updated = paymentService.updatePaymentStatus(payment.getId(), "COMPLETED");
@@ -145,7 +145,7 @@ public class PaymentServiceImplTest {
         payment.setPaymentMethod(testPaymentMethod);
         payment.setAmount(BigDecimal.valueOf(1000));
         payment.setStatus("PENDING");
-        payment.setPaid_at(LocalDateTime.now());
+        
         payment = paymentRepository.save(payment);
 
         PaymentResponseDTO response = paymentService.getPaymentById(payment.getId());
