@@ -12,18 +12,11 @@ public class AddressRequestDTO {
     private String addressLine2;
     private String city;
     private String state;
-    private String zipCode;
+    private String postalCode;
     private String country;
     private String phone;
     private boolean isDefault;
     private String addressLine1;
 
-    public String getAddressLine1() {
-        return this.addressLine1;
-    }
 
-    public String getPostalCode() {
-        String postalCode = new String();
-        return postalCode;
-    }
 }

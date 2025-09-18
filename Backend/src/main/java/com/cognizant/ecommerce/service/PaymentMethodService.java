@@ -13,7 +13,7 @@ public interface PaymentMethodService {
     PaymentMethodResponseDTO addPaymentMethod(Long userId, PaymentMethodRequestDTO requestDTO);
 
     // PUT: Method to update an existing payment method
-    PaymentMethodResponseDTO updatePaymentMethod(Long paymentMethodId, PaymentMethodRequestDTO requestDTO);
+//    PaymentMethodResponseDTO updatePaymentMethod(Long paymentMethodId, PaymentMethodRequestDTO requestDTO);
 
     void deletePaymentMethod(Long paymentMethodId);
 }

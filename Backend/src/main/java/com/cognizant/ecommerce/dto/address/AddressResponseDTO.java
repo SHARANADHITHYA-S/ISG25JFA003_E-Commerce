@@ -22,19 +22,7 @@ public class AddressResponseDTO {
     private Date createdAt;
     private Date updatedAt;
 
-    // A getter method for the boolean field `isDefault`
-    public boolean isDefault() {
-        return this.isDefault;
-    }
 
-    // You may also have a traditional getter, but the boolean-specific one is important
-    public boolean getIsDefault() {
-        return this.isDefault;
-    }
 
-    // Setter for the boolean field
-    public void setDefault(boolean isDefault) {
-        this.isDefault = isDefault;
-    }
 
 }
