@@ -1,14 +1,14 @@
 package com.cognizant.ecommerce.service.impl;
 
+import com.cognizant.ecommerce.dao.CartItemRepository;
+import com.cognizant.ecommerce.dao.CartRepository;
+import com.cognizant.ecommerce.dao.UserRepository;
 import com.cognizant.ecommerce.dto.cart.CartResponseDTO;
 import com.cognizant.ecommerce.dto.cartItem.CartItemResponseDTO;
 import com.cognizant.ecommerce.exception.ResourceNotFoundException;
 import com.cognizant.ecommerce.model.Cart;
 import com.cognizant.ecommerce.model.CartItem;
 import com.cognizant.ecommerce.model.Product;
-import com.cognizant.ecommerce.dao.CartRepository;
-import com.cognizant.ecommerce.dao.CartItemRepository;
-import com.cognizant.ecommerce.dao.UserRepository;
 import com.cognizant.ecommerce.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +48,7 @@ public class CartServiceImpl implements CartService {
     private CartResponseDTO convertToCartResponseDTO(Cart cart) {
         CartResponseDTO cartResponseDTO = new CartResponseDTO();
         cartResponseDTO.setId(cart.getId());
+        cartResponseDTO.setUserId(cart.getUser().getId());
         cartResponseDTO.setCreatedAt(cart.getCreated_at());
         cartResponseDTO.setUpdatedAt(cart.getUpdated_at());
 

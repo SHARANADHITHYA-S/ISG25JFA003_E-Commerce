@@ -17,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 public class CartResponseDTO {
     private Long id;
+    private Long userId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private BigDecimal totalPrice;
