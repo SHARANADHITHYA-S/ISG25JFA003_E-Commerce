@@ -12,8 +12,11 @@ public class AddressRequestDTO {
     private String addressLine2;
     private String city;
     private String state;
-    private String zipCode;
+    private String postalCode;
     private String country;
     private String phone;
     private boolean isDefault;
+    private String addressLine1;
+
+
 }
