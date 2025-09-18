@@ -42,7 +42,7 @@ public class CartServiceImpl implements CartService {
     public void deleteCartByUserId(Long userId) {
         Cart cart = cartRepository.findByUserId(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Cart not found for user with ID: " + userId));
-        cartRepository.delete(cart);
+        cartRepository.deleteByUserId(userId);
     }
 
     private CartResponseDTO convertToCartResponseDTO(Cart cart) {

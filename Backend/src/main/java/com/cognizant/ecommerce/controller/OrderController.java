@@ -1,9 +1,13 @@
 package com.cognizant.ecommerce.controller;
 
+import com.cognizant.ecommerce.dao.CartItemRepository;
+import com.cognizant.ecommerce.dao.CartRepository;
 import com.cognizant.ecommerce.dto.order.OrderRequestDTO;
 import com.cognizant.ecommerce.dto.order.OrderResponseDTO;
+import com.cognizant.ecommerce.service.CartService;
 import com.cognizant.ecommerce.service.OrderService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +19,23 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class OrderController {
 
+    private final CartRepository cartRepository;
+
     private final OrderService orderService;
+    private final CartService cartService;
+    private final CartItemRepository cartItemRepository;
 
     // ➕ Create a new order
     @PostMapping
     public ResponseEntity<OrderResponseDTO> createOrder(@RequestBody OrderRequestDTO orderRequestDTO) {
-        OrderResponseDTO response = orderService.createOrder(orderRequestDTO);
-        return ResponseEntity.ok(response);
+        OrderResponseDTO createdOrder = orderService.createOrder(
+                orderRequestDTO.getUserid(),
+                orderRequestDTO.getAddressId(),
+                orderRequestDTO.getPaymentMethodId()
+        );
+
+
+        return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);
     }
 
     // 🔍 Get order by ID
