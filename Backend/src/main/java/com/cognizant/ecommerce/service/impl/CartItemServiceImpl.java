@@ -37,28 +37,41 @@ public class CartItemServiceImpl implements CartItemService {
     @Override
     @Transactional
     public CartItemResponseDTO createCartItem(Long userId, CartItemRequestDTO cartItemRequestDTO) {
-        // Find the cart for the user, create a new one if it doesn't exist
+
+        // Step 1: Find the product and perform initial checks
+        Product product = productRepository.findById(cartItemRequestDTO.getProductId())
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with ID: " + cartItemRequestDTO.getProductId()));
+
+        if (!product.isActive()) {
+            throw new ResourceNotFoundException("Product '" + product.getName() + "' is not active and cannot be added to cart.");
+        }
+
+        // Step 2: Find or create the user's cart
         Cart cart = cartRepository.findByUserId(userId)
                 .orElseGet(() -> {
                     Cart newCart = new Cart();
-                    // Assume a method to get the User entity by userId
                     newCart.setUser(userRepository.findById(userId)
                             .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId)));
                     return cartRepository.save(newCart);
                 });
 
-        Product product = productRepository.findById(cartItemRequestDTO.getProductId())
-                .orElseThrow(() -> new ResourceNotFoundException("Product not found with ID: " + cartItemRequestDTO.getProductId()));
-
-        // Check if the item already exists in the cart
+        // Step 3: Check if the product already exists in the cart and update quantity
         return cart.getCartItems().stream()
                 .filter(item -> item.getProduct().getId().equals(product.getId()))
                 .findFirst()
                 .map(existingItem -> {
-                    existingItem.setQuantity(existingItem.getQuantity() + cartItemRequestDTO.getQuantity());
+                    int newQuantity = existingItem.getQuantity() + cartItemRequestDTO.getQuantity();
+                    if (newQuantity > product.getQuantity()) {
+                        throw new ResourceNotFoundException("Insufficient stock for product '" + product.getName() + "'. Available stock: " + product.getQuantity());
+                    }
+                    existingItem.setQuantity(newQuantity);
                     return convertToCartItemResponseDTO(cartItemRepository.save(existingItem));
                 })
                 .orElseGet(() -> {
+                    // Step 4: If product is not in cart, add a new cart item
+                    if (cartItemRequestDTO.getQuantity() > product.getQuantity()) {
+                        throw new ResourceNotFoundException("Insufficient stock for product '" + product.getName() + "'. Available stock: " + product.getQuantity());
+                    }
                     CartItem newCartItem = new CartItem();
                     newCartItem.setCart(cart);
                     newCartItem.setProduct(product);
@@ -87,6 +100,11 @@ public class CartItemServiceImpl implements CartItemService {
         CartItem existingCartItem = cartItemRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("CartItem not found with ID: " + id));
 
+        Product product = existingCartItem.getProduct();
+        if (cartItemRequestDTO.getQuantity() > product.getQuantity()) {
+            throw new ResourceNotFoundException("Insufficient stock for product '" + product.getName() + "'. Available stock: " + product.getQuantity());
+        }
+
         // Update quantity
         existingCartItem.setQuantity(cartItemRequestDTO.getQuantity());
 
@@ -103,15 +121,16 @@ public class CartItemServiceImpl implements CartItemService {
     }
 
     private CartItemResponseDTO convertToCartItemResponseDTO(CartItem cartItem) {
+        Product product = cartItem.getProduct();
         CartItemResponseDTO dto = new CartItemResponseDTO();
         dto.setId(cartItem.getId());
         dto.setCartId(cartItem.getCart().getId());
         dto.setUserId(cartItem.getCart().getUser().getId());
-        dto.setProductId(cartItem.getProduct().getId());
-        dto.setProductName(cartItem.getProduct().getName());
-        dto.setPrice(cartItem.getProduct().getPrice());
+        dto.setProductId(product.getId());
+        dto.setProductName(product.getName());
+        dto.setPrice(product.getPrice());
         dto.setQuantity(cartItem.getQuantity());
-        dto.setTotalPrice(cartItem.getProduct().getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())));
+        dto.setTotalPrice(product.getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())));
         return dto;
     }
 }

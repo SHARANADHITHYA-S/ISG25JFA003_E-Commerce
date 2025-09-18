@@ -2,8 +2,10 @@ package com.cognizant.ecommerce.service.impl;
 
 import com.cognizant.ecommerce.dao.CartItemRepository;
 import com.cognizant.ecommerce.dao.CartRepository;
+import com.cognizant.ecommerce.dao.ProductRepository;
 import com.cognizant.ecommerce.dao.UserRepository;
 import com.cognizant.ecommerce.dto.cart.CartResponseDTO;
+import com.cognizant.ecommerce.dto.cartItem.CartItemRequestDTO;
 import com.cognizant.ecommerce.dto.cartItem.CartItemResponseDTO;
 import com.cognizant.ecommerce.exception.ResourceNotFoundException;
 import com.cognizant.ecommerce.model.Cart;
@@ -29,6 +31,10 @@ public class CartServiceImpl implements CartService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
+
 
     @Override
     public CartResponseDTO getCartByUserId(Long userId) {
@@ -71,6 +77,8 @@ public class CartServiceImpl implements CartService {
         Product product = cartItem.getProduct();
         CartItemResponseDTO dto = new CartItemResponseDTO();
         dto.setId(cartItem.getId());
+        dto.setCartId(cartItem.getCart().getId());
+        dto.setUserId(cartItem.getCart().getUser().getId());
         dto.setProductId(product.getId());
         dto.setProductName(product.getName());
         dto.setPrice(product.getPrice());
