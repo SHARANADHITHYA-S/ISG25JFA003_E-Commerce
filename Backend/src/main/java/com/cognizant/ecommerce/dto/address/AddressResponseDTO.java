@@ -1,7 +1,9 @@
 package com.cognizant.ecommerce.dto.address;
 
-import com.cognizant.ecommerce.model.Address;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
 
 import java.util.Date;
 
@@ -9,21 +11,32 @@ import java.util.Date;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddressResponseDTO extends Address {
-    private Long addressId;
-    private String address_line2;
+public class AddressResponseDTO {
+    private Long id;
+    private String addressLine1;
+    private String addressLine2;
     private String city;
     private String state;
-    private String postal_code;
+    private String postalCode;
     private String country;
     private String phone;
-    private boolean isDefault;
-    private Long user_id;
-    private Date created_at;
-    private Date updated_at;
-    private String address_line1;
+    private boolean isDefault; // Ensure this field exists and is a primitive boolean
+    private Date createdAt;
+    private Date updatedAt;
 
+    // A getter method for the boolean field `isDefault`
+    public boolean isDefault() {
+        return this.isDefault;
+    }
 
+    // You may also have a traditional getter, but the boolean-specific one is important
+    public boolean getIsDefault() {
+        return this.isDefault;
+    }
 
+    // Setter for the boolean field
+    public void setDefault(boolean isDefault) {
+        this.isDefault = isDefault;
+    }
 
 }

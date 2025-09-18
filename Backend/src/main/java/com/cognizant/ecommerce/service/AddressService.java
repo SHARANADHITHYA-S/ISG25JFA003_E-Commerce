@@ -12,8 +12,10 @@ public interface AddressService {
 
     Optional<AddressResponseDTO> getAddressById(Long addressId);
 
+    // POST: Method to create a new address
     AddressResponseDTO createAddress(Long userId, AddressRequestDTO addressRequestDTO);
 
+    // PUT: Method to update an existing address
     AddressResponseDTO updateAddress(Long addressId, AddressRequestDTO addressRequestDTO);
 
     void deleteAddress(Long addressId);
