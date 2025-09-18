@@ -5,13 +5,19 @@ import com.cognizant.ecommerce.dto.order.OrderRequestDTO;
 import com.cognizant.ecommerce.dto.order.OrderResponseDTO;
 import com.cognizant.ecommerce.exception.ResourceNotFoundException;
 import com.cognizant.ecommerce.model.*;
+import com.cognizant.ecommerce.service.CartService;
 import com.cognizant.ecommerce.service.OrderService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
@@ -23,68 +29,104 @@ public class OrderServiceImpl implements OrderService {
 
     private static final Logger log = LoggerFactory.getLogger(OrderServiceImpl.class);
 
+    @Autowired
+    private CartService cartService;
+
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
     private final AddressRepository addressRepository;
+    private final CartItemRepository cartItemRepository;
+    private final CartRepository cartRepository;
     private final PaymentMethodRepository paymentMethodRepository;
     private final ModelMapper modelMapper;
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     @Override
-    public OrderResponseDTO createOrder(OrderRequestDTO dto) {
+    @Transactional
+    public OrderResponseDTO createOrder(Long userId, Long addressId, Long paymentMethodId) {
         log.info("Creating new order for userId={}, addressId={}, paymentMethodId={}",
-                dto.getUserid(), dto.getAddressId(), dto.getPaymentMethodId());
+                userId, addressId, paymentMethodId);
 
-        User user = userRepository.findById(dto.getUserid())
-                .orElseThrow(() -> {
-                    log.error("User not found with id={}", dto.getUserid());
-                    return new ResourceNotFoundException("User not found");
-                });
+        // 1. Fetch user
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
 
-        Address address = addressRepository.findById(dto.getAddressId())
-                .orElseThrow(() -> {
-                    log.error("Address not found with id={}", dto.getAddressId());
-                    return new ResourceNotFoundException("Address not found");
-                });
+        // 2. Fetch address
+        Address address = addressRepository.findById(addressId)
+                .orElseThrow(() -> new ResourceNotFoundException("Address not found with id: " + addressId));
 
-        PaymentMethod paymentMethod = paymentMethodRepository.findById(dto.getPaymentMethodId())
-                .orElseThrow(() -> {
-                    log.error("Payment method not found with id={}", dto.getPaymentMethodId());
-                    return new ResourceNotFoundException("Payment method not found");
-                });
+        // 3. Fetch payment method
+        PaymentMethod paymentMethod = paymentMethodRepository.findById(paymentMethodId)
+                .orElseThrow(() -> new ResourceNotFoundException("Payment method not found with id: " + paymentMethodId));
 
+        // 4. Fetch cart
+        Cart cart = cartRepository.findByUserId(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("Cart not found for user id: " + userId));
+
+        if (cart.getCartItems().isEmpty()) {
+            throw new RuntimeException("Cart is empty for user id: " + userId);
+        }
+
+        // 5. Create order
         Order order = Order.builder()
                 .user(user)
                 .address(address)
                 .paymentMethod(paymentMethod)
-                .totalAmount(dto.getTotalAmount())
-                .status(dto.getStatus())
+                .status("PENDING")
                 .placed_at(LocalDateTime.now())
                 .orderItems(new HashSet<>())
                 .build();
 
-        if (dto.getItems() != null) {
-            dto.getItems().forEach(itemDTO -> {
-                Product product = productRepository.findById(itemDTO.getProductId())
-                        .orElseThrow(() -> {
-                            log.error("Product not found with id={}", itemDTO.getProductId());
-                            return new ResourceNotFoundException("Product not found");
-                        });
+        BigDecimal totalAmount = BigDecimal.ZERO;
 
-                order.getOrderItems().add(OrderItem.builder()
-                        .order(order)
-                        .product(product)
-                        .quantity(itemDTO.getQuantity())
-                        .price(itemDTO.getPrice())
-                        .build());
-            });
+        // 6. Loop through cart items
+        for (CartItem cartItem : cart.getCartItems()) {
+            Product product = cartItem.getProduct();
+
+            // Stock check
+            if (product.getQuantity() < cartItem.getQuantity()) {
+                throw new RuntimeException("Insufficient stock for product: " + product.getName());
+            }
+
+            // Reduce stock
+            product.setQuantity(product.getQuantity() - cartItem.getQuantity());
+            productRepository.save(product);
+
+            // Create order item
+            OrderItem orderItem = OrderItem.builder()
+                    .order(order)
+                    .product(product)
+                    .quantity(cartItem.getQuantity())
+                    .price(product.getPrice())
+                    .build();
+
+            order.getOrderItems().add(orderItem);
+
+            // Add to total
+            totalAmount = totalAmount.add(product.getPrice().multiply(BigDecimal.valueOf(cartItem.getQuantity())));
         }
 
+        order.setTotalAmount(totalAmount);
+
+        // 7. Save order
         Order savedOrder = orderRepository.save(order);
-        log.debug("Order saved: {}", savedOrder);
+
+        //flush persistence context
+        entityManager.flush();
+        entityManager.clear();
+
+
+        //delete cart
+        cartRepository.deleteByUserId(userId);
+
+
+        log.info("Order created successfully for userId={} with orderId={}", userId, savedOrder.getId());
+
         return modelMapper.map(savedOrder, OrderResponseDTO.class);
     }
-
     @Override
     public OrderResponseDTO getOrderById(Long orderId) {
         log.info("Fetching order with id={}", orderId);

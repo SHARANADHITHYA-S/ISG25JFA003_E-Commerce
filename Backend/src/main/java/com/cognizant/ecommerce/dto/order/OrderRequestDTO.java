@@ -15,10 +15,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderRequestDTO {
-    private String status;
-    private BigDecimal totalAmount;
     private Long userid;
     private Long addressId;
     private Long paymentMethodId;
-    private List<OrderItemRequestDTO> items;
 }

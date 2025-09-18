@@ -1,7 +1,7 @@
 package com.cognizant.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -9,19 +9,24 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "addresses")
-@Builder
 public class Address {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JsonIgnore
+    private User user;
+
     private String address_line1;
     private String address_line2;
     private String city;
@@ -30,9 +35,8 @@ public class Address {
     private String country;
     private String phone;
 
-    // This is the correct way to map the field to the database column.
     @Column(name = "is_default")
-    private boolean isDefault;
+    public boolean isDefault;
 
     @CreationTimestamp
     private Date created_at;
@@ -40,23 +44,23 @@ public class Address {
     @UpdateTimestamp
     private Date updated_at;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
-    private User user;
+    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private Set<Order> orders;
 
-    public Object getAddressLine1() {
-        Object addressLine1 = null;
-        return addressLine1;
+    // Getter and setter for the boolean field
+    public boolean getIsDefault() {
+        return isDefault;
     }
 
-    public Object getAddressLine2() {
-        Object addressLine2 = null;
-        return addressLine2;
-
+    public void setIsDefault(boolean isDefault) {
+        this.isDefault = isDefault;
     }
 
-    public Object getPostalCode() {
-        Object postalCode = null;
-        return postalCode;
+    public void setIs_default(boolean aDefault) {
+    }
+
+    public Object isDefault() {
+        return isDefault;
     }
 }

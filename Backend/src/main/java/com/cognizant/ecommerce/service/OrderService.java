@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface OrderService {
 
-    OrderResponseDTO createOrder(OrderRequestDTO orderRequestDTO);
+    OrderResponseDTO createOrder(Long UserId, Long AddressId, Long PaymentMethodId);
 
     OrderResponseDTO getOrderById(Long orderId);
 
