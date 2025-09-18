@@ -1,35 +1,88 @@
-2025-09-17T10:11:18.293+05:30  INFO 38684 --- [ecommerce] [main] c.c.e.service.PaymentServiceImplTest     : Starting PaymentServiceImplTest using Java 21 with PID 38684 (started by 2440657 in C:\Users\2440657\OneDrive - Cognizant\Desktop\E-Commerce\Backend)
-2025-09-17T10:11:18.296+05:30 DEBUG 38684 --- [ecommerce] [main] c.c.e.service.PaymentServiceImplTest     : Running with Spring Boot v3.5.5, Spring v6.2.10
-2025-09-17T10:11:18.298+05:30  INFO 38684 --- [ecommerce] [main] c.c.e.service.PaymentServiceImplTest     : No active profile set, falling back to 1 default profile: "default"
-2025-09-17T10:11:21.145+05:30  INFO 38684 --- [ecommerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2025-09-17T10:11:21.518+05:30  INFO 38684 --- [ecommerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 336 ms. Found 12 JPA repository interfaces.
-2025-09-17T10:11:23.150+05:30  INFO 38684 --- [ecommerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2025-09-17T10:11:23.462+05:30  INFO 38684 --- [ecommerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.26.Final
-2025-09-17T10:11:23.675+05:30  INFO 38684 --- [ecommerce] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2025-09-17T10:11:24.885+05:30  INFO 38684 --- [ecommerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2025-09-17T10:11:24.997+05:30  INFO 38684 --- [ecommerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2025-09-17T10:11:26.130+05:30  INFO 38684 --- [ecommerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@46de118b
-2025-09-17T10:11:26.135+05:30  INFO 38684 --- [ecommerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2025-09-17T10:11:26.414+05:30  INFO 38684 --- [ecommerce] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
-	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
-	Database driver: undefined/unknown
-	Database version: 8.0.42
-	Autocommit mode: undefined/unknown
-	Isolation level: undefined/unknown
-	Minimum pool size: undefined/unknown
-	Maximum pool size: undefined/unknown
-2025-09-17T10:11:30.348+05:30  INFO 38684 --- [ecommerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2025-09-17T10:11:30.822+05:30  INFO 38684 --- [ecommerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2025-09-17T10:11:33.020+05:30  WARN 38684 --- [ecommerce] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2025-09-17T10:11:34.447+05:30  INFO 38684 --- [ecommerce] [main] c.c.e.service.PaymentServiceImplTest     : Started PaymentServiceImplTest in 17.079 seconds (process running for 20.451)
-2025-09-17T10:11:35.890+05:30  INFO 38684 --- [ecommerce] [main] c.c.e.service.impl.PaymentServiceImpl    : Creating payment for orderId=54 with amount=1000
-2025-09-17T10:11:35.922+05:30 DEBUG 38684 --- [ecommerce] [main] c.c.e.service.impl.PaymentServiceImpl    : Payment saved: Payment(id=2, amount=1000, status=PENDING, transaction_reference=null, createdAt=2025-09-17T10:11:35.907874900, order=com.cognizant.ecommerce.model.Order@38e46ea, paymentMethod=PaymentMethod(id=96, type=Credit Card, provider=Visa, account_number=null, expiry_date=null, is_default=false, created_at=2025-09-17T10:11:35.863004, updated_at=2025-09-17T10:11:35.863004, user=com.cognizant.ecommerce.model.User@62325b44, orders=null, payments=null))
-2025-09-17T10:11:36.105+05:30  INFO 38684 --- [ecommerce] [main] c.c.e.service.impl.PaymentServiceImpl    : Fetching all payments
-2025-09-17T10:11:36.401+05:30 DEBUG 38684 --- [ecommerce] [main] c.c.e.service.impl.PaymentServiceImpl    : Found 2 payments
-2025-09-17T10:11:36.463+05:30  INFO 38684 --- [ecommerce] [main] c.c.e.service.impl.PaymentServiceImpl    : Updating payment status for paymentId=4 to 'COMPLETED'
-2025-09-17T10:11:36.469+05:30 DEBUG 38684 --- [ecommerce] [main] c.c.e.service.impl.PaymentServiceImpl    : Payment updated: Payment(id=4, amount=1000, status=COMPLETED, transaction_reference=null, createdAt=null, order=com.cognizant.ecommerce.model.Order@5f33123, paymentMethod=PaymentMethod(id=98, type=Credit Card, provider=Visa, account_number=null, expiry_date=null, is_default=false, created_at=2025-09-17T10:11:36.450543, updated_at=2025-09-17T10:11:36.450543, user=com.cognizant.ecommerce.model.User@2ff9a06, orders=null, payments=null))
-2025-09-17T10:11:36.515+05:30  INFO 38684 --- [ecommerce] [main] c.c.e.service.impl.PaymentServiceImpl    : Fetching payment with id=5
-2025-09-17T10:11:36.517+05:30 DEBUG 38684 --- [ecommerce] [main] c.c.e.service.impl.PaymentServiceImpl    : Payment fetched: Payment(id=5, amount=1000, status=PENDING, transaction_reference=null, createdAt=null, order=com.cognizant.ecommerce.model.Order@4d001a14, paymentMethod=PaymentMethod(id=99, type=Credit Card, provider=Visa, account_number=null, expiry_date=null, is_default=false, created_at=2025-09-17T10:11:36.502380, updated_at=2025-09-17T10:11:36.502380, user=com.cognizant.ecommerce.model.User@12ef8410, orders=null, payments=null))
-2025-09-17T10:11:36.550+05:30  INFO 38684 --- [ecommerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
-2025-09-17T10:11:36.555+05:30  INFO 38684 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
-2025-09-17T10:11:36.585+05:30  INFO 38684 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-18T10:53:23.928+05:30  INFO 43188 --- [ecommerce] [main] c.c.e.service.OrderServiceImplTest       : Starting OrderServiceImplTest using Java 21 with PID 43188 (started by 2440657 in C:\Users\2440657\OneDrive - Cognizant\Desktop\E-Commerce\Backend)
+2025-09-18T10:53:23.980+05:30 DEBUG 43188 --- [ecommerce] [main] c.c.e.service.OrderServiceImplTest       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2025-09-18T10:53:23.982+05:30  INFO 43188 --- [ecommerce] [main] c.c.e.service.OrderServiceImplTest       : No active profile set, falling back to 1 default profile: "default"
+2025-09-18T10:53:26.749+05:30  INFO 43188 --- [ecommerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18T10:53:27.196+05:30  INFO 43188 --- [ecommerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 417 ms. Found 12 JPA repository interfaces.
+2025-09-18T10:53:29.030+05:30  INFO 43188 --- [ecommerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18T10:53:29.282+05:30  INFO 43188 --- [ecommerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-09-18T10:53:29.408+05:30  INFO 43188 --- [ecommerce] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-18T10:53:30.159+05:30  INFO 43188 --- [ecommerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18T10:53:30.228+05:30  INFO 43188 --- [ecommerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-18T10:53:30.905+05:30  INFO 43188 --- [ecommerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@56b66a26
+2025-09-18T10:53:30.908+05:30  INFO 43188 --- [ecommerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-18T10:53:33.360+05:30  INFO 43188 --- [ecommerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18T10:53:33.685+05:30  INFO 43188 --- [ecommerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18T10:53:35.340+05:30  INFO 43188 --- [ecommerce] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-09-18T10:53:35.342+05:30  WARN 43188 --- [ecommerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2025-09-18T10:53:35.654+05:30  WARN 43188 --- [ecommerce] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18T10:53:37.316+05:30  INFO 43188 --- [ecommerce] [main] c.c.e.service.OrderServiceImplTest       : Started OrderServiceImplTest in 14.505 seconds (process running for 16.893)
+2025-09-18T10:53:38.638+05:30  WARN 43188 --- [ecommerce] [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 1048, SQLState: 23000
+2025-09-18T10:53:38.638+05:30 ERROR 43188 --- [ecommerce] [main] o.h.engine.jdbc.spi.SqlExceptionHelper   : Column 'quantity' cannot be null
+2025-09-18T10:53:38.744+05:30  INFO 43188 --- [ecommerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18T10:53:38.750+05:30  INFO 43188 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-18T10:53:38.798+05:30  INFO 43188 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-18T10:54:09.445+05:30  INFO 20564 --- [ecommerce] [main] c.c.e.service.OrderServiceImplTest       : Starting OrderServiceImplTest using Java 21 with PID 20564 (started by 2440657 in C:\Users\2440657\OneDrive - Cognizant\Desktop\E-Commerce\Backend)
+2025-09-18T10:54:09.448+05:30 DEBUG 20564 --- [ecommerce] [main] c.c.e.service.OrderServiceImplTest       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2025-09-18T10:54:09.450+05:30  INFO 20564 --- [ecommerce] [main] c.c.e.service.OrderServiceImplTest       : No active profile set, falling back to 1 default profile: "default"
+2025-09-18T10:54:11.578+05:30  INFO 20564 --- [ecommerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18T10:54:11.875+05:30  INFO 20564 --- [ecommerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 284 ms. Found 12 JPA repository interfaces.
+2025-09-18T10:54:13.467+05:30  INFO 20564 --- [ecommerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18T10:54:13.746+05:30  INFO 20564 --- [ecommerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-09-18T10:54:13.909+05:30  INFO 20564 --- [ecommerce] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-18T10:54:14.966+05:30  INFO 20564 --- [ecommerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18T10:54:15.019+05:30  INFO 20564 --- [ecommerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-18T10:54:15.693+05:30  INFO 20564 --- [ecommerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5f1f0ee6
+2025-09-18T10:54:15.700+05:30  INFO 20564 --- [ecommerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-18T10:54:18.985+05:30  INFO 20564 --- [ecommerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18T10:54:19.295+05:30  INFO 20564 --- [ecommerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18T10:54:20.884+05:30  INFO 20564 --- [ecommerce] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-09-18T10:54:20.887+05:30  WARN 20564 --- [ecommerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2025-09-18T10:54:21.202+05:30  WARN 20564 --- [ecommerce] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18T10:54:23.080+05:30  INFO 20564 --- [ecommerce] [main] c.c.e.service.OrderServiceImplTest       : Started OrderServiceImplTest in 14.432 seconds (process running for 16.865)
+2025-09-18T10:54:24.165+05:30  INFO 20564 --- [ecommerce] [main] c.c.e.service.impl.OrderServiceImpl      : Creating new order for userId=139, addressId=122, paymentMethodId=116
+2025-09-18T10:54:24.456+05:30  INFO 20564 --- [ecommerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18T10:54:24.458+05:30  INFO 20564 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-18T10:54:24.485+05:30  INFO 20564 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-18T11:04:50.574+05:30  INFO 7884 --- [ecommerce] [main] c.c.e.service.OrderServiceImplTest       : Starting OrderServiceImplTest using Java 21 with PID 7884 (started by 2440657 in C:\Users\2440657\OneDrive - Cognizant\Desktop\E-Commerce\Backend)
+2025-09-18T11:04:50.582+05:30 DEBUG 7884 --- [ecommerce] [main] c.c.e.service.OrderServiceImplTest       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2025-09-18T11:04:50.585+05:30  INFO 7884 --- [ecommerce] [main] c.c.e.service.OrderServiceImplTest       : No active profile set, falling back to 1 default profile: "default"
+2025-09-18T11:04:53.706+05:30  INFO 7884 --- [ecommerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18T11:04:54.011+05:30  INFO 7884 --- [ecommerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 287 ms. Found 12 JPA repository interfaces.
+2025-09-18T11:04:55.683+05:30  INFO 7884 --- [ecommerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18T11:04:55.996+05:30  INFO 7884 --- [ecommerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-09-18T11:04:56.122+05:30  INFO 7884 --- [ecommerce] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-18T11:04:57.262+05:30  INFO 7884 --- [ecommerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18T11:04:57.378+05:30  INFO 7884 --- [ecommerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-18T11:04:58.362+05:30  INFO 7884 --- [ecommerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@78504ce9
+2025-09-18T11:04:58.369+05:30  INFO 7884 --- [ecommerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-18T11:05:01.808+05:30  INFO 7884 --- [ecommerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18T11:05:02.180+05:30  INFO 7884 --- [ecommerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18T11:05:03.946+05:30  INFO 7884 --- [ecommerce] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-09-18T11:05:03.950+05:30  WARN 7884 --- [ecommerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2025-09-18T11:05:04.421+05:30  WARN 7884 --- [ecommerce] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18T11:05:06.751+05:30  INFO 7884 --- [ecommerce] [main] c.c.e.service.OrderServiceImplTest       : Started OrderServiceImplTest in 17.37 seconds (process running for 21.763)
+2025-09-18T11:05:08.178+05:30  INFO 7884 --- [ecommerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18T11:05:08.183+05:30  INFO 7884 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-18T11:05:08.230+05:30  INFO 7884 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-18T11:06:11.126+05:30  INFO 32492 --- [ecommerce] [main] c.c.e.service.OrderServiceImplTest       : Starting OrderServiceImplTest using Java 21 with PID 32492 (started by 2440657 in C:\Users\2440657\OneDrive - Cognizant\Desktop\E-Commerce\Backend)
+2025-09-18T11:06:11.130+05:30 DEBUG 32492 --- [ecommerce] [main] c.c.e.service.OrderServiceImplTest       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2025-09-18T11:06:11.131+05:30  INFO 32492 --- [ecommerce] [main] c.c.e.service.OrderServiceImplTest       : No active profile set, falling back to 1 default profile: "default"
+2025-09-18T11:06:13.953+05:30  INFO 32492 --- [ecommerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-18T11:06:14.358+05:30  INFO 32492 --- [ecommerce] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 380 ms. Found 12 JPA repository interfaces.
+2025-09-18T11:06:16.178+05:30  INFO 32492 --- [ecommerce] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-18T11:06:16.411+05:30  INFO 32492 --- [ecommerce] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-09-18T11:06:16.538+05:30  INFO 32492 --- [ecommerce] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-18T11:06:17.627+05:30  INFO 32492 --- [ecommerce] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-18T11:06:17.707+05:30  INFO 32492 --- [ecommerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-18T11:06:18.458+05:30  INFO 32492 --- [ecommerce] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4882b9a
+2025-09-18T11:06:18.467+05:30  INFO 32492 --- [ecommerce] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-18T11:06:21.378+05:30  INFO 32492 --- [ecommerce] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-18T11:06:21.819+05:30  INFO 32492 --- [ecommerce] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18T11:06:23.802+05:30  INFO 32492 --- [ecommerce] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-09-18T11:06:23.806+05:30  WARN 32492 --- [ecommerce] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2025-09-18T11:06:24.175+05:30  WARN 32492 --- [ecommerce] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-18T11:06:26.249+05:30  INFO 32492 --- [ecommerce] [main] c.c.e.service.OrderServiceImplTest       : Started OrderServiceImplTest in 16.152 seconds (process running for 19.205)
+2025-09-18T11:06:27.756+05:30  INFO 32492 --- [ecommerce] [main] c.c.e.service.impl.OrderServiceImpl      : Creating new order for userId=141, addressId=124, paymentMethodId=117
+2025-09-18T11:06:27.852+05:30  INFO 32492 --- [ecommerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-18T11:06:27.862+05:30  INFO 32492 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-18T11:06:27.891+05:30  INFO 32492 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
