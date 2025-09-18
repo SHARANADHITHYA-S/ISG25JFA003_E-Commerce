@@ -93,17 +93,17 @@ public class AddressServiceImpl implements AddressService {
      */
     private AddressResponseDTO mapToResponseDTO(Address address) {
         AddressResponseDTO responseDTO = new AddressResponseDTO();
-        responseDTO.setAddressId(address.getId());
-        responseDTO.setAddress_line1(address.getAddress_line1());
-        responseDTO.setAddress_line2(address.getAddress_line2());
+        responseDTO.setId(address.getId());
+        responseDTO.setAddressLine1(address.getAddress_line1());
+        responseDTO.setAddressLine2(address.getAddress_line2());
         responseDTO.setCity(address.getCity());
         responseDTO.setState(address.getState());
-        responseDTO.setPostal_code((String) address.getPostal_code());
+        responseDTO.setPostalCode((String) address.getPostal_code());
         responseDTO.setCountry(address.getCountry());
         responseDTO.setPhone(address.getPhone());
         responseDTO.setDefault((Boolean) address.isDefault());
-        responseDTO.setCreated_at(address.getCreated_at());
-        responseDTO.setUpdated_at(address.getUpdated_at());
+        responseDTO.setCreatedAt(address.getCreated_at());
+        responseDTO.setUpdatedAt(address.getUpdated_at());
         return responseDTO;
     }
 
