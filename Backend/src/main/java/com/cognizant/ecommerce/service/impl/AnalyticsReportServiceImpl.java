@@ -32,11 +32,8 @@ public class AnalyticsReportServiceImpl implements AnalyticsReportService {
 
     @Override
     public AnalyticsReportResponseDTO generateReport(AnalyticsReportRequestDTO requestDTO) {
-        // Here, you would have the complex logic to generate the report data
-        // For this example, we'll use a placeholder.
         String reportData = "Generated report data for " + requestDTO.getReportType();
 
-        // Assuming a user with ID 1 exists to link the report to.
         User user = userRepository.findById(1L)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -48,6 +45,23 @@ public class AnalyticsReportServiceImpl implements AnalyticsReportService {
 
         AnalyticsReport savedReport = analyticsReportRepository.save(report);
         return mapToResponseDTO(savedReport);
+    }
+
+    @Override
+    public AnalyticsReportResponseDTO updateReport(Long reportId, AnalyticsReportRequestDTO requestDTO) {
+        // Find the existing report by ID
+        AnalyticsReport existingReport = analyticsReportRepository.findById(reportId)
+                .orElseThrow(() -> new RuntimeException("Report not found with ID: " + reportId));
+
+        // Update the report fields with new data
+        existingReport.setReport_type(requestDTO.getReportType());
+        existingReport.setData("Updated report data for " + requestDTO.getReportType());
+
+        // Save the updated report entity
+        AnalyticsReport updatedReport = analyticsReportRepository.save(existingReport);
+
+        // Convert and return the updated entity as a DTO
+        return mapToResponseDTO(updatedReport);
     }
 
     private AnalyticsReportResponseDTO mapToResponseDTO(AnalyticsReport report) {

@@ -16,4 +16,14 @@ public class AddressRequestDTO {
     private String country;
     private String phone;
     private boolean isDefault;
+    private String addressLine1;
+
+    public String getAddressLine1() {
+        return this.addressLine1;
+    }
+
+    public String getPostalCode() {
+        String postalCode = new String();
+        return postalCode;
+    }
 }

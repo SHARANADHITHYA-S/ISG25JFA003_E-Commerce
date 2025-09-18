@@ -1,6 +1,5 @@
 package com.cognizant.ecommerce.model;
 
-import com.cognizant.ecommerce.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -10,9 +9,7 @@ import lombok.AllArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.LocalDateTime; // Use the modern date/time class
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,10 +30,10 @@ public class PaymentMethod {
     private String expiry_date;
     private boolean is_default;
 
-    @CreationTimestamp
+    @CreationTimestamp // Automatically sets creation timestamp
     private LocalDateTime created_at;
 
-    @UpdateTimestamp
+    @UpdateTimestamp // Automatically updates timestamp on changes
     private LocalDateTime updated_at;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -58,5 +55,13 @@ public class PaymentMethod {
 
     public boolean isIs_default() {
         return is_default;
+    }
+
+    public void setUpdated_at(LocalDateTime date) {
+        this.updated_at = date;
+    }
+
+    public void setCreated_at(LocalDateTime date) {
+        this.created_at = date;
     }
 }
