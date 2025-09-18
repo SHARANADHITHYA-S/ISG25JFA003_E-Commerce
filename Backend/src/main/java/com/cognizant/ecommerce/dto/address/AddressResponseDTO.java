@@ -1,8 +1,6 @@
 package com.cognizant.ecommerce.dto.address;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import lombok.*;
 
 
 import java.util.Date;
