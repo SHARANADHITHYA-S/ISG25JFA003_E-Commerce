@@ -4,14 +4,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+
 import java.util.Date;
 
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddressResponseDTO {
     private Long id;
-    private Long addressId;
     private String addressLine1;
     private String addressLine2;
     private String city;
@@ -37,4 +38,5 @@ public class AddressResponseDTO {
     public void setDefault(boolean isDefault) {
         this.isDefault = isDefault;
     }
+
 }

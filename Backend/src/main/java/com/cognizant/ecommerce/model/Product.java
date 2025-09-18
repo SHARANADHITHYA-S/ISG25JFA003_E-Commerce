@@ -33,12 +33,13 @@ public class Product {
     private BigDecimal price;
 
     @Column(nullable = false)
+    private Long quantity;
+
+    @Column(nullable = false)
     private String image_url;
 
     @Column(name = "is_active", nullable = false)
     private boolean isActive;
-
-
 
     @CreationTimestamp
     private Date created_at;

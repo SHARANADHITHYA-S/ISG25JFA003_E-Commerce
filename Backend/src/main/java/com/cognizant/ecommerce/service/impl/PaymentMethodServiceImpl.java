@@ -8,10 +8,12 @@ import com.cognizant.ecommerce.model.PaymentMethod;
 import com.cognizant.ecommerce.model.User;
 import com.cognizant.ecommerce.service.PaymentMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime; // Use the modern date/time class
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -49,32 +51,15 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
         PaymentMethod paymentMethod = new PaymentMethod();
         paymentMethod.setUser(user);
         paymentMethod.setType(requestDTO.getCardType());
-        paymentMethod.setProvider("Credit Card");
+        paymentMethod.setProvider("Credit Card"); // Assuming a provider
         paymentMethod.setAccount_number(requestDTO.getCardNumber());
         paymentMethod.setExpiry_date(requestDTO.getExpirationDate());
         paymentMethod.setIs_default(requestDTO.isDefault());
-
-        // Timestamps are now handled automatically by the annotations
-        // No manual setting is needed here.
+        paymentMethod.setCreated_at(LocalDateTime.now());
+        paymentMethod.setUpdated_at(LocalDateTime.now());
 
         PaymentMethod savedPaymentMethod = paymentMethodRepository.save(paymentMethod);
         return mapToResponseDTO(savedPaymentMethod);
-    }
-
-    @Override
-    public PaymentMethodResponseDTO updatePaymentMethod(Long paymentMethodId, PaymentMethodRequestDTO requestDTO) {
-        PaymentMethod existingPaymentMethod = paymentMethodRepository.findById(paymentMethodId)
-                .orElseThrow(() -> new RuntimeException("Payment method not found"));
-
-        existingPaymentMethod.setType(requestDTO.getCardType());
-        existingPaymentMethod.setAccount_number(requestDTO.getCardNumber());
-        existingPaymentMethod.setExpiry_date(requestDTO.getExpirationDate());
-        existingPaymentMethod.setIs_default(requestDTO.isDefault());
-
-        // The updated_at timestamp is now handled automatically by the annotation
-
-        PaymentMethod updatedPaymentMethod = paymentMethodRepository.save(existingPaymentMethod);
-        return mapToResponseDTO(updatedPaymentMethod);
     }
 
     @Override
@@ -86,16 +71,8 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
         PaymentMethodResponseDTO responseDTO = new PaymentMethodResponseDTO();
         responseDTO.setPaymentMethodId(paymentMethod.getId());
         responseDTO.setCardType(paymentMethod.getType());
-
-        // Corrected logic with a null check to avoid NullPointerException
-        String accountNumber = paymentMethod.getAccount_number();
-        if (accountNumber != null && accountNumber.length() >= 4) {
-            responseDTO.setLastFourDigits(accountNumber.substring(accountNumber.length() - 4));
-        } else {
-            responseDTO.setLastFourDigits(null);
-        }
-
-        responseDTO.setCardholderName(null);
+        responseDTO.setLastFourDigits(paymentMethod.getAccount_number().substring(paymentMethod.getAccount_number().length() - 4));
+        responseDTO.setCardholderName(null); // No cardholder name in model
         responseDTO.setDefault(paymentMethod.isIs_default());
         return responseDTO;
     }
