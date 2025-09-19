@@ -70,6 +70,7 @@ public class OrderItemServiceImplTest {
                 .image_url("oignoienwinbebv")
                 .price(BigDecimal.valueOf(250))
                 .description("Sample product")
+                .quantity(10L)
                 .category(category)
                 .build());
 
