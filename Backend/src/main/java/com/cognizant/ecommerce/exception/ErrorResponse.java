@@ -20,5 +20,5 @@ public class ErrorResponse {
         this.path = path;
     }
 
-    // Getters & Setters
+
 }

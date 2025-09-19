@@ -51,7 +51,7 @@ public class OrderController {
     }
 
     // Get all orders
-    @GetMapping
+    @GetMapping("/admin")
     public ResponseEntity<List<OrderResponseDTO>> getAllOrders() {
         log.info("Fetching all orders");
         List<OrderResponseDTO> orders = orderService.getAllOrders();
@@ -69,7 +69,7 @@ public class OrderController {
     }
 
     // Update order status
-    @PutMapping("/{id}/status")
+    @PutMapping("/admin/{id}/status")
     public ResponseEntity<OrderResponseDTO> updateOrderStatus(@PathVariable Long id, @RequestParam String status) {
         log.info("Updating status of orderId={} to {}", id, status);
         orderService.updateOrderStatus(id, status);
@@ -79,7 +79,7 @@ public class OrderController {
     }
 
     // Delete order
-    @PutMapping("/{id}")
+    @PutMapping("/admin/{id}")
     public ResponseEntity<String> deleteOrder(@PathVariable Long id) {
         log.warn("Deleting order with id={}", id);
         orderService.deleteOrder(id);

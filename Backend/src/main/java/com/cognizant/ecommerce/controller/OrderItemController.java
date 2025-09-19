@@ -19,7 +19,7 @@ public class OrderItemController {
     private final OrderItemService orderItemService;
 
     // Add order item
-    @PostMapping
+    @PostMapping("/admin")
     public ResponseEntity<OrderItemResponseDTO> addOrderItem(@RequestBody OrderItemRequestDTO dto) {
         log.info("Received request to add order item: {}", dto);
         OrderItemResponseDTO response = orderItemService.addOrderItem(dto);
@@ -37,7 +37,7 @@ public class OrderItemController {
     }
 
     // Update order item
-    @PutMapping("/{id}")
+    @PutMapping("/admin/{id}")
     public ResponseEntity<OrderItemResponseDTO> updateOrderItem(@PathVariable Long id, @RequestBody OrderItemRequestDTO dto) {
         log.info("Updating order item with id={} using data: {}", id, dto);
         OrderItemResponseDTO updatedItem = orderItemService.updateOrderItem(id, dto);
@@ -46,7 +46,7 @@ public class OrderItemController {
     }
 
     // Delete order item
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/{id}")
     public ResponseEntity<String> deleteOrderItem(@PathVariable Long id) {
         log.warn("Deleting order item with id={}", id);
         orderItemService.deleteOrderItem(id);
