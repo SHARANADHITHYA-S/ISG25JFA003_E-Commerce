@@ -181,13 +181,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteOrder(Long orderId) {
+    public OrderResponseDTO deleteOrder(Long orderId) {
         log.info("Deleting order with id={}", orderId);
-        if (!orderRepository.existsById(orderId)) {
-            log.error("Order not found with id={}", orderId);
-            throw new ResourceNotFoundException("Order not found");
-        }
-        orderRepository.deleteById(orderId);
-        log.info("Order with id={} deleted successfully", orderId);
+
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> {
+                    log.error("Order not found with id={}", orderId);
+                    return new ResourceNotFoundException("Order not found");
+                });
+        order.setStatus("CANCELLED");
+        Order deleted = orderRepository.save(order);
+        log.debug("Order deleted: {}", deleted);
+        return modelMapper.map(deleted, OrderResponseDTO.class);
     }
 }
