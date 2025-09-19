@@ -46,7 +46,7 @@ public class PaymentController {
     }
 
     // Update payment status
-    @PutMapping("/{id}/status")
+    @PutMapping("/admin/{id}/status")
     public ResponseEntity<PaymentResponseDTO> updatePaymentStatus(@PathVariable Long id, @RequestParam String status) {
         log.info("Updating payment status for id={} to {}", id, status);
         PaymentResponseDTO updatedPayment = paymentService.updatePaymentStatus(id, status);
@@ -55,7 +55,7 @@ public class PaymentController {
     }
 
     // Get all payments
-    @GetMapping
+    @GetMapping("/admin")
     public ResponseEntity<List<PaymentResponseDTO>> getAllPayments() {
         log.info("Fetching all payments");
         List<PaymentResponseDTO> payments = paymentService.getAllPayments();
