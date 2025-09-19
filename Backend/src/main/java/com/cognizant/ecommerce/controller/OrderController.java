@@ -25,7 +25,7 @@ public class OrderController {
     private final CartService cartService;
     private final CartItemRepository cartItemRepository;
 
-    // ➕ Create a new order
+    // Create a new order
     @PostMapping
     public ResponseEntity<OrderResponseDTO> createOrder(@RequestBody OrderRequestDTO orderRequestDTO) {
         OrderResponseDTO createdOrder = orderService.createOrder(
@@ -38,19 +38,19 @@ public class OrderController {
         return new ResponseEntity<>(createdOrder, HttpStatus.CREATED);
     }
 
-    // 🔍 Get order by ID
+    // Get order by order ID
     @GetMapping("/{id}")
     public ResponseEntity<OrderResponseDTO> getOrderById(@PathVariable Long id) {
         return ResponseEntity.ok(orderService.getOrderById(id));
     }
 
-    // 📦 Get all orders
+    // Get all orders
     @GetMapping
     public ResponseEntity<List<OrderResponseDTO>> getAllOrders() {
         return ResponseEntity.ok(orderService.getAllOrders());
     }
 
-    // 👤 Get orders by user ID
+    // Get orders by user ID
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<OrderResponseDTO>> getOrdersByUserId(@PathVariable Long userId) {
         return  ResponseEntity.ok(orderService.getOrdersByUserId(userId));
@@ -64,7 +64,7 @@ public class OrderController {
         return ResponseEntity.ok(orderService.getOrderById(id));
     }
 
-    // ❌ Delete order
+    // Delete order
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteOrder(@PathVariable Long id) {
         orderService.deleteOrder(id);
