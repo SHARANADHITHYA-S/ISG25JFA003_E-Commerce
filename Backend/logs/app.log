@@ -124,3 +124,6 @@
 2025-09-19T17:04:39.655+05:30  WARN 29524 --- [ecommerce] [http-nio-8080-exec-6] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Insufficient stock for product 'Bluetooth Headphones'. Available stock: 0]
 2025-09-19T17:06:59.328+05:30  WARN 29524 --- [ecommerce] [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Insufficient stock for product 'Bluetooth Headphones'. Available stock: 2]
 2025-09-19T17:14:21.829+05:30  WARN 29524 --- [ecommerce] [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2025-09-19T17:51:49.245+05:30  INFO 29524 --- [ecommerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-19T17:51:49.287+05:30  INFO 29524 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-19T17:51:49.305+05:30  INFO 29524 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
