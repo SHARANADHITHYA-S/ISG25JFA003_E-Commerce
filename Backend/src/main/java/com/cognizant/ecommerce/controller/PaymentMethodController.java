@@ -17,7 +17,7 @@ public class PaymentMethodController {
 
     private final PaymentMethodService paymentMethodService;
 
-    @GetMapping("/users/{userId}")
+    @GetMapping("/user/{userId}")
     public ResponseEntity<List<PaymentMethodResponseDTO>> getPaymentMethodsByUserId(@PathVariable Long userId) {
         List<PaymentMethodResponseDTO> paymentMethods = paymentMethodService.getPaymentMethodsByUserId(userId);
         return ResponseEntity.ok(paymentMethods);

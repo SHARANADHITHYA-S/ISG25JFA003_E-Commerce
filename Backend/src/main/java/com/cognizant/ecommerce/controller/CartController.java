@@ -19,7 +19,7 @@ public class CartController {
         return 1L; // Hardcoded for this example
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/user/{userId}")
     public ResponseEntity<CartResponseDTO> getCartByUserId(@PathVariable Long userId) {
         // Security check: ensure the user ID matches the authenticated user.
         // For this example, we assume it's valid.
@@ -27,7 +27,7 @@ public class CartController {
         return ResponseEntity.ok(cart);
     }
 
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/user{userId}")
     public ResponseEntity<Void> deleteCartByUserId(@PathVariable Long userId) {
         // Security check: ensure the user ID matches the authenticated user.
         cartService.deleteCartByUserId(userId);

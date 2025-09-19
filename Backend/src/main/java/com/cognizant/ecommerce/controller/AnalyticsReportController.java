@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/analytics-reports")
+@RequestMapping("/api/analytics-reports/admin")
 @RequiredArgsConstructor
 public class AnalyticsReportController {
 

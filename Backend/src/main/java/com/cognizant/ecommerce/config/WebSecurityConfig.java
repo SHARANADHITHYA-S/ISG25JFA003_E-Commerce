@@ -33,23 +33,73 @@ public class WebSecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         //public access
-//                        .requestMatchers(
-//                                        "/api/auth/**",
-//                                        "/api/products/**",
-//                                        "/api/categories/**",
-//                                        "/api/public/**"
-//                                ).permitAll()
-//                        //users and admin access
-//                        .requestMatchers(
-//                                "/api/user/**",
-//                                "/api/carts/**",
-//                                "/api/orders/**",
-//                                "/api/addresses/**"
-//                        ).hasAnyRole("USER", "ADMIN")
-//                        .requestMatchers(
-//                                "/api/admin/**"
-//                        ).hasRole("ADMIN")
-                        .anyRequest().permitAll()
+                                .requestMatchers(
+                                        // User management
+                                        "/api/admin/**",
+
+                                        // Product management
+                                        "/api/products/admin/**",
+
+                                        // Payment management
+                                        "/api/payments/admin/**",
+
+                                        // Order management
+                                        "/api/orders/admin/**",
+
+                                        // Order item management
+                                        "/api/order-items/admin/**",
+
+                                        // Category management
+                                        "/api/categories/admin/**",
+
+                                        // Address management (admin view)
+                                        "/api/addresses/admin/**",
+
+                                        // Analytics
+                                        "/api/analytics-reports/admin/**"
+                                ).hasRole("ADMIN")
+                                .requestMatchers(
+                                        // User profile
+                                        "/api/user/**",
+
+                                        // Payment methods
+                                        "/api/payment-methods/**",
+
+                                        // Payments (non-admin)
+                                        "/api/payments",
+                                        "/api/payments/*",
+                                        "/api/payments/order/*",
+
+                                        // Order items (view only)
+                                        "/api/order-items/order/**",
+
+                                        // Cart items
+                                        "/api/cart-items/**",
+
+                                        // Carts
+                                        "/api/carts/**",
+
+                                        // Orders (non-admin)
+                                        "/api/orders",
+                                        "/api/orders/*",
+                                        "/api/orders/user/**",
+
+                                        // Addresses (non-admin)
+                                        "/api/addresses/**"
+                                ).hasAnyRole("USER", "ADMIN")
+                                // Public
+                                .requestMatchers(
+                                        "/api/auth/register",
+                                        "/api/auth/login",
+                                        "/api/products",
+                                        "/api/products/*",
+                                        "/api/products/category/*",
+                                        "/api/categories",
+                                        "/api/categories/*"
+                                ).permitAll()
+
+                                .anyRequest().authenticated()
+
                 )
                 .exceptionHandling(ex -> ex
                         .authenticationEntryPoint(jwtAuthenticationException) // 401 handler

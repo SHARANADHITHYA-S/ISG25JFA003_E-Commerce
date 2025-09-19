@@ -19,7 +19,7 @@ public class AddressController {
 
     private final AddressService addressService;
 
-    @GetMapping
+    @GetMapping("/admin")
     public ResponseEntity<List<Object>> getAllAddresses() {
         List<Object> addresses = addressService.getAllAddresses();
         return ok(addresses);
@@ -32,7 +32,7 @@ public class AddressController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/users/{userId}")
+    @PostMapping("/user/{userId}")
     public ResponseEntity<AddressResponseDTO> createAddress(@PathVariable Long userId, @RequestBody AddressRequestDTO addressRequestDTO) {
         AddressResponseDTO createdAddress = addressService.createAddress(userId, addressRequestDTO);
         return new ResponseEntity<>(createdAddress, HttpStatus.CREATED);
@@ -50,7 +50,7 @@ public class AddressController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/users/{userId}")
+    @GetMapping("/user/{userId}")
     public ResponseEntity<List<AddressResponseDTO>> getAddressesByUserId(@PathVariable Long userId) {
         List<AddressResponseDTO> addresses = addressService.getAddressesByUserId(userId);
         return ok(addresses);
