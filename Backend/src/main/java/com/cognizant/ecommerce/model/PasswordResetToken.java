@@ -1,12 +1,16 @@
 package com.cognizant.ecommerce.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+
 import java.time.LocalDateTime;
 
+@Getter
 @Entity
 @Table(name = "password_resets")
 public class PasswordResetToken {
 
+    // Getters and Setters...
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,41 +29,20 @@ public class PasswordResetToken {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    // Getters and Setters...
-    public Long getId() {
-        return id;
-    }
-
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getResetToken() {
-        return resetToken;
     }
 
     public void setResetToken(String resetToken) {
         this.resetToken = resetToken;
     }
 
-    public LocalDateTime getExpiresAt() {
-        return expiresAt;
-    }
-
     public void setExpiresAt(LocalDateTime expiresAt) {
         this.expiresAt = expiresAt;
     }
 
-    public boolean isUsed() {
-        return used;
-    }
-
     public void setUsed(boolean used) {
         this.used = used;
-    }
-
-    public User getUser() {
-        return user;
     }
 
     public void setUser(User user) {
