@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/analytics-reports")
+@RequestMapping("/api/analytics-reports/admin")
 @RequiredArgsConstructor
 public class AnalyticsReportController {
 
