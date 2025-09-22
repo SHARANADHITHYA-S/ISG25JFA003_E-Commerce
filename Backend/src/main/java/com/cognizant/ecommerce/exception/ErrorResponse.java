@@ -1,13 +1,16 @@
 package com.cognizant.ecommerce.exception;
 
+import lombok.Data;
+
 import java.time.LocalDateTime;
 
+@Data
 public class ErrorResponse {
-    private final LocalDateTime timestamp;
-    private final int status;
-    private final String error;
-    private final String message;
-    private final String path;
+    private LocalDateTime timestamp;
+    private int status;
+    private String error;
+    private String message;
+    private String path;
 
     public ErrorResponse(int status, String error, String message, String path) {
         this.timestamp = LocalDateTime.now();
@@ -17,24 +20,5 @@ public class ErrorResponse {
         this.path = path;
     }
 
-    // Getters for all fields
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public String getError() {
-        return error;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public String getPath() {
-        return path;
-    }
 }

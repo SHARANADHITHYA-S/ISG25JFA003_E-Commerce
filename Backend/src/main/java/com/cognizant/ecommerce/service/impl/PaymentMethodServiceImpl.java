@@ -4,15 +4,16 @@ import com.cognizant.ecommerce.dao.PaymentMethodRepository;
 import com.cognizant.ecommerce.dao.UserRepository;
 import com.cognizant.ecommerce.dto.payment.PaymentMethodRequestDTO;
 import com.cognizant.ecommerce.dto.payment.PaymentMethodResponseDTO;
-import com.cognizant.ecommerce.exception.ResourceNotFoundException;
 import com.cognizant.ecommerce.model.PaymentMethod;
 import com.cognizant.ecommerce.model.User;
 import com.cognizant.ecommerce.service.PaymentMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,14 +32,6 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
     }
 
     @Override
-    public List<PaymentMethodResponseDTO> getAllPaymentMethods() {
-        List<PaymentMethod> paymentMethods = paymentMethodRepository.findAll();
-        return paymentMethods.stream()
-                .map(this::mapToResponseDTO)
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public List<PaymentMethodResponseDTO> getPaymentMethodsByUserId(Long userId) {
         return paymentMethodRepository.findByUserId(userId).stream()
                 .map(this::mapToResponseDTO)
@@ -52,14 +45,13 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
 
     @Override
     public PaymentMethodResponseDTO addPaymentMethod(Long userId, PaymentMethodRequestDTO requestDTO) {
-        // Throws ResourceNotFoundException
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId));
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
         PaymentMethod paymentMethod = new PaymentMethod();
         paymentMethod.setUser(user);
         paymentMethod.setType(requestDTO.getCardType());
-        paymentMethod.setProvider("Credit Card");
+        paymentMethod.setProvider("Credit Card"); // Assuming a provider
         paymentMethod.setAccount_number(requestDTO.getCardNumber());
         paymentMethod.setExpiry_date(requestDTO.getExpirationDate());
         paymentMethod.setIs_default(requestDTO.isDefault());
@@ -72,9 +64,6 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
 
     @Override
     public void deletePaymentMethod(Long id) {
-        // Find the payment method first to check if it exists before deleting
-        paymentMethodRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Payment method not found with ID: " + id));
         paymentMethodRepository.deleteById(id);
     }
 
@@ -82,14 +71,8 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
         PaymentMethodResponseDTO responseDTO = new PaymentMethodResponseDTO();
         responseDTO.setPaymentMethodId(paymentMethod.getId());
         responseDTO.setCardType(paymentMethod.getType());
-
-        if (paymentMethod.getAccount_number() != null) {
-            responseDTO.setLastFourDigits(paymentMethod.getAccount_number().substring(paymentMethod.getAccount_number().length() - 4));
-        } else {
-            responseDTO.setLastFourDigits("N/A");
-        }
-
-        responseDTO.setCardholderName(null);
+        responseDTO.setLastFourDigits(paymentMethod.getAccount_number().substring(paymentMethod.getAccount_number().length() - 4));
+        responseDTO.setCardholderName(null); // No cardholder name in model
         responseDTO.setDefault(paymentMethod.isIs_default());
         return responseDTO;
     }
