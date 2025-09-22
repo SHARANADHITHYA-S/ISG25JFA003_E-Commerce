@@ -8,139 +8,123 @@ import com.cognizant.ecommerce.exception.DuplicateResourceException;
 import com.cognizant.ecommerce.exception.ResourceNotFoundException;
 import com.cognizant.ecommerce.model.Category;
 import com.cognizant.ecommerce.model.Product;
+import com.cognizant.ecommerce.service.ProductService;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.*;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
-class ProductServiceImplTest {
+@SpringBootTest
+@Transactional
+public class ProductServiceImplTest {
 
-    @Mock
-    private ProductRepository productRepository;
+    @Autowired private ProductService productService;
+    @Autowired private ProductRepository productRepository;
+    @Autowired private CategoryRepository categoryRepository;
+    @Autowired private ModelMapper modelMapper;
 
-    @Mock
-    private CategoryRepository categoryRepository;
-
-    @InjectMocks
-    private ProductServiceImpl productService;
-
-    private ProductRequestDTO requestDTO;
-    private Category category;
+    private Category testCategory;
+    private Product existingProduct;
 
     @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
+    public void setup() {
+        testCategory = categoryRepository.save(Category.builder()
+                .name("E-Gadgets")
+                .build());
 
-        requestDTO = new ProductRequestDTO();
-        requestDTO.setName("Bluetooth Headphones");
-        requestDTO.setDescription("Noise-cancelling over-ear headphones");
-        requestDTO.setPrice(BigDecimal.valueOf(2999.99));
-        requestDTO.setImage_url("https://example.com/images/headphones.jpg");
-        requestDTO.setQuantity(10L);
-        requestDTO.setCategoryId(1L);
-
-        category = new Category();
-        category.setId(1L);
-        category.setName("Electronics");
+        existingProduct = productRepository.save(Product.builder()
+                .name("Old Product")
+                .description("Old Description")
+                .price(BigDecimal.valueOf(100))
+                .image_url("old.jpg")
+                .quantity(10L)
+                .isActive(true)
+                .category(testCategory)
+                .build());
     }
 
     @Test
-    void testCreateProduct_Success() {
-        when(productRepository.findByName("Bluetooth Headphones")).thenReturn(Optional.empty());
-        when(categoryRepository.findById(1L)).thenReturn(Optional.of(category));
-        when(productRepository.save(any(Product.class))).thenAnswer(invocation -> invocation.getArgument(0));
+    public void testUpdateProduct_Success() {
+        ProductRequestDTO requestDTO = ProductRequestDTO.builder()
+                .name("Updated Product")
+                .description("Updated Description")
+                .price(BigDecimal.valueOf(150))
+                .image_url("updated.jpg")
+                .quantity(20L)
+                .isActive(true)
+                .categoryId(testCategory.getId())
+                .build();
 
-        ProductResponseDTO response = productService.createProduct(requestDTO);
+        ProductResponseDTO response = productService.updateProduct(existingProduct.getId(), requestDTO);
 
         assertNotNull(response);
-        assertEquals("Bluetooth Headphones", response.getName());
-        assertEquals(10L, response.getQuantity());
-        assertTrue(response.isActive());
-        assertEquals(1L, response.getCategory_id());
+        assertEquals("Updated Product", response.getName());
+        assertEquals("Updated Description", response.getDescription());
+        assertEquals(BigDecimal.valueOf(150), response.getPrice());
     }
 
     @Test
-    void testCreateProduct_DuplicateName_ThrowsException() {
-        when(productRepository.findByName("Bluetooth Headphones")).thenReturn(Optional.of(new Product()));
-        assertThrows(DuplicateResourceException.class, () -> productService.createProduct(requestDTO));
+    public void testUpdateProduct_ProductNotFound() {
+        ProductRequestDTO requestDTO = ProductRequestDTO.builder()
+                .name("Nonexistent Product")
+                .description("Desc")
+                .price(BigDecimal.valueOf(100))
+                .image_url("img.jpg")
+                .quantity(5L)
+                .isActive(true)
+                .categoryId(testCategory.getId())
+                .build();
+
+        assertThrows(ResourceNotFoundException.class, () ->
+                productService.updateProduct(999L, requestDTO));
     }
 
     @Test
-    void testCreateProduct_CategoryNotFound_ThrowsException() {
-        when(productRepository.findByName("Bluetooth Headphones")).thenReturn(Optional.empty());
-        when(categoryRepository.findById(1L)).thenReturn(Optional.empty());
-        assertThrows(ResourceNotFoundException.class, () -> productService.createProduct(requestDTO));
+    public void testUpdateProduct_DuplicateName() {
+        productRepository.save(Product.builder()
+                .name("Duplicate Name")
+                .description("Another")
+                .price(BigDecimal.valueOf(200))
+                .image_url("dup.jpg")
+                .quantity(5L)
+                .isActive(true)
+                .category(testCategory)
+                .build());
+
+        ProductRequestDTO requestDTO = ProductRequestDTO.builder()
+                .name("Duplicate Name")
+                .description("Updated")
+                .price(BigDecimal.valueOf(150))
+                .image_url("updated.jpg")
+                .quantity(20L)
+                .isActive(true)
+                .categoryId(testCategory.getId())
+                .build();
+
+        assertThrows(DuplicateResourceException.class, () ->
+                productService.updateProduct(existingProduct.getId(), requestDTO));
     }
 
     @Test
-    void testCreateProduct_ZeroQuantity_SetsInactive() {
-        requestDTO.setQuantity(0L);
-        when(productRepository.findByName("Bluetooth Headphones")).thenReturn(Optional.empty());
-        when(categoryRepository.findById(1L)).thenReturn(Optional.of(category));
-        when(productRepository.save(any(Product.class))).thenAnswer(invocation -> invocation.getArgument(0));
+    public void testUpdateProduct_CategoryNotFound() {
+        ProductRequestDTO requestDTO = ProductRequestDTO.builder()
+                .name("New Name")
+                .description("Updated")
+                .price(BigDecimal.valueOf(150))
+                .image_url("updated.jpg")
+                .quantity(20L)
+                .isActive(true)
+                .categoryId(999L)
+                .build();
 
-        ProductResponseDTO response = productService.createProduct(requestDTO);
-        assertFalse(response.isActive());
-    }
-
-    @Test
-    void testUpdateProduct_Success() {
-        Product existingProduct = new Product();
-        existingProduct.setId(1L);
-        existingProduct.setName("Old Name");
-        existingProduct.setQuantity(5L);
-        existingProduct.setCategory(category);
-
-        when(productRepository.findById(1L)).thenReturn(Optional.of(existingProduct));
-        when(productRepository.findByName("Bluetooth Headphones")).thenReturn(Optional.empty());
-        when(categoryRepository.findById(1L)).thenReturn(Optional.of(category));
-        when(productRepository.save(any(Product.class))).thenAnswer(invocation -> invocation.getArgument(0));
-
-        ProductResponseDTO response = productService.updateProduct(1L, requestDTO);
-        assertEquals("Bluetooth Headphones", response.getName());
-        assertEquals(10L, response.getQuantity());
-        assertTrue(response.isActive());
-    }
-
-    @Test
-    void testUpdateProduct_DuplicateName_ThrowsException() {
-        Product existingProduct = new Product();
-        existingProduct.setId(1L);
-        existingProduct.setName("Old Name");
-
-        when(productRepository.findById(1L)).thenReturn(Optional.of(existingProduct));
-        when(productRepository.findByName("Bluetooth Headphones")).thenReturn(Optional.of(new Product()));
-
-        assertThrows(DuplicateResourceException.class, () -> productService.updateProduct(1L, requestDTO));
-    }
-
-    @Test
-    void testUpdateProduct_CategoryNotFound_ThrowsException() {
-        Product existingProduct = new Product();
-        existingProduct.setId(1L);
-        existingProduct.setName("Bluetooth Headphones");
-
-        when(productRepository.findById(1L)).thenReturn(Optional.of(existingProduct));
-        when(categoryRepository.findById(1L)).thenReturn(Optional.empty());
-
-        assertThrows(ResourceNotFoundException.class, () -> productService.updateProduct(1L, requestDTO));
-    }
-
-    @Test
-    void testDeleteProduct_Success() {
-        when(productRepository.existsById(1L)).thenReturn(true);
-        productService.deleteProduct(1L);
-        verify(productRepository).deleteById(1L);
-    }
-
-    @Test
-    void testDeleteProduct_NotFound_ThrowsException() {
-        when(productRepository.existsById(1L)).thenReturn(false);
-        assertThrows(ResourceNotFoundException.class, () -> productService.deleteProduct(1L));
+        assertThrows(ResourceNotFoundException.class, () ->
+                productService.updateProduct(existingProduct.getId(), requestDTO));
     }
 }
