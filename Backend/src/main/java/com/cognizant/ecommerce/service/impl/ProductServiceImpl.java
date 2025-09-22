@@ -42,6 +42,7 @@ public class ProductServiceImpl implements ProductService {
 
         Product product = new Product();
         BeanUtils.copyProperties(productRequestDTO, product);
+        product.setActive(productRequestDTO.getQuantity() > 0);
         product.setCategory(category);
         Product savedProduct = productRepository.save(product);
         return mapToProductResponseDTO(savedProduct);
@@ -77,6 +78,7 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + productRequestDTO.getCategoryId()));
 
         BeanUtils.copyProperties(productRequestDTO, existingProduct);
+        existingProduct.setActive(productRequestDTO.getQuantity() > 0);
         existingProduct.setCategory(category);
         Product updatedProduct = productRepository.save(existingProduct);
         return mapToProductResponseDTO(updatedProduct);

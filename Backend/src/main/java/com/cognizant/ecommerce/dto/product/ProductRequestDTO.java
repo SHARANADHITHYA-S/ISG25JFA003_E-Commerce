@@ -18,7 +18,5 @@ public class ProductRequestDTO {
     private BigDecimal price;
     private String image_url;
     private Long quantity;
-    @JsonProperty("is_active")
-    private boolean isActive;
     private Long categoryId;
 }
