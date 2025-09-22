@@ -2,8 +2,6 @@ package com.cognizant.ecommerce.service;
 
 import com.cognizant.ecommerce.dto.analyticsreport.AnalyticsReportRequestDTO;
 import com.cognizant.ecommerce.dto.analyticsreport.AnalyticsReportResponseDTO;
-
-import java.util.List;
 import java.util.Optional;
 
 public interface AnalyticsReportService {
@@ -14,10 +12,4 @@ public interface AnalyticsReportService {
     AnalyticsReportResponseDTO updateReport(Long reportId, AnalyticsReportRequestDTO requestDTO);
 
     Optional<AnalyticsReportResponseDTO> getReportById(Long reportId);
-
-    List<AnalyticsReportResponseDTO> getAllReports();
-
-    AnalyticsReportResponseDTO createReport(AnalyticsReportRequestDTO requestDTO);
-
-    void deleteReport(Long reportId);
 }

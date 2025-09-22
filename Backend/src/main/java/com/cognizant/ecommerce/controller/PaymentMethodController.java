@@ -17,21 +17,12 @@ public class PaymentMethodController {
 
     private final PaymentMethodService paymentMethodService;
 
-    // GET all payment methods
-    @GetMapping
-    public ResponseEntity<List<PaymentMethodResponseDTO>> getAllPaymentMethods() {
-        List<PaymentMethodResponseDTO> paymentMethods = paymentMethodService.getAllPaymentMethods();
-        return ResponseEntity.ok(paymentMethods);
-    }
-
-    // GET payment methods by user ID
-    @GetMapping("/users/{userId}")
+    @GetMapping("/user/{userId}")
     public ResponseEntity<List<PaymentMethodResponseDTO>> getPaymentMethodsByUserId(@PathVariable Long userId) {
         List<PaymentMethodResponseDTO> paymentMethods = paymentMethodService.getPaymentMethodsByUserId(userId);
         return ResponseEntity.ok(paymentMethods);
     }
 
-    // GET a single payment method by ID
     @GetMapping("/{id}")
     public ResponseEntity<PaymentMethodResponseDTO> getPaymentMethodById(@PathVariable Long id) {
         return paymentMethodService.getPaymentMethodById(id)
@@ -39,14 +30,12 @@ public class PaymentMethodController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // Add a new payment method for a user
     @PostMapping("/users/{userId}")
     public ResponseEntity<PaymentMethodResponseDTO> addPaymentMethod(@PathVariable Long userId, @RequestBody PaymentMethodRequestDTO requestDTO) {
         PaymentMethodResponseDTO newPaymentMethod = paymentMethodService.addPaymentMethod(userId, requestDTO);
         return new ResponseEntity<>(newPaymentMethod, HttpStatus.CREATED);
     }
 
-    // Delete a payment method by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePaymentMethod(@PathVariable Long id) {
         paymentMethodService.deletePaymentMethod(id);
