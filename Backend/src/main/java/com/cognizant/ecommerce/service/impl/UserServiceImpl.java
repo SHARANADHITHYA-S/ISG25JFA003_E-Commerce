@@ -16,12 +16,13 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setName(userRequestDTO.getName());
         user.setEmail(userRequestDTO.getEmail());
-        user.setPassword_hash(passwordEncoder.encode(userRequestDTO.getPassword()));
+        user.setPassword_hash(passwordEncoder.encode(userRequestDTO.getPassword())); // Storing password as plain text (DANGEROUS!)
         user.setRole(userRequestDTO.getRole());
         User savedUser = userRepository.save(user);
         return convertToDto(savedUser);
@@ -72,13 +73,5 @@ public class UserServiceImpl implements UserService {
         userResponseDTO.setCreated_at(user.getCreated_at());
         userResponseDTO.setUpdated_at(user.getUpdated_at());
         return userResponseDTO;
-    }
-
-    @Override
-    public void deleteUserById(Long userId) {
-        if (!userRepository.existsById(userId)) {
-            throw new EntityNotFoundException("User not found with id: " + userId);
-        }
-        userRepository.deleteById(userId);
     }
 }
