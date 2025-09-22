@@ -27,11 +27,11 @@ public class CartController {
         return ResponseEntity.ok(cart);
     }
 
-    @DeleteMapping("/user{userId}")
-    public ResponseEntity<Void> deleteCartByUserId(@PathVariable Long userId) {
+    @DeleteMapping("/user/{userId}")
+    public ResponseEntity<String> deleteCartByUserId(@PathVariable Long userId) {
         // Security check: ensure the user ID matches the authenticated user.
         cartService.deleteCartByUserId(userId);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok("Cart deleted");
     }
 
 }
