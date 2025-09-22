@@ -21,6 +21,7 @@ import java.util.Set;
 @Table(name = "users")
 @Builder
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -45,26 +46,26 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-    private com.cognizant.ecommerce.model.Cart cart;
+    private Cart cart;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-    private Set<com.cognizant.ecommerce.model.Address> addresses = new HashSet<>();
+    private Set<Address> addresses = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-    private Set<com.cognizant.ecommerce.model.PaymentMethod> paymentMethods = new HashSet<>();
+    private Set<PaymentMethod> paymentMethods = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private Set<Order> orders = new HashSet<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    // ✅ Correct mapping for multiple password reset tokens
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JsonIgnore
     private Set<PasswordResetToken> passwordResetTokens = new HashSet<>();
 
-    public void setPasswordHash(String newPassword) {
-
+    public void setPassword_hash(String newPasswordHash) {
+        this.password_hash = newPasswordHash;
     }
-
 }
