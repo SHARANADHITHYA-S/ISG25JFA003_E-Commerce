@@ -1,12 +1,16 @@
 package com.cognizant.ecommerce.service.impl;
 
+import com.cognizant.ecommerce.config.JwtUtil;
 import com.cognizant.ecommerce.dao.UserRepository;
+import com.cognizant.ecommerce.dto.ForgotPassword.ResetPasswordRequest;
 import com.cognizant.ecommerce.dto.user.UserRequestDTO;
 import com.cognizant.ecommerce.dto.user.UserResponseDTO;
+import com.cognizant.ecommerce.exception.ResourceNotFoundException;
 import com.cognizant.ecommerce.model.User;
 import com.cognizant.ecommerce.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -16,13 +20,15 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final JwtUtil jwtUtil;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
+        this.jwtUtil = jwtUtil;
     }
 
     @Override
@@ -74,4 +80,26 @@ public class UserServiceImpl implements UserService {
         userResponseDTO.setUpdated_at(user.getUpdated_at());
         return userResponseDTO;
     }
+
+    public String generateResetToken(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        return jwtUtil.generateResetToken(user.getName());
+    }
+
+    public void resetPassword(ResetPasswordRequest request) {
+        String usernameFromToken = jwtUtil.extractUsername(request.getToken());
+
+        if (!usernameFromToken.equals(request.getUsername())) {
+            throw new BadCredentialsException("Token does not match username");
+        }
+
+        User user = userRepository.findByName(request.getUsername())
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        user.setPassword_hash(passwordEncoder.encode(request.getNewPassword()));
+        userRepository.save(user);
+    }
+
+
 }

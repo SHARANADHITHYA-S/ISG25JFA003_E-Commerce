@@ -91,6 +91,8 @@ public class WebSecurityConfig {
                                 .requestMatchers(
                                         "/api/auth/register",
                                         "/api/auth/login",
+                                        "/api/auth/forgot-password",
+                                        "/api/auth/reset-password",
                                         "/api/products",
                                         "/api/products/*",
                                         "/api/products/category/*",

@@ -2,6 +2,8 @@ package com.cognizant.ecommerce.controller;
 
 import com.cognizant.ecommerce.config.JwtUtil;
 import com.cognizant.ecommerce.dao.UserRepository;
+import com.cognizant.ecommerce.dto.ForgotPassword.ForgotPasswordRequest;
+import com.cognizant.ecommerce.dto.ForgotPassword.ResetPasswordRequest;
 import com.cognizant.ecommerce.exception.BadCredentialsException;
 import com.cognizant.ecommerce.service.UserService;
 import com.cognizant.ecommerce.dto.user.UserRequestDTO;
@@ -18,6 +20,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,6 +94,18 @@ public class UserController {
         List<UserResponseDTO> users = userService.findAllUsers();
         logger.info("Total users fetched: {}", users.size());
         return ResponseEntity.ok(users);
+    }
+
+    @PostMapping("/auth/forgot-password")
+    public ResponseEntity<?> forgotPassword(@RequestBody ForgotPasswordRequest request) {
+        String token = userService.generateResetToken(request.getEmail());
+        return ResponseEntity.ok(Map.of("resetToken", token));
+    }
+
+    @PostMapping("/auth/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordRequest request) {
+        userService.resetPassword(request);
+        return ResponseEntity.ok("Password updated successfully");
     }
 
     @Data
