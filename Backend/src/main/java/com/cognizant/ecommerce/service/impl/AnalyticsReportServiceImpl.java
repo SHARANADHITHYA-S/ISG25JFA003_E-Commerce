@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AnalyticsReportServiceImpl implements AnalyticsReportService {
@@ -28,6 +30,19 @@ public class AnalyticsReportServiceImpl implements AnalyticsReportService {
     @Override
     public Optional<AnalyticsReportResponseDTO> getReportById(Long id) {
         return analyticsReportRepository.findById(id).map(this::mapToResponseDTO);
+    }
+
+    @Override
+    public List<AnalyticsReportResponseDTO> getAllReports() {
+        return analyticsReportRepository.findAll().stream()
+                .map(this::mapToResponseDTO) // or modelMapper.map(...)
+                .collect(Collectors.toList());
+
+    }
+
+    @Override
+    public void deleteReport(Long reportId) {
+
     }
 
     @Override
