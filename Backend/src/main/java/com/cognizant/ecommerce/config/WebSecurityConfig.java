@@ -96,7 +96,7 @@ public class WebSecurityConfig {
                                         "/api/products/category/*",
                                         "/api/categories",
                                         "/api/categories/*",
-                                        "/swagger-ui/**"
+                                        "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html"
                                 ).permitAll()
 
                                 .anyRequest().authenticated()
