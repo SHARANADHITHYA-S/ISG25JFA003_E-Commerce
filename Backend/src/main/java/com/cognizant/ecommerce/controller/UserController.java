@@ -18,10 +18,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @RestController
 @RequestMapping("/api")
 public class UserController {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
@@ -34,66 +39,68 @@ public class UserController {
         this.jwtUtil = jwtUtil;
     }
 
-
     @PostMapping("/auth/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+        logger.info("Login attempt for username: {}", request.getUsername());
         try {
-            // Authenticate against DB
             Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            request.getUsername(),
-                            request.getPassword()
-                    )
+                    new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
             );
 
-            // Get authenticated user details
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String role = userDetails.getAuthorities().iterator().next().getAuthority();
-
-            // Generate JWT
             String token = jwtUtil.generateToken(userDetails.getUsername(), role);
 
+            logger.info("Login successful for username: {}", request.getUsername());
             return ResponseEntity.ok(new JwtResponse(token));
 
         } catch (BadCredentialsException e) {
+            logger.warn("Login failed for username: {}", request.getUsername());
             return ResponseEntity.status(401).body(e);
         }
+    }
+
+    @PostMapping("/auth/register")
+    public ResponseEntity<UserResponseDTO> registerUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
+        logger.info("Registering user with email: {}", userRequestDTO.getEmail());
+        UserResponseDTO registeredUser = userService.registerUser(userRequestDTO);
+        logger.info("User registered successfully with ID: {}", registeredUser.getId());
+        return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/user/{id}")
+    public ResponseEntity<UserResponseDTO> updateUserProfile(@PathVariable Long id, @Valid @RequestBody UserRequestDTO userRequestDTO) {
+        logger.info("Updating user profile for ID: {}", id);
+        UserResponseDTO updatedUser = userService.updateUserProfile(id, userRequestDTO);
+        logger.info("User profile updated for ID: {}", id);
+        return ResponseEntity.ok(updatedUser);
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id) {
+        logger.info("Fetching user by ID: {}", id);
+        UserResponseDTO user = userService.findUserById(id);
+        logger.info("User fetched successfully for ID: {}", id);
+        return ResponseEntity.ok(user);
+    }
+
+    @GetMapping("/admin/user")
+    public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
+        logger.info("Fetching all users");
+        List<UserResponseDTO> users = userService.findAllUsers();
+        logger.info("Total users fetched: {}", users.size());
+        return ResponseEntity.ok(users);
     }
 
     @Data
     public static class LoginRequest {
         private String username;
-        private String password; // e.g., "USER" or "ADMIN"
+        private String password;
     }
 
     @Data
     @AllArgsConstructor
     public static class JwtResponse {
         private String token;
-    }
-
-    @PostMapping("/auth/register")
-    public ResponseEntity<UserResponseDTO> registerUser(@Valid @RequestBody UserRequestDTO userRequestDTO) {
-        UserResponseDTO registeredUser = userService.registerUser(userRequestDTO);
-        return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
-    }
-
-
-    @PutMapping("/user/{id}")
-    public ResponseEntity<UserResponseDTO> updateUserProfile(@PathVariable Long id, @Valid @RequestBody UserRequestDTO userRequestDTO) {
-        UserResponseDTO updatedUser = userService.updateUserProfile(id, userRequestDTO);
-        return ResponseEntity.ok(updatedUser);
-    }
-
-    @GetMapping("/user/{id}")
-    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id) {
-        UserResponseDTO user = userService.findUserById(id);
-        return ResponseEntity.ok(user);
-    }
-
-    @GetMapping("/admin/user")
-    public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
-        List<UserResponseDTO> users = userService.findAllUsers();
-        return ResponseEntity.ok(users);
     }
 }
