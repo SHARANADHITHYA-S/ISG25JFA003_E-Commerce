@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import com.fasterxml.jackson.databind.Module;
 
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 @SpringBootApplication
 public class EcommerceApplication {
