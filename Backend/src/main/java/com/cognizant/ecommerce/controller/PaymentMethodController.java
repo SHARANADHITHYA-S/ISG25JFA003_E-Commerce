@@ -4,6 +4,8 @@ import com.cognizant.ecommerce.dto.payment.PaymentMethodRequestDTO;
 import com.cognizant.ecommerce.dto.payment.PaymentMethodResponseDTO;
 import com.cognizant.ecommerce.service.PaymentMethodService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,41 +17,45 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PaymentMethodController {
 
+    private static final Logger logger = LoggerFactory.getLogger(PaymentMethodController.class);
+
     private final PaymentMethodService paymentMethodService;
 
-    // GET all payment methods
-    @GetMapping
-    public ResponseEntity<List<PaymentMethodResponseDTO>> getAllPaymentMethods() {
-        List<PaymentMethodResponseDTO> paymentMethods = paymentMethodService.getAllPaymentMethods();
-        return ResponseEntity.ok(paymentMethods);
-    }
-
-    // GET payment methods by user ID
-    @GetMapping("/users/{userId}")
+    @GetMapping("/user/{userId}")
     public ResponseEntity<List<PaymentMethodResponseDTO>> getPaymentMethodsByUserId(@PathVariable Long userId) {
+        logger.info("Fetching payment methods for user ID: {}", userId);
         List<PaymentMethodResponseDTO> paymentMethods = paymentMethodService.getPaymentMethodsByUserId(userId);
+        logger.info("Found {} payment methods for user ID: {}", paymentMethods.size(), userId);
         return ResponseEntity.ok(paymentMethods);
     }
 
-    // GET a single payment method by ID
     @GetMapping("/{id}")
     public ResponseEntity<PaymentMethodResponseDTO> getPaymentMethodById(@PathVariable Long id) {
+        logger.info("Fetching payment method by ID: {}", id);
         return paymentMethodService.getPaymentMethodById(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+                .map(method -> {
+                    logger.info("Payment method found: {}", method.getCardType());
+                    return ResponseEntity.ok(method);
+                })
+                .orElseGet(() -> {
+                    logger.warn("Payment method not found for ID: {}", id);
+                    return ResponseEntity.notFound().build();
+                });
     }
 
-    // Add a new payment method for a user
     @PostMapping("/users/{userId}")
     public ResponseEntity<PaymentMethodResponseDTO> addPaymentMethod(@PathVariable Long userId, @RequestBody PaymentMethodRequestDTO requestDTO) {
+        logger.info("Adding payment method for user ID: {} with type: {}", userId, requestDTO.getCardType());
         PaymentMethodResponseDTO newPaymentMethod = paymentMethodService.addPaymentMethod(userId, requestDTO);
+        logger.info("Payment method added with ID: {}", newPaymentMethod.getPaymentMethodId());
         return new ResponseEntity<>(newPaymentMethod, HttpStatus.CREATED);
     }
 
-    // Delete a payment method by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePaymentMethod(@PathVariable Long id) {
+        logger.info("Deleting payment method with ID: {}", id);
         paymentMethodService.deletePaymentMethod(id);
+        logger.info("Payment method deleted with ID: {}", id);
         return ResponseEntity.noContent().build();
     }
 }

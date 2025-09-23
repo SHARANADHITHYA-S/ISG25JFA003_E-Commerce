@@ -44,8 +44,4 @@ public class AnalyticsReportRequestDTO {
     public void setFilterBy(String filterBy) {
         this.filterBy = filterBy;
     }
-
-    public String getReportData() {
-        return "";
-    }
 }

@@ -4,10 +4,12 @@ import com.cognizant.ecommerce.dao.AddressRepository;
 import com.cognizant.ecommerce.dao.UserRepository; // New import needed
 import com.cognizant.ecommerce.dto.address.AddressRequestDTO;
 import com.cognizant.ecommerce.dto.address.AddressResponseDTO;
+import com.cognizant.ecommerce.exception.ResourceNotFoundException;
 import com.cognizant.ecommerce.model.Address;
 import com.cognizant.ecommerce.model.User; // New import needed
 import com.cognizant.ecommerce.service.AddressService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +22,7 @@ public class AddressServiceImpl implements AddressService {
 
     private final AddressRepository addressRepository;
     private final UserRepository userRepository; // Added to support createAddress
+    private final ModelMapper modelMapper;
 
     @Override
     public List<Object> getAllAddresses() {
@@ -36,18 +39,13 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public AddressResponseDTO createAddress(Long userId, AddressRequestDTO addressRequestDTO) {
-        // Find the user by ID; throw an exception if not found
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId));
 
-        // Map the DTO to an entity
         Address address = mapToEntity(addressRequestDTO);
-        address.setUser(user); // Link the address to the user
+        address.setUser(user);
 
-        // Save the new address entity
         Address savedAddress = addressRepository.save(address);
-
-        // Convert and return the saved entity as a DTO
         return mapToResponseDTO(savedAddress);
     }
 
@@ -55,7 +53,7 @@ public class AddressServiceImpl implements AddressService {
     public AddressResponseDTO updateAddress(Long addressId, AddressRequestDTO addressRequestDTO) {
         // Find the existing address by ID; throw an exception if not found
         Address existingAddress = addressRepository.findById(addressId)
-                .orElseThrow(() -> new RuntimeException("Address not found with ID: " + addressId));
+                .orElseThrow(() -> new ResourceNotFoundException("Address not found with ID: " + addressId));
 
         // Update the fields from the DTO
         existingAddress.setAddress_line1(addressRequestDTO.getAddressLine1());
@@ -76,21 +74,22 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public void deleteAddress(Long addressId) {
-        // Implementation for deleting an address would go here
+        Address address = addressRepository.findById(addressId)
+                .orElseThrow(() -> new ResourceNotFoundException("Address not found with id: " + addressId));
+        addressRepository.delete(address);
     }
 
     @Override
     public List<AddressResponseDTO> getAddressesByUserId(Long userId) {
-        // Implementation for getting addresses by user ID would go here
-        return List.of();
+        userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId));
+
+        List<Address> addresses = addressRepository.findByUserId(userId);
+        return addresses.stream()
+                .map(this::mapToResponseDTO)
+                .toList();
     }
 
-    /**
-     * Helper method to map Address entity to AddressResponseDTO.
-     *
-     * @param address The entity to map.
-     * @return The mapped AddressResponseDTO.
-     */
     private AddressResponseDTO mapToResponseDTO(Address address) {
         AddressResponseDTO responseDTO = new AddressResponseDTO();
         responseDTO.setId(address.getId());
@@ -107,12 +106,7 @@ public class AddressServiceImpl implements AddressService {
         return responseDTO;
     }
 
-    /**
-     * Helper method to map AddressRequestDTO to Address entity.
-     *
-     * @param dto The DTO to map.
-     * @return The mapped Address entity.
-     */
+
     private Address mapToEntity(AddressRequestDTO dto) {
         Address address = new Address();
         address.setAddress_line1(dto.getAddressLine1());

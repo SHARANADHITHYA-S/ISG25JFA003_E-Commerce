@@ -3,6 +3,7 @@ package com.cognizant.ecommerce.controller;
 import com.cognizant.ecommerce.dto.payment.PaymentRequestDTO;
 import com.cognizant.ecommerce.dto.payment.PaymentResponseDTO;
 import com.cognizant.ecommerce.service.PaymentService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j; // ✅ Lombok logging
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@SecurityRequirement(name = "BearerAuth")
 @Slf4j
 @RestController
 @RequestMapping("/api/payments")
