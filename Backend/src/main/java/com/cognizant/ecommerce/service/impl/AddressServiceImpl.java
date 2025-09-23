@@ -97,7 +97,7 @@ public class AddressServiceImpl implements AddressService {
         responseDTO.setAddressLine2(address.getAddress_line2());
         responseDTO.setCity(address.getCity());
         responseDTO.setState(address.getState());
-        responseDTO.setPostalCode((String) address.getPostal_code());
+        responseDTO.setPostalCode(address.getPostal_code());
         responseDTO.setCountry(address.getCountry());
         responseDTO.setPhone(address.getPhone());
         responseDTO.setDefault((Boolean) address.isDefault());
