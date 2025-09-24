@@ -22,7 +22,7 @@ public class PaymentMethodController {
 
     private final PaymentMethodService paymentMethodService;
 
-    // ✅ Only owner or admin can view payment methods by user ID
+    // Only owner or admin can view payment methods by user ID
     @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<PaymentMethodResponseDTO>> getPaymentMethodsByUserId(@PathVariable Long userId) {
@@ -32,7 +32,7 @@ public class PaymentMethodController {
         return ResponseEntity.ok(paymentMethods);
     }
 
-    // ✅ Only owner or admin can view a specific payment method
+    // Only owner or admin can view a specific payment method
     @PreAuthorize("@authService.canAccessPaymentMethod(#id)")
     @GetMapping("/{id}")
     public ResponseEntity<PaymentMethodResponseDTO> getPaymentMethodById(@PathVariable Long id) {
@@ -48,7 +48,7 @@ public class PaymentMethodController {
                 });
     }
 
-    // ✅ Only owner or admin can add a payment method
+    // Only owner or admin can add a payment method
     @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
     @PostMapping("/users/{userId}")
     public ResponseEntity<PaymentMethodResponseDTO> addPaymentMethod(@PathVariable Long userId, @RequestBody PaymentMethodRequestDTO requestDTO) {
@@ -58,7 +58,7 @@ public class PaymentMethodController {
         return new ResponseEntity<>(newPaymentMethod, HttpStatus.CREATED);
     }
 
-    // ✅ Only owner or admin can delete a payment method
+    // Only owner or admin can delete a payment method
     @PreAuthorize("@authService.canAccessPaymentMethod(#id)")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePaymentMethod(@PathVariable Long id) {
