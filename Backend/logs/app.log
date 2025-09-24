@@ -136,3 +136,6 @@
 2025-09-24T12:08:19.036+05:30  WARN 18164 --- [ecommerce] [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [io.jsonwebtoken.ExpiredJwtException: JWT expired 272006 milliseconds ago at 2025-09-24T06:33:47.000Z. Current time: 2025-09-24T06:38:19.006Z. Allowed clock skew: 0 milliseconds.]
 2025-09-24T12:08:27.077+05:30  INFO 18164 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.UserController  : Login attempt for username: kiritUser
 2025-09-24T12:08:27.379+05:30  INFO 18164 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.UserController  : Login successful for username: kiritUser
+2025-09-24T12:13:47.531+05:30  INFO 18164 --- [ecommerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-24T12:13:47.533+05:30  INFO 18164 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-24T12:13:47.544+05:30  INFO 18164 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
