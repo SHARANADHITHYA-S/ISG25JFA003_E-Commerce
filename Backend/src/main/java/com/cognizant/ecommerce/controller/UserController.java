@@ -5,6 +5,7 @@ import com.cognizant.ecommerce.dao.UserRepository;
 import com.cognizant.ecommerce.dto.ForgotPassword.ForgotPasswordRequest;
 import com.cognizant.ecommerce.dto.ForgotPassword.ResetPasswordRequest;
 import com.cognizant.ecommerce.exception.BadCredentialsException;
+import com.cognizant.ecommerce.model.User;
 import com.cognizant.ecommerce.service.UserService;
 import com.cognizant.ecommerce.dto.user.UserRequestDTO;
 import com.cognizant.ecommerce.dto.user.UserResponseDTO;
@@ -13,10 +14,12 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -35,12 +38,14 @@ public class UserController {
     private final UserService userService;
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserController(UserService userService, UserRepository userRepository, AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
+    public UserController(UserService userService, UserRepository userRepository, AuthenticationManager authenticationManager, JwtUtil jwtUtil, UserRepository userRepository1) {
         this.userService = userService;
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
+        this.userRepository = userRepository1;
     }
 
     @PostMapping("/auth/login")
@@ -53,7 +58,9 @@ public class UserController {
 
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String role = userDetails.getAuthorities().iterator().next().getAuthority();
-            String token = jwtUtil.generateToken(userDetails.getUsername(), role);
+            User user = userRepository.findByName(userDetails.getUsername())
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+            String token = jwtUtil.generateToken(user.getId(),userDetails.getUsername(), role);
 
             logger.info("Login successful for username: {}", request.getUsername());
             return ResponseEntity.ok(new JwtResponse(token));
@@ -72,22 +79,25 @@ public class UserController {
         return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
     }
 
-    @PutMapping("/user/{id}")
-    public ResponseEntity<UserResponseDTO> updateUserProfile(@PathVariable Long id, @Valid @RequestBody UserRequestDTO userRequestDTO) {
-        logger.info("Updating user profile for ID: {}", id);
-        UserResponseDTO updatedUser = userService.updateUserProfile(id, userRequestDTO);
-        logger.info("User profile updated for ID: {}", id);
+    @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
+    @PutMapping("/user/{userId}")
+    public ResponseEntity<UserResponseDTO> updateUserProfile(@PathVariable Long userId, @Valid @RequestBody UserRequestDTO userRequestDTO) {
+        logger.info("Updating user profile for ID: {}", userId);
+        UserResponseDTO updatedUser = userService.updateUserProfile(userId, userRequestDTO);
+        logger.info("User profile updated for ID: {}", userId);
         return ResponseEntity.ok(updatedUser);
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id) {
-        logger.info("Fetching user by ID: {}", id);
-        UserResponseDTO user = userService.findUserById(id);
-        logger.info("User fetched successfully for ID: {}", id);
+    @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long userId) {
+        logger.info("Fetching user by ID: {}", userId);
+        UserResponseDTO user = userService.findUserById(userId);
+        logger.info("User fetched successfully for ID: {}", userId);
         return ResponseEntity.ok(user);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin/user")
     public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
         logger.info("Fetching all users");

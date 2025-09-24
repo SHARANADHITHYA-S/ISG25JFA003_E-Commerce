@@ -10,6 +10,8 @@ import com.cognizant.ecommerce.service.AnalyticsReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cognizant.ecommerce.exception.AnalyticsReportNotFoundException;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -37,12 +39,16 @@ public class AnalyticsReportServiceImpl implements AnalyticsReportService {
         return analyticsReportRepository.findAll().stream()
                 .map(this::mapToResponseDTO) // or modelMapper.map(...)
                 .collect(Collectors.toList());
-
     }
 
     @Override
     public void deleteReport(Long reportId) {
+        // First check if the report exists. If not, throw a custom exception.
+        analyticsReportRepository.findById(reportId)
+                .orElseThrow(() -> new AnalyticsReportNotFoundException("Analytics report not found with ID: " + reportId));
 
+        // If the report exists, proceed with the deletion.
+        analyticsReportRepository.deleteById(reportId);
     }
 
     @Override
