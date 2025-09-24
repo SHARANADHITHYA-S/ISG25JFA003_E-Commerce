@@ -16,7 +16,8 @@ import static org.springframework.http.ResponseEntity.ok;
 @RestController
 @RequestMapping("/api/analytics-reports")
 @RequiredArgsConstructor
-public class AnalyticsReportController {
+public class
+AnalyticsReportController {
 
     private final AnalyticsReportService analyticsReportService;
 

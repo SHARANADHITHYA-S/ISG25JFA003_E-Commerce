@@ -17,6 +17,7 @@ public class ProductRequestDTO {
     private String description;
     private BigDecimal price;
     private String image_url;
+    private Boolean isActive;
     private Long quantity;
     private Long categoryId;
 }
