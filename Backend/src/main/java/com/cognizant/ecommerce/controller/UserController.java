@@ -14,6 +14,7 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -78,22 +79,25 @@ public class UserController {
         return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
     }
 
-    @PutMapping("/user/{id}")
-    public ResponseEntity<UserResponseDTO> updateUserProfile(@PathVariable Long id, @Valid @RequestBody UserRequestDTO userRequestDTO) {
-        logger.info("Updating user profile for ID: {}", id);
-        UserResponseDTO updatedUser = userService.updateUserProfile(id, userRequestDTO);
-        logger.info("User profile updated for ID: {}", id);
+    @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
+    @PutMapping("/user/{userId}")
+    public ResponseEntity<UserResponseDTO> updateUserProfile(@PathVariable Long userId, @Valid @RequestBody UserRequestDTO userRequestDTO) {
+        logger.info("Updating user profile for ID: {}", userId);
+        UserResponseDTO updatedUser = userService.updateUserProfile(userId, userRequestDTO);
+        logger.info("User profile updated for ID: {}", userId);
         return ResponseEntity.ok(updatedUser);
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id) {
-        logger.info("Fetching user by ID: {}", id);
-        UserResponseDTO user = userService.findUserById(id);
-        logger.info("User fetched successfully for ID: {}", id);
+    @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long userId) {
+        logger.info("Fetching user by ID: {}", userId);
+        UserResponseDTO user = userService.findUserById(userId);
+        logger.info("User fetched successfully for ID: {}", userId);
         return ResponseEntity.ok(user);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin/user")
     public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
         logger.info("Fetching all users");
