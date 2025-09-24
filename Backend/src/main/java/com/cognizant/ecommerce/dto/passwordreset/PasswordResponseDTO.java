@@ -13,4 +13,3 @@ public class PasswordResponseDTO {
     private String message;
     private String email;
 }
-
