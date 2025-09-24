@@ -1,120 +1,123 @@
-//package com.cognizant.ecommerce.service.impl;
-//
-//import com.cognizant.ecommerce.dao.CartItemRepository;
-//import com.cognizant.ecommerce.dao.CartRepository;
-//import com.cognizant.ecommerce.dao.UserRepository;
-//import com.cognizant.ecommerce.dto.cart.CartResponseDTO;
-//import com.cognizant.ecommerce.exception.ResourceNotFoundException;
-//import com.cognizant.ecommerce.model.Cart;
-//import com.cognizant.ecommerce.model.CartItem;
-//import com.cognizant.ecommerce.model.Product;
-//import com.cognizant.ecommerce.model.User;
-//import org.junit.jupiter.api.BeforeEach;
-//import org.junit.jupiter.api.Test;
-//import org.mockito.*;
-//import java.math.BigDecimal;
-//import java.util.*;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//import static org.mockito.Mockito.*;
-//
-//class CartServiceImplTest {
-//
-//    @InjectMocks
-//    private CartServiceImpl cartService;
-//
-//    @Mock
-//    private CartRepository cartRepository;
-//
-//    @Mock
-//    private CartItemRepository cartItemRepository;
-//
-//    @Mock
-//    private UserRepository userRepository;
-//
-//    @BeforeEach
-//    void setup() {
-//        MockitoAnnotations.openMocks(this);
-//    }
-//
-//    @Test
-//    void testGetCartByUserId_success() {
-//        Long userId = 1L;
-//        Product product = new Product();
-//        product.setId(101L);
-//        product.setName("Laptop");
-//        product.setPrice(BigDecimal.valueOf(1000));
-//
-//        CartItem item = new CartItem();
-//        item.setId(201L);
-//        item.setProduct(product);
-//        item.setQuantity(2);
-//
-//        Cart cart = new Cart();
-//        cart.setId(301L);
-//        cart.setUser(new User());
-//        cart.setCartItems(List.of(item));
-//
-//        when(cartRepository.findByUserId(userId)).thenReturn(Optional.of(cart));
-//
-//        CartResponseDTO response = cartService.getCartByUserId(userId);
-//
-//        assertEquals(301L, response.getId());
-//        assertEquals(1, response.getItems().size());
-//        assertEquals(BigDecimal.valueOf(2000), response.getItems().get(0).getTotalPrice());
-//    }
-//
-//    @Test
-//    void testGetCartByUserId_notFound() {
-//        Long userId = 2L;
-//        when(cartRepository.findByUserId(userId)).thenReturn(Optional.empty());
-//
-//        assertThrows(ResourceNotFoundException.class, () -> cartService.getCartByUserId(userId));
-//    }
-//
-//    @Test
-//    void testDeleteCartByUserId_success() {
-//        Long userId = 3L;
-//        Cart cart = new Cart();
-//        cart.setId(401L);
-//
-//        when(cartRepository.findByUserId(userId)).thenReturn(Optional.of(cart));
-//
-//        cartService.deleteCartByUserId(userId);
-//
-//        verify(cartRepository).delete(cart);
-//    }
-//
-//    @Test
-//    void testDeleteCartByUserId_notFound() {
-//        Long userId = 4L;
-//        when(cartRepository.findByUserId(userId)).thenReturn(Optional.empty());
-//
-//        assertThrows(ResourceNotFoundException.class, () -> cartService.deleteCartByUserId(userId));
-//    }
-//
-////    @Test
-////    void testClearCart_success() {
-////        Long userId = 5L;
-////        CartItem item1 = new CartItem();
-////        CartItem item2 = new CartItem();
-////
-////        Cart cart = new Cart();
-////        cart.setId(501L);
-////        cart.setCartItems(List.of(item1, item2));
-////
-////        when(cartRepository.findByUserId(userId)).thenReturn(Optional.of(cart));
-////
-////        cartService.deleteCartByUserId(userId);
-////
-////        verify(cartItemRepository).deleteAll(cart.getCartItems());
-////    }
-////
-////    @Test
-////    void testClearCart_notFound() {
-////        Long userId = 6L;
-////        when(cartRepository.findByUserId(userId)).thenReturn(Optional.empty());
-////
-////        assertThrows(ResourceNotFoundException.class, () -> cartService.clearCart(userId));
-////    }
-////}
+package com.cognizant.ecommerce.service.impl;
+
+import com.cognizant.ecommerce.dao.CartItemRepository;
+import com.cognizant.ecommerce.dao.CartRepository;
+import com.cognizant.ecommerce.dao.ProductRepository;
+import com.cognizant.ecommerce.dao.UserRepository;
+import com.cognizant.ecommerce.dto.cart.CartResponseDTO;
+import com.cognizant.ecommerce.dto.cartItem.CartItemResponseDTO;
+import com.cognizant.ecommerce.exception.ResourceNotFoundException;
+import com.cognizant.ecommerce.model.Cart;
+import com.cognizant.ecommerce.model.CartItem;
+import com.cognizant.ecommerce.model.Product;
+import com.cognizant.ecommerce.model.User;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+@SpringBootTest
+class CartServiceImplTest {
+
+    @InjectMocks
+    private CartServiceImpl cartService;
+
+    @Mock
+    private CartRepository cartRepository;
+    @Mock
+    private CartItemRepository cartItemRepository;
+    @Mock
+    private UserRepository userRepository;
+    @Mock
+    private ProductRepository productRepository;
+
+    private Cart cart;
+    private User user;
+    private Product product;
+    private CartItem cartItem;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+
+        user = new User();
+        user.setId(1L);
+
+        product = new Product();
+        product.setId(10L);
+        product.setName("Test Product");
+        product.setPrice(BigDecimal.valueOf(100));
+
+        cart = new Cart();
+        cart.setId(1L);
+        cart.setUser(user);
+        cart.setCreated_at(LocalDateTime.now());
+        cart.setUpdated_at(LocalDateTime.now());
+
+        cartItem = new CartItem();
+        cartItem.setId(100L);
+        cartItem.setCart(cart);
+        cartItem.setProduct(product);
+        cartItem.setQuantity(2);
+
+        List<CartItem> cartItems = new ArrayList<>();
+        cartItems.add(cartItem);
+        cart.setCartItems(cartItems);
+    }
+
+    @Test
+    void testGetCartByUserId_Success() {
+        when(cartRepository.findByUserId(1L)).thenReturn(Optional.of(cart));
+
+        CartResponseDTO response = cartService.getCartByUserId(1L);
+
+        assertNotNull(response);
+        assertEquals(cart.getId(), response.getId());
+        assertEquals(user.getId(), response.getUserId());
+        assertEquals(1, response.getItems().size());
+
+        CartItemResponseDTO itemDto = response.getItems().get(0);
+        assertEquals(cartItem.getId(), itemDto.getId());
+        assertEquals(product.getId(), itemDto.getProductId());
+        assertEquals(product.getName(), itemDto.getProductName());
+        assertEquals(product.getPrice(), itemDto.getPrice());
+        assertEquals(cartItem.getQuantity(), itemDto.getQuantity());
+        assertEquals(BigDecimal.valueOf(200), itemDto.getTotalPrice());
+        assertEquals(BigDecimal.valueOf(200), response.getTotalPrice());
+    }
+
+    @Test
+    void testGetCartByUserId_CartNotFound() {
+        when(cartRepository.findByUserId(2L)).thenReturn(Optional.empty());
+        Exception exception = assertThrows(ResourceNotFoundException.class, () -> {
+            cartService.getCartByUserId(2L);
+        });
+        assertTrue(exception.getMessage().contains("Cart not found for user with ID: 2"));
+    }
+
+    @Test
+    void testDeleteCartByUserId_Success() {
+        when(cartRepository.findByUserId(1L)).thenReturn(Optional.of(cart));
+        doNothing().when(cartRepository).deleteByUserId(1L);
+
+        assertDoesNotThrow(() -> cartService.deleteCartByUserId(1L));
+        verify(cartRepository, times(1)).deleteByUserId(1L);
+    }
+
+    @Test
+    void testDeleteCartByUserId_CartNotFound() {
+        when(cartRepository.findByUserId(2L)).thenReturn(Optional.empty());
+        assertThrows(ResourceNotFoundException.class, () -> cartService.deleteCartByUserId(2L));
+    }
+}

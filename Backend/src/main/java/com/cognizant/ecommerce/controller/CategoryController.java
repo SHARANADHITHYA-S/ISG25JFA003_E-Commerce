@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/admin")
     public ResponseEntity<CategoryResponseDTO> createCategory(@RequestBody CategoryRequestDTO categoryRequestDTO) {
         logger.info("Creating category: {}", categoryRequestDTO.getName());
@@ -48,6 +50,7 @@ public class CategoryController {
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/admin/{id}")
     public ResponseEntity<CategoryResponseDTO> updateCategory(@PathVariable Long id, @RequestBody CategoryRequestDTO categoryRequestDTO) {
         logger.info("Updating category ID: {}", id);
@@ -55,6 +58,7 @@ public class CategoryController {
         return new ResponseEntity<>(updatedCategory, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/admin/{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long id) {
         logger.info("Deleting category ID: {}", id);

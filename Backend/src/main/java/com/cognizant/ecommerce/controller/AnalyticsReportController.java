@@ -6,6 +6,7 @@ import com.cognizant.ecommerce.service.AnalyticsReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,12 +16,14 @@ public class AnalyticsReportController {
 
     private final AnalyticsReportService analyticsReportService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/generate")
     public ResponseEntity<AnalyticsReportResponseDTO> generateReport(@RequestBody AnalyticsReportRequestDTO requestDTO) {
         AnalyticsReportResponseDTO report = analyticsReportService.generateReport(requestDTO);
         return new ResponseEntity<>(report, HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{reportId}")
     public ResponseEntity<AnalyticsReportResponseDTO> getReportById(@PathVariable Long reportId) {
         return analyticsReportService.getReportById(reportId)
