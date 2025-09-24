@@ -23,6 +23,6 @@ public class UserRequestDTO {
     @NotBlank(message = "Password cannot be blank")
     private String password;
 
-    @NotBlank(message = "Role cannot be blank")
-    private String role;
+//    @NotBlank(message = "Role cannot be blank")
+//    private String role;
 }

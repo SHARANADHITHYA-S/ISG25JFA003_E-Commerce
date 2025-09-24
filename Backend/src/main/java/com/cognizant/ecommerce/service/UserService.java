@@ -12,5 +12,6 @@ public interface UserService {
     List<UserResponseDTO> findAllUsers();
     String generateResetToken(String email);
     void resetPassword(ResetPasswordRequest request);
+    void deleteUserById(Long userId);
 
 }

@@ -14,9 +14,11 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
@@ -78,22 +80,25 @@ public class UserController {
         return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
     }
 
-    @PutMapping("/user/{id}")
-    public ResponseEntity<UserResponseDTO> updateUserProfile(@PathVariable Long id, @Valid @RequestBody UserRequestDTO userRequestDTO) {
-        logger.info("Updating user profile for ID: {}", id);
-        UserResponseDTO updatedUser = userService.updateUserProfile(id, userRequestDTO);
-        logger.info("User profile updated for ID: {}", id);
+    @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
+    @PutMapping("/user/{userId}")
+    public ResponseEntity<UserResponseDTO> updateUserProfile(@PathVariable Long userId, @Valid @RequestBody UserRequestDTO userRequestDTO) {
+        logger.info("Updating user profile for ID: {}", userId);
+        UserResponseDTO updatedUser = userService.updateUserProfile(userId, userRequestDTO);
+        logger.info("User profile updated for ID: {}", userId);
         return ResponseEntity.ok(updatedUser);
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long id) {
-        logger.info("Fetching user by ID: {}", id);
-        UserResponseDTO user = userService.findUserById(id);
-        logger.info("User fetched successfully for ID: {}", id);
+    @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable Long userId) {
+        logger.info("Fetching user by ID: {}", userId);
+        UserResponseDTO user = userService.findUserById(userId);
+        logger.info("User fetched successfully for ID: {}", userId);
         return ResponseEntity.ok(user);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin/user")
     public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
         logger.info("Fetching all users");
@@ -105,14 +110,42 @@ public class UserController {
     @PostMapping("/auth/forgot-password")
     public ResponseEntity<?> forgotPassword(@RequestBody ForgotPasswordRequest request) {
         String token = userService.generateResetToken(request.getEmail());
+        logger.info("Reset token generated");
         return ResponseEntity.ok(Map.of("resetToken", token));
     }
 
     @PostMapping("/auth/reset-password")
     public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordRequest request) {
         userService.resetPassword(request);
+        logger.info("Password updated successfully");
         return ResponseEntity.ok("Password updated successfully");
     }
+
+
+    @PreAuthorize("hasRole('USER')")
+    @DeleteMapping("/me")
+    public ResponseEntity<String> deleteOwnAccount() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Object details = auth.getDetails();
+
+        if (!(details instanceof Long userId)) {
+            throw new BadCredentialsException("Invalid authentication details");
+        }
+
+        userService.deleteUserById(userId);
+        return ResponseEntity.ok("Your account has been deleted");
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @DeleteMapping("/admin/{userId}")
+    public ResponseEntity<String> deleteUserByAdmin(@PathVariable Long userId) {
+        userService.deleteUserById(userId);
+        return ResponseEntity.ok("User deleted by admin");
+    }
+
+
+
+
 
     @Data
     public static class LoginRequest {

@@ -18,8 +18,6 @@ public class ProductRequestDTO {
     private BigDecimal price;
     private Boolean isActive;
     private String image_url;
-
     private Long quantity;
-
     private Long categoryId;
 }
