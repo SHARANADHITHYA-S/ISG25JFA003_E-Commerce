@@ -16,4 +16,6 @@ public interface PaymentMethodService {
 //    PaymentMethodResponseDTO updatePaymentMethod(Long paymentMethodId, PaymentMethodRequestDTO requestDTO);
 
     void deletePaymentMethod(Long paymentMethodId);
+
+    List<PaymentMethodResponseDTO> getAllPaymentMethods();
 }

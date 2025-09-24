@@ -8,12 +8,11 @@ import com.cognizant.ecommerce.model.PaymentMethod;
 import com.cognizant.ecommerce.model.User;
 import com.cognizant.ecommerce.service.PaymentMethodService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.cognizant.ecommerce.exception.ResourceNotFoundException;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -46,12 +45,12 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
     @Override
     public PaymentMethodResponseDTO addPaymentMethod(Long userId, PaymentMethodRequestDTO requestDTO) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId));
 
         PaymentMethod paymentMethod = new PaymentMethod();
         paymentMethod.setUser(user);
         paymentMethod.setType(requestDTO.getCardType());
-        paymentMethod.setProvider("Credit Card"); // Assuming a provider
+        paymentMethod.setProvider("Credit Card");
         paymentMethod.setAccount_number(requestDTO.getCardNumber());
         paymentMethod.setExpiry_date(requestDTO.getExpirationDate());
         paymentMethod.setIs_default(requestDTO.isDefault());
@@ -67,12 +66,27 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
         paymentMethodRepository.deleteById(id);
     }
 
+    @Override
+    public List<PaymentMethodResponseDTO> getAllPaymentMethods() {
+        return paymentMethodRepository.findAll().stream()
+                .map(this::mapToResponseDTO)
+                .collect(Collectors.toList());
+    }
+
     private PaymentMethodResponseDTO mapToResponseDTO(PaymentMethod paymentMethod) {
         PaymentMethodResponseDTO responseDTO = new PaymentMethodResponseDTO();
         responseDTO.setPaymentMethodId(paymentMethod.getId());
         responseDTO.setCardType(paymentMethod.getType());
-        responseDTO.setLastFourDigits(paymentMethod.getAccount_number().substring(paymentMethod.getAccount_number().length() - 4));
-        responseDTO.setCardholderName(null); // No cardholder name in model
+
+        // FIX: Added a null and length check to prevent NullPointerException
+        String accountNumber = paymentMethod.getAccount_number();
+        if (accountNumber != null && accountNumber.length() >= 4) {
+            responseDTO.setLastFourDigits(accountNumber.substring(accountNumber.length() - 4));
+        } else {
+            responseDTO.setLastFourDigits("N/A"); // Default value for incomplete data
+        }
+
+        responseDTO.setCardholderName(null);
         responseDTO.setDefault(paymentMethod.isIs_default());
         return responseDTO;
     }
