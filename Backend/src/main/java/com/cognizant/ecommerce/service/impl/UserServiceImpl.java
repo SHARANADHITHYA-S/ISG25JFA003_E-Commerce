@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     private final JwtUtil jwtUtil;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, JwtUtil jwtUtil) {
@@ -39,9 +39,10 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setName(userRequestDTO.getName());
         user.setEmail(userRequestDTO.getEmail());
-        user.setPassword_hash(passwordEncoder.encode(userRequestDTO.getPassword())); // Storing password as plain text (DANGEROUS!)
-        user.setRole(userRequestDTO.getRole());
-        User savedUser = userRepository.save(user);
+        user.setPassword_hash(passwordEncoder.encode(userRequestDTO.getPassword()));
+        user.setRole("USER"); // hardcoded
+
+        User savedUser= userRepository.save(user);
         return convertToDto(savedUser);
     }
 
@@ -51,7 +52,6 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
         user.setName(userRequestDTO.getName());
         user.setEmail(userRequestDTO.getEmail());
-        user.setRole(userRequestDTO.getRole());
         User updatedUser = userRepository.save(user);
         return convertToDto(updatedUser);
     }
@@ -99,6 +99,14 @@ public class UserServiceImpl implements UserService {
 
         user.setPassword_hash(passwordEncoder.encode(request.getNewPassword()));
         userRepository.save(user);
+    }
+
+    public void deleteUserById(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId));
+
+        userRepository.delete(user);
+        System.out.println("✅ User deleted: ID " + userId);
     }
 
 

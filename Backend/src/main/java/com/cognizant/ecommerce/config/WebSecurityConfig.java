@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -19,6 +20,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
+@EnableMethodSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
@@ -56,7 +58,9 @@ public class WebSecurityConfig {
                                         "/api/addresses/admin/**",
 
                                         // Analytics
-                                        "/api/analytics-reports/admin/**"
+                                        "/api/analytics-reports/admin/**",
+
+                                        "/api/admin/**"
                                 ).hasRole("ADMIN")
                                 .requestMatchers(
                                         // User profile
@@ -85,7 +89,12 @@ public class WebSecurityConfig {
                                         "/api/orders/user/**",
 
                                         // Addresses (non-admin)
-                                        "/api/addresses/**"
+                                        "/api/addresses/**",
+
+                                        "/api/me"
+
+
+
                                 ).hasAnyRole("USER", "ADMIN")
                                 // Public
                                 .requestMatchers(

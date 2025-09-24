@@ -6,6 +6,7 @@ import com.cognizant.ecommerce.service.OrderItemService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j; //
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class OrderItemController {
 
     private final OrderItemService orderItemService;
 
-    // Add order item
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/admin")
     public ResponseEntity<OrderItemResponseDTO> addOrderItem(@RequestBody OrderItemRequestDTO dto) {
         log.info("Received request to add order item: {}", dto);
@@ -27,7 +28,8 @@ public class OrderItemController {
         return ResponseEntity.ok(response);
     }
 
-    // Get items by order id
+    // Only owner or admin can view order items
+    @PreAuthorize("@authService.canAccessOrder(#orderId)")
     @GetMapping("/order/{orderId}")
     public ResponseEntity<List<OrderItemResponseDTO>> getItemsByOrder(@PathVariable Long orderId) {
         log.info("Fetching order items for orderId={}", orderId);
@@ -36,7 +38,8 @@ public class OrderItemController {
         return ResponseEntity.ok(items);
     }
 
-    // Update order item
+    // Only admins can update order items
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/admin/{id}")
     public ResponseEntity<OrderItemResponseDTO> updateOrderItem(@PathVariable Long id, @RequestBody OrderItemRequestDTO dto) {
         log.info("Updating order item with id={} using data: {}", id, dto);
@@ -45,7 +48,8 @@ public class OrderItemController {
         return ResponseEntity.ok(updatedItem);
     }
 
-    // Delete order item
+    // Only admins can delete order items
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/admin/{id}")
     public ResponseEntity<String> deleteOrderItem(@PathVariable Long id) {
         log.warn("Deleting order item with id={}", id);
