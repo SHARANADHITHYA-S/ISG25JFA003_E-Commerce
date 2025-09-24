@@ -14,7 +14,7 @@ import java.util.Date;
 public class JwtUtil {
 
     private final String SECRET = "replace-with-a-very-long-256-bit-secret-key";
-    private final long EXPIRATION = 1000 * 60 * 60; // 1 hour
+    private final long EXPIRATION = 1000L * 60 * 60; // 1 hour
 
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(SECRET.getBytes());
@@ -51,6 +51,17 @@ public class JwtUtil {
             return false;
         }
     }
+
+    public String generateResetToken(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 15 * 60 * 1000)) // 15 min
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
+                .compact();
+    }
+
+
 
 }
 
