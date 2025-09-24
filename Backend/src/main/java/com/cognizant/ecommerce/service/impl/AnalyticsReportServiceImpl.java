@@ -31,13 +31,15 @@ public class AnalyticsReportServiceImpl implements AnalyticsReportService {
 
     @Override
     public Optional<AnalyticsReportResponseDTO> getReportById(Long id) {
-        return analyticsReportRepository.findById(id).map(this::mapToResponseDTO);
+        return Optional.of(analyticsReportRepository.findById(id)
+                .map(this::mapToResponseDTO)
+                .orElseThrow(() -> new AnalyticsReportNotFoundException("Analytics report not found with ID: " + id)));
     }
 
     @Override
     public List<AnalyticsReportResponseDTO> getAllReports() {
         return analyticsReportRepository.findAll().stream()
-                .map(this::mapToResponseDTO) // or modelMapper.map(...)
+                .map(this::mapToResponseDTO)
                 .collect(Collectors.toList());
     }
 
@@ -72,7 +74,7 @@ public class AnalyticsReportServiceImpl implements AnalyticsReportService {
     public AnalyticsReportResponseDTO updateReport(Long reportId, AnalyticsReportRequestDTO requestDTO) {
         // Find the existing report by ID
         AnalyticsReport existingReport = analyticsReportRepository.findById(reportId)
-                .orElseThrow(() -> new RuntimeException("Report not found with ID: " + reportId));
+                .orElseThrow(() -> new AnalyticsReportNotFoundException("Report not found with ID: " + reportId));
 
         // Update the report fields with new data
         existingReport.setReport_type(requestDTO.getReportType());
