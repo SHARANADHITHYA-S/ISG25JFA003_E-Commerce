@@ -1,0 +1,87 @@
+2025-09-24T09:27:33.199+05:30  INFO 25180 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Starting EcommerceApplication using Java 21 with PID 25180 (C:\Users\2441309\OneDrive - Cognizant\Documents\fin fin\ISG25JFA003_E-Commerce\Backend\target\classes started by 2441309 in C:\Users\2441309\OneDrive - Cognizant\Documents\fin fin\ISG25JFA003_E-Commerce)
+2025-09-24T09:27:33.207+05:30 DEBUG 25180 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2025-09-24T09:27:33.209+05:30  INFO 25180 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-09-24T09:27:33.267+05:30  INFO 25180 --- [ecommerce] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-24T09:27:33.267+05:30  INFO 25180 --- [ecommerce] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-24T09:27:35.128+05:30  INFO 25180 --- [ecommerce] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-24T09:27:35.367+05:30  INFO 25180 --- [ecommerce] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 226 ms. Found 12 JPA repository interfaces.
+2025-09-24T09:27:36.705+05:30  INFO 25180 --- [ecommerce] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-24T09:27:36.727+05:30  INFO 25180 --- [ecommerce] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-24T09:27:36.727+05:30  INFO 25180 --- [ecommerce] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2025-09-24T09:27:36.820+05:30  INFO 25180 --- [ecommerce] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-24T09:27:36.820+05:30  INFO 25180 --- [ecommerce] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 3553 ms
+2025-09-24T09:27:37.086+05:30  INFO 25180 --- [ecommerce] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-24T09:27:37.276+05:30  INFO 25180 --- [ecommerce] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-09-24T09:27:37.355+05:30  INFO 25180 --- [ecommerce] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-24T09:27:37.830+05:30  INFO 25180 --- [ecommerce] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-24T09:27:37.846+05:30  INFO 25180 --- [ecommerce] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-24T09:27:38.289+05:30  INFO 25180 --- [ecommerce] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@442a7378
+2025-09-24T09:27:38.289+05:30  INFO 25180 --- [ecommerce] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-24T09:27:39.880+05:30  INFO 25180 --- [ecommerce] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-24T09:27:40.209+05:30  INFO 25180 --- [ecommerce] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-24T09:27:40.834+05:30 DEBUG 25180 --- [ecommerce] [restartedMain] c.c.ecommerce.config.JwtAuthFilter       : Filter 'jwtAuthFilter' configured for use
+2025-09-24T09:27:41.375+05:30  INFO 25180 --- [ecommerce] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-09-24T09:27:41.375+05:30  WARN 25180 --- [ecommerce] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2025-09-24T09:27:41.680+05:30  WARN 25180 --- [ecommerce] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-24T09:27:42.836+05:30  INFO 25180 --- [ecommerce] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-09-24T09:27:42.909+05:30  INFO 25180 --- [ecommerce] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-24T09:27:42.915+05:30  INFO 25180 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Started EcommerceApplication in 10.3 seconds (process running for 10.953)
+2025-09-24T09:28:22.744+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-24T09:28:22.744+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-09-24T09:28:22.749+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2025-09-24T09:28:23.049+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-1] c.c.ecommerce.controller.UserController  : Login attempt for username: sara
+2025-09-24T09:28:23.950+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-1] c.c.ecommerce.controller.UserController  : Login successful for username: sara
+2025-09-24T09:29:21.171+05:30  WARN 25180 --- [ecommerce] [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/auth/admin/user.]
+2025-09-24T09:33:46.577+05:30  WARN 25180 --- [ecommerce] [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-09-24T09:33:50.477+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.UserController  : Login attempt for username: johndoe
+2025-09-24T09:33:50.641+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.UserController  : Login successful for username: johndoe
+2025-09-24T09:37:47.187+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-8] c.c.ecommerce.controller.UserController  : Registering user with email: saras@example.com
+2025-09-24T09:37:47.637+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-8] c.c.ecommerce.controller.UserController  : User registered successfully with ID: 20
+2025-09-24T09:38:27.319+05:30  WARN 25180 --- [ecommerce] [http-nio-8080-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/login.]
+2025-09-24T09:38:37.794+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.UserController  : Login attempt for username: saras
+2025-09-24T09:38:38.002+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.UserController  : Login successful for username: saras
+2025-09-24T09:39:21.985+05:30  WARN 25180 --- [ecommerce] [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.servlet.resource.NoResourceFoundException: No static resource api/user.]
+2025-09-24T09:40:02.440+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.UserController  : Fetching user by ID: 20
+2025-09-24T09:40:02.510+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.UserController  : User fetched successfully for ID: 20
+2025-09-24T09:42:11.958+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-8] c.c.ecommerce.controller.UserController  : Registering user with email: 099@examp.com
+2025-09-24T09:42:12.147+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-8] c.c.ecommerce.controller.UserController  : User registered successfully with ID: 21
+2025-09-24T09:42:37.890+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-9] c.c.ecommerce.controller.UserController  : Login attempt for username: sar
+2025-09-24T09:42:38.105+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-9] c.c.ecommerce.controller.UserController  : Login successful for username: sar
+2025-09-24T09:43:26.809+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.UserController  : Fetching all users
+2025-09-24T09:43:26.982+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.UserController  : Total users fetched: 18
+2025-09-24T09:48:37.322+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.UserController  : Fetching user by ID: 21
+2025-09-24T09:48:37.332+05:30  INFO 25180 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.UserController  : User fetched successfully for ID: 21
+2025-09-24T09:49:14.301+05:30  INFO 25180 --- [ecommerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-24T09:49:14.301+05:30  INFO 25180 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-24T09:49:14.349+05:30  INFO 25180 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-24T11:24:45.840+05:30  INFO 16124 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Starting EcommerceApplication using Java 21 with PID 16124 (C:\Users\2441309\OneDrive - Cognizant\Documents\fin fin\ISG25JFA003_E-Commerce\Backend\target\classes started by 2441309 in C:\Users\2441309\OneDrive - Cognizant\Documents\fin fin\ISG25JFA003_E-Commerce)
+2025-09-24T11:24:45.840+05:30 DEBUG 16124 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2025-09-24T11:24:45.840+05:30  INFO 16124 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-09-24T11:24:45.934+05:30  INFO 16124 --- [ecommerce] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-09-24T11:24:45.934+05:30  INFO 16124 --- [ecommerce] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-09-24T11:24:47.322+05:30  INFO 16124 --- [ecommerce] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-09-24T11:24:47.564+05:30  INFO 16124 --- [ecommerce] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 225 ms. Found 12 JPA repository interfaces.
+2025-09-24T11:24:48.724+05:30  INFO 16124 --- [ecommerce] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-09-24T11:24:48.738+05:30  INFO 16124 --- [ecommerce] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-09-24T11:24:48.738+05:30  INFO 16124 --- [ecommerce] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2025-09-24T11:24:48.849+05:30  INFO 16124 --- [ecommerce] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-09-24T11:24:48.849+05:30  INFO 16124 --- [ecommerce] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2915 ms
+2025-09-24T11:24:49.158+05:30  INFO 16124 --- [ecommerce] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-09-24T11:24:49.357+05:30  INFO 16124 --- [ecommerce] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-09-24T11:24:49.423+05:30  INFO 16124 --- [ecommerce] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-09-24T11:24:49.973+05:30  INFO 16124 --- [ecommerce] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-09-24T11:24:50.017+05:30  INFO 16124 --- [ecommerce] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-24T11:24:50.554+05:30  INFO 16124 --- [ecommerce] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@24d9ac94
+2025-09-24T11:24:50.556+05:30  INFO 16124 --- [ecommerce] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-24T11:24:51.890+05:30  INFO 16124 --- [ecommerce] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-09-24T11:24:52.033+05:30  INFO 16124 --- [ecommerce] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-09-24T11:24:52.593+05:30 DEBUG 16124 --- [ecommerce] [restartedMain] c.c.ecommerce.config.JwtAuthFilter       : Filter 'jwtAuthFilter' configured for use
+2025-09-24T11:24:53.075+05:30  INFO 16124 --- [ecommerce] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-09-24T11:24:53.076+05:30  WARN 16124 --- [ecommerce] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2025-09-24T11:24:53.332+05:30  WARN 16124 --- [ecommerce] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-09-24T11:24:54.652+05:30  INFO 16124 --- [ecommerce] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-09-24T11:24:54.701+05:30  INFO 16124 --- [ecommerce] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-09-24T11:24:54.717+05:30  INFO 16124 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Started EcommerceApplication in 9.54 seconds (process running for 10.302)
+2025-09-24T11:34:04.480+05:30  INFO 16124 --- [ecommerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-09-24T11:34:04.493+05:30  INFO 16124 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-24T11:34:04.517+05:30  INFO 16124 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
