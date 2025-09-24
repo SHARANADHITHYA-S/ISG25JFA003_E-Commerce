@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j; // ✅ Lombok logging
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +21,8 @@ public class PaymentController {
 
     private final PaymentService paymentService;
 
-    // Create payment
+    // Only the owner or admin can create a payment
+    @PreAuthorize("@authService.isSelfOrAdmin(#dto.userId)")
     @PostMapping
     public ResponseEntity<PaymentResponseDTO> createPayment(@RequestBody PaymentRequestDTO dto) {
         log.info("Received request to create payment: {}", dto);
@@ -29,7 +31,8 @@ public class PaymentController {
         return ResponseEntity.ok(response);
     }
 
-    // Get payment by payment id
+    // Only the owner or admin can view a payment by ID
+    @PreAuthorize("@authService.canAccessPayment(#id)")
     @GetMapping("/{id}")
     public ResponseEntity<PaymentResponseDTO> getPaymentById(@PathVariable Long id) {
         log.info("Fetching payment with id={}", id);
@@ -38,7 +41,8 @@ public class PaymentController {
         return ResponseEntity.ok(payment);
     }
 
-    // Get payment by order id
+    // Only the owner or admin can view a payment by order ID
+    @PreAuthorize("@authService.canAccessOrder(#orderId)")
     @GetMapping("/order/{orderId}")
     public ResponseEntity<PaymentResponseDTO> getPaymentByOrderId(@PathVariable Long orderId) {
         log.info("Fetching payment for orderId={}", orderId);
@@ -47,7 +51,8 @@ public class PaymentController {
         return ResponseEntity.ok(payment);
     }
 
-    // Update payment status
+    // Only admins can update payment status
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/admin/{id}/status")
     public ResponseEntity<PaymentResponseDTO> updatePaymentStatus(@PathVariable Long id, @RequestParam String status) {
         log.info("Updating payment status for id={} to {}", id, status);
@@ -56,7 +61,8 @@ public class PaymentController {
         return ResponseEntity.ok(updatedPayment);
     }
 
-    // Get all payments
+    // Only admins can view all payments
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin")
     public ResponseEntity<List<PaymentResponseDTO>> getAllPayments() {
         log.info("Fetching all payments");

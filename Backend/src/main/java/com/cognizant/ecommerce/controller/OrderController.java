@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j; // ✅ Lombok logging
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class OrderController {
     private final CartItemRepository cartItemRepository;
 
     // Create a new order
+    @PreAuthorize("@authService.isSelfOrAdmin(#orderRequestDTO.userid)")
     @PostMapping
     public ResponseEntity<OrderResponseDTO> createOrder(@RequestBody OrderRequestDTO orderRequestDTO) {
         log.info("Received request to create order for userId={}, addressId={}, paymentMethodId={}",
@@ -42,6 +44,7 @@ public class OrderController {
     }
 
     // Get order by order ID
+    @PreAuthorize("@authService.canAccessOrder(#id)")
     @GetMapping("/{id}")
     public ResponseEntity<OrderResponseDTO> getOrderById(@PathVariable Long id) {
         log.info("Fetching order with id={}", id);
@@ -60,6 +63,7 @@ public class OrderController {
     }
 
     // Get orders by user ID
+    @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<OrderResponseDTO>> getOrdersByUserId(@PathVariable Long userId) {
         log.info("Fetching orders for userId={}", userId);
