@@ -19,6 +19,5 @@ public class ProductRequestDTO {
     private Boolean isActive;
     private String image_url;
     private Long quantity;
-    private Boolean isActive;
     private Long categoryId;
 }
