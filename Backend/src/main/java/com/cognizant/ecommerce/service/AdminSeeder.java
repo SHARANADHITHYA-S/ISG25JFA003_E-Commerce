@@ -19,7 +19,10 @@ public class AdminSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        if (userRepository.findByName("admin").isEmpty()) {
+        boolean usernameExists = userRepository.findByName("admin").isPresent();
+        boolean emailExists = userRepository.findByEmail("admin@yourdomain.com").isPresent();
+
+        if (!usernameExists || !emailExists) {
             User admin = new User();
             admin.setName("admin");
             admin.setEmail("admin@yourdomain.com");
