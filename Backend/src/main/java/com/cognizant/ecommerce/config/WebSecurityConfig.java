@@ -58,7 +58,9 @@ public class WebSecurityConfig {
                                         "/api/addresses/admin/**",
 
                                         // Analytics
-                                        "/api/analytics-reports/admin/**"
+                                        "/api/analytics-reports/admin/**",
+
+                                        "/api/admin/**"
                                 ).hasRole("ADMIN")
                                 .requestMatchers(
                                         // User profile
@@ -87,7 +89,12 @@ public class WebSecurityConfig {
                                         "/api/orders/user/**",
 
                                         // Addresses (non-admin)
-                                        "/api/addresses/**"
+                                        "/api/addresses/**",
+
+                                        "/api/me"
+
+
+
                                 ).hasAnyRole("USER", "ADMIN")
                                 // Public
                                 .requestMatchers(

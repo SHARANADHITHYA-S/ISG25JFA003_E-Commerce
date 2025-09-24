@@ -101,5 +101,13 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    public void deleteUserById(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: " + userId));
+
+        userRepository.delete(user);
+        System.out.println("✅ User deleted: ID " + userId);
+    }
+
 
 }
