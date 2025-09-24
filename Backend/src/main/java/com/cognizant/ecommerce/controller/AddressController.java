@@ -6,6 +6,7 @@ import com.cognizant.ecommerce.service.AddressService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class AddressController {
         return ok(addresses);
     }
 
+
     @GetMapping("/{addressId}")
     public ResponseEntity<AddressResponseDTO> getAddressById(@PathVariable Long addressId) {
         return addressService.getAddressById(addressId)
@@ -32,12 +34,14 @@ public class AddressController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
     @PostMapping("/user/{userId}")
     public ResponseEntity<AddressResponseDTO> createAddress(@PathVariable Long userId, @RequestBody AddressRequestDTO addressRequestDTO) {
         AddressResponseDTO createdAddress = addressService.createAddress(userId, addressRequestDTO);
         return new ResponseEntity<>(createdAddress, HttpStatus.CREATED);
     }
 
+    @PreAuthorize("@authService.isSelfOrAdmin(#addressRequestDTO.userId)")
     @PutMapping("/{addressId}")
     public ResponseEntity<AddressResponseDTO> updateAddress(@PathVariable Long addressId, @RequestBody AddressRequestDTO addressRequestDTO) {
         AddressResponseDTO updatedAddress = addressService.updateAddress(addressId, addressRequestDTO);
@@ -50,6 +54,7 @@ public class AddressController {
         return ResponseEntity.ok("Address Deleted");
     }
 
+    @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<AddressResponseDTO>> getAddressesByUserId(@PathVariable Long userId) {
         List<AddressResponseDTO> addresses = addressService.getAddressesByUserId(userId);
