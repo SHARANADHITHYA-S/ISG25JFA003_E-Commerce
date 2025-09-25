@@ -3,6 +3,7 @@ package com.cognizant.ecommerce.controller;
 import com.cognizant.ecommerce.dto.product.ProductRequestDTO;
 import com.cognizant.ecommerce.dto.product.ProductResponseDTO;
 import com.cognizant.ecommerce.service.ProductService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class ProductController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/admin")
-    public ResponseEntity<ProductResponseDTO> createProduct(@RequestBody ProductRequestDTO productRequestDTO) {
+    public ResponseEntity<ProductResponseDTO> createProduct(@Valid @RequestBody ProductRequestDTO productRequestDTO) {
         logger.info("Creating product: {}", productRequestDTO.getName());
         ProductResponseDTO createdProduct = productService.createProduct(productRequestDTO);
         logger.info("Product created with ID: {}", createdProduct.getId());
@@ -61,7 +62,7 @@ public class ProductController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/admin/{id}")
-    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable Long id, @RequestBody ProductRequestDTO productRequestDTO) {
+    public ResponseEntity<ProductResponseDTO> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductRequestDTO productRequestDTO) {
         logger.info("Updating product ID: {}", id);
         ProductResponseDTO updatedProduct = productService.updateProduct(id, productRequestDTO);
         logger.info("Product updated: {}", updatedProduct.getName());

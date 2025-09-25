@@ -3,6 +3,7 @@ package com.cognizant.ecommerce.controller;
 import com.cognizant.ecommerce.dto.payment.PaymentMethodRequestDTO;
 import com.cognizant.ecommerce.dto.payment.PaymentMethodResponseDTO;
 import com.cognizant.ecommerce.service.PaymentMethodService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +52,7 @@ public class PaymentMethodController {
     // Only owner or admin can add a payment method
     @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
     @PostMapping("/users/{userId}")
-    public ResponseEntity<PaymentMethodResponseDTO> addPaymentMethod(@PathVariable Long userId, @RequestBody PaymentMethodRequestDTO requestDTO) {
+    public ResponseEntity<PaymentMethodResponseDTO> addPaymentMethod(@PathVariable Long userId, @Valid @RequestBody PaymentMethodRequestDTO requestDTO) {
         logger.info("Adding payment method for user ID: {} with type: {}", userId, requestDTO.getCardType());
         PaymentMethodResponseDTO newPaymentMethod = paymentMethodService.addPaymentMethod(userId, requestDTO);
         logger.info("Payment method added with ID: {}", newPaymentMethod.getPaymentMethodId());

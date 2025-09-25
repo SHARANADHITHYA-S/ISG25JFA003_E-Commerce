@@ -2,27 +2,25 @@ package com.cognizant.ecommerce.dto.user;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 
-// This DTO is used for creating or updating a User
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserRequestDTO {
 
-    @NotBlank(message = "Name cannot be blank")
-    private String name;
+    @NotBlank(message = "Username is required")
+    private String username;
 
-    @NotBlank(message = "Email cannot be blank")
-    @Email(message = "Email should be valid")
+    @NotBlank(message = "Email is required")
+    @Email
     private String email;
 
-    // The password field is only for requests, not for responses
-    @NotBlank(message = "Password cannot be blank")
+    @NotBlank(message = "Password is required")
     private String password;
 
-//    @NotBlank(message = "Role cannot be blank")
-//    private String role;
+    // getters and setters
 }

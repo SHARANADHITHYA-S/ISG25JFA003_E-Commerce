@@ -3,6 +3,7 @@ package com.cognizant.ecommerce.controller;
 import com.cognizant.ecommerce.dto.address.AddressRequestDTO;
 import com.cognizant.ecommerce.dto.address.AddressResponseDTO;
 import com.cognizant.ecommerce.service.AddressService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,14 +37,14 @@ public class AddressController {
 
     @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
     @PostMapping("/user/{userId}")
-    public ResponseEntity<AddressResponseDTO> createAddress(@PathVariable Long userId, @RequestBody AddressRequestDTO addressRequestDTO) {
+    public ResponseEntity<AddressResponseDTO> createAddress(@PathVariable Long userId, @Valid @RequestBody AddressRequestDTO addressRequestDTO) {
         AddressResponseDTO createdAddress = addressService.createAddress(userId, addressRequestDTO);
         return new ResponseEntity<>(createdAddress, HttpStatus.CREATED);
     }
 
     @PreAuthorize("@authService.isSelfOrAdmin(#addressRequestDTO.userId)")
     @PutMapping("/{addressId}")
-    public ResponseEntity<AddressResponseDTO> updateAddress(@PathVariable Long addressId, @RequestBody AddressRequestDTO addressRequestDTO) {
+    public ResponseEntity<AddressResponseDTO> updateAddress(@PathVariable Long addressId, @Valid @RequestBody AddressRequestDTO addressRequestDTO) {
         AddressResponseDTO updatedAddress = addressService.updateAddress(addressId, addressRequestDTO);
         return ok(updatedAddress);
     }

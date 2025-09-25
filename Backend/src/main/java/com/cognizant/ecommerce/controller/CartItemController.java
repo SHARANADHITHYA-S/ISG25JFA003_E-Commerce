@@ -3,6 +3,7 @@ package com.cognizant.ecommerce.controller;
 import com.cognizant.ecommerce.dto.cartItem.CartItemRequestDTO;
 import com.cognizant.ecommerce.dto.cartItem.CartItemResponseDTO;
 import com.cognizant.ecommerce.service.CartItemService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class CartItemController {
     // Only the owner or admin can create a cart item
     @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
     @PostMapping("/{userId}")
-    public ResponseEntity<CartItemResponseDTO> createCartItem(@PathVariable Long userId, @RequestBody CartItemRequestDTO cartItemRequestDTO) {
+    public ResponseEntity<CartItemResponseDTO> createCartItem(@Valid @PathVariable Long userId, @Valid @RequestBody CartItemRequestDTO cartItemRequestDTO) {
         logger.info("Creating cart item for user ID: {}", userId);
         CartItemResponseDTO newCartItem = cartItemService.createCartItem(userId, cartItemRequestDTO);
         return new ResponseEntity<>(newCartItem, HttpStatus.CREATED);
@@ -51,7 +52,7 @@ public class CartItemController {
     // Only the owner or admin can update a cart item
     @PreAuthorize("@authService.canAccessCartItem(#id)")
     @PutMapping("/{id}")
-    public ResponseEntity<CartItemResponseDTO> updateCartItem(@PathVariable Long id, @RequestBody CartItemRequestDTO cartItemRequestDTO) {
+    public ResponseEntity<CartItemResponseDTO> updateCartItem(@PathVariable Long id, @Valid @RequestBody CartItemRequestDTO cartItemRequestDTO) {
         logger.info("Updating cart item ID: {}", id);
         CartItemResponseDTO updatedCartItem = cartItemService.updateCartItem(id, cartItemRequestDTO);
         return ResponseEntity.ok(updatedCartItem);
