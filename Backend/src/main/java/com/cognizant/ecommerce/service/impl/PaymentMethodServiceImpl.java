@@ -96,7 +96,7 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
         }
 
         responseDTO.setCardholderName(null);
-        responseDTO.setDefault(paymentMethod.isIs_default());
+
         return responseDTO;
     }
 }
