@@ -36,8 +36,11 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByEmail(userRequestDTO.getEmail()).isPresent()) {
             throw new IllegalArgumentException("User with this email already exists");
         }
+        if (userRepository.findByName(userRequestDTO.getUsername()).isPresent()) {
+            throw new IllegalArgumentException("User with this name already exists");
+        }
         User user = new User();
-        user.setName(userRequestDTO.getName());
+        user.setName(userRequestDTO.getUsername());
         user.setEmail(userRequestDTO.getEmail());
         user.setPassword_hash(passwordEncoder.encode(userRequestDTO.getPassword()));
         user.setRole("USER"); // hardcoded
@@ -50,7 +53,7 @@ public class UserServiceImpl implements UserService {
     public UserResponseDTO updateUserProfile(Long userId, UserRequestDTO userRequestDTO) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
-        user.setName(userRequestDTO.getName());
+        user.setName(userRequestDTO.getUsername());
         user.setEmail(userRequestDTO.getEmail());
         User updatedUser = userRepository.save(user);
         return convertToDto(updatedUser);

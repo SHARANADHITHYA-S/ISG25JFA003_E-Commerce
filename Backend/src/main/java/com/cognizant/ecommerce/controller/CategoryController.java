@@ -3,6 +3,7 @@ package com.cognizant.ecommerce.controller;
 import com.cognizant.ecommerce.dto.category.CategoryRequestDTO;
 import com.cognizant.ecommerce.dto.category.CategoryResponseDTO;
 import com.cognizant.ecommerce.service.CategoryService;
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class CategoryController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/admin")
-    public ResponseEntity<CategoryResponseDTO> createCategory(@RequestBody CategoryRequestDTO categoryRequestDTO) {
+    public ResponseEntity<CategoryResponseDTO> createCategory(@Valid @RequestBody CategoryRequestDTO categoryRequestDTO) {
         logger.info("Creating category: {}", categoryRequestDTO.getName());
         CategoryResponseDTO createdCategory = categoryService.createCategory(categoryRequestDTO);
         logger.info("Category created with ID: {}", createdCategory.getId());
@@ -52,7 +53,7 @@ public class CategoryController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/admin/{id}")
-    public ResponseEntity<CategoryResponseDTO> updateCategory(@PathVariable Long id, @RequestBody CategoryRequestDTO categoryRequestDTO) {
+    public ResponseEntity<CategoryResponseDTO> updateCategory(@PathVariable Long id, @Valid @RequestBody CategoryRequestDTO categoryRequestDTO) {
         logger.info("Updating category ID: {}", id);
         CategoryResponseDTO updatedCategory = categoryService.updateCategory(id, categoryRequestDTO);
         return new ResponseEntity<>(updatedCategory, HttpStatus.OK);

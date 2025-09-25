@@ -1,4 +1,4 @@
-package com.cognizant.ecommerce.service;
+package com.cognizant.ecommerce.service.impl;
 
 import com.cognizant.ecommerce.dao.AddressRepository;
 import com.cognizant.ecommerce.dao.UserRepository;
@@ -8,7 +8,6 @@ import com.cognizant.ecommerce.exception.AddressNotFoundException;
 import com.cognizant.ecommerce.exception.ResourceNotFoundException;
 import com.cognizant.ecommerce.model.Address;
 import com.cognizant.ecommerce.model.User;
-import com.cognizant.ecommerce.service.impl.AddressServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -16,7 +15,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.modelmapper.ModelMapper;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;

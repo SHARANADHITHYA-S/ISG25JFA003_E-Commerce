@@ -1,9 +1,10 @@
-package com.cognizant.ecommerce.service;
+package com.cognizant.ecommerce.service.impl;
 
 import com.cognizant.ecommerce.dao.*;
 import com.cognizant.ecommerce.dto.payment.PaymentRequestDTO;
 import com.cognizant.ecommerce.dto.payment.PaymentResponseDTO;
 import com.cognizant.ecommerce.model.*;
+import com.cognizant.ecommerce.service.PaymentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;

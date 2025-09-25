@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @PostMapping("/auth/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
         logger.info("Login attempt for username: {}", request.getUsername());
         try {
             Authentication authentication = authenticationManager.authenticate(
@@ -82,7 +82,7 @@ public class UserController {
 
     @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
     @PutMapping("/user/{userId}")
-    public ResponseEntity<UserResponseDTO> updateUserProfile(@PathVariable Long userId, @Valid @RequestBody UserRequestDTO userRequestDTO) {
+    public ResponseEntity<UserResponseDTO> updateUserProfile(@Valid @PathVariable Long userId, @Valid @RequestBody UserRequestDTO userRequestDTO) {
         logger.info("Updating user profile for ID: {}", userId);
         UserResponseDTO updatedUser = userService.updateUserProfile(userId, userRequestDTO);
         logger.info("User profile updated for ID: {}", userId);
@@ -108,14 +108,14 @@ public class UserController {
     }
 
     @PostMapping("/auth/forgot-password")
-    public ResponseEntity<?> forgotPassword(@RequestBody ForgotPasswordRequest request) {
+    public ResponseEntity<?> forgotPassword(@Valid @RequestBody ForgotPasswordRequest request) {
         String token = userService.generateResetToken(request.getEmail());
         logger.info("Reset token generated");
         return ResponseEntity.ok(Map.of("resetToken", token));
     }
 
     @PostMapping("/auth/reset-password")
-    public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordRequest request) {
+    public ResponseEntity<?> resetPassword(@Valid @RequestBody ResetPasswordRequest request) {
         userService.resetPassword(request);
         logger.info("Password updated successfully");
         return ResponseEntity.ok("Password updated successfully");

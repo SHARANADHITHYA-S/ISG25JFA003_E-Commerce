@@ -1,5 +1,6 @@
 package com.cognizant.ecommerce.dto.address;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -8,15 +9,32 @@ import lombok.AllArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddressRequestDTO {
+    @NotBlank(message = "Street cannot be null")
     private String street;
-    private String addressLine2;
-    private String city;
-    private String state;
-    private String postalCode;
-    private String country;
-    private String phone;
-    private boolean isDefault;
+
+    @NotBlank(message = "address cannot be null")
     private String addressLine1;
+
+    private String addressLine2;
+
+    @NotBlank(message = "city cannot be null")
+    private String city;
+
+    @NotBlank(message = "state cannot be null")
+    private String state;
+
+    @NotBlank(message = "postal code cannot be null")
+    private String postalCode;
+
+    @NotBlank(message = "country cannot be null")
+    private String country;
+
+    @NotBlank(message = "phone no. cannot be null")
+    private String phone;
+
+    private boolean isDefault;
+
+
 
 
 }

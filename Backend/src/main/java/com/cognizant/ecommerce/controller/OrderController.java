@@ -6,6 +6,7 @@ import com.cognizant.ecommerce.dto.order.OrderRequestDTO;
 import com.cognizant.ecommerce.dto.order.OrderResponseDTO;
 import com.cognizant.ecommerce.service.CartService;
 import com.cognizant.ecommerce.service.OrderService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j; // ✅ Lombok logging
 import org.springframework.http.HttpStatus;
@@ -29,7 +30,7 @@ public class OrderController {
     // Create a new order
     @PreAuthorize("@authService.isSelfOrAdmin(#orderRequestDTO.userid)")
     @PostMapping
-    public ResponseEntity<OrderResponseDTO> createOrder(@RequestBody OrderRequestDTO orderRequestDTO) {
+    public ResponseEntity<OrderResponseDTO> createOrder(@Valid @RequestBody OrderRequestDTO orderRequestDTO) {
         log.info("Received request to create order for userId={}, addressId={}, paymentMethodId={}",
                 orderRequestDTO.getUserid(), orderRequestDTO.getAddressId(), orderRequestDTO.getPaymentMethodId());
 
@@ -74,7 +75,7 @@ public class OrderController {
 
     // Update order status
     @PutMapping("/admin/{id}/status")
-    public ResponseEntity<OrderResponseDTO> updateOrderStatus(@PathVariable Long id, @RequestParam String status) {
+    public ResponseEntity<OrderResponseDTO> updateOrderStatus(@Valid @PathVariable Long id,@Valid @RequestParam String status) {
         log.info("Updating status of orderId={} to {}", id, status);
         orderService.updateOrderStatus(id, status);
         OrderResponseDTO updatedOrder = orderService.getOrderById(id);
@@ -84,7 +85,7 @@ public class OrderController {
 
     // Delete order
     @PutMapping("/admin/{id}")
-    public ResponseEntity<String> deleteOrder(@PathVariable Long id) {
+    public ResponseEntity<String> deleteOrder(@Valid @PathVariable Long id) {
         log.warn("Deleting order with id={}", id);
         orderService.deleteOrder(id);
         log.info("Order deleted successfully with id={}", id);
