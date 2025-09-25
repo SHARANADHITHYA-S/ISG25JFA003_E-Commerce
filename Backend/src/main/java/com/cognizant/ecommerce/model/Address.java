@@ -37,6 +37,8 @@ public class Address {
     private String country;
     private String phone;
 
+    private String street;
+
     @Column(name = "is_default")
     public boolean isDefault;
 
@@ -46,9 +48,10 @@ public class Address {
     @UpdateTimestamp
     private Date updated_at;
 
-    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "address")
     @JsonIgnore
     private Set<Order> orders;
+
 
     // Getter and setter for the boolean field
     public boolean getIsDefault() {
