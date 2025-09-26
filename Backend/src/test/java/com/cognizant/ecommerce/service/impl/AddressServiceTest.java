@@ -1,6 +1,7 @@
 package com.cognizant.ecommerce.service.impl;
 
 import com.cognizant.ecommerce.dao.AddressRepository;
+import com.cognizant.ecommerce.dao.OrderRepository;
 import com.cognizant.ecommerce.dao.UserRepository;
 import com.cognizant.ecommerce.dto.address.AddressRequestDTO;
 import com.cognizant.ecommerce.dto.address.AddressResponseDTO;
@@ -32,6 +33,9 @@ public class AddressServiceTest {
     private UserRepository userRepository;
 
     @Mock
+    private OrderRepository orderRepository;
+
+    @Mock
     private ModelMapper modelMapper;
 
     @InjectMocks
@@ -53,14 +57,14 @@ public class AddressServiceTest {
 
     private AddressRequestDTO createAddressRequestDTO() {
         AddressRequestDTO dto = new AddressRequestDTO();
-        dto.setAddressLine1("123 Test St");
+        dto.setAddress_line1("123 Test St");
         return dto;
     }
 
     private AddressResponseDTO createAddressResponseDTO(Long id) {
         AddressResponseDTO dto = new AddressResponseDTO();
         dto.setId(id);
-        dto.setAddressLine1("123 Test St");
+        dto.setAddress_line1("123 Test St");
         return dto;
     }
 
@@ -140,19 +144,21 @@ public class AddressServiceTest {
 
     @Test
     void testDeleteAddress_Success() {
-        when(addressRepository.findById(anyLong())).thenReturn(Optional.of(createAddress(1L)));
-        doNothing().when(addressRepository).deleteById(anyLong());
+        Address address = new Address();
+        address.setId(1L);
+
+        when(addressRepository.findById(1L)).thenReturn(Optional.of(address));
+        doNothing().when(addressRepository).delete(address); // match actual service call
 
         addressService.deleteAddress(1L);
 
-        verify(addressRepository, times(1)).deleteById(1L);
+        verify(addressRepository, times(1)).delete(address);
     }
 
     @Test
     void testDeleteAddress_NotFound() {
         when(addressRepository.findById(anyLong())).thenReturn(Optional.empty());
-
-        assertThrows(AddressNotFoundException.class, () -> addressService.deleteAddress(1L));
+        assertThrows(ResourceNotFoundException.class, () -> addressService.deleteAddress(1L));
         verify(addressRepository, never()).deleteById(anyLong());
     }
 }

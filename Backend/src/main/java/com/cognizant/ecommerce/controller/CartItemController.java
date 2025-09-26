@@ -41,6 +41,7 @@ public class CartItemController {
         return ResponseEntity.ok(cartItem);
     }
 
+
     @GetMapping
     public ResponseEntity<List<CartItemResponseDTO>> getAllCartItems() {
         logger.info("Fetching all cart items");

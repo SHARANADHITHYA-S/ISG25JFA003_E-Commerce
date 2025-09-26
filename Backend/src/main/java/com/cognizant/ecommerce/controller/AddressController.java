@@ -42,9 +42,9 @@ public class AddressController {
         return new ResponseEntity<>(createdAddress, HttpStatus.CREATED);
     }
 
-    @PreAuthorize("@authService.isSelfOrAdmin(#addressRequestDTO.userId)")
-    @PutMapping("/{addressId}")
-    public ResponseEntity<AddressResponseDTO> updateAddress(@PathVariable Long addressId, @Valid @RequestBody AddressRequestDTO addressRequestDTO) {
+    @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
+    @PutMapping("/{userId}/{addressId}")
+    public ResponseEntity<AddressResponseDTO> updateAddress(@Valid @PathVariable Long userId, @PathVariable Long addressId, @Valid @RequestBody AddressRequestDTO addressRequestDTO) {
         AddressResponseDTO updatedAddress = addressService.updateAddress(addressId, addressRequestDTO);
         return ok(updatedAddress);
     }
