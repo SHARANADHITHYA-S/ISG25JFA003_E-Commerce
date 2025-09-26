@@ -2,6 +2,7 @@ package com.cognizant.ecommerce.dto.passwordreset;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -17,6 +18,7 @@ public class PasswordRequestDTO {
     private String email;
 
     @NotBlank(message = "New password cannot be blank")
+    @Pattern(regexp = "^\\S+$", message = "Password must not contain spaces")
     private String newPassword;
 }
 

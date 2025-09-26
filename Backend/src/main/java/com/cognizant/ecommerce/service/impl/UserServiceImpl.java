@@ -6,9 +6,11 @@ import com.cognizant.ecommerce.dto.ForgotPassword.ResetPasswordRequest;
 import com.cognizant.ecommerce.dto.user.UserRequestDTO;
 import com.cognizant.ecommerce.dto.user.UserResponseDTO;
 import com.cognizant.ecommerce.exception.ResourceNotFoundException;
+import com.cognizant.ecommerce.exception.TokenMismatchException;
 import com.cognizant.ecommerce.model.User;
 import com.cognizant.ecommerce.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
+import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -94,11 +96,12 @@ public class UserServiceImpl implements UserService {
         String usernameFromToken = jwtUtil.extractUsername(request.getToken());
 
         if (!usernameFromToken.equals(request.getUsername())) {
-            throw new BadCredentialsException("Token does not match username");
+            throw new TokenMismatchException("Token does not match username");
         }
 
         User user = userRepository.findByName(request.getUsername())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
 
         user.setPassword_hash(passwordEncoder.encode(request.getNewPassword()));
         userRepository.save(user);

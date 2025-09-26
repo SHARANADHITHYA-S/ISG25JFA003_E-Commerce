@@ -20,6 +20,7 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(SECRET.getBytes());
     }
 
+    //to generate token while logging in
     public String generateToken(Long userId, String username, String role) {
         return Jwts.builder()
                 .setSubject(username)
@@ -54,6 +55,7 @@ public class JwtUtil {
         }
     }
 
+    //generating reset token
     public String generateResetToken(String username) {
         return Jwts.builder()
                 .setSubject(username)
