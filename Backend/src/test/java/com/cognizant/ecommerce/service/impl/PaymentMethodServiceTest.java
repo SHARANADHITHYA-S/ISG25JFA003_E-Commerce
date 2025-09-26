@@ -4,6 +4,7 @@ import com.cognizant.ecommerce.dao.PaymentMethodRepository;
 import com.cognizant.ecommerce.dao.UserRepository;
 import com.cognizant.ecommerce.dto.payment.PaymentMethodRequestDTO;
 import com.cognizant.ecommerce.dto.payment.PaymentMethodResponseDTO;
+import com.cognizant.ecommerce.exception.PaymentMethodNotFoundException;
 import com.cognizant.ecommerce.exception.ResourceNotFoundException;
 import com.cognizant.ecommerce.model.PaymentMethod;
 import com.cognizant.ecommerce.model.User;
@@ -107,12 +108,11 @@ class PaymentMethodServiceTest {
 
     @Test
     void testGetPaymentMethodById_NotFound() {
-        when(paymentMethodRepository.findById(anyLong())).thenReturn(Optional.empty());
+        when(paymentMethodRepository.findById(99L)).thenReturn(Optional.empty());
 
-        Optional<PaymentMethodResponseDTO> result = paymentMethodService.getPaymentMethodById(99L);
-
-        assertFalse(result.isPresent());
+        assertThrows(PaymentMethodNotFoundException.class, () -> paymentMethodService.getPaymentMethodById(99L));
     }
+
 
     @Test
     void testAddPaymentMethod_Success() {
@@ -141,11 +141,15 @@ class PaymentMethodServiceTest {
 
     @Test
     void testDeletePaymentMethod_Success() {
-        // The service method doesn't check for existence before deleting
-        doNothing().when(paymentMethodRepository).deleteById(anyLong());
+        PaymentMethod pm = createPaymentMethod(1L);
+
+        when(paymentMethodRepository.findById(1L)).thenReturn(Optional.of(pm));
+        doNothing().when(paymentMethodRepository).deleteById(1L);
 
         assertDoesNotThrow(() -> paymentMethodService.deletePaymentMethod(1L));
 
+        verify(paymentMethodRepository, times(1)).findById(1L);
         verify(paymentMethodRepository, times(1)).deleteById(1L);
     }
+
 }
