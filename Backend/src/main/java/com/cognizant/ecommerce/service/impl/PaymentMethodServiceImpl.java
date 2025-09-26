@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.cognizant.ecommerce.exception.ResourceNotFoundException;
+import com.cognizant.ecommerce.exception.PaymentMethodNotFoundException; // Ensure this import exists
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -39,7 +40,12 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
 
     @Override
     public Optional<PaymentMethodResponseDTO> getPaymentMethodById(Long id) {
-        return paymentMethodRepository.findById(id).map(this::mapToResponseDTO);
+        // Find by ID and throw a specific exception if not found
+        return paymentMethodRepository.findById(id)
+                .map(this::mapToResponseDTO)
+                .or(() -> {
+                    throw new PaymentMethodNotFoundException("Payment method not found with ID: " + id);
+                });
     }
 
     @Override
@@ -52,6 +58,7 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
         paymentMethod.setType(requestDTO.getCardType());
         paymentMethod.setProvider("Credit Card");
         paymentMethod.setAccount_number(requestDTO.getCardNumber());
+        paymentMethod.setCardholderName(requestDTO.getCardholderName());
         paymentMethod.setExpiry_date(requestDTO.getExpirationDate());
         paymentMethod.setIs_default(requestDTO.isDefault());
         paymentMethod.setCreated_at(LocalDateTime.now());
@@ -63,6 +70,9 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
 
     @Override
     public void deletePaymentMethod(Long id) {
+        // Check if the payment method exists before attempting to delete
+        paymentMethodRepository.findById(id)
+                .orElseThrow(() -> new PaymentMethodNotFoundException("Payment method not found with ID: " + id));
         paymentMethodRepository.deleteById(id);
     }
 
@@ -86,8 +96,8 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
             responseDTO.setLastFourDigits("N/A"); // Default value for incomplete data
         }
 
-        responseDTO.setCardholderName(null);
-        responseDTO.setDefault(paymentMethod.isIs_default());
+        responseDTO.setCardholderName(paymentMethod.getCardholderName());
+
         return responseDTO;
     }
 }

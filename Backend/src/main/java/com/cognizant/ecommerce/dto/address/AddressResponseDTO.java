@@ -11,16 +11,17 @@ import java.util.Date;
 @AllArgsConstructor
 public class AddressResponseDTO {
     private Long id;
-    private String addressLine1;
-    private String addressLine2;
+    private String address_line1;
+    private String address_line2;
     private String city;
     private String state;
-    private String postalCode;
+    private String street;
+    private String postal_code;
     private String country;
     private String phone;
     private boolean isDefault; // Ensure this field exists and is a primitive boolean
-    private Date createdAt;
-    private Date updatedAt;
+    private Date created_at;
+    private Date updated_at;
 
 
 

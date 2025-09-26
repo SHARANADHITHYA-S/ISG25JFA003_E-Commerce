@@ -5,7 +5,7 @@ public class PaymentMethodResponseDTO {
     private String cardType;
     private String lastFourDigits;
     private String cardholderName;
-    private boolean isDefault;
+
 
     // Getters and setters
     public Long getPaymentMethodId() {
@@ -40,12 +40,6 @@ public class PaymentMethodResponseDTO {
         this.cardholderName = cardholderName;
     }
 
-    public boolean isDefault() {
-        return isDefault;
-    }
 
-    public void setDefault(boolean aDefault) {
-        isDefault = aDefault;
-    }
 
 }

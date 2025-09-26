@@ -1,11 +1,12 @@
-package com.cognizant.ecommerce.service;
+package com.cognizant.ecommerce.service.impl;
 
 import com.cognizant.ecommerce.dao.*;
 import com.cognizant.ecommerce.dto.cartItem.CartItemRequestDTO;
 import com.cognizant.ecommerce.dto.order.OrderRequestDTO;
 import com.cognizant.ecommerce.dto.order.OrderResponseDTO;
-import com.cognizant.ecommerce.dto.orderItem.OrderItemRequestDTO;
 import com.cognizant.ecommerce.model.*;
+import com.cognizant.ecommerce.service.CartItemService;
+import com.cognizant.ecommerce.service.OrderService;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,11 +16,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 @SpringBootTest
 @Transactional
@@ -106,6 +104,7 @@ public class OrderServiceImplTest {
                 .price(BigDecimal.valueOf(250))
                 .description("Sample product")
                 .image_url("http://bruh.com")
+                .isActive(true)
                 .quantity(10L)
                 .category(category)
                 .build());

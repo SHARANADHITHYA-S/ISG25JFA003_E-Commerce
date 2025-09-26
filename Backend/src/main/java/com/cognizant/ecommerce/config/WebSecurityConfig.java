@@ -1,7 +1,9 @@
 package com.cognizant.ecommerce.config;
 
+import com.cognizant.ecommerce.exception.CustomAuthenticationEntryPoint;
 import com.cognizant.ecommerce.service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,6 +30,9 @@ public class WebSecurityConfig {
     private final JwtAuthFilter jwtAuthFilter;
     private final JwtAccessDeniedException jwtAccessDeniedException;
     private final JwtAuthenticationException jwtAuthenticationException;
+
+    @Autowired
+    private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -138,7 +143,8 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public PasswordEncoder passwordEncoder()
+    {
         return new BCryptPasswordEncoder();
     }
 }

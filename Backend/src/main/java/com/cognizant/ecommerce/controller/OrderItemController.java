@@ -3,6 +3,7 @@ package com.cognizant.ecommerce.controller;
 import com.cognizant.ecommerce.dto.orderItem.OrderItemRequestDTO;
 import com.cognizant.ecommerce.dto.orderItem.OrderItemResponseDTO;
 import com.cognizant.ecommerce.service.OrderItemService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j; //
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class OrderItemController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/admin")
-    public ResponseEntity<OrderItemResponseDTO> addOrderItem(@RequestBody OrderItemRequestDTO dto) {
+    public ResponseEntity<OrderItemResponseDTO> addOrderItem(@Valid @RequestBody OrderItemRequestDTO dto) {
         log.info("Received request to add order item: {}", dto);
         OrderItemResponseDTO response = orderItemService.addOrderItem(dto);
         log.info("Order item added successfully with id={} for orderId={}", response.getId(), dto.getId());
@@ -41,7 +42,7 @@ public class OrderItemController {
     // Only admins can update order items
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/admin/{id}")
-    public ResponseEntity<OrderItemResponseDTO> updateOrderItem(@PathVariable Long id, @RequestBody OrderItemRequestDTO dto) {
+    public ResponseEntity<OrderItemResponseDTO> updateOrderItem(@Valid @PathVariable Long id, @Valid @RequestBody OrderItemRequestDTO dto) {
         log.info("Updating order item with id={} using data: {}", id, dto);
         OrderItemResponseDTO updatedItem = orderItemService.updateOrderItem(id, dto);
         log.info("Order item updated successfully with id={}", id);
@@ -51,7 +52,7 @@ public class OrderItemController {
     // Only admins can delete order items
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/admin/{id}")
-    public ResponseEntity<String> deleteOrderItem(@PathVariable Long id) {
+    public ResponseEntity<String> deleteOrderItem(@Valid @PathVariable Long id) {
         log.warn("Deleting order item with id={}", id);
         orderItemService.deleteOrderItem(id);
         log.info("Order item deleted successfully with id={}", id);

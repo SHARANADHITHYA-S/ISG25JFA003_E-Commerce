@@ -4,6 +4,7 @@ import com.cognizant.ecommerce.dto.payment.PaymentRequestDTO;
 import com.cognizant.ecommerce.dto.payment.PaymentResponseDTO;
 import com.cognizant.ecommerce.service.PaymentService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j; // ✅ Lombok logging
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class PaymentController {
     // Only the owner or admin can create a payment
     @PreAuthorize("@authService.isSelfOrAdmin(#dto.userId)")
     @PostMapping
-    public ResponseEntity<PaymentResponseDTO> createPayment(@RequestBody PaymentRequestDTO dto) {
+    public ResponseEntity<PaymentResponseDTO> createPayment(@Valid @RequestBody PaymentRequestDTO dto) {
         log.info("Received request to create payment: {}", dto);
         PaymentResponseDTO response = paymentService.createPayment(dto);
         log.info("Payment created successfully with id={} for orderId={}", response.getId(), dto.getOrderId());
