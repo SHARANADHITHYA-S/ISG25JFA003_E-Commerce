@@ -23,10 +23,13 @@ public class JwtAccessDeniedException implements AccessDeniedHandler {
         response.setContentType("application/json");
 
         Map<String, Object> body = new HashMap<>();
+        body.put("timestamp", java.time.LocalDateTime.now().toString());
+        body.put("status", 403);
         body.put("error", "Forbidden");
-        body.put("message", accessDeniedException.getMessage());
+        body.put("message", "You do not have permission to access this resource");
         body.put("path", request.getRequestURI());
 
         new ObjectMapper().writeValue(response.getOutputStream(), body);
     }
+
 }
