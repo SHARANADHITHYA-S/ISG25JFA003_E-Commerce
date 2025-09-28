@@ -4,13 +4,16 @@ import com.cognizant.ecommerce.dao.AnalyticsReportRepository;
 import com.cognizant.ecommerce.dao.UserRepository;
 import com.cognizant.ecommerce.dto.analyticsreport.AnalyticsReportRequestDTO;
 import com.cognizant.ecommerce.dto.analyticsreport.AnalyticsReportResponseDTO;
+import com.cognizant.ecommerce.exception.AnalyticsReportGenerationException;
+import com.cognizant.ecommerce.exception.AnalyticsReportNotFoundException;
+import com.cognizant.ecommerce.exception.ResourceNotFoundException;
 import com.cognizant.ecommerce.model.AnalyticsReport;
 import com.cognizant.ecommerce.model.User;
 import com.cognizant.ecommerce.service.AnalyticsReportService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.cognizant.ecommerce.exception.AnalyticsReportNotFoundException;
 
 import java.util.Date;
 import java.util.List;
@@ -19,6 +22,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class AnalyticsReportServiceImpl implements AnalyticsReportService {
+
+    private static final Logger log = LoggerFactory.getLogger(AnalyticsReportServiceImpl.class);
 
     private final AnalyticsReportRepository analyticsReportRepository;
     private final UserRepository userRepository;
@@ -31,9 +36,9 @@ public class AnalyticsReportServiceImpl implements AnalyticsReportService {
 
     @Override
     public Optional<AnalyticsReportResponseDTO> getReportById(Long id) {
-        return Optional.of(analyticsReportRepository.findById(id)
-                .map(this::mapToResponseDTO)
-                .orElseThrow(() -> new AnalyticsReportNotFoundException("Analytics report not found with ID: " + id)));
+        AnalyticsReport report = analyticsReportRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Analytics report not found with ID: " + id));
+        return Optional.of(mapToResponseDTO(report));
     }
 
     @Override
@@ -45,25 +50,24 @@ public class AnalyticsReportServiceImpl implements AnalyticsReportService {
 
     @Override
     public void deleteReport(Long reportId) {
-        // First check if the report exists. If not, throw a custom exception.
-        analyticsReportRepository.findById(reportId)
-                .orElseThrow(() -> new AnalyticsReportNotFoundException("Analytics report not found with ID: " + reportId));
-
-        // If the report exists, proceed with the deletion.
-        analyticsReportRepository.deleteById(reportId);
+        AnalyticsReport report = analyticsReportRepository.findById(reportId)
+                .orElseThrow(() -> new ResourceNotFoundException("Analytics report not found with ID: " + reportId));
+        analyticsReportRepository.delete(report);
     }
 
     @Override
     public AnalyticsReportResponseDTO generateReport(AnalyticsReportRequestDTO requestDTO) {
-        String reportData = "Generated report data for " + requestDTO.getReportType();
+        if (requestDTO.getReportType() == null || requestDTO.getReportType().isBlank()) {
+            throw new AnalyticsReportGenerationException("Report type must not be null or empty");
+        }
 
         User user = userRepository.findById(1L)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with ID: 1"));
 
         AnalyticsReport report = new AnalyticsReport();
         report.setGeneratedBy(user);
         report.setReport_type(requestDTO.getReportType());
-        report.setData(reportData);
+        report.setData("Generated report data for " + requestDTO.getReportType());
         report.setGenerated_at(new Date());
 
         AnalyticsReport savedReport = analyticsReportRepository.save(report);
@@ -72,18 +76,13 @@ public class AnalyticsReportServiceImpl implements AnalyticsReportService {
 
     @Override
     public AnalyticsReportResponseDTO updateReport(Long reportId, AnalyticsReportRequestDTO requestDTO) {
-        // Find the existing report by ID
         AnalyticsReport existingReport = analyticsReportRepository.findById(reportId)
                 .orElseThrow(() -> new AnalyticsReportNotFoundException("Report not found with ID: " + reportId));
 
-        // Update the report fields with new data
         existingReport.setReport_type(requestDTO.getReportType());
         existingReport.setData("Updated report data for " + requestDTO.getReportType());
 
-        // Save the updated report entity
         AnalyticsReport updatedReport = analyticsReportRepository.save(existingReport);
-
-        // Convert and return the updated entity as a DTO
         return mapToResponseDTO(updatedReport);
     }
 
