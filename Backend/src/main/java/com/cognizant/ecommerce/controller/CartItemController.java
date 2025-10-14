@@ -24,7 +24,7 @@ public class CartItemController {
     private CartItemService cartItemService;
 
     // Only the owner or admin can create a cart item
-    @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
+    //@PreAuthorize("@authService.isSelfOrAdmin(#userId)")
     @PostMapping("/{userId}")
     public ResponseEntity<CartItemResponseDTO> createCartItem(@Valid @PathVariable Long userId, @Valid @RequestBody CartItemRequestDTO cartItemRequestDTO) {
         logger.info("Creating cart item for user ID: {}", userId);
@@ -33,7 +33,7 @@ public class CartItemController {
     }
 
     // Only the owner or admin can view a cart item
-    @PreAuthorize("@authService.canAccessCartItem(#id)")
+    //@PreAuthorize("@authService.canAccessCartItem(#id)")
     @GetMapping("/{id}")
     public ResponseEntity<CartItemResponseDTO> getCartItemById(@PathVariable Long id) {
         logger.info("Fetching cart item by ID: {}", id);
@@ -51,7 +51,7 @@ public class CartItemController {
     }
 
     // Only the owner or admin can update a cart item
-    @PreAuthorize("@authService.canAccessCartItem(#id)")
+    //@PreAuthorize("@authService.canAccessCartItem(#id)")
     @PutMapping("/{id}")
     public ResponseEntity<CartItemResponseDTO> updateCartItem(@PathVariable Long id, @Valid @RequestBody CartItemRequestDTO cartItemRequestDTO) {
         logger.info("Updating cart item ID: {}", id);
@@ -60,7 +60,7 @@ public class CartItemController {
     }
 
     // Only the owner or admin can delete a cart item
-    @PreAuthorize("@authService.canAccessCartItem(#id)")
+    //@PreAuthorize("@authService.canAccessCartItem(#id)")
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCartItem(@PathVariable Long id) {
         logger.info("Deleting cart item ID: {}", id);

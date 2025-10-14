@@ -1,17 +1,24 @@
-export interface Cart {
-    id: number;
-    userId: number;
-    items: CartItem[];
-    total: number;
-    createdAt: Date;
-    updatedAt: Date;
+export interface CartItemRequest {
+  productId: number;
+  quantity: number;
 }
 
-export interface CartItem {
-    id: number;
-    productId: number;
-    productName: string;
-    quantity: number;
-    price: number;
-    subtotal: number;
+export interface CartItemResponse {
+  id: number;
+  userId: number;
+  cartId: number;
+  productId: number;
+  productName: string;
+  price: number;
+  quantity: number;
+  totalPrice: number;
+}
+
+export interface CartResponse {
+  id: number;
+  userId: number;
+  createdAt: string;
+  updatedAt: string;
+  totalPrice: number;
+  items: CartItemResponse[];
 }
