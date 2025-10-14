@@ -21,7 +21,7 @@ public class PaymentRequestDTO {
     @NotNull(message = "Order ID is required")
     private Long orderId;
 
-    @NotNull(message = "Amount is required")
-    @Positive(message = "Amount must be greater than zero")
-    private BigDecimal amount;
+//    @NotNull(message = "Amount is required")
+//    @Positive(message = "Amount must be greater than zero")
+//    private BigDecimal amount;
 }

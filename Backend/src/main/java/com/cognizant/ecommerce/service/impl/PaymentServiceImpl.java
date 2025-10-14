@@ -44,8 +44,8 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public PaymentResponseDTO createPayment(PaymentRequestDTO paymentRequestDTO) {
-        log.info("Creating payment for orderId={} with amount={}",
-                paymentRequestDTO.getOrderId(), paymentRequestDTO.getAmount());
+        log.info("Creating payment for orderId={}",
+                paymentRequestDTO.getOrderId());
 
         Order order = orderRepository.findById(paymentRequestDTO.getOrderId())
                 .orElseThrow(() -> {
@@ -54,7 +54,7 @@ public class PaymentServiceImpl implements PaymentService {
                 });
 
         Payment payment = Payment.builder()
-                .amount(paymentRequestDTO.getAmount())
+                .amount(order.getTotalAmount())
                 .order(order)
                 .paymentMethod(order.getPaymentMethod())
                 .status("PENDING")
