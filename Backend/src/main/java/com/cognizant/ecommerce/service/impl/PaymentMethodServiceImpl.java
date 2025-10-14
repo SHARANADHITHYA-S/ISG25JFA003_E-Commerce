@@ -58,6 +58,7 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
         paymentMethod.setType(requestDTO.getCardType());
         paymentMethod.setProvider("Credit Card");
         paymentMethod.setAccount_number(requestDTO.getCardNumber());
+        paymentMethod.setCardholderName(requestDTO.getCardholderName());
         paymentMethod.setExpiry_date(requestDTO.getExpirationDate());
         paymentMethod.setIs_default(requestDTO.isDefault());
         paymentMethod.setCreated_at(LocalDateTime.now());
@@ -95,7 +96,7 @@ public class PaymentMethodServiceImpl implements PaymentMethodService {
             responseDTO.setLastFourDigits("N/A"); // Default value for incomplete data
         }
 
-        responseDTO.setCardholderName(null);
+        responseDTO.setCardholderName(paymentMethod.getCardholderName());
 
         return responseDTO;
     }

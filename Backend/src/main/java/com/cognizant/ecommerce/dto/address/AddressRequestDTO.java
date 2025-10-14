@@ -13,9 +13,9 @@ public class AddressRequestDTO {
     private String street;
 
     @NotBlank(message = "address cannot be null")
-    private String addressLine1;
+    private String address_line1;
 
-    private String addressLine2;
+    private String address_line2;
 
     @NotBlank(message = "city cannot be null")
     private String city;
@@ -24,7 +24,7 @@ public class AddressRequestDTO {
     private String state;
 
     @NotBlank(message = "postal code cannot be null")
-    private String postalCode;
+    private String postal_code;
 
     @NotBlank(message = "country cannot be null")
     private String country;

@@ -6,6 +6,7 @@ import com.cognizant.ecommerce.dto.ForgotPassword.ResetPasswordRequest;
 import com.cognizant.ecommerce.dto.user.UserRequestDTO;
 import com.cognizant.ecommerce.dto.user.UserResponseDTO;
 import com.cognizant.ecommerce.exception.ResourceNotFoundException;
+import com.cognizant.ecommerce.exception.TokenMismatchException;
 import com.cognizant.ecommerce.model.User;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,10 +59,9 @@ class UserServiceImplTest {
                 .build();
 
         userRequestDTO = new UserRequestDTO();
-        userRequestDTO.setName("testUser");
+        userRequestDTO.setUsername("testUser");
         userRequestDTO.setEmail("test@example.com");
         userRequestDTO.setPassword("password123");
-        userRequestDTO.setRole("USER");
 
         userResponseDTO = new UserResponseDTO();
         userResponseDTO.setId(1L);
@@ -101,7 +101,7 @@ class UserServiceImplTest {
         // Arrange
         when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
         when(userRepository.save(any(User.class))).thenReturn(user);
-        userRequestDTO.setName("updatedName");
+        userRequestDTO.setUsername("updatedName");
 
         // Act
         UserResponseDTO result = userService.updateUserProfile(1L, userRequestDTO);
@@ -213,9 +213,10 @@ class UserServiceImplTest {
         when(jwtUtil.extractUsername("mismatchToken")).thenReturn("anotherUser");
 
         // Act & Assert
-        assertThrows(BadCredentialsException.class, () -> userService.resetPassword(request));
+        assertThrows(TokenMismatchException.class, () -> userService.resetPassword(request));
         verify(userRepository, never()).save(any(User.class));
     }
+
 
     @Test
     void resetPassword_UserNotFound_ThrowsException() {

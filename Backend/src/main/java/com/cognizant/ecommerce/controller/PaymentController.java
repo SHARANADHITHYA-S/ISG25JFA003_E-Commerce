@@ -2,6 +2,7 @@ package com.cognizant.ecommerce.controller;
 
 import com.cognizant.ecommerce.dto.payment.PaymentRequestDTO;
 import com.cognizant.ecommerce.dto.payment.PaymentResponseDTO;
+import com.cognizant.ecommerce.service.OrderService;
 import com.cognizant.ecommerce.service.PaymentService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -21,6 +22,7 @@ import java.util.List;
 public class PaymentController {
 
     private final PaymentService paymentService;
+    private final OrderService orderService;
 
     // Only the owner or admin can create a payment
     @PreAuthorize("@authService.isSelfOrAdmin(#dto.userId)")
@@ -58,6 +60,7 @@ public class PaymentController {
     public ResponseEntity<PaymentResponseDTO> updatePaymentStatus(@PathVariable Long id, @RequestParam String status) {
         log.info("Updating payment status for id={} to {}", id, status);
         PaymentResponseDTO updatedPayment = paymentService.updatePaymentStatus(id, status);
+        orderService.updateOrderStatus(updatedPayment.getOrderId(), status);
         log.info("Payment status updated successfully for id={}", id);
         return ResponseEntity.ok(updatedPayment);
     }

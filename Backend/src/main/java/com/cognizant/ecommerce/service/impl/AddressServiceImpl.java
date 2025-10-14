@@ -1,12 +1,14 @@
 package com.cognizant.ecommerce.service.impl;
 
 import com.cognizant.ecommerce.dao.AddressRepository;
+import com.cognizant.ecommerce.dao.OrderRepository;
 import com.cognizant.ecommerce.dao.UserRepository;
 import com.cognizant.ecommerce.dto.address.AddressRequestDTO;
 import com.cognizant.ecommerce.dto.address.AddressResponseDTO;
 import com.cognizant.ecommerce.exception.AddressNotFoundException;
 import com.cognizant.ecommerce.exception.ResourceNotFoundException;
 import com.cognizant.ecommerce.model.Address;
+import com.cognizant.ecommerce.model.Order;
 import com.cognizant.ecommerce.model.User;
 import com.cognizant.ecommerce.service.AddressService;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,7 @@ public class AddressServiceImpl implements AddressService {
     private final AddressRepository addressRepository;
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final OrderRepository orderRepository;
 
     @Override
     public List<Object> getAllAddresses() {
@@ -78,9 +81,16 @@ public class AddressServiceImpl implements AddressService {
     @Override
     public void deleteAddress(Long addressId) {
         // Corrected: Use specific AddressNotFoundException
-        addressRepository.findById(addressId)
-                .orElseThrow(() -> new AddressNotFoundException("Address not found with id: " + addressId));
-        addressRepository.deleteById(addressId); // Use deleteById for clarity
+        Address address = addressRepository.findById(addressId)
+                .orElseThrow(() -> new ResourceNotFoundException("Address not found"));
+
+        List<Order> linkedOrders = orderRepository.findByAddressId(addressId);
+        for (Order order : linkedOrders) {
+            order.setAddress(null);
+        }
+        orderRepository.saveAll(linkedOrders);
+
+        addressRepository.delete(address); // Use deleteById for clarity
     }
 
     @Override

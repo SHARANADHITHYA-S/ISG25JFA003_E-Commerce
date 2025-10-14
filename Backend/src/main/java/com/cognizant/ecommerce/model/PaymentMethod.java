@@ -27,6 +27,7 @@ public class PaymentMethod {
     private String type;
     private String provider;
     private String account_number;
+    private String cardholderName;
     private String expiry_date;
     private boolean is_default;
 
