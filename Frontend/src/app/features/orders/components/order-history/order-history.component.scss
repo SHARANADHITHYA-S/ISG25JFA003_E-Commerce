@@ -1,0 +1,26 @@
+.order-history-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.order-card .card-header {
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.order-card .card-header:hover {
+    background-color: #f8f9fa;
+}
+
+.badge {
+    font-size: 0.9rem;
+    padding: 0.5em 0.75em;
+}
+
+.badge.bg-warning {
+    color: #000;
+}
+
+.pagination .page-link {
+    cursor: pointer;
+}
