@@ -16,10 +16,11 @@ export const errorInterceptor: HttpInterceptorFn = (
         catchError((error: HttpErrorResponse) => {
             if (error.status === 401) {
                 authService.logout();
-                router.navigate(['/auth/login']);
+                router.navigate(['/login']); // Changed to /login as per app.routes.ts
             }
 
             const errorMessage = error.error?.message || 'An unknown error occurred';
+            alert(errorMessage); // Display error message
             return throwError(() => new Error(errorMessage));
         })
     );

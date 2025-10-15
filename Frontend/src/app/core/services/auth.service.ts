@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
+import { StorageService } from './storage.service';
 
 @Injectable({
     providedIn: 'root'
@@ -10,10 +11,49 @@ import { User } from '../models/user';
 export class AuthService {
     private apiUrl = 'http://localhost:8080/api/auth';
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient, private storageService: StorageService) {}
 
-    login(email: string, password: string): Observable<{ token: string, user: User }> {
-        return this.http.post<{ token: string, user: User }>(`${this.apiUrl}/login`, { email, password });
+    private decodeToken(token: string): any {
+        try {
+            const base64Url = token.split('.')[1];
+            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+            const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+            return JSON.parse(jsonPayload);
+        } catch (e) {
+            console.error("Error decoding token:", e);
+            return null;
+        }
+    }
+
+    login(username: string, password: string): Observable<{ token: string, user: User }> {
+        return this.http.post<{ token: string, user: User }>(`${this.apiUrl}/login`, { username, password }).pipe(
+            map(response => {
+                console.log("Login response:", response);
+                this.storageService.setItem('token', response.token);
+                console.log("Token stored in localStorage after login:", this.storageService.getItem('token'));
+
+                const decodedToken = this.decodeToken(response.token);
+                console.log("Decoded token:", decodedToken);
+
+                if (decodedToken) {
+                    const user: User = {
+                        id: decodedToken.userId,
+                        username: decodedToken.sub, // 'sub' is the subject, which is the username
+                        role: decodedToken.role,
+                        firstName: '', // Assuming these are not in token
+                        lastName: '',
+                        createdAt: new Date(),
+                        updatedAt: new Date()
+                    };
+                    this.storageService.setItem('user', user);
+                } else {
+                    this.storageService.removeItem('user');
+                }
+                return response;
+            })
+        );
     }
 
     register(user: Partial<User>, password: string): Observable<User> {
@@ -21,16 +61,18 @@ export class AuthService {
     }
 
     logout(): void {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        this.storageService.removeItem('token');
+        this.storageService.removeItem('user');
     }
 
     isLoggedIn(): boolean {
-        return !!localStorage.getItem('token');
+        console.log("Token from localStorage in isLoggedIn:", this.storageService.getItem('token'));
+        return !!this.storageService.getItem('token');
     }
 
     getCurrentUser(): User | null {
-        const userStr = localStorage.getItem('user');
-        return userStr ? JSON.parse(userStr) : null;
+        const user = this.storageService.getItem<User>('user');
+        console.log("User object from StorageService:", user);
+        return user;
     }
 }

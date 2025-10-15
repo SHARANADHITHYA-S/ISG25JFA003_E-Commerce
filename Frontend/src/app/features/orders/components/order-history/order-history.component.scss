@@ -1,26 +1,94 @@
 .order-history-container {
-    max-width: 900px;
-    margin: 0 auto;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.order-card .card-header {
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
+h2 {
+  color: #0B2545;
+  font-weight: bold;
+  margin-bottom: 2rem;
 }
 
-.order-card .card-header:hover {
-    background-color: #f8f9fa;
+.order-history-card {
+  background-color: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease-in-out;
 }
 
-.badge {
-    font-size: 0.9rem;
-    padding: 0.5em 0.75em;
+.order-history-card:hover {
+  transform: translateY(-5px);
 }
 
-.badge.bg-warning {
-    color: #000;
+.order-id {
+  color: #0B2545;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+.order-placed {
+  color: #6c757d;
+  font-size: 0.85rem;
+}
+
+.status-tag {
+  background-color: #2ECC71; /* Green for COMPLETED */
+  color: #fff;
+  font-weight: bold;
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.5rem;
+}
+
+.order-total {
+  color: #0B2545;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.view-details-btn {
+  background-color: #EE7B30;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.view-details-btn:hover {
+  background-color: #d66a2a;
 }
 
 .pagination .page-link {
-    cursor: pointer;
+  cursor: pointer;
+  color: #0B2545;
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #0B2545;
+  border-color: #0B2545;
+  color: #fff;
+}
+
+.order-details-expanded {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.order-details-expanded .section-title {
+  color: #0B2545;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.order-details-expanded .list-group-item {
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem 0;
+  color: #343a40;
+}
+
+.order-details-expanded p {
+  margin-bottom: 0.5rem;
+  color: #343a40;
 }
