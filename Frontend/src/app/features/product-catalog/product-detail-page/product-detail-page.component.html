@@ -5,7 +5,7 @@
     </div>
     <div class="col-md-6">
       <h1 class="display-5 mb-3">{{ p.name }}</h1>
-      <p class="lead text-primary fw-bold">${{ p.price }}</p>
+      <p class="lead text-primary fw-bold">₹{{ p.price }}</p>
       
       <div class="mb-4">
         <span class="badge" [ngClass]="{'bg-success': p.is_active && p.quantity > 0, 'bg-danger': !p.is_active || p.quantity <= 0}">

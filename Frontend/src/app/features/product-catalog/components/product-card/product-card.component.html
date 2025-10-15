@@ -3,7 +3,7 @@
   <div class="card-body d-flex flex-column">
     <h5 class="card-title">{{ product.name }}</h5>
     <p class="card-text text-muted mb-2">{{ product.description.substring(0, 50) }}...</p>
-    <p class="fs-4 fw-bold text-danger mt-auto">${{ product.price }}</p>
+    <p class="fs-4 fw-bold text-danger mt-auto">₹{{ product.price }}</p>
     <!-- FIX: The routerLink path needs to be an array with the path segments -->
     <a [routerLink]="['/products', product.id]" class="btn btn-sm btn-outline-primary mt-2">View Details</a>
   </div>
