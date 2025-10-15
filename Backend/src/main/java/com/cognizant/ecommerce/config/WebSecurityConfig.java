@@ -1,9 +1,7 @@
 package com.cognizant.ecommerce.config;
 
-import com.cognizant.ecommerce.exception.CustomAuthenticationEntryPoint;
 import com.cognizant.ecommerce.service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +18,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 @Configuration
 @EnableMethodSecurity
@@ -31,102 +35,113 @@ public class WebSecurityConfig {
     private final JwtAccessDeniedException jwtAccessDeniedException;
     private final JwtAuthenticationException jwtAuthenticationException;
 
-    @Autowired
-    private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        //public access
-                                .requestMatchers(
-                                        // User management
-                                        "/api/admin/**",
-
-                                        // Product management
-                                        "/api/products/admin/**",
-
-                                        // Payment management
-                                        "/api/payments/admin/**",
-
-                                        // Order management
-                                        "/api/orders/admin/**",
-
-                                        // Order item management
-                                        "/api/order-items/admin/**",
-
-                                        // Category management
-                                        "/api/categories/admin/**",
-
-                                        // Address management (admin view)
-                                        "/api/addresses/admin/**",
-
-                                        // Analytics
-                                        "/api/analytics-reports/admin/**",
-
-                                        "/api/admin/**"
-                                ).hasRole("ADMIN")
-                                .requestMatchers(
-                                        // User profile
-                                        "/api/user/**",
-
-                                        // Payment methods
-                                        "/api/payment-methods/**",
-
-                                        // Payments (non-admin)
-                                        "/api/payments",
-                                        "/api/payments/*",
-                                        "/api/payments/order/*",
-
-                                        // Order items (view only)
-                                        "/api/order-items/order/**",
-
-                                        // Cart items
-                                        "/api/cart-items/**",
-
-                                        // Carts
-                                        "/api/carts/**",
-
-                                        // Orders (non-admin)
-                                        "/api/orders",
-                                        "/api/orders/*",
-                                        "/api/orders/user/**",
-
-                                        // Addresses (non-admin)
-                                        "/api/addresses/**",
-
-                                        "/api/me"
-
-
-
-                                ).hasAnyRole("USER", "ADMIN")
-                                // Public
-                                .requestMatchers(
-                                        "/api/auth/register",
-                                        "/api/auth/login",
-                                        "/api/auth/forgot-password",
-                                        "/api/auth/reset-password",
-                                        "/api/products",
-                                        "/api/products/*",
-                                        "/api/products/category/*",
-                                        "/api/categories",
-                                        "/api/categories/*",
-                                        "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html"
-                                ).permitAll()
-
-                                .anyRequest().authenticated()
-
-                )
-                .exceptionHandling(ex -> ex
-                        .authenticationEntryPoint(jwtAuthenticationException) // 401 handler
-                        .accessDeniedHandler(jwtAccessDeniedException) // 403 handler
-                )
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
-        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
+//                .authorizeHttpRequests(auth -> auth
+//                        //public access
+//                                .requestMatchers(
+//                                        // User management
+//                                        "/api/admin/**",
+//
+//                                        // Product management
+//                                        "/api/products/admin/**",
+//
+//                                        // Payment management
+//                                        "/api/payments/admin/**",
+//
+//                                        // Order management
+//                                        "/api/orders/admin/**",
+//
+//                                        // Order item management
+//                                        "/api/order-items/admin/**",
+//
+//                                        // Category management
+//                                        "/api/categories/admin/**",
+//
+//                                        // Address management (admin view)
+//                                        "/api/addresses/admin/**",
+//
+//                                        // Analytics
+//                                        "/api/analytics-reports/admin/**",
+//
+//                                        "/api/admin/**"
+//                                ).hasRole("ADMIN")
+//                                .requestMatchers(
+//                                        // User profile
+//                                        "/api/user/**",
+//
+//                                        // Payment methods
+//                                        "/api/payment-methods/**",
+//
+//                                        // Payments (non-admin)
+//                                        "/api/payments",
+//                                        "/api/payments/*",
+//                                        "/api/payments/order/*",
+//
+//                                        // Order items (view only)
+//                                        "/api/order-items/order/**",
+//
+//                                        // Cart items
+//                                        "/api/cart-items/**",
+//
+//                                        // Carts
+//                                        "/api/carts/**",
+//
+//                                        // Orders (non-admin)
+//                                        "/api/orders",
+//                                        "/api/orders/*",
+//                                        "/api/orders/user/**",
+//
+//                                        // Addresses (non-admin)
+//                                        "/api/addresses/**",
+//
+//                                        "/api/me"
+//
+//
+//
+//                                ).hasAnyRole("USER", "ADMIN")
+//                                // Public
+//                                .requestMatchers(
+//                                        "/api/auth/register",
+//                                        "/api/auth/login",
+//                                        "/api/auth/forgot-password",
+//                                        "/api/auth/reset-password",
+//                                        "/api/products",
+//                                        "/api/products/*",
+//                                        "/api/products/category/*",
+//                                        "/api/categories",
+//                                        "/api/categories/*",
+//                                        "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html"
+//                                ).permitAll()
+//
+//                                .anyRequest().authenticated()
+//
+//                )
+//                .exceptionHandling(ex -> ex
+//                        .authenticationEntryPoint(jwtAuthenticationException) // 401 handler
+//                        .accessDeniedHandler(jwtAccessDeniedException) // 403 handler
+//                )
+//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+//
+//        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        configuration.setAllowCredentials(true);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     @Bean
@@ -148,4 +163,3 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
-
