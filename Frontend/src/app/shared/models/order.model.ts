@@ -18,11 +18,13 @@ export interface OrderItem {
     subtotal: number;
 }
 
-export type OrderStatus = 'PENDING' | 'PROCESSING' | 'COMPLETED' | 'CANCELLED';
+export type OrderStatus = 'PENDING' | 'PROCESSING' | 'SHIPPED' | 'DELIVERED' | 'COMPLETED' | 'CANCELLED';
 
 export const ORDER_STATUS_HIERARCHY: Record<OrderStatus, number> = {
     PENDING: 1,
     PROCESSING: 2,
-    COMPLETED: 3,
-    CANCELLED: 4,
+    SHIPPED: 3,
+    DELIVERED: 4,
+    COMPLETED: 5,
+    CANCELLED: 6,
 };

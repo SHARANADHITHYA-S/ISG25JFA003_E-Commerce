@@ -58,12 +58,35 @@ export class OrderHistoryComponent implements OnInit {
                 return 'bg-warning';
             case 'PROCESSING':
                 return 'bg-info';
+            case 'SHIPPED':
+                return 'bg-primary'; // Example color for SHIPPED
+            case 'DELIVERED':
+                return 'bg-success'; // Example color for DELIVERED
             case 'COMPLETED':
                 return 'bg-success';
             case 'CANCELLED':
                 return 'bg-danger';
             default:
                 return 'bg-secondary';
+        }
+    }
+
+    getShadowColor(status: OrderStatus): string {
+        switch (status) {
+            case 'PENDING':
+                return 'rgba(255, 193, 7, 0.3)'; // Yellowish for pending
+            case 'PROCESSING':
+                return 'rgba(23, 162, 184, 0.3)'; // Bluish for processing
+            case 'SHIPPED':
+                return 'rgba(0, 123, 255, 0.3)'; // Blue for shipped
+            case 'DELIVERED':
+                return 'rgba(40, 167, 69, 0.3)'; // Greenish for delivered
+            case 'COMPLETED':
+                return 'rgba(40, 167, 69, 0.3)'; // Greenish for completed
+            case 'CANCELLED':
+                return 'rgba(220, 53, 69, 0.3)'; // Reddish for cancelled
+            default:
+                return 'rgba(108, 117, 125, 0.3)'; // Grayish for unknown
         }
     }
 }
