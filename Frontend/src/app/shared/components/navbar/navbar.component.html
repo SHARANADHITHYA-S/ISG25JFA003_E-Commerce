@@ -22,7 +22,10 @@
         </li>
       </ul>
       <div class="d-flex align-items-center ms-auto">
-        <a class="nav-link" routerLink="/cart"><i class="fas fa-shopping-cart"></i></a>
+        <a class="nav-link" routerLink="/cart">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="badge bg-danger rounded-pill ms-1" *ngIf="cartItemCount > 0">{{cartItemCount}}</span>
+        </a>
         <a class="nav-link" routerLink="/profile"><i class="fas fa-user-circle"></i></a>
       </div>
     </div>
