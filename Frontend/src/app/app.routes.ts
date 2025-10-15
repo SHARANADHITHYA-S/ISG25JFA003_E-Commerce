@@ -21,6 +21,8 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'categories', pathMatch: 'full' },
       { path: 'categories', loadComponent: () => import('./features/admin-management/category-crud/category-crud.component').then(m => m.CategoryCrudComponent) },
+      { path: 'categories/new', loadComponent: () => import('./features/admin-management/category-form/category-form.component').then(m => m.CategoryFormComponent) },
+      { path: 'categories/edit/:id', loadComponent: () => import('./features/admin-management/category-form/category-form.component').then(m => m.CategoryFormComponent) },
       { path: 'products', loadComponent: () => import('./features/admin-management/product-crud/product-crud.component').then(m => m.ProductCrudComponent) },
       { path: 'products/new', loadComponent: () => import('./features/admin-management/product-form/product-form.component').then(m => m.ProductFormComponent) },
       { path: 'products/edit/:id', loadComponent: () => import('./features/admin-management/product-form/product-form.component').then(m => m.ProductFormComponent) }

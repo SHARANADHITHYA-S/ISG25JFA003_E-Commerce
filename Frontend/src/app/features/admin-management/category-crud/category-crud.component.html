@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="d-flex justify-content-between mb-3 align-items-center">
     <h3>Category Management (Admin)</h3>
-    <button class="btn btn-primary" routerLink="new">Add New Category</button>
+    <button class="btn btn-primary" [routerLink]="['/admin/categories/new']">Add New Category</button>
   </div>
   <table class="table table-bordered table-striped">
     <thead class="thead-dark">
@@ -18,7 +18,7 @@
         <td>{{ category.name }}</td>
         <td>{{ category.description }}</td>
         <td>
-          <button class="btn btn-sm btn-info me-2" [routerLink]="['edit', category.id]">Edit</button>
+          <button class="btn btn-sm btn-info me-2" [routerLink]="['/admin/categories/edit', category.id]">Edit</button>
           <button class="btn btn-sm btn-danger" (click)="onDelete(category.id)">Delete</button>
         </td>
       </tr>
