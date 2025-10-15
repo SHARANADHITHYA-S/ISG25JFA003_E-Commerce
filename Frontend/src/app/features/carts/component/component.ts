@@ -14,8 +14,6 @@ export class CartComponent implements OnInit {
   isLoading = true;
   error: string | null = null;
   
-  private readonly userId = 2;
-
   constructor(private cartService: CartService) { }
 
   ngOnInit(): void {
@@ -25,7 +23,7 @@ export class CartComponent implements OnInit {
   loadCart(): void {
     this.isLoading = true;
     this.error = null;
-    this.cartService.getCart(this.userId).subscribe({
+    this.cartService.getCart().subscribe({
       next: (data) => {
         console.log('Cart data received:', data); // Debug log
         this.cart = data;
@@ -103,7 +101,7 @@ export class CartComponent implements OnInit {
   clearCart(): void {
     if (!this.cart || !confirm('Are you sure you want to empty your entire cart?')) return;
     
-    this.cartService.clearCart(this.userId).subscribe({
+    this.cartService.clearCart().subscribe({
       next: () => {
         // Update local state
         if (this.cart) {

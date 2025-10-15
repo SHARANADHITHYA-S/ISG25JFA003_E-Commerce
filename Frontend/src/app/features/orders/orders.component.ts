@@ -34,10 +34,13 @@ export class OrdersComponent {
     }
 
     private loadCartItemCount(): void {
-        // Assuming userId 2 as per cart component
-        this.cartService.getCart(2).subscribe({
+        this.cartService.getCart().subscribe({
             next: (cart: CartResponse | null) => {
                 this.cartItemCount = cart?.items?.reduce((sum: number, item: any) => sum + item.quantity, 0) || 0;
+            },
+            error: (error) => {
+                console.error('Error loading cart item count:', error);
+                this.cartItemCount = 0;
             }
         });
     }

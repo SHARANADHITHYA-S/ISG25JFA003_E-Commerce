@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { Order } from '../../shared/models/order.model';
 import { AuthService } from './auth.service';
 
@@ -30,7 +30,13 @@ export class OrderService {
     }
 
     getCurrentOrder(): Observable<Order | null> {
-        const userId = this.getUserIdFromAuth();
+        let userId: number;
+        try {
+            userId = this.getUserIdFromAuth();
+        } catch (error: any) {
+            return throwError(() => new Error('Authentication required to load current order. Please log in.'));
+        }
+
         return this.http.get<Order[]>(`${this.apiUrl}/user/${userId}`).pipe(
             map(orders => {
                 const order = orders.find(o => o.status !== 'COMPLETED' && o.status !== 'CANCELLED');
@@ -38,23 +44,39 @@ export class OrderService {
                     return null;
                 }
                 return order;
-            })
+            }),
+            catchError(this.handleError)
         );
     }
 
     getPreviousOrders(): Observable<Order[]> {
-        const userId = this.getUserIdFromAuth();
+        let userId: number;
+        try {
+            userId = this.getUserIdFromAuth();
+        } catch (error: any) {
+            return throwError(() => new Error('Authentication required to load previous orders. Please log in.'));
+        }
+
         return this.http.get<Order[]>(`${this.apiUrl}/user/${userId}`).pipe(
-            map(orders => orders.filter(o => o.status === 'COMPLETED' || o.status === 'CANCELLED'))
+            map(orders => orders.filter(o => o.status === 'COMPLETED' || o.status === 'CANCELLED')),
+            catchError(this.handleError)
         );
     }
 
     getOrderDetails(orderId: number): Observable<Order> {
-        return this.http.get<Order>(`${this.apiUrl}/${orderId}`);
+        return this.http.get<Order>(`${this.apiUrl}/${orderId}`).pipe(
+            catchError(this.handleError)
+        );
     }
 
     getOrdersByPage(page: number, size: number): Observable<PaginatedOrderResponse> {
-        const userId = this.getUserIdFromAuth();
+        let userId: number;
+        try {
+            userId = this.getUserIdFromAuth();
+        } catch (error: any) {
+            return throwError(() => new Error('Authentication required to load paginated orders. Please log in.'));
+        }
+
         return this.http.get<Order[]>(`${this.apiUrl}/user/${userId}`).pipe(
             map(orders => {
                 const startIndex = page * size;
@@ -67,7 +89,24 @@ export class OrderService {
                     size,
                     number: page
                 };
-            })
+            }),
+            catchError(this.handleError)
         );
+    }
+
+    private handleError(error: any) {
+        console.error('An API error occurred', error);
+        let errorMessage = 'Something went wrong with the API call.';
+        if (error.error instanceof ErrorEvent) {
+            // Client-side error
+            errorMessage = `Error: ${error.error.message}`;
+        } else if (error.status) {
+            // Backend returned an unsuccessful response code
+            errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+        } else if (error.message) {
+            // Custom error from getUserIdFromAuth
+            errorMessage = error.message;
+        }
+        return throwError(() => new Error(errorMessage));
     }
 }

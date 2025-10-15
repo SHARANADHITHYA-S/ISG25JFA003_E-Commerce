@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { CartResponse, CartItemRequest, CartItemResponse } from '../models/cart';
+import { AuthService } from './auth.service'; // Import AuthService
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,27 @@ import { CartResponse, CartItemRequest, CartItemResponse } from '../models/cart'
 export class CartService {
   private apiUrl = 'http://localhost:8080/api';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
-  getCart(userId: number): Observable<CartResponse> {
+  private getUserIdFromAuth(): number {
+    const user = this.authService.getCurrentUser();
+    if (user && user.id) {
+      return user.id;
+    }
+    throw new Error('User not logged in or user ID not available.');
+  }
+
+  getCart(): Observable<CartResponse> {
+    const userId = this.getUserIdFromAuth();
     return this.http.get<CartResponse>(`${this.apiUrl}/carts/user/${userId}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  addCartItem(productId: number, quantity: number): Observable<CartItemResponse> {
+    const userId = this.getUserIdFromAuth();
+    const itemRequest: CartItemRequest = { productId, quantity };
+    return this.http.post<CartItemResponse>(`${this.apiUrl}/cart-items/${userId}`, itemRequest).pipe(
       catchError(this.handleError)
     );
   }
@@ -30,7 +48,8 @@ export class CartService {
     );
   }
 
-  clearCart(userId: number): Observable<string> {
+  clearCart(): Observable<string> {
+    const userId = this.getUserIdFromAuth();
     return this.http.delete(`${this.apiUrl}/carts/user/${userId}`, { responseType: 'text' }).pipe(
       catchError(this.handleError)
     );
