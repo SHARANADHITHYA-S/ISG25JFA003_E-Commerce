@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../core/services/product.service';
 import { CategoryService } from '../../../core/services/category.service';
@@ -7,6 +10,8 @@ import { CategoryResponseDTO } from '../../../core/models/category';
 
 @Component({
   selector: 'app-product-form',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.scss']
 })

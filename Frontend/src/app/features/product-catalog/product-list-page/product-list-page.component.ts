@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { CategoryFilterComponent } from '../components/category-filter/category-filter.component';
+import { ProductCardComponent } from '../components/product-card/product-card.component';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../core/services/product.service';
 import { ProductResponseDTO } from '../../../core/models/product';
 
 @Component({
   selector: 'app-product-list-page',
+  standalone: true,
+  imports: [CommonModule, RouterModule, CategoryFilterComponent, ProductCardComponent],
   templateUrl: './product-list-page.component.html',
   styleUrls: ['./product-list-page.component.scss']
 })

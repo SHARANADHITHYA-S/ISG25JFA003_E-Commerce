@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { ProductService } from '../../../core/services/product.service';
 import { CategoryService } from '../../../core/services/category.service';
 import { ProductResponseDTO } from '../../../core/models/product';
@@ -6,6 +9,8 @@ import { CategoryResponseDTO } from '../../../core/models/category';
 
 @Component({
   selector: 'app-product-crud',
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './product-crud.component.html',
   styleUrls: ['./product-crud.component.scss']
 })
