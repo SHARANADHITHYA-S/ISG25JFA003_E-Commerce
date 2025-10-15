@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-@PreAuthorize("@authService.isSelf(#userId)")
+//@PreAuthorize("@authService.isSelf(#userId)")
 @RestController
 @RequestMapping("/api/carts")
 public class CartController {
@@ -19,7 +19,7 @@ public class CartController {
     @Autowired
     private CartService cartService;
 
-    @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
+    //@PreAuthorize("@authService.isSelfOrAdmin(#userId)")
     @GetMapping("/user/{userId}")
     public ResponseEntity<CartResponseDTO> getCartByUserId(@PathVariable Long userId) {
         logger.info("Fetching cart for user ID: {}", userId);
@@ -27,7 +27,7 @@ public class CartController {
         return ResponseEntity.ok(cart);
     }
 
-    @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
+    //@PreAuthorize("@authService.isSelfOrAdmin(#userId)")
     @DeleteMapping("/user/{userId}")
     public ResponseEntity<String> deleteCartByUserId(@PathVariable Long userId) {
         logger.info("Deleting cart for user ID: {}", userId);
