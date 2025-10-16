@@ -1,19 +1,10 @@
-.card-img-top {
-  height: 200px;
-  object-fit: cover;
-}
-
 .card {
-  transition: transform 0.2s, box-shadow 0.2s;
-  cursor: pointer;
+  max-width: 350px; /* Adjust as needed */
+  border-radius: 15px; /* Adjust as needed for more rounding */
+  overflow: hidden; /* Ensures content respects border-radius */
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
-}
-
-.card-title {
-  font-size: 1.1rem;
-  font-weight: 600;
+.card-img-top {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 }

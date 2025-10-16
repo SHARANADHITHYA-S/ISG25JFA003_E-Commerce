@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ProductResponseDTO, ProductRequestDTO } from '../../core/models/product';
 
 @Injectable({
@@ -12,7 +12,9 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   getAllProducts(): Observable<ProductResponseDTO[]> {
-    return this.http.get<ProductResponseDTO[]>(this.apiUrl);
+    return this.http.get<ProductResponseDTO[]>(this.apiUrl).pipe(
+      tap(data => console.log('Products from backend:', data))
+    );
   }
 
   getProductById(id: number): Observable<ProductResponseDTO> {

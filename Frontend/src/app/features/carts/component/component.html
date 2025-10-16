@@ -68,7 +68,7 @@
               <span>{{ cart.totalPrice | currency }}</span>
             </div>
             <div class="d-grid gap-2 mt-4">
-              <button class="btn btn-success btn-lg glass-button">Proceed to Checkout</button>
+              <button class="btn btn-success btn-lg glass-button" (click)="openCheckoutDialog()">Proceed to Checkout</button>
               <button class="btn btn-outline-danger glass-button-outline" (click)="clearCart()">Clear Cart</button>
             </div>
           </div>

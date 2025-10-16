@@ -1,0 +1,36 @@
+<div class="checkout-dialog-container">
+  <app-loader *ngIf="isLoading" [overlay]="true" message="Loading checkout options..."></app-loader>
+  <app-error-message *ngIf="error" [message]="error" (retryClick)="loadCheckoutData()"></app-error-message>
+
+  <div *ngIf="!isLoading && !error" class="glass-card p-4">
+    <h3 class="mb-4">Complete Your Order</h3>
+
+    <div class="mb-4">
+      <h5>Select Shipping Address:</h5>
+      <div *ngIf="addresses.length === 0" class="alert alert-warning">No addresses found. Please add one in your profile.</div>
+      <select *ngIf="addresses.length > 0" class="form-select glass-select" [(ngModel)]="selectedAddressId">
+        <option [ngValue]="null" disabled>Choose an address...</option>
+        <option *ngFor="let address of addresses" [ngValue]="address.id">
+          {{ address.address_line1 }}, {{ address.city }}, {{ address.state }} {{ address.postal_code }}, {{ address.country }}
+        </option>
+      </select>
+    </div>
+
+    <div class="mb-4">
+      <h5>Select Payment Method:</h5>
+      <div *ngIf="paymentMethods.length === 0" class="alert alert-warning">No payment methods found. Please add one in your profile.</div>
+      <select *ngIf="paymentMethods.length > 0" class="form-select glass-select" [(ngModel)]="selectedPaymentMethodId">
+        <option [ngValue]="null" disabled>Choose a payment method...</option>
+        <option *ngFor="let method of paymentMethods" [ngValue]="method.paymentMethodId">
+          {{ method.cardType }} ending in {{ method.lastFourDigits }} (Cardholder: {{ method.cardholderName }})
+        </option>
+      </select>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2">
+      <button class="btn btn-outline-secondary" (click)="closeDialog()">Cancel</button>
+      <button class="btn btn-primary glass-button" (click)="placeOrder()"
+              [disabled]="!selectedAddressId || !selectedPaymentMethodId">Place Order</button>
+    </div>
+  </div>
+</div>

@@ -1,12 +1,13 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { CategoryService } from '../../../../core/services/category.service';
 import { CategoryResponseDTO } from '../../../../core/models/category';
 
 @Component({
   selector: 'app-category-filter',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './category-filter.component.html',
   styleUrls: ['./category-filter.component.scss']
 })

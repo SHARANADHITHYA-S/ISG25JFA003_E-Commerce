@@ -16,11 +16,14 @@ export const errorInterceptor: HttpInterceptorFn = (
         catchError((error: HttpErrorResponse) => {
             if (error.status === 401) {
                 authService.logout();
-                router.navigate(['/login']); // Changed to /login as per app.routes.ts
+                router.navigate(['/login']);
+            } else if (error.status === 404 && req.url.includes('/cart')) {
+                // Suppress the alert for a 404 on the cart endpoint
+                return throwError(() => new Error('Cart not found'));
             }
 
             const errorMessage = error.error?.message || 'An unknown error occurred';
-            alert(errorMessage); // Display error message
+            alert(errorMessage);
             return throwError(() => new Error(errorMessage));
         })
     );

@@ -2,11 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../../core/services/cart.service';
 import { CartResponse, CartItemResponse, CartItemRequest } from '../../../core/models/cart';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog'; // Import MatDialog and MatDialogModule
+import { CheckoutDialogComponent } from '../components/checkout-dialog/checkout-dialog.component'; // Import CheckoutDialogComponent
+import { Router } from '@angular/router'; // Import Router
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSnackBar and MatSnackBarModule
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatDialogModule, MatSnackBarModule], // Add MatSnackBarModule to imports
   templateUrl: './component.html'
 })
 export class CartComponent implements OnInit {
@@ -14,7 +18,12 @@ export class CartComponent implements OnInit {
   isLoading = true;
   error: string | null = null;
   
-  constructor(private cartService: CartService) { }
+  constructor(
+    private cartService: CartService,
+    private dialog: MatDialog,
+    private router: Router,
+    private snackBar: MatSnackBar // Inject MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     this.loadCart();
@@ -61,7 +70,7 @@ export class CartComponent implements OnInit {
           this.recalculateCartTotal();
         }
       },
-      error: (err) => { 
+      error: (err) => {
         this.error = 'Failed to remove item.'; 
         console.error('Error removing item:', err);
       }
@@ -73,7 +82,7 @@ export class CartComponent implements OnInit {
     const newQuantity = parseInt(inputElement.value, 10);
 
     if (isNaN(newQuantity) || newQuantity < 1) {
-      alert('Quantity must be a positive number.');
+      this.snackBar.open('Quantity must be a positive number.', 'Dismiss', { duration: 3000 });
       inputElement.value = item.quantity.toString();
       return;
     }
@@ -92,7 +101,7 @@ export class CartComponent implements OnInit {
         }
       },
       error: (err) => {
-        alert('Failed to update quantity. The item may be out of stock.');
+        this.snackBar.open('Failed to update quantity. The item may be out of stock.', 'Dismiss', { duration: 3000 });
         inputElement.value = item.quantity.toString(); // Reset the input value
       }
     });
@@ -113,6 +122,21 @@ export class CartComponent implements OnInit {
         this.error = 'Failed to clear the cart.'; 
         console.error('Error clearing cart:', err);
       }
+    });
+  }
+
+  openCheckoutDialog(): void {
+    const dialogRef = this.dialog.open(CheckoutDialogComponent, {
+      width: '600px',
+      disableClose: true // Prevent closing by clicking outside or pressing escape
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'orderPlaced') {
+        // Order was successfully placed, navigate to orders page
+        this.router.navigate(['/orders']);
+      }
+      // If dialog was cancelled or closed without placing order, do nothing
     });
   }
 

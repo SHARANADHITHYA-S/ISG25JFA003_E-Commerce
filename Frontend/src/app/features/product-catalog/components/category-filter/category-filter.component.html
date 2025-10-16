@@ -1,16 +1,9 @@
-<div class="list-group">
-  <!-- All Products link -->
-  <button type="button" class="list-group-item list-group-item-action"
-          [class.active]="selectedCategoryId === null"
-          (click)="selectCategory(null)">
-    All Products
-  </button>
-  
-  <!-- Category list -->
-  <button type="button" class="list-group-item list-group-item-action"
-          *ngFor="let category of categories"
-          [class.active]="selectedCategoryId === category.id"
-          (click)="selectCategory(category.id)">
-    {{ category.name }}
-  </button>
+<div class="form-group">
+  <label for="category-select">Category</label>
+  <select class="form-control" id="category-select" [ngModel]="selectedCategoryId" (ngModelChange)="selectCategory($event)">
+    <option [ngValue]="null">All Products</option>
+    <option *ngFor="let category of categories" [ngValue]="category.id">
+      {{ category.name }}
+    </option>
+  </select>
 </div>

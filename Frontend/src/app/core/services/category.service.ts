@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { CategoryResponseDTO, CategoryRequestDTO } from '../../core/models/category';
 
 @Injectable({
@@ -12,7 +12,9 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   getAllCategories(): Observable<CategoryResponseDTO[]> {
-    return this.http.get<CategoryResponseDTO[]>(this.apiUrl);
+    return this.http.get<CategoryResponseDTO[]>(this.apiUrl).pipe(
+      tap(data => console.log('Categories from backend:', data))
+    );
   }
 
   getCategoryById(id: number): Observable<CategoryResponseDTO> {

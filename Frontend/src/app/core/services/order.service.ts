@@ -13,6 +13,18 @@ export interface PaginatedOrderResponse {
     number: number;
 }
 
+// Define OrderResponseDTO interface
+export interface OrderResponseDTO {
+  id: number;
+  userId: number;
+  addressId: number;
+  paymentMethodId: number;
+  totalAmount: number;
+  status: string;
+  placed_at: string;
+  orderItems: any[]; // Define a proper interface for OrderItem if needed
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -27,6 +39,25 @@ export class OrderService {
             return user.id;
         }
         throw new Error('User not logged in or user ID not available.');
+    }
+
+    createOrder(addressId: number, paymentMethodId: number): Observable<OrderResponseDTO> {
+        let userId: number;
+        try {
+            userId = this.getUserIdFromAuth();
+        } catch (error: any) {
+            return throwError(() => new Error('Authentication required to create order. Please log in.'));
+        }
+
+        const orderRequest = {
+            userid: userId,
+            addressId: addressId,
+            paymentMethodId: paymentMethodId
+        };
+
+        return this.http.post<OrderResponseDTO>(this.apiUrl, orderRequest).pipe(
+            catchError(this.handleError)
+        );
     }
 
     getCurrentOrder(): Observable<Order | null> {
@@ -58,8 +89,7 @@ export class OrderService {
         }
 
         return this.http.get<Order[]>(`${this.apiUrl}/user/${userId}`).pipe(
-            map(orders => orders.filter(o => o.status === 'COMPLETED' || o.status === 'CANCELLED')),
-            catchError(this.handleError)
+            map(orders => orders.filter(o => o.status === 'COMPLETED' || o.status === 'CANCELLED'))
         );
     }
 
