@@ -1,0 +1,234 @@
+.navbar {
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+  
+  .container {
+    transition: all 0.3s ease-in-out;
+    max-width: 1400px;
+  }
+}
+
+.navbar-brand {
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.navbar-nav {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.navbar-nav .nav-link {
+  color: #fff;
+  margin: 0 1rem;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #EE7B30;
+}
+
+.navbar-nav .nav-item.active-orders .nav-link {
+  background-color: #EE7B30;
+  color: #0B2545;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+}
+
+.navbar-nav .nav-item.active-orders .nav-link:hover {
+  color: #0B2545;
+}
+
+.fa-user-circle,
+.fa-shopping-cart {
+  color: #fff;
+  font-size: 1.8rem;
+  margin-left: 1rem;
+}
+
+/* Override bootstrap navbar default styles */
+.navbar.navbar-expand-lg {
+    border: none !important;
+    background-image: none !important;
+}
+
+.navbar.bg-body-tertiary {
+    background-color: transparent !important;
+    --bs-bg-opacity: 0 !important;
+}
+
+/* Modern Glassmorphic Navbar Styles */
+.navbar {
+    padding: 10px 24px !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 100% !important;
+    z-index: 1000 !important;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    transition: all 0.2s ease-in-out !important;
+    --bs-navbar-padding-y: 0 !important;
+    --bs-navbar-brand-padding-y: 0 !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Override any bootstrap background colors */
+.navbar[class*="bg-"] {
+    background: transparent !important;
+}
+
+/* Scrolled state styles */
+.navbar.scrolled {
+    top: 1rem !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 95% !important;
+    max-width: 1000px !important;
+    right: auto !important; /* Unset right property */
+
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(12px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
+    
+    border-radius: 9999px !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.05) !important;
+    border-bottom: none !important; /* Remove bottom border in scrolled state */
+}
+
+/* Additional ambient glow for enhanced floating effect */
+.navbar.scrolled::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 9999px;
+    padding: 1px;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0.1)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.navbar-brand {
+    color: #333 !important; /* Dark color for readability */
+    font-weight: 700 !important;
+    font-size: 1.5rem !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    padding: 0.5rem 1rem !important;
+    margin-right: 2rem !important;
+    transition: all 1s ease-in-out !important;
+}
+
+.nav-item {
+    margin: 0 0.25rem !important;
+}
+
+/* Primary text links */
+.navbar .nav-link {
+    position: relative;
+    color: #333 !important;
+    padding: 0.5rem 1rem !important;
+    font-weight: 500 !important;
+    transition: color 0.3s ease, padding 1.2s ease-in-out !important;
+}
+
+.navbar.scrolled .nav-link {
+    padding: 0.5rem 0.6rem !important; /* Reduce padding in scrolled state */
+}
+
+.navbar .nav-link:hover {
+    color: #000 !important;
+}
+
+/* Dynamic underline effect on hover */
+.navbar .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #EE7B30; /* Changed to orange */
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out; /* Added duration and easing */
+}
+
+.navbar .nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* Glassmorphic button links */
+.nav-link-glass {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 9999px !important;
+    padding: 0.5rem 1.25rem !important;
+    color: #fff !important;
+    transition: all 0.3s ease !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(5px) !important;
+}
+
+.nav-link-glass:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* CTA Button */
+.nav-link-cta {
+    background: linear-gradient(135deg, #FF6B6B, #FFB88C) !important;
+    color: #fff !important;
+    padding: 0.5rem 1.5rem !important;
+    border-radius: 9999px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2) !important;
+}
+
+.nav-link-cta:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 16px rgba(255, 107, 107, 0.3) !important;
+}
+
+/* Icon buttons */
+.nav-icon-button {
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+    background: rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease !important;
+    margin-left: 0.5rem !important;
+}
+
+.nav-icon-button:hover {
+    background: rgba(0, 0, 0, 0.4) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.navbar-nav {
+    align-items: center !important;
+    transition: all 0.5s !important;
+}

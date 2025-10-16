@@ -1130,3 +1130,139 @@ Caused by: java.lang.IllegalStateException: Ambiguous @ExceptionHandler method m
 2025-09-25T15:28:29.932+05:30  INFO 29284 --- [ecommerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-09-25T15:28:29.939+05:30  INFO 29284 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2025-09-25T15:28:29.953+05:30  INFO 29284 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-10-15T16:24:16.277+05:30  INFO 34960 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Starting EcommerceApplication using Java 21 with PID 34960 (C:\Users\2440657\OneDrive - Cognizant\Desktop\E-Commerce\Backend\target\classes started by 2440657 in C:\Users\2440657\OneDrive - Cognizant\Desktop\E-Commerce\Backend)
+2025-10-15T16:24:16.282+05:30 DEBUG 34960 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2025-10-15T16:24:16.284+05:30  INFO 34960 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-10-15T16:24:16.391+05:30  INFO 34960 --- [ecommerce] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-10-15T16:24:16.392+05:30  INFO 34960 --- [ecommerce] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-10-15T16:24:19.065+05:30  INFO 34960 --- [ecommerce] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-15T16:24:19.350+05:30  INFO 34960 --- [ecommerce] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 265 ms. Found 12 JPA repository interfaces.
+2025-10-15T16:24:21.452+05:30  INFO 34960 --- [ecommerce] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-15T16:24:21.494+05:30  INFO 34960 --- [ecommerce] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-15T16:24:21.495+05:30  INFO 34960 --- [ecommerce] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2025-10-15T16:24:21.634+05:30  INFO 34960 --- [ecommerce] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-15T16:24:21.635+05:30  INFO 34960 --- [ecommerce] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5242 ms
+2025-10-15T16:24:21.805+05:30  INFO 34960 --- [ecommerce] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-15T16:24:22.700+05:30  INFO 34960 --- [ecommerce] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@223f5c7f
+2025-10-15T16:24:22.710+05:30  INFO 34960 --- [ecommerce] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-15T16:24:23.202+05:30  INFO 34960 --- [ecommerce] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-15T16:24:23.506+05:30  INFO 34960 --- [ecommerce] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-10-15T16:24:23.620+05:30  INFO 34960 --- [ecommerce] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-15T16:24:24.479+05:30  INFO 34960 --- [ecommerce] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-15T16:24:28.213+05:30  INFO 34960 --- [ecommerce] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-15T16:24:28.528+05:30  INFO 34960 --- [ecommerce] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-15T16:24:29.489+05:30 DEBUG 34960 --- [ecommerce] [restartedMain] c.c.ecommerce.config.JwtAuthFilter       : Filter 'jwtAuthFilter' configured for use
+2025-10-15T16:24:30.469+05:30  INFO 34960 --- [ecommerce] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-10-15T16:24:30.473+05:30  WARN 34960 --- [ecommerce] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2025-10-15T16:24:30.834+05:30  WARN 34960 --- [ecommerce] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-15T16:24:32.590+05:30  INFO 34960 --- [ecommerce] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-10-15T16:24:32.672+05:30  INFO 34960 --- [ecommerce] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-15T16:24:32.694+05:30  INFO 34960 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Started EcommerceApplication in 17.427 seconds (process running for 18.607)
+2025-10-15T16:24:33.960+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-15T16:24:33.960+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-15T16:24:33.962+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2025-10-15T16:24:34.728+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.UserController  : Login attempt for username: User
+2025-10-15T16:24:35.013+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.UserController  : Login successful for username: User
+2025-10-15T16:24:35.205+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-15T16:24:35.240+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:24:35.240+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:24:35.255+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:24:35.366+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:24:35.391+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:24:35.391+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:24:35.401+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:24:35.426+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:24:41.242+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-8] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-15T16:25:09.037+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CartItemController      : Updating cart item ID: 118
+2025-10-15T16:25:24.863+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-9] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-15T16:25:24.863+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:25:24.863+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:25:24.873+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:25:24.887+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:25:24.911+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:25:24.911+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:25:24.911+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:25:24.934+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:25:35.703+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-15T16:25:37.385+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-15T16:25:37.386+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:25:37.387+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:25:37.394+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:25:37.409+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:25:37.424+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:25:37.424+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:25:37.428+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:25:37.428+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:25:51.120+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-8] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-15T16:25:52.030+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-1] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-15T16:25:52.038+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:25:52.038+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:25:52.045+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:25:52.061+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:25:52.078+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:25:52.078+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:25:52.089+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:25:52.115+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:26:50.452+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:26:50.453+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:26:50.462+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:26:50.478+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:26:50.499+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:26:50.500+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:26:50.508+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:26:50.531+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:27:10.611+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-15T16:27:10.643+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:27:10.644+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:27:10.648+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:27:10.658+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:27:10.669+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:27:10.670+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:27:10.673+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:27:10.684+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:28:31.131+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-9] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-15T16:31:43.148+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:31:43.148+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:31:43.148+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:31:43.163+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:31:43.186+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:31:43.186+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:31:43.196+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:31:43.211+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:31:45.533+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-15T16:32:08.980+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:32:08.981+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:32:08.985+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:32:08.995+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:32:09.003+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:32:09.003+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:32:09.006+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:32:09.016+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:32:13.646+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-15T16:32:33.339+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CartItemController      : Updating cart item ID: 118
+2025-10-15T16:35:00.234+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:35:00.237+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:35:00.242+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:35:00.253+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:35:00.271+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:35:00.271+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:35:00.275+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:35:00.284+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:35:01.918+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-3] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-15T16:35:06.870+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CartItemController      : Updating cart item ID: 118
+2025-10-15T16:35:07.927+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CartItemController      : Updating cart item ID: 118
+2025-10-15T16:35:08.734+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.CartItemController      : Updating cart item ID: 118
+2025-10-15T16:36:19.086+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.CartItemController      : Updating cart item ID: 118
+2025-10-15T16:36:22.797+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.CartItemController      : Updating cart item ID: 118
+2025-10-15T16:36:37.895+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-15T16:36:37.933+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:36:37.933+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:36:37.939+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:36:37.965+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:36:38.001+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.OrderController         : Fetching orders for userId=231
+2025-10-15T16:36:38.001+05:30  INFO 34960 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=231
+2025-10-15T16:36:38.005+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=231
+2025-10-15T16:36:38.016+05:30 DEBUG 34960 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.OrderController         : Total orders fetched for userId 231: 2
+2025-10-15T16:37:28.245+05:30  INFO 34960 --- [ecommerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-10-15T16:37:28.253+05:30  INFO 34960 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-10-15T16:37:28.281+05:30  INFO 34960 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

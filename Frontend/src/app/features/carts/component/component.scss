@@ -1,0 +1,71 @@
+.glass-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border-radius: 1.5rem; // More rounded
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: #0B2545; // Dark text for readability
+}
+
+.glass-header {
+    @extend .glass-card; // Inherit glassmorphic properties
+    background: rgba(255, 255, 255, 0.7); // Slightly less transparent for header
+    border-bottom: none; // Remove bottom border for a cleaner look
+    color: #0B2545;
+    font-weight: 700;
+}
+
+.table {
+    color: #0B2545; // Ensure table text is dark
+    th {
+        color: #0B2545;
+        font-weight: 600;
+    }
+    td {
+        color: #333;
+    }
+}
+
+.form-control {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #0B2545;
+    &:focus {
+        background: rgba(255, 255, 255, 0.8);
+        border-color: #EE7B30;
+        box-shadow: 0 0 0 0.25rem rgba(238, 123, 48, 0.25);
+    }
+}
+
+.glass-button {
+    background: linear-gradient(135deg, #EE7B30, #FFB88C);
+    color: #fff;
+    border: none;
+    border-radius: 9999px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(238, 123, 48, 0.2);
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(238, 123, 48, 0.3);
+    }
+}
+
+.glass-button-outline {
+    @extend .glass-button;
+    background: transparent;
+    color: #EE7B30;
+    border: 1px solid #EE7B30;
+    box-shadow: none;
+    &:hover {
+        background: #EE7B30;
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(238, 123, 48, 0.2);
+    }
+}

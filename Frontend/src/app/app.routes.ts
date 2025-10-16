@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
+import { OrdersComponent } from './features/orders/orders.component';
+import { CartComponent } from './features/carts/component/component';
+import { LoginComponent } from './features/login/login.component';
+import { AuthGuard } from './core/guards/auth.guard
 // Note: Removed direct import of OrdersComponent to enforce lazy loading conventions
 
 export const routes: Routes = [
@@ -28,12 +33,13 @@ export const routes: Routes = [
       { path: 'products/edit/:id', loadComponent: () => import('./features/admin-management/product-form/product-form.component').then(m => m.ProductFormComponent) }
     ]
   },
+   { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
+    { path: 'cart', component: CartComponent },
+    { path: 'login', component: LoginComponent },
+    { path: '', redirectTo: '/orders', pathMatch: 'full' }
 
-  // Lazy-load the Orders module (assuming OrdersComponent is now in a module)
-  {
-    path: 'orders',
-    loadComponent: () => import('./features/orders/orders.component').then(m => m.OrdersComponent)
-  },
+
+
 
   // Wildcard route for any other URL, redirects to the main product page
   { path: '**', redirectTo: 'products' }
@@ -44,3 +50,4 @@ export const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
