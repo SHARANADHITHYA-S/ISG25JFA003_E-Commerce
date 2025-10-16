@@ -35,99 +35,101 @@ public class WebSecurityConfig {
     private final JwtAccessDeniedException jwtAccessDeniedException;
     private final JwtAuthenticationException jwtAuthenticationException;
 
+    
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
-//                .authorizeHttpRequests(auth -> auth
-//                        //public access
-//                                .requestMatchers(
-//                                        // User management
-//                                        "/api/admin/**",
-//
-//                                        // Product management
-//                                        "/api/products/admin/**",
-//
-//                                        // Payment management
-//                                        "/api/payments/admin/**",
-//
-//                                        // Order management
-//                                        "/api/orders/admin/**",
-//
-//                                        // Order item management
-//                                        "/api/order-items/admin/**",
-//
-//                                        // Category management
-//                                        "/api/categories/admin/**",
-//
-//                                        // Address management (admin view)
-//                                        "/api/addresses/admin/**",
-//
-//                                        // Analytics
-//                                        "/api/analytics-reports/admin/**",
-//
-//                                        "/api/admin/**"
-//                                ).hasRole("ADMIN")
-//                                .requestMatchers(
-//                                        // User profile
-//                                        "/api/user/**",
-//
-//                                        // Payment methods
-//                                        "/api/payment-methods/**",
-//
-//                                        // Payments (non-admin)
-//                                        "/api/payments",
-//                                        "/api/payments/*",
-//                                        "/api/payments/order/*",
-//
-//                                        // Order items (view only)
-//                                        "/api/order-items/order/**",
-//
-//                                        // Cart items
-//                                        "/api/cart-items/**",
-//
-//                                        // Carts
-//                                        "/api/carts/**",
-//
-//                                        // Orders (non-admin)
-//                                        "/api/orders",
-//                                        "/api/orders/*",
-//                                        "/api/orders/user/**",
-//
-//                                        // Addresses (non-admin)
-//                                        "/api/addresses/**",
-//
-//                                        "/api/me"
-//
-//
-//
-//                                ).hasAnyRole("USER", "ADMIN")
-//                                // Public
-//                                .requestMatchers(
-//                                        "/api/auth/register",
-//                                        "/api/auth/login",
-//                                        "/api/auth/forgot-password",
-//                                        "/api/auth/reset-password",
-//                                        "/api/products",
-//                                        "/api/products/*",
-//                                        "/api/products/category/*",
-//                                        "/api/categories",
-//                                        "/api/categories/*",
-//                                        "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html"
-//                                ).permitAll()
-//
-//                                .anyRequest().authenticated()
-//
-//                )
-//                .exceptionHandling(ex -> ex
-//                        .authenticationEntryPoint(jwtAuthenticationException) // 401 handler
-//                        .accessDeniedHandler(jwtAccessDeniedException) // 403 handler
-//                )
-//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-//
-//        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth -> auth
+                        //public access
+
+
+                                .requestMatchers(
+                                        // User management
+                                        "/api/admin/**",
+
+                                        // Product management
+                                        "/api/products/admin/**",
+
+                                        // Payment management
+                                        "/api/payments/admin/**",
+
+                                        // Order management
+                                        "/api/orders/admin/**",
+
+                                        // Order item management
+                                        "/api/order-items/admin/**",
+
+                                        // Category management
+                                        "/api/categories/admin/**",
+
+                                        // Address management (admin view)
+                                        "/api/addresses/admin/**",
+
+                                        // Analytics
+                                        "/api/analytics-reports/admin/**",
+
+                                        "/api/admin/**"
+                                ).hasRole("ADMIN")
+                                .requestMatchers(
+                                        // User profile
+                                        "/api/user/**",
+
+                                        // Payment methods
+                                        "/api/payment-methods/**",
+
+                                        // Payments (non-admin)
+                                        "/api/payments",
+                                        "/api/payments/*",
+                                        "/api/payments/order/*",
+
+                                        // Order items (view only)
+                                        "/api/order-items/order/**",
+
+                                        // Cart items
+                                        "/api/cart-items/**",
+
+                                        // Carts
+                                        "/api/carts/**",
+
+                                        // Orders (non-admin)
+                                        "/api/orders",
+                                        "/api/orders/*",
+                                        "/api/orders/user/**",
+
+                                        // Addresses (non-admin)
+                                        "/api/addresses/**",
+
+                                        "/api/me"
+
+
+
+                                ).hasAnyRole("USER", "ADMIN")
+                                // Public
+                                .requestMatchers(
+                                        "/api/auth/register",
+                                        "/api/auth/login",
+                                        "/api/auth/forgot-password",
+                                        "/api/auth/reset-password",
+                                        "/api/products",
+                                        "/api/products/*",
+                                        "/api/products/category/*",
+                                        "/api/categories",
+                                        "/api/categories/*",
+                                        "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html"
+                                ).permitAll()
+
+                                .anyRequest().authenticated()
+
+                )
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(jwtAuthenticationException) // 401 handler
+                        .accessDeniedHandler(jwtAccessDeniedException) // 403 handler
+                )
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
@@ -163,3 +165,4 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
+

@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
+import { OrdersComponent } from './features/orders/orders.component';
+import { CartComponent } from './features/carts/component/component';
+import { LoginComponent } from './features/login/login.component';
+import { AuthGuard } from './core/guards/auth.guard
 // Note: Removed direct import of OrdersComponent to enforce lazy loading conventions
 
 const routes: Routes = [
@@ -19,12 +24,12 @@ const routes: Routes = [
     // This path is correct *if* the file exists at src/app/features/admin-management/admin.module.ts
     loadChildren: () => import('./features/admin-management/admin.module').then(m => m.AdminModule) 
   },
+   { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
+    { path: 'cart', component: CartComponent },
+    { path: 'login', component: LoginComponent },
+    { path: '', redirectTo: '/orders', pathMatch: 'full' }
 
-  // Lazy-load the Orders module (assuming OrdersComponent is now in a module)
-  { 
-    path: 'orders', 
-    loadChildren: () => import('./features/orders/orders.module').then(m => m.OrdersModule) 
-  },
+
 
   // Wildcard route for any other URL, redirects to the main product page
   { path: '**', redirectTo: 'products' }
@@ -35,3 +40,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
