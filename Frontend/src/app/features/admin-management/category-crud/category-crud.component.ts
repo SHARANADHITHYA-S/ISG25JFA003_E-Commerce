@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { CategoryService } from '../../../core/services/category.service';
 import { CategoryResponseDTO } from '../../../core/models/category';
 
 @Component({
   selector: 'app-category-crud',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './category-crud.component.html',
   styleUrls: ['./category-crud.component.scss']
 })

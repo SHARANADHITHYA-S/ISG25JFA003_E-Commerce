@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="d-flex justify-content-between mb-3 align-items-center">
     <h3>Product Management (Admin)</h3>
-    <button class="btn btn-primary" routerLink="new">Add New Product</button>
+    <button class="btn btn-primary" [routerLink]="['/admin/products/new']">Add New Product</button>
   </div>
   
   <!-- Category Filter Dropdown -->
@@ -29,13 +29,13 @@
       <tr *ngFor="let product of products">
         <td>{{ product.id }}</td>
         <td>{{ product.name }}</td>
-        <td>${{ product.price }}</td>
+        <td>₹{{ product.price }}</td>
         <td>{{ product.quantity }}</td>
         <td><span class="badge" [ngClass]="{'bg-success': product.is_active, 'bg-danger': !product.is_active}">
             {{ product.is_active ? 'Yes' : 'No' }}
           </span></td>
         <td>
-          <button class="btn btn-sm btn-info me-2" [routerLink]="['edit', product.id]">Edit</button>
+          <button class="btn btn-sm btn-info me-2" [routerLink]="['/admin/products/edit', product.id]">Edit</button>
           <button class="btn btn-sm btn-danger" (click)="onDelete(product.id)">Delete</button>
         </td>
       </tr>
