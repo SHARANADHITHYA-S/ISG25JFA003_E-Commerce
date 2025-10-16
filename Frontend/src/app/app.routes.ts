@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
+    { path: 'landing-page', loadComponent: () => import('./features/landing-page/landing-page').then(m => m.LandingPageComponent) },
     { path: '', redirectTo: 'products', pathMatch: 'full' },
     {
         path: 'products',

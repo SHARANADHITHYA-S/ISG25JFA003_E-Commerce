@@ -1,0 +1,27 @@
+<section class="py-5 bg-light">
+  <div class="container py-4">
+    <div class="text-center mb-5">
+      <h2 class="display-5 fw-bold text-dark mb-3">Shop by Category</h2>
+      <p class="text-secondary">Browse through our diverse range of product categories</p>
+    </div>
+
+    <div class="row g-4">
+      <div *ngFor="let category of categories" class="col-md-6 col-lg-3">
+        <div class="card h-100 border-0 shadow-sm" style="cursor: pointer;">
+          <div class="ratio ratio-4x3 overflow-hidden bg-light">
+            <img
+              [src]="category.image"
+              [alt]="category.name"
+              class="card-img-top"
+              style="object-fit: cover;"
+            />
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title fw-semibold mb-2">{{ category.name }}</h5>
+            <p class="card-text text-muted small">{{ category.count }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
