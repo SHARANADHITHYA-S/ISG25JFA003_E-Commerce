@@ -1,0 +1,16 @@
+<div class="list-group">
+  <!-- All Products link -->
+  <button type="button" class="list-group-item list-group-item-action"
+          [class.active]="selectedCategoryId === null"
+          (click)="selectCategory(null)">
+    All Products
+  </button>
+  
+  <!-- Category list -->
+  <button type="button" class="list-group-item list-group-item-action"
+          *ngFor="let category of categories"
+          [class.active]="selectedCategoryId === category.id"
+          (click)="selectCategory(category.id)">
+    {{ category.name }}
+  </button>
+</div>

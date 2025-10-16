@@ -1,0 +1,44 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between mb-3 align-items-center">
+    <h3>Product Management (Admin)</h3>
+    <button class="btn btn-primary" routerLink="new">Add New Product</button>
+  </div>
+  
+  <!-- Category Filter Dropdown -->
+  <div class="mb-3">
+    <label for="categoryFilter" class="form-label">Filter by Category:</label>
+    <select class="form-select" id="categoryFilter" [(ngModel)]="selectedCategoryId" (change)="filterProductsByCategory()">
+      <option [ngValue]="null">All Categories</option>
+      <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.name }}</option>
+    </select>
+  </div>
+  
+  <!-- Product Table -->
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Active</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.id }}</td>
+        <td>{{ product.name }}</td>
+        <td>${{ product.price }}</td>
+        <td>{{ product.quantity }}</td>
+        <td><span class="badge" [ngClass]="{'bg-success': product.is_active, 'bg-danger': !product.is_active}">
+            {{ product.is_active ? 'Yes' : 'No' }}
+          </span></td>
+        <td>
+          <button class="btn btn-sm btn-info me-2" [routerLink]="['edit', product.id]">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="onDelete(product.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

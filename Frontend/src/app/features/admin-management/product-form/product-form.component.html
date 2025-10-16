@@ -1,0 +1,47 @@
+<div class="container mt-4">
+  <h3>{{ isEditMode ? 'Edit Product' : 'Add New Product' }}</h3>
+  <form (ngSubmit)="onSubmit()">
+    
+    <!-- Product Name -->
+    <div class="mb-3">
+      <label for="name" class="form-label">Product Name</label>
+      <input type="text" id="name" class="form-control" [(ngModel)]="product.name" name="name" required>
+    </div>
+    
+    <!-- Description -->
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea id="description" class="form-control" [(ngModel)]="product.description" name="description" required></textarea>
+    </div>
+    
+    <!-- Price -->
+    <div class="mb-3">
+      <label for="price" class="form-label">Price</label>
+      <input type="number" id="price" class="form-control" [(ngModel)]="product.price" name="price" required>
+    </div>
+    
+    <!-- Image URL -->
+    <div class="mb-3">
+      <label for="image_url" class="form-label">Image URL</label>
+      <input type="text" id="image_url" class="form-control" [(ngModel)]="product.image_url" name="image_url" required>
+    </div>
+    
+    <!-- Quantity -->
+    <div class="mb-3">
+      <label for="quantity" class="form-label">Quantity</label>
+      <input type="number" id="quantity" class="form-control" [(ngModel)]="product.quantity" name="quantity" required>
+    </div>
+    
+    <!-- Category Dropdown -->
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select id="category" class="form-control" [(ngModel)]="product.categoryId" name="categoryId" required>
+        <option [ngValue]="0" disabled>Select a Category</option>
+        <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.name }}</option>
+      </select>
+    </div>
+    
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-success">{{ isEditMode ? 'Update Product' : 'Create Product' }}</button>
+  </form>
+</div>

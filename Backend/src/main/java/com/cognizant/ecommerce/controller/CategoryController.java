@@ -27,7 +27,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/admin")
     public ResponseEntity<CategoryResponseDTO> createCategory(@Valid @RequestBody CategoryRequestDTO categoryRequestDTO) {
         logger.info("Creating category: {}", categoryRequestDTO.getName());
@@ -51,7 +51,7 @@ public class CategoryController {
         return new ResponseEntity<>(categories, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/admin/{id}")
     public ResponseEntity<CategoryResponseDTO> updateCategory(@PathVariable Long id, @Valid @RequestBody CategoryRequestDTO categoryRequestDTO) {
         logger.info("Updating category ID: {}", id);
@@ -59,7 +59,7 @@ public class CategoryController {
         return new ResponseEntity<>(updatedCategory, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/admin/{id}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long id) {
         logger.info("Deleting category ID: {}", id);
