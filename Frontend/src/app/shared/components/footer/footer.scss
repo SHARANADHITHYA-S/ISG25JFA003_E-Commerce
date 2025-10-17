@@ -1,0 +1,10 @@
+/* Defines a CSS variable for the primary orange color */
+:host {
+  --primary-orange: #fd7e14; /* A vibrant orange */
+}
+
+/* Changes the link color on hover and adds a smooth transition */
+.footer-link:hover {
+  color: var(--primary-orange) !important;
+  transition: color 0.3s ease;
+}
