@@ -1,7 +1,6 @@
 <div class="form-group">
-  <label for="category-select">Category</label>
   <select class="form-control" id="category-select" [ngModel]="selectedCategoryId" (ngModelChange)="selectCategory($event)">
-    <option [ngValue]="null">All Products</option>
+    <option [ngValue]="null">Categories</option>
     <option *ngFor="let category of categories" [ngValue]="category.id">
       {{ category.name }}
     </option>

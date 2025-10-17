@@ -37,7 +37,6 @@
 
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 
-@import "bootstrap/dist/css/bootstrap.min.css";
 
 html {
     height: 100%;
@@ -184,5 +183,3 @@ app-current-order {
     margin-top: 10px;
 }
 
-/* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
