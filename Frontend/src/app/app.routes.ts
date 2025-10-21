@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
+import { AdminGuard } from './core/guards/admin.guard';
 
 export const routes: Routes = [
     { path: '', loadComponent: () => import('./features/landing-page/landing-page').then(m => m.LandingPageComponent) },
@@ -13,7 +14,7 @@ export const routes: Routes = [
     },
     {
         path: 'admin',
-        canActivate: [AuthGuard],
+        canActivate: [AdminGuard],
         children: [
             { path: '', redirectTo: 'categories', pathMatch: 'full' },
             { 
@@ -47,6 +48,11 @@ export const routes: Routes = [
         loadComponent: () => import('./features/orders/orders.component').then(c => c.OrdersComponent), 
         canActivate: [AuthGuard] 
     },
+    {
+        path: 'profile',
+        loadComponent: () => import('./features/user-profile/user-profile.component').then(c => c.UserProfileComponent),
+        canActivate: [AuthGuard]
+    },
     { 
         path: 'cart', 
         loadComponent: () => import('./features/carts/component/component').then(c => c.CartComponent) 
@@ -55,5 +61,12 @@ export const routes: Routes = [
         path: 'login', 
         loadComponent: () => import('./features/login/login.component').then(c => c.LoginComponent) 
     },
+
+    {
+        path:'register',
+        loadComponent: () => import('./features/register/register.component').then(c => c.RegisterComponent
+            
+        )
+    }
    
 ];

@@ -9,6 +9,7 @@ import { LoaderComponent } from '../../../../shared/components/loader/loader.com
 import { ErrorMessageComponent } from '../../../../shared/components/error-message/error-message.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { forkJoin } from 'rxjs'; // Import forkJoin
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-checkout-dialog',
@@ -30,6 +31,7 @@ export class CheckoutDialogComponent implements OnInit {
   private orderService = inject(OrderService);
   private router = inject(Router);
   private dialogRef = inject(MatDialogRef<CheckoutDialogComponent>);
+  private authService = inject(AuthService);
 
   ngOnInit(): void {
     this.loadCheckoutData();
@@ -40,10 +42,16 @@ export class CheckoutDialogComponent implements OnInit {
     this.error = null;
     this.selectedAddressId = null; // Reset selections
     this.selectedPaymentMethodId = null; // Reset selections
+    const userId = this.authService.getCurrentUser()?.id;
+    if (!userId) {
+      this.error = 'User not logged in.';
+      this.isLoading = false;
+      return;
+    }
 
     forkJoin([
-      this.addressService.getAddressesByUserId(),
-      this.paymentMethodService.getPaymentMethodsByUserId()
+      this.addressService.getAddressesByUserId(userId),
+      this.paymentMethodService.getPaymentMethodsByUserId(userId)
     ]).subscribe({
       next: ([addresses, paymentMethods]) => {
         this.addresses = addresses;

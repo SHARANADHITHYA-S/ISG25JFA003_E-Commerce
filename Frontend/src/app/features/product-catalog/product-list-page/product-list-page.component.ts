@@ -6,16 +6,18 @@ import { ProductCardComponent } from '../components/product-card/product-card.co
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../core/services/product.service';
 import { ProductResponseDTO } from '../../../core/models/product';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-product-list-page',
   standalone: true,
-  imports: [CommonModule, RouterModule, CategoryFilterComponent, ProductCardComponent],
+  imports: [CommonModule, RouterModule, CategoryFilterComponent, ProductCardComponent, NgbCarouselModule],
   templateUrl: './product-list-page.component.html',
   styleUrls: ['./product-list-page.component.scss']
 })
 export class ProductListPageComponent implements OnInit {
   products: ProductResponseDTO[] = [];
+  productImages: string[] = [];
   currentCategoryId: number | null = null;
   loading = true;
 
@@ -40,6 +42,7 @@ export class ProductListPageComponent implements OnInit {
       this.productService.getProductsByCategoryId(this.currentCategoryId).subscribe({
         next: (data: ProductResponseDTO[]) => {
           this.products = data.filter(product => product.is_active);
+          this.productImages = this.products.map(p => p.image_url);
           this.loading = false;
         },
         error: () => this.loading = false
@@ -49,6 +52,7 @@ export class ProductListPageComponent implements OnInit {
       this.productService.getAllProducts().subscribe({
         next: (data: ProductResponseDTO[]) => {
           this.products = data.filter(product => product.is_active);
+          this.productImages = this.products.map(p => p.image_url);
           this.loading = false;
         },
         error: () => this.loading = false

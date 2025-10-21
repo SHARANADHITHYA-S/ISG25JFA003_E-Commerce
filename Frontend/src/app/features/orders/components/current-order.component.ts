@@ -18,10 +18,6 @@ import { ErrorMessageComponent } from '../../../shared/components/error-message/
             (retryClick)="loadCurrentOrder()"
         ></app-error-message>
 
-        <div *ngIf="noCurrentOrderFound && !loading && !error" class="alert alert-info text-center my-4">
-            No current order found.
-        </div>
-
         <div class="current-order-card card border-0 rounded-3" 
              *ngIf="currentOrder && !loading && !error"
              [ngClass]="'order-status-' + currentOrder.status.toLowerCase()">
@@ -231,13 +227,12 @@ import { ErrorMessageComponent } from '../../../shared/components/error-message/
             font-weight: 500;
             color: #dc3545;
         }
-    `],
+    `]
 })
 export class CurrentOrderComponent implements OnInit {
     currentOrder: Order | null = null;
     loading = false;
     error: string | null = null;
-    noCurrentOrderFound: boolean = false;
 
     constructor(private orderService: OrderService) {}
 
@@ -248,15 +243,13 @@ export class CurrentOrderComponent implements OnInit {
     loadCurrentOrder(): void {
         this.loading = true;
         this.error = null;
-        this.noCurrentOrderFound = false;
         this.orderService.getCurrentOrder().subscribe({
             next: (order) => {
                 if (order) {
                     this.currentOrder = order;
-                    this.noCurrentOrderFound = false;
                 } else {
                     this.currentOrder = null;
-                    this.noCurrentOrderFound = true;
+                    console.log('No current order found.');
                 }
                 this.loading = false;
             },
@@ -264,7 +257,6 @@ export class CurrentOrderComponent implements OnInit {
                 console.error('Error loading current order:', error);
                 this.error = 'Failed to load current order. Please try again.';
                 this.loading = false;
-                this.noCurrentOrderFound = false;
             }
         });
     }
@@ -299,7 +291,7 @@ export class CurrentOrderComponent implements OnInit {
             case 'DELIVERED':
                 return 'rgba(40, 167, 69, 0.3)'; // Greenish for delivered
             case 'COMPLETED':
-                return 'rgba(40, 167, 69, 0.3)'; // Greenish for completed
+                return 'rgba(40, 167, 69, .3)'; // Greenish for completed
             case 'CANCELLED':
                 return 'rgba(220, 53, 69, 0.3)'; // Reddish for cancelled
             default:

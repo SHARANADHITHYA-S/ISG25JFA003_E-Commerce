@@ -63,6 +63,7 @@
         </div>
         <div *ngIf="addresses.length === 0" class="no-data">
           <p>No addresses found. Add an address to get started.</p>
+          <button class="btn btn-primary mt-3" (click)="addNewAddress()">Add New Address</button>
         </div>
       </div>
     </div>
@@ -83,6 +84,7 @@
         </div>
         <div *ngIf="paymentMethods.length === 0" class="no-data">
           <p>No payment methods found. Add a payment method to get started.</p>
+          <button class="btn btn-primary mt-3" (click)="addNewPaymentMethod()">Add New Payment Method</button>
         </div>
       </div>
     </div>

@@ -33,13 +33,15 @@
             <i class="fas fa-user-circle"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+            <li *ngIf="isAdmin"><a class="dropdown-item" routerLink="/admin/products"><i class="fas fa-user-shield me-2"></i>Admin Dashboard</a></li>
             <li><a class="dropdown-item" routerLink="/profile"><i class="fas fa-user me-2"></i>User Profile</a></li>
+            <li><a class="dropdown-item" routerLink="/orders"><i class="fas fa-box me-2"></i>Orders</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt me-2"></i>Sign Out</a></li>
           </ul>
         </div>
         <div *ngIf="!isLoggedIn">
-          <a class="nav-link" routerLink="/login">Login</a>
+          <a class="nav-link" routerLink="/login">Sign In</a>
         </div>
       </div>
     </div>

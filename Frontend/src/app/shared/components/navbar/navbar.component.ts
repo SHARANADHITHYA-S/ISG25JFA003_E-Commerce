@@ -17,13 +17,17 @@ export class NavbarComponent implements OnInit {
   isScrolled = false;
   cartItemCount = 0; // New property
   isLoggedIn = false;
+  isAdmin = false; // New property
   private cartService = inject(CartService); // Inject CartService
   private authService = inject(AuthService);
   private router = inject(Router);
 
   ngOnInit(): void { // Implemented OnInit
     this.loadCartItemCount();
-    this.checkLoginStatus();
+    this.authService.loggedIn$.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+      this.isAdmin = this.authService.getUserRole() === 'ROLE_ADMIN';
+    });
   }
 
   @HostListener('window:scroll', [])
@@ -43,12 +47,8 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  private checkLoginStatus(): void {
-    this.isLoggedIn = this.authService.isLoggedIn();
-  }
-
   logout(): void {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 }

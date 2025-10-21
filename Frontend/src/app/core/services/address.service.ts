@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AuthService } from './auth.service';
 
 export interface Address {
   id: number;
@@ -25,24 +24,16 @@ export interface Address {
 export class AddressService {
   private apiUrl = 'http://localhost:8080/api/addresses';
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient) { }
 
-  private getUserIdFromAuth(): number {
-    const user = this.authService.getCurrentUser();
-    if (user && user.id) {
-      return user.id;
-    }
-    throw new Error('User not logged in or user ID not available.');
+  getAddressesByUserId(userId: number): Observable<Address[]> {
+    return this.http.get<Address[]>(`${this.apiUrl}/user/${userId}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  getAddressesByUserId(): Observable<Address[]> {
-    let userId: number;
-    try {
-      userId = this.getUserIdFromAuth();
-    } catch (error: any) {
-      return throwError(() => new Error('Authentication required to load addresses. Please log in.'));
-    }
-    return this.http.get<Address[]>(`${this.apiUrl}/user/${userId}`).pipe(
+  addAddress(userId: number, address: Partial<Address>): Observable<Address> {
+    return this.http.post<Address>(`${this.apiUrl}/user/${userId}`, address).pipe(
       catchError(this.handleError)
     );
   }
