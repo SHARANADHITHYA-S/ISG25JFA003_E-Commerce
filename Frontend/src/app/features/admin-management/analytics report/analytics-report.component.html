@@ -1,0 +1,91 @@
+<div class="analytics-container">
+  <h1>Analytics Report</h1>
+
+  <div *ngIf="loading" class="loading">
+    <p>Loading analytics data...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+    <button (click)="fetchAnalyticsData()">Retry</button>
+  </div>
+
+  <div *ngIf="analyticsData && !loading" class="analytics-content">
+    <!-- Overview Cards -->
+    <div class="overview-cards">
+      <div class="card">
+        <h3>Total Sales</h3>
+        <p class="metric">${{ analyticsData.totalSales | number:'1.2-2' }}</p>
+      </div>
+      <div class="card">
+        <h3>Total Orders</h3>
+        <p class="metric">{{ analyticsData.totalOrders }}</p>
+      </div>
+      <div class="card">
+        <h3>Total Users</h3>
+        <p class="metric">{{ analyticsData.totalUsers }}</p>
+      </div>
+      <div class="card">
+        <h3>Total Products</h3>
+        <p class="metric">{{ analyticsData.totalProducts }}</p>
+      </div>
+    </div>
+
+    <!-- Sales by Category -->
+    <div class="chart-section">
+      <h2>Sales by Category</h2>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Sales ($)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of analyticsData.salesByCategory">
+            <td>{{ category.categoryName }}</td>
+            <td>{{ category.sales | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Monthly Sales -->
+    <div class="chart-section">
+      <h2>Monthly Sales</h2>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Sales ($)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let month of analyticsData.monthlySales">
+            <td>{{ month.month }}</td>
+            <td>{{ month.sales | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Top Selling Products -->
+    <div class="chart-section">
+      <h2>Top Selling Products</h2>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Sales ($)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of analyticsData.topSellingProducts">
+            <td>{{ product.productName }}</td>
+            <td>{{ product.sales | number:'1.2-2' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

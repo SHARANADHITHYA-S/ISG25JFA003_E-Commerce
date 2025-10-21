@@ -1,7 +1,7 @@
 .navbar {
   transition: all 0.3s ease-in-out;
   width: 100%;
-  
+
   .container {
     transition: all 0.3s ease-in-out;
     max-width: 1400px;
@@ -96,7 +96,7 @@
     background: rgba(255, 255, 255, 0.6) !important;
     backdrop-filter: blur(12px) saturate(180%) !important;
     -webkit-backdrop-filter: blur(12px) saturate(180%) !important;
-    
+
     border-radius: 9999px !important;
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 1px 8px rgba(0, 0, 0, 0.05) !important;
@@ -236,4 +236,40 @@
   height: 40px !important;
   width: auto !important;
   filter: brightness(100%) invert(0) saturate(150%) !important;
+}
+
+.profile-dropdown-btn {
+  border: none !important;
+  background: transparent !important;
+  color: #666 !important;
+  padding: 0.5rem !important;
+  border-radius: 50% !important;
+  transition: all 0.3s ease !important;
+}
+
+.profile-dropdown-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #333 !important;
+}
+
+.dropdown-menu {
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 8px !important;
+  min-width: 180px !important;
+}
+
+.dropdown-item {
+  padding: 0.75rem 1rem !important;
+  color: #333 !important;
+  transition: all 0.2s ease !important;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa !important;
+  color: #1976d2 !important;
+}
+
+.dropdown-item i {
+  width: 16px !important;
 }

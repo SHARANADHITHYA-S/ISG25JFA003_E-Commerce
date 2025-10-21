@@ -75,4 +75,12 @@ export class AuthService {
         console.log("User object from StorageService:", user);
         return user;
     }
+
+    forgotPassword(email: string): Observable<any> {
+        return this.http.post(`${this.apiUrl}/forgot-password`, { email });
+    }
+
+    resetPassword(token: string, username: string, newPassword: string): Observable<any> {
+        return this.http.post(`${this.apiUrl}/reset-password`, { token, username, newPassword }, { responseType: 'text' });
+    }
 }
