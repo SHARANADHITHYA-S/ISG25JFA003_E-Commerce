@@ -1,0 +1,17 @@
+::ng-deep .carousel-inner {
+  max-height: 200px; /* Adjust as needed */
+}
+
+.carousel-image-container {
+  height: 200px; /* Same as .carousel-inner max-height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.carousel-image-container img {
+  height: 100%;
+  width: auto;
+  object-fit: contain;
+}

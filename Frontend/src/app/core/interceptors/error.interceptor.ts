@@ -23,7 +23,7 @@ export const errorInterceptor: HttpInterceptorFn = (
             }
 
             const errorMessage = error.error?.message || 'An unknown error occurred';
-            alert(errorMessage);
+            console.error(errorMessage);
             return throwError(() => new Error(errorMessage));
         })
     );

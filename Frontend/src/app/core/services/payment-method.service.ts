@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { AuthService } from './auth.service';
 
 export interface PaymentMethod {
   paymentMethodId: number; // Changed to match backend response
@@ -11,30 +10,30 @@ export interface PaymentMethod {
   cardholderName: string;
 }
 
+export interface PaymentMethodRequest {
+  cardType: string;
+  cardNumber: string;
+  expirationDate: string;
+  cardholderName: string;
+  default: boolean;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentMethodService {
   private apiUrl = 'http://localhost:8080/api/payment-methods';
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient) { }
 
-  private getUserIdFromAuth(): number {
-    const user = this.authService.getCurrentUser();
-    if (user && user.id) {
-      return user.id;
-    }
-    throw new Error('User not logged in or user ID not available.');
+  getPaymentMethodsByUserId(userId: number): Observable<PaymentMethod[]> {
+    return this.http.get<PaymentMethod[]>(`${this.apiUrl}/user/${userId}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  getPaymentMethodsByUserId(): Observable<PaymentMethod[]> {
-    let userId: number;
-    try {
-      userId = this.getUserIdFromAuth();
-    } catch (error: any) {
-      return throwError(() => new Error('Authentication required to load payment methods. Please log in.'));
-    }
-    return this.http.get<PaymentMethod[]>(`${this.apiUrl}/user/${userId}`).pipe(
+  addPaymentMethod(userId: number, paymentMethod: PaymentMethodRequest): Observable<PaymentMethod> {
+    return this.http.post<PaymentMethod>(`${this.apiUrl}/users/${userId}`, paymentMethod).pipe(
       catchError(this.handleError)
     );
   }
