@@ -33,7 +33,15 @@
             <i class="fas fa-user-circle"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-            <li *ngIf="isAdmin"><a class="dropdown-item" routerLink="/admin/products"><i class="fas fa-user-shield me-2"></i>Admin Dashboard</a></li>
+            <li *ngIf="isAdmin" class="dropdown-submenu">
+              <a class="dropdown-item dropdown-toggle" href="#"><i class="fas fa-user-shield me-2"></i>Admin Dashboard</a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" routerLink="/admin/products">Product Management</a></li>
+                <li><a class="dropdown-item" routerLink="/admin/analytics-report">Analytics Report</a></li>
+                <li><a class="dropdown-item" routerLink="/admin/analytics-orders">Order Analytics</a></li>
+                <li><a class="dropdown-item" routerLink="/admin/analytics-products">Product Analytics</a></li>
+              </ul>
+            </li>
             <li><a class="dropdown-item" routerLink="/profile"><i class="fas fa-user me-2"></i>User Profile</a></li>
             <li><a class="dropdown-item" routerLink="/orders"><i class="fas fa-box me-2"></i>Orders</a></li>
             <li><hr class="dropdown-divider"></li>

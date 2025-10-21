@@ -37,10 +37,22 @@ export const routes: Routes = [
                 path: 'products/new', 
                 loadComponent: () => import('./features/admin-management/product-form/product-form.component').then(m => m.ProductFormComponent) 
             },
-            {
-                path: 'products/edit/:id',
-                loadComponent: () => import('./features/admin-management/product-form/product-form.component').then(m => m.ProductFormComponent)
-            },
+                        { 
+                            path: 'products/edit/:id', 
+                            loadComponent: () => import('./features/admin-management/product-form/product-form.component').then(m => m.ProductFormComponent) 
+                        },
+                        {
+                            path: 'analytics-report',
+                            loadComponent: () => import('./features/admin-management/analytics report/analytics-report.component').then(m => m.AnalyticsReportComponent)
+                        },
+                        {
+                            path: 'analytics-orders',
+                            loadComponent: () => import('./features/admin-management/analytics-orders/analytics-orders.component').then(m => m.AnalyticsOrdersComponent)
+                        },
+                        {
+                            path: 'analytics-products',
+                            loadComponent: () => import('./features/admin-management/analytics-products/analytics-products.component').then(m => m.AnalyticsProductsComponent)
+                        },
             {
                 path: 'analytics',
                 children: [
