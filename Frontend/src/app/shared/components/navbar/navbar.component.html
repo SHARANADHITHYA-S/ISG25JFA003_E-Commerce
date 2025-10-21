@@ -34,6 +34,16 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
             <li><a class="dropdown-item" routerLink="/profile"><i class="fas fa-user me-2"></i>User Profile</a></li>
+            <li *ngIf="isAdmin" class="dropdown-submenu">
+              <a class="dropdown-item dropdown-toggle" href="#" id="analyticsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fas fa-chart-bar me-2"></i>Analytics
+              </a>
+              <ul class="dropdown-menu dropdown-menu-start" aria-labelledby="analyticsDropdown">
+                <li><a class="dropdown-item" routerLink="/admin/analytics"><i class="fas fa-chart-line me-2"></i>Reports</a></li>
+                <li><a class="dropdown-item" routerLink="/admin/analytics/products"><i class="fas fa-box me-2"></i>Products</a></li>
+                <li><a class="dropdown-item" routerLink="/admin/analytics/orders"><i class="fas fa-shopping-bag me-2"></i>Orders</a></li>
+              </ul>
+            </li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" (click)="logout()"><i class="fas fa-sign-out-alt me-2"></i>Sign Out</a></li>
           </ul>
