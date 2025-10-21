@@ -1,11 +1,8 @@
 export interface AnalyticsData {
-  totalSales: number;
-  totalOrders: number;
-  totalUsers: number;
-  totalProducts: number;
-  salesByCategory: CategorySales[];
-  monthlySales: MonthlySales[];
-  topSellingProducts: TopProduct[];
+  reportId: number;
+  reportName: string;
+  creationDate: Date;
+  reportData: string;
 }
 
 export interface CategorySales {
@@ -18,7 +15,7 @@ export interface MonthlySales {
   sales: number;
 }
 
-export interface TopProduct {
+export interface ProductSales {
   productName: string;
   sales: number;
 }

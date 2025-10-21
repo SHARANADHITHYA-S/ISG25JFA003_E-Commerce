@@ -79,8 +79,12 @@ export class AuthService {
     }
 
     getUserRole(): string | null {
-        const user = this.getCurrentUser();
-        return user ? user.role : null;
+        const token = this.storageService.getItem('token');
+        if (token && typeof token === 'string') {
+            const decoded = this.decodeToken(token);
+            return decoded ? decoded.role : null;
+        }
+        return null;
     }
 
     forgotPassword(email: string): Observable<any> {

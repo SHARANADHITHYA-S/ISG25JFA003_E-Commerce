@@ -37,9 +37,30 @@ export const routes: Routes = [
                 path: 'products/new', 
                 loadComponent: () => import('./features/admin-management/product-form/product-form.component').then(m => m.ProductFormComponent) 
             },
-            { 
-                path: 'products/edit/:id', 
-                loadComponent: () => import('./features/admin-management/product-form/product-form.component').then(m => m.ProductFormComponent) 
+            {
+                path: 'products/edit/:id',
+                loadComponent: () => import('./features/admin-management/product-form/product-form.component').then(m => m.ProductFormComponent)
+            },
+            {
+                path: 'analytics',
+                children: [
+                    { path: '', redirectTo: 'reports', pathMatch: 'full' },
+                    {
+                        path: 'reports',
+                        loadComponent: () => import('./features/admin-management/analytics report/analytics-report.component').then(m => m.AnalyticsReportComponent),
+                        canActivate: [AuthGuard]
+                    },
+                    {
+                        path: 'products',
+                        loadComponent: () => import('./features/admin-management/analytics-products/analytics-products.component').then(m => m.AnalyticsProductsComponent),
+                        canActivate: [AuthGuard]
+                    },
+                    {
+                        path: 'orders',
+                        loadComponent: () => import('./features/admin-management/analytics-orders/analytics-orders.component').then(m => m.AnalyticsOrdersComponent),
+                        canActivate: [AuthGuard]
+                    }
+                ]
             }
         ]
     },
@@ -63,10 +84,18 @@ export const routes: Routes = [
     },
 
     {
-        path:'register',
-        loadComponent: () => import('./features/register/register.component').then(c => c.RegisterComponent
-            
-        )
+        path: 'register',
+        loadComponent: () => import('./features/register/register.component').then(m => m.RegisterComponent)
+
+    },
+    {
+        path: 'forgot-password',
+        loadComponent: () => import('./features/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)
+    },
+    {
+        path: 'reset-password',
+        loadComponent: () => import('./features/reset-password/reset-password.component').then(m => m.ResetPasswordComponent)
     }
-   
+
+
 ];

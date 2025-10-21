@@ -49,6 +49,12 @@ export class NavbarComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
-    this.router.navigate(['/']);
+    this.isLoggedIn = false;
+    this.router.navigate(['/login']);
+
+  }
+
+  get isAdmin(): boolean {
+    return this.authService.getUserRole() === 'ROLE_ADMIN';
   }
 }
