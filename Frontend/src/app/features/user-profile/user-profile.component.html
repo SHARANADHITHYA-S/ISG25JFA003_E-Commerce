@@ -47,7 +47,10 @@
 
     <!-- Addresses Section -->
     <div *ngIf="activeSection === 'addresses'" class="section">
-      <h2>My Addresses</h2>
+      <div class="section-header">
+        <h2>My Addresses ({{addresses.length}} / 10)</h2>
+        <button class="btn btn-primary" (click)="addNewAddress()" [disabled]="addresses.length >= 10">Add New Address</button>
+      </div>
       <div class="addresses-list">
         <div *ngFor="let address of addresses" class="address-card">
           <div class="address-header">
@@ -63,14 +66,16 @@
         </div>
         <div *ngIf="addresses.length === 0" class="no-data">
           <p>No addresses found. Add an address to get started.</p>
-          <button class="btn btn-primary mt-3" (click)="addNewAddress()">Add New Address</button>
         </div>
       </div>
     </div>
 
     <!-- Payment Methods Section -->
     <div *ngIf="activeSection === 'payment'" class="section">
-      <h2>Payment Methods</h2>
+      <div class="section-header">
+        <h2>Payment Methods ({{paymentMethods.length}} / 10)</h2>
+        <button class="btn btn-primary" (click)="addNewPaymentMethod()" [disabled]="paymentMethods.length >= 10">Add New Payment Method</button>
+      </div>
       <div class="payment-list">
         <div *ngFor="let payment of paymentMethods" class="payment-card">
           <div class="payment-header">
@@ -83,8 +88,7 @@
           </div>
         </div>
         <div *ngIf="paymentMethods.length === 0" class="no-data">
-          <p>No payment methods found. Add a payment method to get started.</p>
-          <button class="btn btn-primary mt-3" (click)="addNewPaymentMethod()">Add New Payment Method</button>
+          <p>No payment methods found.. Add a payment method to get started.</p>
         </div>
       </div>
     </div>
