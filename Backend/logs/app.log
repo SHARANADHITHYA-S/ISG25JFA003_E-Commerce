@@ -1266,3 +1266,768 @@ Caused by: java.lang.IllegalStateException: Ambiguous @ExceptionHandler method m
 2025-10-15T16:37:28.245+05:30  INFO 34960 --- [ecommerce] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2025-10-15T16:37:28.253+05:30  INFO 34960 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2025-10-15T16:37:28.281+05:30  INFO 34960 --- [ecommerce] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-10-21T10:07:31.635+05:30  INFO 4188 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Starting EcommerceApplication using Java 21 with PID 4188 (C:\Users\2440657\OneDrive - Cognizant\Desktop\E-Commerce\Backend\target\classes started by 2440657 in C:\Users\2440657\OneDrive - Cognizant\Desktop\E-Commerce\Backend)
+2025-10-21T10:07:31.641+05:30 DEBUG 4188 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Running with Spring Boot v3.3.1, Spring v6.1.10
+2025-10-21T10:07:31.641+05:30  INFO 4188 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : No active profile set, falling back to 1 default profile: "default"
+2025-10-21T10:07:31.749+05:30  INFO 4188 --- [ecommerce] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-10-21T10:07:31.750+05:30  INFO 4188 --- [ecommerce] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-10-21T10:07:33.867+05:30  INFO 4188 --- [ecommerce] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-10-21T10:07:34.185+05:30  INFO 4188 --- [ecommerce] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 294 ms. Found 12 JPA repository interfaces.
+2025-10-21T10:07:36.000+05:30  INFO 4188 --- [ecommerce] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2025-10-21T10:07:36.024+05:30  INFO 4188 --- [ecommerce] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-10-21T10:07:36.024+05:30  INFO 4188 --- [ecommerce] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.25]
+2025-10-21T10:07:36.126+05:30  INFO 4188 --- [ecommerce] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-10-21T10:07:36.126+05:30  INFO 4188 --- [ecommerce] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4375 ms
+2025-10-21T10:07:36.309+05:30  INFO 4188 --- [ecommerce] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-10-21T10:07:37.329+05:30  INFO 4188 --- [ecommerce] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@50d9e44d
+2025-10-21T10:07:37.336+05:30  INFO 4188 --- [ecommerce] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-10-21T10:07:37.578+05:30  INFO 4188 --- [ecommerce] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-10-21T10:07:37.818+05:30  INFO 4188 --- [ecommerce] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.2.Final
+2025-10-21T10:07:37.872+05:30  INFO 4188 --- [ecommerce] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-10-21T10:07:38.670+05:30  INFO 4188 --- [ecommerce] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-10-21T10:07:40.584+05:30  INFO 4188 --- [ecommerce] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-10-21T10:07:40.933+05:30  INFO 4188 --- [ecommerce] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-10-21T10:07:41.768+05:30 DEBUG 4188 --- [ecommerce] [restartedMain] c.c.ecommerce.config.JwtAuthFilter       : Filter 'jwtAuthFilter' configured for use
+2025-10-21T10:07:42.628+05:30  INFO 4188 --- [ecommerce] [restartedMain] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2025-10-21T10:07:42.631+05:30  WARN 4188 --- [ecommerce] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2025-10-21T10:07:43.123+05:30  WARN 4188 --- [ecommerce] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-10-21T10:07:45.361+05:30  INFO 4188 --- [ecommerce] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-10-21T10:07:45.476+05:30  INFO 4188 --- [ecommerce] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2025-10-21T10:07:45.499+05:30  INFO 4188 --- [ecommerce] [restartedMain] c.c.ecommerce.EcommerceApplication       : Started EcommerceApplication in 14.929 seconds (process running for 16.464)
+2025-10-21T10:10:29.128+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-10-21T10:10:29.128+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-10-21T10:10:29.135+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2025-10-21T10:10:29.540+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.UserController  : Registering user with email: New@gmail.com
+2025-10-21T10:10:29.900+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.UserController  : User registered successfully with ID: 232
+2025-10-21T10:10:48.636+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.UserController  : Login attempt for username: newUser
+2025-10-21T10:10:49.028+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.UserController  : Login successful for username: newUser
+2025-10-21T10:10:49.317+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T10:10:49.317+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T10:10:49.337+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T10:10:49.366+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T10:10:49.394+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T10:10:49.396+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T10:10:49.401+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T10:10:49.406+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T10:11:01.256+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.ecommerce.controller.UserController  : Login attempt for username: newUser
+2025-10-21T10:11:01.335+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.ecommerce.controller.UserController  : Login successful for username: newUser
+2025-10-21T10:11:01.406+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T10:11:01.406+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T10:11:01.423+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T10:11:01.423+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-6] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T10:11:01.454+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T10:11:01.454+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T10:11:01.466+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T10:11:01.475+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T10:25:53.577+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 232
+2025-10-21T10:25:54.285+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 232]
+2025-10-21T10:25:57.681+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T10:25:57.704+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T10:25:57.771+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T10:25:57.851+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T10:31:23.381+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.ecommerce.controller.UserController  : Login attempt for username: newUser
+2025-10-21T10:31:23.497+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.ecommerce.controller.UserController  : Login successful for username: newUser
+2025-10-21T10:31:23.676+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T10:31:23.676+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T10:31:23.687+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T10:31:23.703+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T10:31:23.721+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T10:31:23.721+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T10:31:23.728+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T10:31:23.730+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T10:40:27.686+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T10:40:27.687+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T10:40:27.709+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T10:40:27.723+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T10:40:31.686+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T10:40:31.690+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T10:40:31.694+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T10:40:31.711+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T10:40:41.571+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T10:40:41.572+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T10:40:41.583+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T10:40:41.594+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T10:46:47.103+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 232
+2025-10-21T10:46:47.117+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 232]
+2025-10-21T10:46:47.167+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T10:46:47.171+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T10:46:47.176+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T10:46:47.185+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T11:16:57.432+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 232
+2025-10-21T11:16:57.452+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 232]
+2025-10-21T11:17:38.126+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.ecommerce.controller.UserController  : Login attempt for username: newUser
+2025-10-21T11:17:38.341+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.ecommerce.controller.UserController  : Login successful for username: newUser
+2025-10-21T11:17:38.504+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T11:17:38.504+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T11:17:38.521+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T11:17:38.527+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T11:17:38.537+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T11:17:38.537+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T11:17:38.537+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T11:17:38.554+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T11:18:17.995+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 232
+2025-10-21T11:18:18.008+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 232]
+2025-10-21T11:19:36.378+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 232
+2025-10-21T11:19:36.431+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 232]
+2025-10-21T11:26:43.617+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 232
+2025-10-21T11:26:43.629+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 232]
+2025-10-21T11:26:52.559+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.c.PaymentMethodController          : Fetching payment methods for user ID: 232
+2025-10-21T11:26:52.610+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.c.PaymentMethodController          : Found 0 payment methods for user ID: 232
+2025-10-21T11:26:57.857+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T11:26:57.859+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T11:26:57.876+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T11:26:57.887+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T11:27:00.365+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T11:27:00.365+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T11:27:00.365+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T11:27:00.372+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T11:27:00.390+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T11:27:00.392+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T11:27:00.413+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T11:27:00.416+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T11:28:02.556+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T11:28:02.557+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T11:28:02.559+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T11:28:02.559+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T11:28:20.482+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T11:28:20.484+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T11:28:20.498+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T11:28:20.510+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T11:33:16.024+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.UserController  : Login attempt for username: newUser
+2025-10-21T11:33:16.166+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.UserController  : Login successful for username: newUser
+2025-10-21T11:33:16.292+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T11:33:16.292+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T11:33:16.308+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T11:33:16.311+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-6] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T11:33:16.330+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T11:33:16.330+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T11:33:16.335+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T11:33:16.337+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T11:37:31.926+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 232
+2025-10-21T11:37:31.954+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 232]
+2025-10-21T11:37:32.307+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T11:37:32.308+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T11:37:32.320+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T11:37:32.323+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T11:37:32.347+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T11:37:32.347+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T11:37:32.352+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T11:37:32.354+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T12:03:56.268+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T12:03:56.277+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 232
+2025-10-21T12:03:56.277+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T12:03:56.294+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T12:03:56.303+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 232]
+2025-10-21T12:03:56.303+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T12:03:56.331+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T12:03:56.331+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T12:03:56.340+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T12:03:56.344+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T12:10:40.821+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T12:10:40.829+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T12:10:40.884+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T12:10:40.890+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T12:10:51.195+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.ecommerce.controller.UserController  : Login attempt for username: newUser
+2025-10-21T12:10:51.281+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.ecommerce.controller.UserController  : Login successful for username: newUser
+2025-10-21T12:10:51.352+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T12:10:51.358+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T12:10:51.358+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T12:10:51.378+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T12:10:53.556+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T12:10:53.558+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T12:10:53.567+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T12:10:53.574+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T12:10:53.590+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T12:10:53.591+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T12:10:53.600+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T12:10:53.602+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T12:11:02.509+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.ecommerce.controller.UserController  : Login attempt for username: newUser
+2025-10-21T12:11:02.590+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.ecommerce.controller.UserController  : Login successful for username: newUser
+2025-10-21T12:11:02.640+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T12:11:02.640+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T12:11:02.650+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T12:11:02.656+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T12:12:22.744+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Fetching products by category ID: 1
+2025-10-21T12:12:22.802+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Products fetched for category 1: 2
+2025-10-21T12:14:16.311+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 232
+2025-10-21T12:14:16.333+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 232]
+2025-10-21T12:14:16.463+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T12:14:16.463+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T12:14:16.481+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T12:14:16.487+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T12:14:29.000+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T12:14:29.016+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T12:16:42.616+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T12:16:42.624+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T12:19:17.123+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T12:19:17.139+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T12:23:19.772+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 232
+2025-10-21T12:23:19.790+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 232]
+2025-10-21T12:23:19.941+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T12:23:19.944+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T12:23:19.950+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T12:23:19.962+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T12:26:09.636+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 232
+2025-10-21T12:26:09.649+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-6] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 232]
+2025-10-21T12:28:03.419+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 232
+2025-10-21T12:28:03.430+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 232]
+2025-10-21T12:35:50.938+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 232
+2025-10-21T12:35:50.952+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 232]
+2025-10-21T12:39:04.081+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 232
+2025-10-21T12:39:04.117+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 232]
+2025-10-21T12:40:58.647+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 232
+2025-10-21T12:40:58.656+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 232]
+2025-10-21T12:50:15.506+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T12:50:15.506+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T12:50:15.567+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T12:50:15.575+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T12:50:20.430+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.c.PaymentMethodController          : Fetching payment methods for user ID: 232
+2025-10-21T12:50:20.450+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.c.PaymentMethodController          : Found 0 payment methods for user ID: 232
+2025-10-21T12:50:26.439+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T12:50:26.444+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T12:50:26.453+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T12:50:26.460+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T12:50:26.476+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.OrderController         : Fetching orders for userId=232
+2025-10-21T12:50:26.476+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=232
+2025-10-21T12:50:26.484+05:30 ERROR 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.service.impl.OrderServiceImpl      : No orders found for userId=232
+2025-10-21T12:50:26.487+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: No orders found for user with id: 232]
+2025-10-21T12:50:33.274+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T12:50:33.276+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T12:50:33.288+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T12:50:33.299+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T12:50:36.596+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T12:50:36.600+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T12:50:36.612+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T12:50:36.632+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T12:51:31.676+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 232
+2025-10-21T12:51:31.688+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 232]
+2025-10-21T12:51:31.870+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T12:51:31.870+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T12:51:31.880+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T12:51:31.885+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T12:52:05.730+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 232
+2025-10-21T12:52:05.749+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 232]
+2025-10-21T12:52:05.903+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T12:52:05.904+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T12:52:05.912+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T12:52:05.920+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T12:53:03.562+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 232
+2025-10-21T12:53:03.572+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 232]
+2025-10-21T12:53:03.703+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T12:53:03.704+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T12:53:03.712+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T12:53:03.718+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T12:54:53.734+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.ecommerce.controller.UserController  : Login attempt for username: admin
+2025-10-21T12:54:53.814+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.ecommerce.controller.UserController  : Login successful for username: admin
+2025-10-21T12:54:53.873+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T12:54:53.873+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T12:54:53.873+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T12:54:53.887+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T12:55:00.613+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T12:55:04.577+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T12:58:04.388+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T12:59:25.843+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T13:00:26.787+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T13:01:03.944+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T13:01:59.073+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:01:59.075+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:01:59.082+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:01:59.087+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T13:02:11.918+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.OrderController         : Fetching orders for userId=212
+2025-10-21T13:02:11.918+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=212
+2025-10-21T13:02:11.942+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : Found 1 orders for userId=212
+2025-10-21T13:02:12.312+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.OrderController         : Total orders fetched for userId 212: 1
+2025-10-21T13:02:12.343+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.OrderController         : Fetching orders for userId=212
+2025-10-21T13:02:12.343+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=212
+2025-10-21T13:02:12.355+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.service.impl.OrderServiceImpl      : Found 1 orders for userId=212
+2025-10-21T13:02:12.372+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.OrderController         : Total orders fetched for userId 212: 1
+2025-10-21T13:02:13.653+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T13:02:31.524+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.UserController  : Login attempt for username: User
+2025-10-21T13:02:31.658+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.UserController  : Login successful for username: User
+2025-10-21T13:02:31.717+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:02:31.717+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:02:31.717+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:02:31.734+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T13:02:36.139+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-21T13:02:36.146+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 231]
+2025-10-21T13:02:49.934+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:02:49.934+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:02:49.944+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:02:49.952+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T13:26:55.806+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-21T13:26:55.829+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 231]
+2025-10-21T13:26:55.915+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:26:55.933+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:26:55.946+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:26:55.954+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T13:28:10.874+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-21T13:28:10.893+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 231]
+2025-10-21T13:29:12.515+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-21T13:29:12.532+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-6] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 231]
+2025-10-21T13:29:24.973+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.UserController  : Login attempt for username: User
+2025-10-21T13:29:25.106+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.UserController  : Login successful for username: User
+2025-10-21T13:29:25.254+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:29:25.261+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:29:25.270+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T13:29:25.275+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:29:33.809+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-21T13:29:33.816+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 231]
+2025-10-21T13:29:43.078+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.ecommerce.controller.UserController  : Login attempt for username: admin
+2025-10-21T13:29:43.264+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.ecommerce.controller.UserController  : Login successful for username: admin
+2025-10-21T13:29:43.442+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:29:43.442+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:29:43.473+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:29:43.478+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T13:29:47.408+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T13:33:43.518+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T13:34:20.852+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T13:34:21.154+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:34:21.165+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:34:41.775+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:34:41.775+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:34:41.791+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:34:41.798+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T13:34:44.766+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.UserController  : Login attempt for username: admin
+2025-10-21T13:34:44.888+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.UserController  : Login successful for username: admin
+2025-10-21T13:34:44.984+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:34:44.984+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:34:44.994+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:34:45.000+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T13:34:53.587+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.UserController  : Login attempt for username: User
+2025-10-21T13:34:53.709+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.UserController  : Login successful for username: User
+2025-10-21T13:34:53.810+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:34:53.835+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:34:53.837+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T13:34:53.852+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:35:01.444+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 231
+2025-10-21T13:35:01.464+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 231]
+2025-10-21T13:35:15.723+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.UserController  : Login attempt for username: admin
+2025-10-21T13:35:15.818+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.UserController  : Login successful for username: admin
+2025-10-21T13:35:15.938+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:35:15.949+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:35:15.950+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:35:15.966+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T13:35:21.497+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T13:35:21.919+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:35:21.929+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:35:32.198+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T13:35:32.568+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:35:32.582+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:35:32.599+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:35:32.599+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Total products fetched: 3
+2025-10-21T13:35:36.408+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:35:36.420+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:37:46.933+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.ProductController       : Creating product: Iphone 17 pro max
+2025-10-21T13:37:47.072+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.ProductController       : Product created with ID: 199
+2025-10-21T13:37:47.153+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:37:47.162+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:37:47.170+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T13:37:47.171+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:37:52.018+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:37:52.018+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:37:52.024+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:37:52.033+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T13:39:16.074+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:39:16.075+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:39:16.086+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:39:16.111+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T13:39:18.099+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:39:18.101+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Fetching product by ID: 199
+2025-10-21T13:39:18.107+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:39:18.116+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Product fetched: Iphone 17 pro max
+2025-10-21T13:39:21.063+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.ProductController       : Updating product ID: 199
+2025-10-21T13:39:21.177+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.ProductController       : Product updated: Iphone 17 pro max
+2025-10-21T13:39:21.247+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:39:21.250+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:39:21.256+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:39:21.261+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T13:39:24.151+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:39:24.151+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:39:24.166+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:39:24.171+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T13:39:51.763+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:39:51.763+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:39:51.771+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:39:51.783+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T13:39:53.613+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:39:53.626+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:39:53.626+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Fetching product by ID: 199
+2025-10-21T13:39:53.642+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Product fetched: Iphone 17 pro max
+2025-10-21T13:39:57.552+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Updating product ID: 199
+2025-10-21T13:39:57.575+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Product updated: Iphone 17 pro max
+2025-10-21T13:39:57.623+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:39:57.624+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:39:57.634+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:39:57.643+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T13:39:59.599+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:39:59.599+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:39:59.612+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:39:59.644+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T13:40:05.647+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Fetching products by category ID: 2
+2025-10-21T13:40:05.657+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Products fetched for category 2: 1
+2025-10-21T13:40:07.307+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:40:07.325+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T13:40:08.968+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.ProductController       : Fetching products by category ID: 1
+2025-10-21T13:40:08.968+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.ProductController       : Products fetched for category 1: 3
+2025-10-21T13:40:10.162+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:40:10.177+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T13:40:11.139+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T13:40:19.045+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.ecommerce.controller.CartController  : Deleting cart for user ID: 212
+2025-10-21T13:40:22.981+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T13:40:22.984+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T13:40:25.078+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T13:40:25.084+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T13:40:25.292+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T13:40:25.298+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T13:40:44.610+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.ecommerce.controller.UserController  : Login attempt for username: admin
+2025-10-21T13:40:44.700+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.ecommerce.controller.UserController  : Login successful for username: admin
+2025-10-21T13:40:44.777+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:40:44.783+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:40:44.787+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T13:40:44.788+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:42:18.310+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T13:42:18.321+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T13:42:18.503+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:42:18.504+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:42:18.511+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:42:18.518+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T13:42:39.086+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T13:42:39.090+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-6] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T13:42:39.293+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:42:39.306+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T13:42:39.324+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:42:39.330+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:43:27.031+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.UserController  : Login attempt for username: admin
+2025-10-21T13:43:27.163+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.UserController  : Login successful for username: admin
+2025-10-21T13:43:27.219+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:43:27.220+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:43:27.228+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:43:27.233+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T13:44:49.688+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T13:44:49.695+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T13:44:49.925+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:44:49.929+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:44:49.934+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:44:49.936+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T13:49:38.878+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Fetching product by ID: 199
+2025-10-21T13:49:38.896+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Product fetched: Iphone 17 pro max
+2025-10-21T13:49:48.707+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.ecommerce.controller.UserController  : Login attempt for username: admin
+2025-10-21T13:49:48.801+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.ecommerce.controller.UserController  : Login successful for username: admin
+2025-10-21T13:49:48.883+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:49:48.883+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:49:48.889+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:49:48.893+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T13:58:19.984+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T13:58:19.994+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T13:58:20.149+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T13:58:20.150+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T13:58:20.156+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T13:58:20.162+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T16:13:35.605+05:30  WARN 4188 --- [ecommerce] [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=6m50s256ms22µs500ns).
+2025-10-21T16:13:51.622+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T16:13:51.622+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T16:13:51.913+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T16:13:51.977+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T16:13:53.536+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.UserController  : Login attempt for username: admin
+2025-10-21T16:13:53.750+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.UserController  : Login successful for username: admin
+2025-10-21T16:13:53.860+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T16:13:53.866+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T16:13:53.867+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T16:13:53.873+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T16:13:59.823+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:13:59.855+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T16:13:59.878+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T16:13:59.882+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T16:14:04.384+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.OrderController         : Fetching orders for userId=212
+2025-10-21T16:14:04.386+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=212
+2025-10-21T16:14:04.411+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.service.impl.OrderServiceImpl      : Found 1 orders for userId=212
+2025-10-21T16:14:04.437+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.OrderController         : Total orders fetched for userId 212: 1
+2025-10-21T16:14:04.452+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.OrderController         : Fetching orders for userId=212
+2025-10-21T16:14:04.452+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=212
+2025-10-21T16:14:04.458+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.service.impl.OrderServiceImpl      : Found 1 orders for userId=212
+2025-10-21T16:14:04.465+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.OrderController         : Total orders fetched for userId 212: 1
+2025-10-21T16:14:10.400+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:14:10.408+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T16:14:12.512+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T16:14:12.516+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T16:14:12.524+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T16:14:12.526+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T16:14:16.655+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.ProductController       : Fetching product by ID: 1
+2025-10-21T16:14:16.663+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.ProductController       : Product fetched: Laptop
+2025-10-21T16:14:18.123+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CartItemController      : Creating cart item for user ID: 212
+2025-10-21T16:14:21.785+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T16:14:21.785+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T16:14:21.791+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T16:14:21.798+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T16:14:23.853+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Fetching product by ID: 1
+2025-10-21T16:14:23.860+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Product fetched: Laptop
+2025-10-21T16:14:27.540+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:16:19.877+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:16:20.038+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:20:01.345+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:20:01.474+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:22:41.483+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:22:41.697+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:23:28.177+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:23:28.332+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:24:10.224+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:24:10.361+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:30:41.374+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.c.PaymentMethodController          : Fetching payment methods for user ID: 212
+2025-10-21T16:30:41.411+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.c.PaymentMethodController          : Found 0 payment methods for user ID: 212
+2025-10-21T16:30:43.507+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.c.PaymentMethodController          : Fetching payment methods for user ID: 212
+2025-10-21T16:30:43.520+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.c.PaymentMethodController          : Found 0 payment methods for user ID: 212
+2025-10-21T16:30:54.472+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:31:01.818+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.c.PaymentMethodController          : Fetching payment methods for user ID: 212
+2025-10-21T16:31:01.841+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.c.PaymentMethodController          : Found 0 payment methods for user ID: 212
+2025-10-21T16:38:42.610+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:38:42.754+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.c.PaymentMethodController          : Fetching payment methods for user ID: 212
+2025-10-21T16:38:42.763+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.c.PaymentMethodController          : Found 0 payment methods for user ID: 212
+2025-10-21T16:40:58.590+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:40:58.675+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.c.PaymentMethodController          : Fetching payment methods for user ID: 212
+2025-10-21T16:40:58.694+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.c.PaymentMethodController          : Found 0 payment methods for user ID: 212
+2025-10-21T16:46:35.510+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:46:35.607+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.c.PaymentMethodController          : Fetching payment methods for user ID: 212
+2025-10-21T16:46:35.613+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.c.PaymentMethodController          : Found 0 payment methods for user ID: 212
+2025-10-21T16:46:46.946+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:46:47.010+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.c.PaymentMethodController          : Fetching payment methods for user ID: 212
+2025-10-21T16:46:47.015+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.c.PaymentMethodController          : Found 0 payment methods for user ID: 212
+2025-10-21T16:51:35.249+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T16:51:35.466+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.c.PaymentMethodController          : Fetching payment methods for user ID: 212
+2025-10-21T16:51:35.486+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.c.PaymentMethodController          : Found 0 payment methods for user ID: 212
+2025-10-21T17:08:15.216+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:09:00.194+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.OrderController         : Fetching orders for userId=212
+2025-10-21T17:09:00.195+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=212
+2025-10-21T17:09:00.232+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.service.impl.OrderServiceImpl      : Found 1 orders for userId=212
+2025-10-21T17:09:00.252+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.OrderController         : Total orders fetched for userId 212: 1
+2025-10-21T17:09:00.266+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.OrderController         : Fetching orders for userId=212
+2025-10-21T17:09:00.266+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=212
+2025-10-21T17:09:00.269+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.service.impl.OrderServiceImpl      : Found 1 orders for userId=212
+2025-10-21T17:09:00.274+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.OrderController         : Total orders fetched for userId 212: 1
+2025-10-21T17:09:51.825+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:10:24.218+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:10:24.218+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T17:10:24.237+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:10:24.244+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T17:10:34.627+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:10:34.743+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T17:10:34.746+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:10:34.753+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:10:34.758+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T17:10:36.693+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:10:36.696+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Fetching product by ID: 1
+2025-10-21T17:10:36.698+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:10:36.709+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Product fetched: Laptop
+2025-10-21T17:10:59.316+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T17:10:59.321+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:10:59.325+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:10:59.326+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T17:12:42.603+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Fetching product by ID: 1
+2025-10-21T17:12:42.604+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:12:42.610+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Product fetched: Laptop
+2025-10-21T17:12:42.610+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:12:46.630+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:12:46.633+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T17:12:46.637+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:12:46.642+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T17:14:14.471+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:14:14.472+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Fetching product by ID: 1
+2025-10-21T17:14:14.481+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Product fetched: Laptop
+2025-10-21T17:14:14.481+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:14:18.009+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:14:18.011+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T17:14:18.024+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:14:18.030+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T17:15:53.170+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T17:15:53.172+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:15:53.178+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:15:53.182+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T17:15:57.476+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.ecommerce.controller.UserController  : Login attempt for username: admin
+2025-10-21T17:15:57.585+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.ecommerce.controller.UserController  : Login successful for username: admin
+2025-10-21T17:15:57.633+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:15:57.633+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T17:15:57.641+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:15:57.647+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T17:15:59.997+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.c.PaymentMethodController          : Fetching payment methods for user ID: 212
+2025-10-21T17:16:00.013+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.c.PaymentMethodController          : Found 0 payment methods for user ID: 212
+2025-10-21T17:22:09.823+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:22:14.544+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:22:14.846+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.c.PaymentMethodController          : Fetching payment methods for user ID: 212
+2025-10-21T17:22:14.846+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.c.PaymentMethodController          : Found 0 payment methods for user ID: 212
+2025-10-21T17:26:08.517+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2025-10-21T17:26:14.649+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:26:14.831+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.c.PaymentMethodController          : Fetching payment methods for user ID: 212
+2025-10-21T17:26:14.835+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.c.PaymentMethodController          : Found 0 payment methods for user ID: 212
+2025-10-21T17:28:49.262+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
+2025-10-21T17:34:21.465+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:34:21.792+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-6] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-10-21T17:35:48.942+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.c.PaymentMethodController          : Adding payment method for user ID: 212 with type: credit
+2025-10-21T17:35:49.024+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.c.PaymentMethodController          : Payment method added with ID: 217
+2025-10-21T17:35:55.329+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:35:56.363+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-10-21T17:35:57.752+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-10-21T17:35:58.461+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-7] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-10-21T17:35:59.024+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-10-21T17:35:59.183+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-10-21T17:35:59.392+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-6] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-10-21T17:36:01.415+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:36:01.911+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:36:03.549+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-10-21T17:36:05.993+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-10-21T17:36:08.091+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-10-21T17:38:25.646+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:38:26.096+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'GET' is not supported]
+2025-10-21T17:40:24.237+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:40:24.919+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.c.PaymentMethodController          : Fetching payment methods for user ID: 212
+2025-10-21T17:40:24.926+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.c.PaymentMethodController          : Found 1 payment methods for user ID: 212
+2025-10-21T17:41:50.059+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:41:51.845+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.c.PaymentMethodController          : Fetching payment methods for user ID: 212
+2025-10-21T17:41:51.854+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.c.PaymentMethodController          : Found 1 payment methods for user ID: 212
+2025-10-21T17:41:55.824+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.OrderController         : Received request to create order for userId=212, addressId=219, paymentMethodId=217
+2025-10-21T17:41:55.841+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.service.impl.OrderServiceImpl      : Creating new order for userId=212, addressId=219, paymentMethodId=217
+2025-10-21T17:41:56.007+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.service.impl.OrderServiceImpl      : Order created successfully for userId=212 with orderId=102
+2025-10-21T17:41:56.016+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.OrderController         : Order created successfully with orderId=102
+2025-10-21T17:41:56.281+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.OrderController         : Fetching orders for userId=212
+2025-10-21T17:41:56.282+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=212
+2025-10-21T17:41:56.291+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=212
+2025-10-21T17:41:56.300+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.OrderController         : Total orders fetched for userId 212: 2
+2025-10-21T17:41:56.316+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.OrderController         : Fetching orders for userId=212
+2025-10-21T17:41:56.316+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=212
+2025-10-21T17:41:56.325+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=212
+2025-10-21T17:41:56.336+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.OrderController         : Total orders fetched for userId 212: 2
+2025-10-21T17:43:39.745+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T17:43:39.749+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:43:39.769+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:43:39.773+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T17:43:54.656+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.OrderController         : Fetching orders for userId=212
+2025-10-21T17:43:54.658+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=212
+2025-10-21T17:43:54.661+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=212
+2025-10-21T17:43:54.675+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.OrderController         : Total orders fetched for userId 212: 2
+2025-10-21T17:43:54.688+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.OrderController         : Fetching orders for userId=212
+2025-10-21T17:43:54.688+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=212
+2025-10-21T17:43:54.691+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=212
+2025-10-21T17:43:54.701+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.OrderController         : Total orders fetched for userId 212: 2
+2025-10-21T17:44:00.464+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:44:00.462+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T17:44:00.470+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:44:00.473+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T17:52:01.104+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:52:01.118+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T17:52:01.321+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T17:52:01.331+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:52:01.335+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T17:52:01.336+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:55:19.509+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:55:19.517+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T17:55:20.177+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T17:55:20.187+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T17:55:20.242+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:55:20.242+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T17:55:20.263+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:55:20.270+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:55:41.990+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:55:41.992+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:57:08.449+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:57:08.460+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T17:57:08.743+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T17:57:08.769+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T17:57:08.771+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:57:08.779+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-9] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T17:57:08.809+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:57:08.816+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:57:10.046+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:57:10.046+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T17:57:10.062+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.ProductController       : Fetching products by category ID: 1
+2025-10-21T17:57:10.075+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.ProductController       : Products fetched for category 1: 3
+2025-10-21T17:57:11.598+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T17:57:11.612+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:57:11.615+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-6] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T17:57:11.624+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T17:57:22.810+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:57:22.810+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T17:57:22.816+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:57:22.821+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T17:57:22.838+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:57:22.846+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-8] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T17:57:37.679+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:57:37.684+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T17:57:43.843+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.UserController  : Login attempt for username: admin
+2025-10-21T17:57:43.932+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.UserController  : Login successful for username: admin
+2025-10-21T17:57:44.051+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T17:57:44.052+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:57:44.056+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:57:44.071+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T17:57:46.368+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T17:57:46.365+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T17:57:46.383+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T17:57:46.389+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T17:57:46.546+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T17:57:46.557+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T18:04:33.689+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T18:04:33.714+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T18:04:33.739+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T18:04:33.752+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T18:04:33.767+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T18:04:33.777+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T18:04:37.293+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Fetching products by category ID: 1
+2025-10-21T18:04:37.308+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.ProductController       : Products fetched for category 1: 3
+2025-10-21T18:04:39.365+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T18:04:39.375+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T18:07:51.046+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T18:07:51.052+05:30  WARN 4188 --- [ecommerce] [http-nio-8080-exec-10] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [com.cognizant.ecommerce.exception.ResourceNotFoundException: Cart not found for user with ID: 212]
+2025-10-21T18:07:54.389+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T18:07:54.389+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T18:07:54.394+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T18:07:54.399+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T18:07:56.906+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.ProductController       : Fetching product by ID: 2
+2025-10-21T18:07:56.919+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.ProductController       : Product fetched: Headphones
+2025-10-21T18:07:59.544+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T18:07:59.544+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T18:07:59.552+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T18:07:59.562+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T18:08:00.217+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.ProductController       : Fetching product by ID: 1
+2025-10-21T18:08:00.224+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.ProductController       : Product fetched: Laptop
+2025-10-21T18:08:01.849+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.CartItemController      : Creating cart item for user ID: 212
+2025-10-21T18:08:05.790+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T18:10:07.139+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T18:10:07.272+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T18:10:07.279+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T18:10:17.500+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T18:10:17.501+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T18:10:17.512+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T18:10:17.513+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T18:14:58.086+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T18:14:59.939+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T18:15:13.286+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.ecommerce.controller.UserController  : Login attempt for username: User
+2025-10-21T18:15:13.445+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.ecommerce.controller.UserController  : Login successful for username: User
+2025-10-21T18:15:13.583+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T18:15:13.585+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T18:15:13.605+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-4] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T18:15:13.605+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T18:15:23.443+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.UserController  : Login attempt for username: admin
+2025-10-21T18:15:23.592+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.ecommerce.controller.UserController  : Login successful for username: admin
+2025-10-21T18:15:23.658+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T18:15:23.658+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T18:15:23.665+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-7] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T18:15:23.670+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T18:17:39.518+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T18:17:39.518+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T18:17:39.528+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T18:17:39.536+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-10] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T18:17:42.349+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.OrderController         : Fetching orders for userId=212
+2025-10-21T18:17:42.349+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=212
+2025-10-21T18:17:42.362+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=212
+2025-10-21T18:17:42.386+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-6] c.c.e.controller.OrderController         : Total orders fetched for userId 212: 2
+2025-10-21T18:17:42.408+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.OrderController         : Fetching orders for userId=212
+2025-10-21T18:17:42.408+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.service.impl.OrderServiceImpl      : Fetching orders for userId=212
+2025-10-21T18:17:42.415+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.service.impl.OrderServiceImpl      : Found 2 orders for userId=212
+2025-10-21T18:17:42.429+05:30 DEBUG 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.e.controller.OrderController         : Total orders fetched for userId 212: 2
+2025-10-21T18:17:43.274+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-3] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T18:17:45.920+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.ProductController       : Fetching all products
+2025-10-21T18:17:45.923+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.CategoryController      : Fetching all categories
+2025-10-21T18:17:45.928+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.e.controller.CategoryController      : Total categories fetched: 2
+2025-10-21T18:17:45.984+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-9] c.c.e.controller.ProductController       : Total products fetched: 4
+2025-10-21T18:18:06.744+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T18:18:12.905+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-8] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T18:18:19.171+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-5] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T18:18:29.433+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-2] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212
+2025-10-21T18:19:21.628+05:30  INFO 4188 --- [ecommerce] [http-nio-8080-exec-1] c.c.ecommerce.controller.CartController  : Fetching cart for user ID: 212

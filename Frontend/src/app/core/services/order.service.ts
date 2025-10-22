@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 import { Order } from '../../shared/models/order.model';
 import { AuthService } from './auth.service';
+import { NotificationService } from './notification.service';
 
 export interface PaginatedOrderResponse {
     content: Order[];
@@ -31,7 +32,7 @@ export interface OrderResponseDTO {
 export class OrderService {
     private apiUrl = 'http://localhost:8080/api/orders';
 
-    constructor(private http: HttpClient, private authService: AuthService) { }
+    constructor(private http: HttpClient, private authService: AuthService, private notificationService: NotificationService) { }
 
     private getUserIdFromAuth(): number {
         const user = this.authService.getCurrentUser();
@@ -46,6 +47,7 @@ export class OrderService {
         try {
             userId = this.getUserIdFromAuth();
         } catch (error: any) {
+            this.notificationService.showError('Authentication required to create order. Please log in.');
             return throwError(() => new Error('Authentication required to create order. Please log in.'));
         }
 
@@ -56,7 +58,11 @@ export class OrderService {
         };
 
         return this.http.post<OrderResponseDTO>(this.apiUrl, orderRequest).pipe(
-            catchError(this.handleError)
+            tap(() => this.notificationService.showSuccess('Order placed successfully')),
+            catchError(err => {
+                this.notificationService.showError('Failed to place order');
+                return this.handleError(err);
+            })
         );
     }
 
@@ -95,6 +101,12 @@ export class OrderService {
 
     getOrderDetails(orderId: number): Observable<Order> {
         return this.http.get<Order>(`${this.apiUrl}/${orderId}`).pipe(
+            catchError(this.handleError)
+        );
+    }
+
+    updateOrderStatus(orderId: number, status: string): Observable<Order> {
+        return this.http.put<Order>(`${this.apiUrl}/admin/${orderId}/status?status=${status}`, {}).pipe(
             catchError(this.handleError)
         );
     }

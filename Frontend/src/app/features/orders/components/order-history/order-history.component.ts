@@ -10,10 +10,10 @@ import { ErrorMessageComponent } from '../../../../shared/components/error-messa
     standalone: true,
     imports: [CommonModule, LoaderComponent, ErrorMessageComponent],
     templateUrl: './order-history.component.html',
-    styleUrls: ['./order-history.component.scss']
+    styleUrl: './order-history.component.scss'
 })
 export class OrderHistoryComponent implements OnInit {
-    paginatedOrders: PaginatedOrderResponse | null = null;
+    allOrders: Order[] = [];
     loading = false;
     error: string | null = null;
     expandedOrderId: number | null = null;
@@ -21,15 +21,15 @@ export class OrderHistoryComponent implements OnInit {
     constructor(private orderService: OrderService) { }
 
     ngOnInit(): void {
-        this.loadOrders(0);
+        this.loadOrders();
     }
 
-    loadOrders(page: number): void {
+    loadOrders(): void {
         this.loading = true;
         this.error = null;
-        this.orderService.getOrdersByPage(page, 5).subscribe({
+        this.orderService.getOrdersByPage(0, 100).subscribe({
             next: (response: PaginatedOrderResponse) => {
-                this.paginatedOrders = response;
+                this.allOrders = response.content;
                 this.loading = false;
             },
             error: (error: any) => {
@@ -44,31 +44,56 @@ export class OrderHistoryComponent implements OnInit {
         this.expandedOrderId = this.expandedOrderId === orderId ? null : orderId;
     }
 
-    onPageChange(page: number): void {
-        this.loadOrders(page);
-    }
-
-    get totalPages(): number {
-        return this.paginatedOrders?.totalPages || 0;
+    getProductImage(productName: string): string {
+        const imageMap: { [key: string]: string } = {
+            'Atomic Habits': '/atomichabitsbk.jpg',
+            'The Alchemist': '/thealchemistbk.jpg',
+            'Clean Code': '/cleancodebk.jpg',
+            'Headset': '/headset.jpg',
+            'Kettle': '/kettle.jpg',
+            'LED TV': '/ledtv.jpg',
+            'Lipstick': '/lipstick.jpg',
+            'Pan': '/pan.jpg',
+            'Pillow': '/pillow.jpg',
+            'Serum': '/serum.jpg',
+            'Shampoo': '/shampoo.jpg',
+            'Smartwatch': '/smartwatch.jpg'
+        };
+        
+        if (imageMap[productName]) {
+            return imageMap[productName];
+        }
+        
+        for (const key in imageMap) {
+            if (productName.toLowerCase().includes(key.toLowerCase())) {
+                return imageMap[key];
+            }
+        }
+        
+        return '/favicon.ico';
     }
 
     getBadgeClass(status: OrderStatus): string {
         switch (status) {
             case 'PENDING':
-                return 'bg-warning';
+                return 'status-pending';
             case 'PROCESSING':
-                return 'bg-info';
+                return 'status-processing';
             case 'SHIPPED':
-                return 'bg-primary'; // Example color for SHIPPED
+                return 'status-shipped';
             case 'DELIVERED':
-                return 'bg-success'; // Example color for DELIVERED
+                return 'status-delivered';
             case 'COMPLETED':
-                return 'bg-success';
+                return 'status-completed';
             case 'CANCELLED':
-                return 'bg-danger';
+                return 'status-cancelled';
             default:
-                return 'bg-secondary';
+                return 'status-default';
         }
+    }
+
+    trackByOrderId(index: number, order: Order): number {
+        return order.id;
     }
 
     getShadowColor(status: OrderStatus): string {

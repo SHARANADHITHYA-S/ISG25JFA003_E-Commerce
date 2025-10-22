@@ -1,93 +1,89 @@
 .checkout-dialog-container {
-    // Basic styling for the dialog container if needed
-    // This component is expected to be used within a dialog framework (e.g., NgbModal, MatDialog)
-    // So its positioning and overlay might be handled by the framework.
-    // Here, we focus on the content styling.
-    min-width: 400px;
-    max-width: 600px;
-    margin: auto; // Center the content if not handled by dialog framework
+    min-width: 450px;
+    max-width: 550px;
+    margin: auto;
 }
 
-.glass-card {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(12px) saturate(180%);
-    -webkit-backdrop-filter: blur(12px) saturate(180%);
-    border-radius: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    color: #0B2545; // Dark text for readability
+.checkout-card {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #0B2545;
+    transition: all 0.3s ease;
+    
+    &:hover {
+        background: rgba(255, 255, 255, 0.5);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
 }
 
-h3, h5 {
+h4, h6 {
     color: #0B2545;
     font-weight: 600;
 }
 
-.form-check-label {
-    color: #333;
+h4 {
+    font-size: 1.1rem;
 }
 
-.glass-form-check {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 0.5rem;
-    padding: 0.75rem 1rem;
+h6 {
+    font-size: 0.9rem;
     margin-bottom: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-        background: rgba(255, 255, 255, 0.4);
-        border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    input[type="radio"] {
-        margin-right: 0.75rem;
-        &:checked + .form-check-label {
-            font-weight: 600;
-            color: #EE7B30;
-        }
-    }
 }
 
-.glass-select {
-    background: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 0.5rem;
+.form-select {
+    background: rgba(248, 249, 250, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(222, 226, 230, 0.3);
+    border-radius: 6px;
     color: #0B2545;
-    padding: 0.5rem 1rem;
-    appearance: none; // Remove default select arrow
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%23000000%22%20d%3D%22M287%20197.2L159.7%2069.8c-3-3-7.7-3-10.7%200L5.4%20197.2c-3%203-3%207.7%200%2010.7l16%2016c3%203%207.8%203%2010.7%200l117-117%20117%20117c3%203%207.7%203%2010.7%200l16-16c3-3%203-7.7%200-10.7z%22%2F%3E%3C%2Fsvg%3E'); // Custom arrow
-    background-repeat: no-repeat;
-    background-position: right 0.75rem center;
-    background-size: 12px 12px;
-    transition: all 0.2s ease-in-out;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
 
     &:focus {
         border-color: #EE7B30;
-        box-shadow: 0 0 0 0.25rem rgba(238, 123, 48, 0.25);
+        background: rgba(248, 249, 250, 0.6);
+        box-shadow: 0 0 0 0.15rem rgba(238, 123, 48, 0.15);
         outline: none;
     }
 
     option {
-        background: #fff; // White background for options for readability
+        background: #fff;
         color: #0B2545;
     }
 }
 
-.glass-button {
-    background: linear-gradient(135deg, #EE7B30, #FFB88C);
-    color: #fff;
-    border: none;
-    border-radius: 9999px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(238, 123, 48, 0.2);
-    &:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 6px 16px rgba(238, 123, 48, 0.3);
+.btn-sm {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background: #2ECC71;
+    border-color: #2ECC71;
+    
+    &:hover:not(:disabled) {
+        background: #27AE60;
+        border-color: #27AE60;
     }
+    
     &:disabled {
         opacity: 0.6;
         cursor: not-allowed;
+    }
+}
+
+.btn-outline-secondary {
+    &:hover {
+        background: rgba(248, 249, 250, 0.5);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
     }
 }

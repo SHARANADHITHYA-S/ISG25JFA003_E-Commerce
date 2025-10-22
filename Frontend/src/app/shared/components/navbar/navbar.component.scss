@@ -45,6 +45,15 @@
   color: #333 !important;
   font-size: 1.5rem;
   margin-left: 1rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.profile-dropdown-btn:hover .fa-user-circle {
+  transform: scale(1.15);
+}
+
+.profile-dropdown-btn.nav-link::after {
+  display: none;
 }
 
 /* Override bootstrap navbar default styles */
@@ -247,10 +256,10 @@
   transition: all 0.3s ease !important;
 }
 
-.profile-dropdown-btn:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  color: #333 !important;
-}
+// .profile-dropdown-btn:hover {
+//   background-color: rgba(255, 255, 255, 0.1) !important;
+//   color: #333 !important;
+// }
 
 .dropdown-menu {
   border: none !important;

@@ -4,6 +4,7 @@ import com.cognizant.ecommerce.config.JwtUtil;
 import com.cognizant.ecommerce.dao.UserRepository;
 import com.cognizant.ecommerce.dto.ForgotPassword.ForgotPasswordRequest;
 import com.cognizant.ecommerce.dto.ForgotPassword.ResetPasswordRequest;
+import com.cognizant.ecommerce.dto.user.UserEditDTO;
 import com.cognizant.ecommerce.exception.BadCredentialsException;
 import com.cognizant.ecommerce.exception.ErrorResponse;
 import com.cognizant.ecommerce.exception.InvalidCredentialsException;
@@ -93,9 +94,9 @@ public class UserController {
 
     @PreAuthorize("@authService.isSelfOrAdmin(#userId)")
     @PutMapping("/user/{userId}")
-    public ResponseEntity<UserResponseDTO> updateUserProfile(@Valid @PathVariable Long userId, @Valid @RequestBody UserRequestDTO userRequestDTO) {
+    public ResponseEntity<UserResponseDTO> updateUserProfile(@Valid @PathVariable Long userId, @Valid @RequestBody UserEditDTO userEditDTO) {
         logger.info("Updating user profile for ID: {}", userId);
-        UserResponseDTO updatedUser = userService.updateUserProfile(userId, userRequestDTO);
+        UserResponseDTO updatedUser = userService.updateUserProfile(userId, userEditDTO);
         logger.info("User profile updated for ID: {}", userId);
         return ResponseEntity.ok(updatedUser);
     }

@@ -2,21 +2,15 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './shared/components/navbar/navbar.component';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
     selector: 'app-root',
     standalone: true,
-    imports: [RouterOutlet, NgbModule, NavbarComponent],
+    imports: [RouterOutlet, NgbModule, NavbarComponent, ToastModule],
     template: `
-        <div class="app-container">
-            <app-navbar></app-navbar>
-            <router-outlet></router-outlet>
-        </div>
+        <app-navbar></app-navbar>
+        <router-outlet></router-outlet>
     `,
-    styles: [`
-        .app-container {
-            min-height: 100vh;
-        }
-    `]
 })
 export class AppComponent { }
