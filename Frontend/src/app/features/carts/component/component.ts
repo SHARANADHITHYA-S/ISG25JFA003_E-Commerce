@@ -141,6 +141,10 @@ export class CartComponent implements OnInit {
     });
   }
 
+  navigateToProduct(productId: number): void {
+    this.router.navigate(['/products', productId]);
+  }
+
   private recalculateCartTotal(): void {
     if (this.cart) {
       this.cart.totalPrice = this.cart.items.reduce((total, item) => {

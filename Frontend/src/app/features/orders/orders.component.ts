@@ -64,8 +64,8 @@ export class OrdersComponent {
         
         // Get user details
         const user = this.authService.getCurrentUser();
-        const userName = user ? `${user.firstName} ${user.lastName}` : 'Guest User';
-        const userEmail = user?.username ? `${user.username}@example.com` : '';
+        const userName = user ? user.name : 'Guest User';
+        const userEmail = user?.email ? user.email : '';
 
         // Open Real Razorpay Checkout
         this.razorpayService.openCheckout({
@@ -76,7 +76,7 @@ export class OrdersComponent {
             prefill: {
                 name: userName,
                 email: userEmail,
-                contact: user?.username || ''
+                contact: user?.name || '' // Assuming contact can be name or phone number
             },
             theme: {
                 color: '#667eea'

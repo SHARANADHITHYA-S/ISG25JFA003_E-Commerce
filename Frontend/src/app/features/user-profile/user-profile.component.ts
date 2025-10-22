@@ -89,7 +89,7 @@ export class UserProfileComponent implements OnInit {
     if (this.user && this.user.id && this.editableUser) {
       // Create a new object with only username and email for the API call
       const userUpdate: { username?: string; email?: string } = {
-        username: this.editableUser.name, // Use editableUser.name for the username field
+        username: this.editableUser.name, // Use editableUser.username for the username field
         email: this.editableUser.email
       };
 

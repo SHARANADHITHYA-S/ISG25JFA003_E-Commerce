@@ -1,70 +1,190 @@
 <div class="order-history-container">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner-container">
+      <div class="custom-spinner"></div>
+      <p>Loading your order history...</p>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <app-error-message *ngIf="error" [message]="error" (retryClick)="loadOrders()"></app-error-message>
+
+  <div *ngIf="!loading && !error">
+    <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h3>
-            <i class="bi bi-clock-history me-2"></i>Order History
-        </h3>
+      <h3>
+        <i class="bi bi-clock-history me-2"></i>Order History
+      </h3>
+      <div class="orders-count" *ngIf="allOrders.length > 0">
+        <span class="badge badge-primary">{{ allOrders.length }} Orders</span>
+      </div>
     </div>
 
-    <app-loader *ngIf="loading" [overlay]="true" message="Loading order history..."></app-loader>
-    <app-error-message *ngIf="error" [message]="error" (retryClick)="loadOrders()"></app-error-message>
-
-    <div *ngIf="!loading && !error">
-        <!-- Orders Display - Collapsed by Default -->
-        <div class="orders-grid">
-            <div *ngFor="let order of allOrders" class="order-card">
-                <!-- Collapsed View (Default) -->
-                <div class="order-card-collapsed">
-                    <div class="order-left">
-                        <h5 class="order-number">Order #{{ order.id }}</h5>
-                        <p class="order-date">Placed: {{ order.placed_at | date:'MMM d, y' }}</p>
-                    </div>
-                </div>
-
-                <div class="order-card-footer">
-                    <div class="order-total-left">
-                        <strong>Total: {{ order.totalAmount | currency }}</strong>
-                    </div>
-                    <div class="order-actions-right">
-                        <span class="status-badge" [ngClass]="getBadgeClass(order.status)">
-                            {{ order.status }}
-                        </span>
-                        <button class="btn btn-primary btn-sm view-details-btn" (click)="toggleOrderDetails(order.id)">
-                            {{ expandedOrderId === order.id ? 'Hide Details' : 'View Details' }}
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Expanded Details View -->
-                <div class="expanded-details" *ngIf="expandedOrderId === order.id">
-                    <hr class="details-divider">
-                    
-                    <h6 class="items-title">Items in this Order ({{ order.orderItems.length }})</h6>
-                    
-                    <!-- Order Items -->
-                    <div class="order-items-list">
-                        <div class="history-item" *ngFor="let item of order.orderItems">
-                            <div class="item-info">
-                                <strong>Product:</strong> {{ item.productName }}<br>
-                                <span class="text-muted">Quantity: {{ item.quantity }}</span><br>
-                                <span class="text-muted">Total: {{ (item.price * item.quantity) | currency }}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Shipping and Payment Info -->
-                    <div class="order-meta-info">
-                        <p><strong>Shipping Address ID:</strong> {{ order.addressId }}</p>
-                        <p><strong>Payment Method ID:</strong> {{ order.paymentMethodId }}</p>
-                    </div>
-                </div>
+    <!-- Orders Display -->
+    <div *ngIf="allOrders.length > 0" class="orders-grid">
+      <div *ngFor="let order of allOrders; trackBy: trackByOrderId" class="order-card">
+        <!-- Collapsed View (Default) -->
+        <div class="order-card-collapsed">
+          <div class="order-header-section">
+            <div class="order-info">
+              <h5 class="order-number">
+                <i class="bi bi-receipt me-2"></i>Order #{{ order.id }}
+              </h5>
+              <p class="order-date">
+                <i class="bi bi-calendar-event me-1"></i>{{ order.placed_at | date:'MMM d, y' }}
+              </p>
             </div>
-
-            <!-- Empty State -->
-            <div *ngIf="allOrders.length === 0" class="empty-state">
-                <i class="bi bi-inbox empty-icon"></i>
-                <h4>No orders found</h4>
-                <p>You don't have any orders at the moment.</p>
+            <div class="order-status">
+              <span class="status-badge" [ngClass]="getBadgeClass(order.status)">
+                {{ order.status }}
+              </span>
             </div>
+          </div>
+
+          <!-- Quick Items Preview -->
+          <div class="order-items-preview" *ngIf="order.orderItems.length > 0">
+            <div class="preview-item" *ngFor="let item of order.orderItems.slice(0, 3)">
+              <img [src]="getProductImage(item.productName)"
+                   [alt]="item.productName"
+                   onerror="this.src='/favicon.ico'"
+                   class="preview-image">
+              <span class="preview-quantity">{{ item.quantity }}</span>
+            </div>
+            <span class="more-items" *ngIf="order.orderItems.length > 3">
+              +{{ order.orderItems.length - 3 }} more
+            </span>
+          </div>
         </div>
+
+        <div class="order-card-footer">
+          <div class="order-total-section">
+            <div class="total-info">
+              <span class="total-label">Total Amount:</span>
+              <span class="total-amount">{{ order.totalAmount | currency }}</span>
+            </div>
+            <div class="items-count">
+              <i class="bi bi-box-seam me-1"></i>{{ order.orderItems.length }} {{ order.orderItems.length === 1 ? 'Item' : 'Items' }}
+            </div>
+          </div>
+          <div class="order-actions">
+            <button class="btn btn-details" (click)="toggleOrderDetails(order.id)">
+              <i class="bi" [class]="expandedOrderId === order.id ? 'bi-chevron-up' : 'bi-chevron-down'"></i>
+              {{ expandedOrderId === order.id ? 'Hide Details' : 'View Details' }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Expanded Details View -->
+        <div class="expanded-details" *ngIf="expandedOrderId === order.id">
+          <div class="details-divider"></div>
+
+          <div class="order-details-content">
+            <!-- Order Items Section -->
+            <div class="items-section">
+              <h6 class="section-title">
+                <i class="bi bi-box-seam me-2"></i>Order Items ({{ order.orderItems.length }})
+              </h6>
+              <div class="order-items-list">
+                <div class="history-item" *ngFor="let item of order.orderItems">
+                  <div class="item-image-wrapper">
+                    <img [src]="getProductImage(item.productName)"
+                         [alt]="item.productName"
+                         onerror="this.src='/favicon.ico'"
+                         class="item-image">
+                  </div>
+                  <div class="item-details">
+                    <h6 class="item-name">{{ item.productName }}</h6>
+                    <div class="item-meta">
+                      <span class="quantity">
+                        <i class="bi bi-dash-circle me-1"></i>Qty: {{ item.quantity }}
+                      </span>
+                      <span class="price">{{ item.price | currency }}</span>
+                    </div>
+                    <div class="item-total">
+                      <span class="total-label">Subtotal:</span>
+                      <span class="total-value">{{ (item.price * item.quantity) | currency }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="summary-section">
+              <h6 class="section-title">
+                <i class="bi bi-receipt-cutoff me-2"></i>Order Summary
+              </h6>
+              <div class="summary-details">
+                <div class="summary-row">
+                  <span>Subtotal:</span>
+                  <span class="summary-value">{{ order.totalAmount | currency }}</span>
+                </div>
+                <div class="summary-row">
+                  <span>Shipping:</span>
+                  <span class="summary-value free">FREE</span>
+                </div>
+                <div class="summary-row">
+                  <span>Tax (9%):</span>
+                  <span class="summary-value">{{ order.totalAmount * 0.09 | currency }}</span>
+                </div>
+                <div class="summary-row total">
+                  <span>Grand Total:</span>
+                  <span class="total-value">{{ order.totalAmount * 1.09 | currency }}</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Shipping and Payment Info -->
+            <div class="meta-section">
+              <h6 class="section-title">
+                <i class="bi bi-info-circle me-2"></i>Order Information
+              </h6>
+              <div class="meta-grid">
+                <div class="meta-item">
+                  <i class="bi bi-geo-alt"></i>
+                  <div>
+                    <span class="meta-label">Shipping Address</span>
+                    <span class="meta-value">ID: {{ order.addressId }}</span>
+                  </div>
+                </div>
+                <div class="meta-item">
+                  <i class="bi bi-credit-card"></i>
+                  <div>
+                    <span class="meta-label">Payment Method</span>
+                    <span class="meta-value">ID: {{ order.paymentMethodId }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="actions-section">
+              <button class="btn btn-outline-secondary">
+                <i class="bi bi-file-earmark-text me-2"></i>View Invoice
+              </button>
+              <button class="btn btn-outline-info">
+                <i class="bi bi-headset me-2"></i>Contact Support
+              </button>
+              <button class="btn btn-outline-success" *ngIf="order.status === 'DELIVERED'">
+                <i class="bi bi-star me-2"></i>Write Review
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- Empty State -->
+    <div *ngIf="allOrders.length === 0" class="empty-state">
+      <div class="empty-content">
+        <i class="bi bi-receipt-x empty-icon"></i>
+        <h4>No Order History</h4>
+        <p>You haven't placed any orders yet. Start shopping to create your first order!</p>
+        <a href="/products" class="btn btn-primary">
+          <i class="bi bi-shop me-2"></i>Browse Products
+        </a>
+      </div>
+    </div>
+  </div>
 </div>

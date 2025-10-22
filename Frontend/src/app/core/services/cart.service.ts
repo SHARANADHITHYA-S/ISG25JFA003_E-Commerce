@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { CartResponse, CartItemRequest, CartItemResponse } from '../models/cart';
 import { AuthService } from './auth.service'; // Import AuthService
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { AuthService } from './auth.service'; // Import AuthService
 export class CartService {
   private apiUrl = 'http://localhost:8080/api';
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService, private notificationService: NotificationService) { }
 
   private getUserIdFromAuth(): number {
     const user = this.authService.getCurrentUser();
@@ -32,7 +33,11 @@ export class CartService {
     const userId = this.getUserIdFromAuth();
     const itemRequest: CartItemRequest = { productId, quantity };
     return this.http.post<CartItemResponse>(`${this.apiUrl}/cart-items/${userId}`, itemRequest).pipe(
-      catchError(this.handleError)
+      tap(() => this.notificationService.showSuccess('Item added to cart')),
+      catchError(err => {
+        this.notificationService.showError('Failed to add item to cart');
+        return this.handleError(err);
+      })
     );
   }
 
@@ -44,14 +49,22 @@ export class CartService {
 
   removeCartItem(itemId: number): Observable<string> {
     return this.http.delete(`${this.apiUrl}/cart-items/${itemId}`, { responseType: 'text' }).pipe(
-      catchError(this.handleError)
+      tap(() => this.notificationService.showSuccess('Item removed from cart')),
+      catchError(err => {
+        this.notificationService.showError('Failed to remove item from cart');
+        return this.handleError(err);
+      })
     );
   }
 
   clearCart(): Observable<string> {
     const userId = this.getUserIdFromAuth();
     return this.http.delete(`${this.apiUrl}/carts/user/${userId}`, { responseType: 'text' }).pipe(
-      catchError(this.handleError)
+      tap(() => this.notificationService.showSuccess('Cart cleared')),
+      catchError(err => {
+        this.notificationService.showError('Failed to clear cart');
+        return this.handleError(err);
+      })
     );
   }
 

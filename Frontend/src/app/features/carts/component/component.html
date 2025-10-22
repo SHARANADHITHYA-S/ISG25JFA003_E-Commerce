@@ -32,7 +32,7 @@
     <div class="cart-layout">
       <!-- Cart Items List -->
       <div class="cart-items-section">
-        <div class="cart-item" *ngFor="let item of cart.items">
+        <div class="cart-item" *ngFor="let item of cart.items" (click)="navigateToProduct(item.productId)">
           <div class="item-image-wrapper">
             <img [src]="getProductImage(item.productName)" 
                  [alt]="item.productName"

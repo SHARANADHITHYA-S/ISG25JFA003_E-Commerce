@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { User } from '../models/user';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { User } from '../models/user';
 export class UserService {
   private apiUrl = 'http://localhost:8080/api/user';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private notificationService: NotificationService) { }
 
   getUserById(userId: number): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/${userId}`).pipe(
@@ -20,7 +21,11 @@ export class UserService {
 
   updateUser(userId: number, user: Partial<User>): Observable<User> {
     return this.http.put<User>(`${this.apiUrl}/${userId}`, user).pipe(
-      catchError(this.handleError)
+      tap(() => this.notificationService.showSuccess('User details updated successfully')),
+      catchError(err => {
+        this.notificationService.showError('Failed to update user details');
+        return this.handleError(err);
+      })
     );
   }
 

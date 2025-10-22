@@ -23,7 +23,7 @@
       </div>
       <div *ngIf="user" class="profile-info">
         <div class="info-group">
-          <label>Name:</label>
+          <label>Username:</label>
           <span *ngIf="!editMode">{{ user.name }}</span>
           <input *ngIf="editMode" [(ngModel)]="editableUser.name" class="form-control">
         </div>

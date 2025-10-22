@@ -76,20 +76,24 @@ export class OrderHistoryComponent implements OnInit {
     getBadgeClass(status: OrderStatus): string {
         switch (status) {
             case 'PENDING':
-                return 'bg-warning';
+                return 'status-pending';
             case 'PROCESSING':
-                return 'bg-info';
+                return 'status-processing';
             case 'SHIPPED':
-                return 'bg-primary'; // Example color for SHIPPED
+                return 'status-shipped';
             case 'DELIVERED':
-                return 'bg-success'; // Example color for DELIVERED
+                return 'status-delivered';
             case 'COMPLETED':
-                return 'bg-success';
+                return 'status-completed';
             case 'CANCELLED':
-                return 'bg-danger';
+                return 'status-cancelled';
             default:
-                return 'bg-secondary';
+                return 'status-default';
         }
+    }
+
+    trackByOrderId(index: number, order: Order): number {
+        return order.id;
     }
 
     getShadowColor(status: OrderStatus): string {

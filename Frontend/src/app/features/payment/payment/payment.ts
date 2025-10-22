@@ -77,7 +77,7 @@ export class PaymentPageComponent implements OnInit {
         this.handlePaymentSuccess(response);
       },
       prefill: {
-        name: user?.username || 'Test User',
+        name: user?.name || 'Test User',
         //email: user?.email || 'test@example.com',
         contact: '9999999999'
       },

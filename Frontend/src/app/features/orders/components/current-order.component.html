@@ -1,0 +1,169 @@
+<div class="current-order-container">
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner-container">
+      <div class="custom-spinner"></div>
+      <p>Loading your current order...</p>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <app-error-message *ngIf="error" [message]="error" (retryClick)="loadCurrentOrder()"></app-error-message>
+
+  <div *ngIf="!loading && !error">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h3>
+        <i class="bi bi-cart-check me-2"></i>Current Order
+      </h3>
+    </div>
+
+    <!-- Single Big Order Card -->
+    <div *ngIf="currentOrder" class="order-big-card">
+      <!-- Order Header -->
+      <div class="order-header-section">
+        <div class="order-info">
+          <h4 class="order-title">
+            <i class="bi bi-receipt me-2"></i>Order #{{ currentOrder.id }}
+          </h4>
+          <p class="order-date">
+            <i class="bi bi-calendar-event me-1"></i>Placed on {{ currentOrder.placed_at | date:'MMM d, y' }}
+          </p>
+        </div>
+        <div class="order-status">
+          <span class="status-badge" [ngClass]="getStatusClass(currentOrder.status)">
+            {{ currentOrder.status }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Main Content Layout -->
+      <div class="order-main-content">
+        <!-- Order Items Section (Left Side) -->
+        <div class="order-items-section">
+          <h5 class="section-title">
+            <i class="bi bi-box-seam me-2"></i>Order Items ({{ currentOrder.orderItems.length }})
+          </h5>
+          <div class="items-list">
+            <div class="item-card" *ngFor="let item of currentOrder.orderItems">
+              <div class="item-image-container">
+                <img [src]="getProductImage(item.productName)"
+                     [alt]="item.productName"
+                     onerror="this.src='/favicon.ico'"
+                     class="item-image">
+              </div>
+              <div class="item-content">
+                <h6 class="item-name">{{ item.productName }}</h6>
+                <div class="item-details">
+                  <span class="quantity">
+                    <i class="bi bi-dash-circle me-1"></i>Qty: {{ item.quantity }}
+                  </span>
+                  <span class="price">{{ item.price | currency }}</span>
+                </div>
+                <div class="item-total">
+                  <span class="total-label">Subtotal:</span>
+                  <span class="total-value">{{ (item.price * item.quantity) | currency }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Details Section (Right Side) -->
+        <div class="order-details-section">
+          <!-- Order Details Grid -->
+          <div class="order-details-grid">
+            <!-- Shipping Information -->
+            <div class="detail-card">
+              <h6 class="detail-title">
+                <i class="bi bi-geo-alt me-2"></i>Shipping Address
+              </h6>
+              <div class="detail-content">
+                <p class="detail-text">Address ID: {{ currentOrder.addressId }}</p>
+                <p class="detail-text">Estimated Shipping: {{ getEstimatedShippingDate() | date:'MMM d, y' }}</p>
+                <p class="detail-text">Expected Arrival: {{ getArrivalDate() | date:'MMM d, y' }}</p>
+              </div>
+            </div>
+
+            <!-- Payment Information -->
+            <div class="detail-card">
+              <h6 class="detail-title">
+                <i class="bi bi-credit-card me-2"></i>Payment Method
+              </h6>
+              <div class="detail-content">
+                <p class="detail-text">Payment Method ID: {{ currentOrder.paymentMethodId }}</p>
+                <p class="detail-text">Status: {{ currentOrder.status }}</p>
+              </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="detail-card summary-card">
+              <h6 class="detail-title">
+                <i class="bi bi-receipt-cutoff me-2"></i>Order Summary
+              </h6>
+              <div class="summary-content">
+                <div class="summary-row">
+                  <span>Subtotal:</span>
+                  <span class="summary-value">{{ currentOrder.totalAmount | currency }}</span>
+                </div>
+                <div class="summary-row">
+                  <span>Shipping:</span>
+                  <span class="summary-value free">FREE</span>
+                </div>
+                <div class="summary-row">
+                  <span>Tax (9%):</span>
+                  <span class="summary-value">{{ currentOrder.totalAmount * 0.09 | currency }}</span>
+                </div>
+                <hr class="summary-divider">
+                <div class="summary-row total">
+                  <span>Total:</span>
+                  <span class="total-value">{{ currentOrder.totalAmount * 1.09 | currency }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="order-actions">
+            <button class="btn btn-payment" (click)="onMakePayment()">
+              <i class="bi bi-credit-card-2-front me-2"></i>
+              Proceed to Payment
+            </button>
+            <button class="btn btn-cancel" (click)="onCancelOrder()">
+              <i class="bi bi-x-circle me-2"></i>
+              Cancel Order
+            </button>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="trust-badges">
+            <div class="badge-item">
+              <i class="bi bi-shield-check"></i>
+              <span>Secure Payment</span>
+            </div>
+            <div class="badge-item">
+              <i class="bi bi-truck"></i>
+              <span>Fast Delivery</span>
+            </div>
+            <div class="badge-item">
+              <i class="bi bi-arrow-clockwise"></i>
+              <span>Easy Returns</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!currentOrder" class="empty-state">
+      <div class="empty-content">
+        <i class="bi bi-bag-x empty-icon"></i>
+        <h4>No Current Order</h4>
+        <p>You don't have any pending orders at the moment. Start shopping to place an order!</p>
+        <a href="/products" class="btn btn-primary">
+          <i class="bi bi-shop me-2"></i>Browse Products
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
