@@ -37,6 +37,10 @@ export class PaymentMethodFormComponent {
       cardholderName: ['', Validators.required],
       default: [false]
     });
+
+    if (this.data) {
+      this.paymentForm.patchValue(this.data);
+    }
   }
 
   onNoClick(): void {

@@ -152,6 +152,16 @@
   font-style: italic;
 }
 
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 12px;
+  border: 1px solid #c3e6cb;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .profile-container {
     flex-direction: column;
