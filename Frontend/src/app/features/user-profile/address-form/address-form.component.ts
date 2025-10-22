@@ -41,6 +41,10 @@ export class AddressFormComponent {
       phone: ['', Validators.required],
       default: [false]
     });
+
+    if (this.data) {
+      this.addressForm.patchValue(this.data);
+    }
   }
 
   onNoClick(): void {

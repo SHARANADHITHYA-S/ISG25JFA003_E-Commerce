@@ -38,6 +38,18 @@ export class AddressService {
     );
   }
 
+  updateAddress(userId: number, addressId: number, address: Partial<Address>): Observable<Address> {
+    return this.http.put<Address>(`${this.apiUrl}/${userId}/${addressId}`, address).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteAddress(addressId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${addressId}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: any) {
     console.error('An API error occurred in AddressService', error);
     let errorMessage = 'Something went wrong with the API call.';

@@ -94,4 +94,8 @@ export class AuthService {
     resetPassword(token: string, username: string, newPassword: string): Observable<any> {
         return this.http.post(`${this.apiUrl}/reset-password`, { token, username, newPassword }, { responseType: 'text' });
     }
+
+    updateProfile(user: User): Observable<User> {
+        return this.http.put<User>(`${this.apiUrl}/profile`, user);
+    }
 }

@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Add New Payment Method</h2>
+<h2 mat-dialog-title>{{ data ? 'Edit Payment Method' : 'Add New Payment Method' }}</h2>
 <div mat-dialog-content>
   <form [formGroup]="paymentForm">
     <mat-form-field appearance="fill">
@@ -22,5 +22,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button (click)="onSubmit()" [disabled]="!paymentForm.valid">Add Payment Method</button>
+  <button mat-button (click)="onSubmit()" [disabled]="!paymentForm.valid">{{ data ? 'Save Payment Method' : 'Add Payment Method' }}</button>
 </div>

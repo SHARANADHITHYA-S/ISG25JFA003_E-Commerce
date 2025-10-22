@@ -38,6 +38,18 @@ export class PaymentMethodService {
     );
   }
 
+  updatePaymentMethod(paymentMethodId: number, paymentMethod: PaymentMethodRequest): Observable<PaymentMethod> {
+    return this.http.put<PaymentMethod>(`${this.apiUrl}/${paymentMethodId}`, paymentMethod).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deletePaymentMethod(paymentMethodId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${paymentMethodId}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: any) {
     console.error('An API error occurred in PaymentMethodService', error);
     let errorMessage = 'Something went wrong with the API call.';
@@ -51,4 +63,3 @@ export class PaymentMethodService {
     return throwError(() => new Error(errorMessage));
   }
 }
-
