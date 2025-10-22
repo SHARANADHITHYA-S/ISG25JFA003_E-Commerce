@@ -99,6 +99,12 @@ export class OrderService {
         );
     }
 
+    updateOrderStatus(orderId: number, status: string): Observable<Order> {
+        return this.http.put<Order>(`${this.apiUrl}/admin/${orderId}/status?status=${status}`, {}).pipe(
+            catchError(this.handleError)
+        );
+    }
+
     getOrdersByPage(page: number, size: number): Observable<PaginatedOrderResponse> {
         let userId: number;
         try {

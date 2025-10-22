@@ -11,7 +11,8 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; //
   selector: 'app-cart',
   standalone: true,
   imports: [CommonModule, MatDialogModule, MatSnackBarModule], // Add MatSnackBarModule to imports
-  templateUrl: './component.html'
+  templateUrl: './component.html',
+  styleUrls: ['./component.scss']
 })
 export class CartComponent implements OnInit {
   cart: CartResponse | null = null;
@@ -153,5 +154,76 @@ export class CartComponent implements OnInit {
       return 0;
     }
     return this.cart.items.reduce((sum, item) => sum + item.quantity, 0);
+  }
+
+  getProductImage(productName: string): string {
+    const imageMap: { [key: string]: string } = {
+      'Atomic Habits': '/atomichabitsbk.jpg',
+      'The Alchemist': '/thealchemistbk.jpg',
+      'Clean Code': '/cleancodebk.jpg',
+      'Headset': '/headset.jpg',
+      'Kettle': '/kettle.jpg',
+      'LED TV': '/ledtv.jpg',
+      'Lipstick': '/lipstick.jpg',
+      'Pan': '/pan.jpg',
+      'Pillow': '/pillow.jpg',
+      'Serum': '/serum.jpg',
+      'Shampoo': '/shampoo.jpg',
+      'Smartwatch': '/smartwatch.jpg'
+    };
+    
+    if (imageMap[productName]) {
+      return imageMap[productName];
+    }
+    
+    for (const key in imageMap) {
+      if (productName.toLowerCase().includes(key.toLowerCase())) {
+        return imageMap[key];
+      }
+    }
+    
+    return '/favicon.ico';
+  }
+
+  incrementQuantity(item: CartItemResponse): void {
+    const newQuantity = item.quantity + 1;
+    const itemRequest: CartItemRequest = { productId: item.productId, quantity: newQuantity };
+
+    this.cartService.updateCartItem(item.id, itemRequest).subscribe({
+      next: (updatedItem) => {
+        if (this.cart) {
+          const index = this.cart.items.findIndex(i => i.id === updatedItem.id);
+          if (index !== -1) {
+            this.cart.items[index] = updatedItem;
+            this.recalculateCartTotal();
+          }
+        }
+      },
+      error: (err) => {
+        this.snackBar.open('Failed to update quantity.', 'Dismiss', { duration: 3000 });
+      }
+    });
+  }
+
+  decrementQuantity(item: CartItemResponse): void {
+    if (item.quantity <= 1) return;
+    
+    const newQuantity = item.quantity - 1;
+    const itemRequest: CartItemRequest = { productId: item.productId, quantity: newQuantity };
+
+    this.cartService.updateCartItem(item.id, itemRequest).subscribe({
+      next: (updatedItem) => {
+        if (this.cart) {
+          const index = this.cart.items.findIndex(i => i.id === updatedItem.id);
+          if (index !== -1) {
+            this.cart.items[index] = updatedItem;
+            this.recalculateCartTotal();
+          }
+        }
+      },
+      error: (err) => {
+        this.snackBar.open('Failed to update quantity.', 'Dismiss', { duration: 3000 });
+      }
+    });
   }
 }
