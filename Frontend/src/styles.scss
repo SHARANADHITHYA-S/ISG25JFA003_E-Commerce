@@ -184,5 +184,39 @@ app-current-order {
     margin-top: 10px;
 }
 
+/* Snackbar Custom Styles */
+.success-snackbar {
+    background: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    
+    .mdc-snackbar__label,
+    .mat-mdc-snack-bar-label {
+        color: white !important;
+    }
+}
+
+.error-snackbar {
+    background: linear-gradient(135deg, #E74C3C 0%, #C0392B 100%) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    
+    .mdc-snackbar__label,
+    .mat-mdc-snack-bar-label {
+        color: white !important;
+    }
+}
+
+.info-snackbar {
+    background: linear-gradient(135deg, #3498DB 0%, #2980B9 100%) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    
+    .mdc-snackbar__label,
+    .mat-mdc-snack-bar-label {
+        color: white !important;
+    }
+}
+
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';

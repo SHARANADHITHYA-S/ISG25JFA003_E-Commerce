@@ -1,63 +1,70 @@
 <div class="order-history-container">
-    <h2 class="text-center mb-4">Order History</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3>
+            <i class="bi bi-clock-history me-2"></i>Order History
+        </h3>
+    </div>
 
     <app-loader *ngIf="loading" [overlay]="true" message="Loading order history..."></app-loader>
-    <app-error-message *ngIf="error" [message]="error" (retryClick)="loadOrders(0)"></app-error-message>
+    <app-error-message *ngIf="error" [message]="error" (retryClick)="loadOrders()"></app-error-message>
 
-    <div *ngIf="paginatedOrders && paginatedOrders.content.length > 0">
-        <div class="row justify-content-center">
-            <div class="mb-4" *ngFor="let order of paginatedOrders.content">
-                <div class="order-history-card card shadow-sm border-0 rounded-3" [ngStyle]="{'box-shadow': '0 4px 12px ' + getShadowColor(order.status)}">
-                    <div class="card-body p-4">
-                        <div class="d-flex justify-content-between align-items-start mb-3">
-                            <div>
-                                <h5 class="order-id">Order #{{ order.id }}</h5>
-                                <p class="order-placed">Placed: {{ order.placed_at | date:'mediumDate' }}</p>
+    <div *ngIf="!loading && !error">
+        <!-- Orders Display - Collapsed by Default -->
+        <div class="orders-grid">
+            <div *ngFor="let order of allOrders" class="order-card">
+                <!-- Collapsed View (Default) -->
+                <div class="order-card-collapsed">
+                    <div class="order-left">
+                        <h5 class="order-number">Order #{{ order.id }}</h5>
+                        <p class="order-date">Placed: {{ order.placed_at | date:'MMM d, y' }}</p>
+                    </div>
+                </div>
+
+                <div class="order-card-footer">
+                    <div class="order-total-left">
+                        <strong>Total: {{ order.totalAmount | currency }}</strong>
+                    </div>
+                    <div class="order-actions-right">
+                        <span class="status-badge" [ngClass]="getBadgeClass(order.status)">
+                            {{ order.status }}
+                        </span>
+                        <button class="btn btn-primary btn-sm view-details-btn" (click)="toggleOrderDetails(order.id)">
+                            {{ expandedOrderId === order.id ? 'Hide Details' : 'View Details' }}
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Expanded Details View -->
+                <div class="expanded-details" *ngIf="expandedOrderId === order.id">
+                    <hr class="details-divider">
+                    
+                    <h6 class="items-title">Items in this Order ({{ order.orderItems.length }})</h6>
+                    
+                    <!-- Order Items -->
+                    <div class="order-items-list">
+                        <div class="history-item" *ngFor="let item of order.orderItems">
+                            <div class="item-info">
+                                <strong>Product:</strong> {{ item.productName }}<br>
+                                <span class="text-muted">Quantity: {{ item.quantity }}</span><br>
+                                <span class="text-muted">Total: {{ (item.price * item.quantity) | currency }}</span>
                             </div>
-                            <span class="status-tag badge" [ngClass]="getBadgeClass(order.status)">{{ order.status }}</span>
                         </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h6 class="order-total">Total: {{ order.totalAmount | currency }}</h6>
-                            <button class="btn view-details-btn" (click)="toggleOrderDetails(order.id)">View Details</button>
-                        </div>
-                        <div class="order-details-expanded" *ngIf="expandedOrderId === order.id">
-                            <hr>
-                            <h6 class="section-title">Items in this Order ({{ order.orderItems.length }})</h6>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item" *ngFor="let item of order.orderItems">
-                                    Product: {{ item.productName }}<br>
-                                    Quantity: {{ item.quantity }}<br>
-                                    Total: {{ (item.price * item.quantity) | currency }}
-                                </li>
-                            </ul>
-                            <p class="mt-3"><strong>Shipping Address ID:</strong> {{ order.addressId }}</p>
-                            <p><strong>Payment Method ID:</strong> {{ order.paymentMethodId }}</p>
-                        </div>
+                    </div>
+
+                    <!-- Shipping and Payment Info -->
+                    <div class="order-meta-info">
+                        <p><strong>Shipping Address ID:</strong> {{ order.addressId }}</p>
+                        <p><strong>Payment Method ID:</strong> {{ order.paymentMethodId }}</p>
                     </div>
                 </div>
             </div>
+
+            <!-- Empty State -->
+            <div *ngIf="allOrders.length === 0" class="empty-state">
+                <i class="bi bi-inbox empty-icon"></i>
+                <h4>No orders found</h4>
+                <p>You don't have any orders at the moment.</p>
+            </div>
         </div>
-
-        <nav *ngIf="totalPages > 1" aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-                <li class="page-item" [class.disabled]="paginatedOrders.number === 0">
-                    <a class="page-link" (click)="onPageChange(paginatedOrders.number - 1)" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li *ngFor="let page of [].constructor(totalPages); let i = index" class="page-item" [class.active]="i === paginatedOrders.number">
-                    <a class="page-link" (click)="onPageChange(i)">{{ i + 1 }}</a>
-                </li>
-                <li class="page-item" [class.disabled]="paginatedOrders.number === totalPages - 1">
-                    <a class="page-link" (click)="onPageChange(paginatedOrders.number + 1)" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-
-    <div *ngIf="!loading && !error && (!paginatedOrders || paginatedOrders.content.length === 0)" class="text-center">
-        <p>No previous orders found.</p>
     </div>
 </div>

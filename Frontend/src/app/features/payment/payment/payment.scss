@@ -1,0 +1,53 @@
+/* Payment Page Styles */
+.payment-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+ 
+.payment-card {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+ 
+/* Loading Animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+ 
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+ 
+/* Razorpay Button Hover Effect */
+.razorpay-button {
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+ 
+.razorpay-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+ 
+/* Test Card Styling */
+.test-card {
+  border-left: 4px solid #3b82f6;
+}
+ 
+.test-card-mastercard {
+  border-left: 4px solid #f59e0b;
+}
+ 
+/* Success/Error States */
+.payment-success {
+  border-color: #10b981;
+  background-color: #ecfdf5;
+}
+ 
+.payment-error {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
