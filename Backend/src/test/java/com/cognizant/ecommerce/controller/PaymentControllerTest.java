@@ -43,7 +43,6 @@ class PaymentControllerTest {
         PaymentRequestDTO request = new PaymentRequestDTO();
         request.setUserId(1L);
         request.setOrderId(2L);
-        request.setAmount(BigDecimal.valueOf(999.99));
 
 
         PaymentResponseDTO response = new PaymentResponseDTO();

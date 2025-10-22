@@ -95,7 +95,6 @@ public class PaymentServiceImplTest {
     public void testCreatePayment() {
         PaymentRequestDTO dto = new PaymentRequestDTO();
         dto.setOrderId(testOrder.getId());
-        dto.setAmount(BigDecimal.valueOf(1000));
 
 
         PaymentResponseDTO response = paymentService.createPayment(dto);

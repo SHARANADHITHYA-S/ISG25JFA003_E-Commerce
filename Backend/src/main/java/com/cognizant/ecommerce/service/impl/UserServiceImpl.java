@@ -3,6 +3,7 @@ package com.cognizant.ecommerce.service.impl;
 import com.cognizant.ecommerce.config.JwtUtil;
 import com.cognizant.ecommerce.dao.UserRepository;
 import com.cognizant.ecommerce.dto.ForgotPassword.ResetPasswordRequest;
+import com.cognizant.ecommerce.dto.user.UserEditDTO;
 import com.cognizant.ecommerce.dto.user.UserRequestDTO;
 import com.cognizant.ecommerce.dto.user.UserResponseDTO;
 import com.cognizant.ecommerce.exception.ResourceNotFoundException;
@@ -52,11 +53,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDTO updateUserProfile(Long userId, UserRequestDTO userRequestDTO) {
+    public UserResponseDTO updateUserProfile(Long userId, UserEditDTO userEditDTO) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id: " + userId));
-        user.setName(userRequestDTO.getUsername());
-        user.setEmail(userRequestDTO.getEmail());
+        user.setName(userEditDTO.getUsername());
+        user.setEmail(userEditDTO.getEmail());
         User updatedUser = userRepository.save(user);
         return convertToDto(updatedUser);
     }

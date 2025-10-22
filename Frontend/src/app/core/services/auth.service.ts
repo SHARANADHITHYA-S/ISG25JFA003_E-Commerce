@@ -36,22 +36,24 @@ export class AuthService {
         return this.http.post<{ token: string, user: User }>(`${this.apiUrl}/login`, { username, password }).pipe(
             map(response => {
                 this.storageService.setItem('token', response.token);
-
-                const decodedToken = this.decodeToken(response.token);
-
-                if (decodedToken) {
-                    const user: User = {
-                        id: decodedToken.userId,
-                        username: decodedToken.sub, // 'sub' is the subject, which is the username
-                        role: decodedToken.role,
-                        firstName: '', // Assuming these are not in token
-                        lastName: '',
-                        createdAt: new Date(),
-                        updatedAt: new Date()
-                    };
-                    this.storageService.setItem('user', user);
+                if (response.user) {
+                    this.storageService.setItem('user', response.user);
                 } else {
-                    this.storageService.removeItem('user');
+                    // Fallback to decoding token if user object is not in response
+                    const decodedToken = this.decodeToken(response.token);
+                    if (decodedToken) {
+                        const user: User = {
+                            id: decodedToken.userId,
+                            name: decodedToken.sub,
+                            email: '',
+                            role: decodedToken.role,
+                            created_at: '',
+                            updated_at: ''
+                        };
+                        this.storageService.setItem('user', user);
+                    } else {
+                        this.storageService.removeItem('user');
+                    }
                 }
                 this.loggedIn.next(true);
                 return response;
@@ -76,6 +78,10 @@ export class AuthService {
     getCurrentUser(): User | null {
         const user = this.storageService.getItem<User>('user');
         return user;
+    }
+
+    setCurrentUser(user: User): void {
+        this.storageService.setItem('user', user);
     }
 
     getUserRole(): string | null {

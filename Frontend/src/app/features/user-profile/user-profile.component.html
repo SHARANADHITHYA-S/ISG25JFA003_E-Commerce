@@ -17,27 +17,31 @@
   <div class="content">
     <!-- Profile Section -->
     <div *ngIf="activeSection === 'profile'" class="section">
-      <h2>Profile Information</h2>
+      <div class="section-header">
+        <h2>Profile Information</h2>
+        <button class="btn btn-secondary" (click)="toggleEditMode()">{{ editMode ? 'Cancel' : 'Edit' }}</button>
+      </div>
       <div *ngIf="user" class="profile-info">
         <div class="info-group">
-          <label>Username:</label>
-          <span>{{ user.username }}</span>
+          <label>Name:</label>
+          <span *ngIf="!editMode">{{ user.name }}</span>
+          <input *ngIf="editMode" [(ngModel)]="editableUser.name" class="form-control">
         </div>
         <div class="info-group">
-          <label>First Name:</label>
-          <span>{{ user.firstName || 'Not provided' }}</span>
-        </div>
-        <div class="info-group">
-          <label>Last Name:</label>
-          <span>{{ user.lastName || 'Not provided' }}</span>
+          <label>Email:</label>
+          <span *ngIf="!editMode">{{ user.email || 'Not provided' }}</span>
+          <input *ngIf="editMode" [(ngModel)]="editableUser.email" class="form-control">
         </div>
         <div class="info-group">
           <label>Role:</label>
           <span>{{ user.role }}</span>
         </div>
         <div class="info-group">
-          <label>Member Since:</label>
-          <span>{{ user.createdAt | date:'mediumDate' }}</span>
+          <label>Joined at:</label>
+          <span>{{ user.created_at | date:'mediumDate' }}</span>
+        </div>
+        <div *ngIf="editMode" class="edit-actions">
+          <button class="btn btn-primary" (click)="saveUser()">Save Changes</button>
         </div>
       </div>
       <div *ngIf="!user" class="no-data">

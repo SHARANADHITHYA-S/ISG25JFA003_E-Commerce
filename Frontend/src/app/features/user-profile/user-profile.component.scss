@@ -187,3 +187,13 @@
   align-items: center;
   margin-bottom: 20px;
 }
+
+.edit-actions {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.info-group input.form-control {
+    flex: 1;
+    max-width: 400px;
+}

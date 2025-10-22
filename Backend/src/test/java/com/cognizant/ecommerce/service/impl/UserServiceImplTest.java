@@ -3,6 +3,7 @@ package com.cognizant.ecommerce.service.impl;
 import com.cognizant.ecommerce.config.JwtUtil;
 import com.cognizant.ecommerce.dao.UserRepository;
 import com.cognizant.ecommerce.dto.ForgotPassword.ResetPasswordRequest;
+import com.cognizant.ecommerce.dto.user.UserEditDTO;
 import com.cognizant.ecommerce.dto.user.UserRequestDTO;
 import com.cognizant.ecommerce.dto.user.UserResponseDTO;
 import com.cognizant.ecommerce.exception.ResourceNotFoundException;
@@ -43,6 +44,7 @@ class UserServiceImplTest {
     private User user;
     private UserRequestDTO userRequestDTO;
     private UserResponseDTO userResponseDTO;
+    private UserEditDTO userEditDTO;
 
     @BeforeEach
     void setUp() {
@@ -101,14 +103,15 @@ class UserServiceImplTest {
         // Arrange
         when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
         when(userRepository.save(any(User.class))).thenReturn(user);
-        userRequestDTO.setUsername("updatedName");
+        UserEditDTO userEditDTO = new UserEditDTO("newName", "newemail@example.com");
+
 
         // Act
-        UserResponseDTO result = userService.updateUserProfile(1L, userRequestDTO);
+        UserResponseDTO result = userService.updateUserProfile(1L, userEditDTO);
 
         // Assert
         assertNotNull(result);
-        assertEquals("updatedName", result.getName());
+        assertEquals("newName   ", result.getName());
         verify(userRepository, times(1)).save(any(User.class));
     }
 
@@ -118,7 +121,7 @@ class UserServiceImplTest {
         when(userRepository.findById(anyLong())).thenReturn(Optional.empty());
 
         // Act & Assert
-        assertThrows(EntityNotFoundException.class, () -> userService.updateUserProfile(1L, userRequestDTO));
+        assertThrows(EntityNotFoundException.class, () -> userService.updateUserProfile(1L, userEditDTO));
         verify(userRepository, never()).save(any(User.class));
     }
 
