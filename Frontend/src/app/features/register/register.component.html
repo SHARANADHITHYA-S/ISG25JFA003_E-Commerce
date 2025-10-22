@@ -1,0 +1,86 @@
+<div class="register-container">
+  <div class="register-form">
+    <h2>Register</h2>
+
+    <div *ngIf="errorMessage" class="alert alert-error">
+      {{ errorMessage }}
+    </div>
+
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+
+    <form (ngSubmit)="register()">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          [(ngModel)]="username"
+          name="username"
+          required
+          placeholder="Enter your username"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="email"
+          name="email"
+          required
+          placeholder="Enter your email"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          [(ngModel)]="password"
+          name="password"
+          required
+          placeholder="Enter your password"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password:</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          [(ngModel)]="confirmPassword"
+          name="confirmPassword"
+          required
+          placeholder="Confirm your password"
+        />
+      </div>
+
+      <button type="submit" class="register-btn">Register</button>
+    </form>
+
+    <p class="login-link">
+      Already have an account? <a routerLink="/login">Login here</a>
+    </p>
+
+    <!-- Navbar Icons -->
+    <div class="navbar-icons">
+      <a routerLink="/forgot-password" class="icon-link" title="Forgot Password">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C13.1 2 14 2.9 14 4V5H16V7H14V8C14 9.1 13.1 10 12 10C10.9 10 10 9.1 10 8V7H8V5H10V4C10 2.9 10.9 2 12 2ZM12 12C13.66 12 15 13.34 15 15V16H17V18H15V19C15 20.66 13.66 22 12 22C10.34 22 9 20.66 9 19V18H7V16H9V15C9 13.34 10.34 12 12 12Z" fill="currentColor"/>
+        </svg>
+        <span>Forgot Password</span>
+      </a>
+
+      <a routerLink="/reset-password" class="icon-link" title="Reset Password">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C13.1 2 14 2.9 14 4V5H16V7H14V8C14 9.1 13.1 10 12 10C10.9 10 10 9.1 10 8V7H8V5H10V4C10 2.9 10.9 2 12 2ZM12 12C13.66 12 15 13.34 15 15V16H17V18H15V19C15 20.66 13.66 22 12 22C10.34 22 9 20.66 9 19V18H7V16H9V15C9 13.34 10.34 12 12 12Z" fill="currentColor"/>
+        </svg>
+        <span>Reset Password</span>
+      </a>
+    </div>
+  </div>
+</div>

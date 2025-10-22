@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user';
 import { StorageService } from './storage.service';
@@ -10,8 +10,13 @@ import { StorageService } from './storage.service';
 })
 export class AuthService {
     private apiUrl = 'http://localhost:8080/api/auth';
+    private loggedIn: BehaviorSubject<boolean>;
+    loggedIn$: Observable<boolean>;
 
-    constructor(private http: HttpClient, private storageService: StorageService) {}
+    constructor(private http: HttpClient, private storageService: StorageService) {
+        this.loggedIn = new BehaviorSubject<boolean>(this.isLoggedIn());
+        this.loggedIn$ = this.loggedIn.asObservable();
+    }
 
     private decodeToken(token: string): any {
         try {
@@ -30,12 +35,9 @@ export class AuthService {
     login(username: string, password: string): Observable<{ token: string, user: User }> {
         return this.http.post<{ token: string, user: User }>(`${this.apiUrl}/login`, { username, password }).pipe(
             map(response => {
-                console.log("Login response:", response);
                 this.storageService.setItem('token', response.token);
-                console.log("Token stored in localStorage after login:", this.storageService.getItem('token'));
 
                 const decodedToken = this.decodeToken(response.token);
-                console.log("Decoded token:", decodedToken);
 
                 if (decodedToken) {
                     const user: User = {
@@ -51,6 +53,7 @@ export class AuthService {
                 } else {
                     this.storageService.removeItem('user');
                 }
+                this.loggedIn.next(true);
                 return response;
             })
         );
@@ -63,16 +66,32 @@ export class AuthService {
     logout(): void {
         this.storageService.removeItem('token');
         this.storageService.removeItem('user');
+        this.loggedIn.next(false);
     }
 
     isLoggedIn(): boolean {
-        console.log("Token from localStorage in isLoggedIn:", this.storageService.getItem('token'));
         return !!this.storageService.getItem('token');
     }
 
     getCurrentUser(): User | null {
         const user = this.storageService.getItem<User>('user');
-        console.log("User object from StorageService:", user);
         return user;
+    }
+
+    getUserRole(): string | null {
+        const token = this.storageService.getItem('token');
+        if (token && typeof token === 'string') {
+            const decoded = this.decodeToken(token);
+            return decoded ? decoded.role : null;
+        }
+        return null;
+    }
+
+    forgotPassword(email: string): Observable<any> {
+        return this.http.post(`${this.apiUrl}/forgot-password`, { email });
+    }
+
+    resetPassword(token: string, username: string, newPassword: string): Observable<any> {
+        return this.http.post(`${this.apiUrl}/reset-password`, { token, username, newPassword }, { responseType: 'text' });
     }
 }

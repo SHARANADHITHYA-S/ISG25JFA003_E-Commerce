@@ -1,0 +1,92 @@
+<div class="profile-container">
+  <div class="sidebar">
+    <h3>My Account</h3>
+    <ul class="nav-list">
+      <li class="nav-item" [class.active]="activeSection === 'profile'" (click)="setActiveSection('profile')">
+        <i class="fas fa-user"></i> Profile
+      </li>
+      <li class="nav-item" [class.active]="activeSection === 'addresses'" (click)="setActiveSection('addresses')">
+        <i class="fas fa-map-marker-alt"></i> Addresses
+      </li>
+      <li class="nav-item" [class.active]="activeSection === 'payment'" (click)="setActiveSection('payment')">
+        <i class="fas fa-credit-card"></i> Payment Methods
+      </li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <!-- Profile Section -->
+    <div *ngIf="activeSection === 'profile'" class="section">
+      <h2>Profile Information</h2>
+      <div *ngIf="user" class="profile-info">
+        <div class="info-group">
+          <label>Username:</label>
+          <span>{{ user.username }}</span>
+        </div>
+        <div class="info-group">
+          <label>First Name:</label>
+          <span>{{ user.firstName || 'Not provided' }}</span>
+        </div>
+        <div class="info-group">
+          <label>Last Name:</label>
+          <span>{{ user.lastName || 'Not provided' }}</span>
+        </div>
+        <div class="info-group">
+          <label>Role:</label>
+          <span>{{ user.role }}</span>
+        </div>
+        <div class="info-group">
+          <label>Member Since:</label>
+          <span>{{ user.createdAt | date:'mediumDate' }}</span>
+        </div>
+      </div>
+      <div *ngIf="!user" class="no-data">
+        <p>Unable to load profile information. Please try logging in again.</p>
+      </div>
+    </div>
+
+    <!-- Addresses Section -->
+    <div *ngIf="activeSection === 'addresses'" class="section">
+      <h2>My Addresses</h2>
+      <div class="addresses-list">
+        <div *ngFor="let address of addresses" class="address-card">
+          <div class="address-header">
+            <h4>{{ address.address_line1 }}</h4>
+            <span *ngIf="address.default" class="default-badge">Default</span>
+          </div>
+          <div class="address-details">
+            <p>{{ address.address_line2 }}</p>
+            <p>{{ address.city }}, {{ address.state }} {{ address.postal_code }}</p>
+            <p>{{ address.country }}</p>
+            <p>Phone: {{ address.phone }}</p>
+          </div>
+        </div>
+        <div *ngIf="addresses.length === 0" class="no-data">
+          <p>No addresses found. Add an address to get started.</p>
+          <button class="btn btn-primary mt-3" (click)="addNewAddress()">Add New Address</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Payment Methods Section -->
+    <div *ngIf="activeSection === 'payment'" class="section">
+      <h2>Payment Methods</h2>
+      <div class="payment-list">
+        <div *ngFor="let payment of paymentMethods" class="payment-card">
+          <div class="payment-header">
+            <i class="fas fa-credit-card"></i>
+            <span class="card-type">{{ payment.cardType }}</span>
+          </div>
+          <div class="payment-details">
+            <p>**** **** **** {{ payment.lastFourDigits }}</p>
+            <p>{{ payment.cardholderName }}</p>
+          </div>
+        </div>
+        <div *ngIf="paymentMethods.length === 0" class="no-data">
+          <p>No payment methods found. Add a payment method to get started.</p>
+          <button class="btn btn-primary mt-3" (click)="addNewPaymentMethod()">Add New Payment Method</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

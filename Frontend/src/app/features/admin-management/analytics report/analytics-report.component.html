@@ -1,0 +1,46 @@
+<div class="analytics-container">
+  <h1>Analytics Reports</h1>
+
+  <div *ngIf="loading" class="loading">
+    <p>Loading analytics data...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+    <button (click)="fetchAnalyticsData()">Retry</button>
+  </div>
+
+  <!-- Generate New Report -->
+  <div class="generate-report-section">
+    <h2>Generate New Report</h2>
+    <div class="form-group">
+      <input
+        type="text"
+        [(ngModel)]="newReportType"
+        placeholder="Enter report type (e.g., Sales, Users, Products)"
+        class="form-control">
+      <button (click)="generateReport()" [disabled]="loading" class="btn btn-primary">Generate Report</button>
+    </div>
+  </div>
+
+  <!-- Reports List -->
+  <div *ngIf="analyticsData.length > 0 && !loading" class="reports-list">
+    <h2>Generated Reports</h2>
+    <div class="report-card" *ngFor="let report of analyticsData">
+      <div class="report-header">
+        <h3>{{ report.reportName }}</h3>
+        <button (click)="deleteReport(report.reportId)" class="btn btn-danger btn-sm">Delete</button>
+      </div>
+      <div class="report-details">
+        <p><strong>Report ID:</strong> {{ report.reportId }}</p>
+        <p><strong>Created:</strong> {{ report.creationDate | date:'medium' }}</p>
+        <p><strong>Report Type:</strong> {{ report.reportData.split(':')[0] || 'N/A' }}</p>
+        <p><strong>Data:</strong> {{ report.reportData }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="analyticsData.length === 0 && !loading && !error" class="no-reports">
+    <p>No reports generated yet. Create your first report above!</p>
+  </div>
+</div>

@@ -29,7 +29,7 @@ export const tokenInterceptor: HttpInterceptorFn = (
             if (error.status === 401 || error.status === 403) {
                 // Token expired or unauthorized, redirect to login
                 authService.logout(); // Clear any invalid token
-                router.navigate(['/auth/login']);
+                router.navigate(['/login']);
             }
             return throwError(() => error);
         })

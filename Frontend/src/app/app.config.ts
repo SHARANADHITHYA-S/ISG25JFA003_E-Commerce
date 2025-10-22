@@ -1,7 +1,7 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSnackBarModule
@@ -15,6 +15,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptors([tokenInterceptor, errorInterceptor])),
     provideAnimations(),
-    importProvidersFrom(NgbModule, MatDialogModule, MatSnackBarModule) // Add MatSnackBarModule here
+    importProvidersFrom(NgbModule, MatDialogModule, MatSnackBarModule, BrowserAnimationsModule)
   ]
 };

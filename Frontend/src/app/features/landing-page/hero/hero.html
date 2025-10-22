@@ -1,7 +1,7 @@
-<section class="bg-light py-5">
+<section class="hero-section">
   <div class="container py-md-5">
-    <div class="row align-items-center g-5">
-      <div class="col-lg-6">
+    <div class="row align-items-center g-3">
+      <div class="col-lg-8">
         <div class="mb-3">
           <span class="badge bg-warning bg-opacity-10 text-warning rounded-pill px-3 py-2 fw-medium">
             ✨ New Arrivals
@@ -15,16 +15,16 @@
           Free shipping on orders over $50.
         </p>
         <div class="d-flex flex-wrap gap-3">
-          <button class="btn btn-warning btn-lg px-4">
+          <button class="btn btn-warning btn-lg px-4" (click)="navigateToProducts()">
             Shop Now →
           </button>
-          <button class="btn btn-outline-secondary btn-lg px-4">
+          <button class="btn btn-outline-secondary btn-lg px-4" (click)="navigateToDeals()">
             View Deals
           </button>
         </div>
       </div>
       
-      <div class="col-lg-6">
+      <div class="col-lg-4">
         <div class="position-relative">
           <div class="ratio ratio-1x1 rounded-4 overflow-hidden bg-white shadow-lg">
             <img

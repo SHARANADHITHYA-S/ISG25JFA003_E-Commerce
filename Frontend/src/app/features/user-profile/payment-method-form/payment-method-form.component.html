@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Add New Payment Method</h2>
+<div mat-dialog-content>
+  <form [formGroup]="paymentForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Card Type</mat-label>
+      <input matInput formControlName="cardType">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Card Number</mat-label>
+      <input matInput formControlName="cardNumber" placeholder="16-digit card number">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Expiration Date</mat-label>
+      <input matInput formControlName="expirationDate" placeholder="MM/YY">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Cardholder Name</mat-label>
+      <input matInput formControlName="cardholderName">
+    </mat-form-field>
+    <mat-checkbox formControlName="default">Set as Default</mat-checkbox>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="onSubmit()" [disabled]="!paymentForm.valid">Add Payment Method</button>
+</div>

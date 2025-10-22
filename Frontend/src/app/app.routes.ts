@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
+import { AdminGuard } from './core/guards/admin.guard';
 
 export const routes: Routes = [
     { path: '', loadComponent: () => import('./features/landing-page/landing-page').then(m => m.LandingPageComponent) },
@@ -13,7 +14,7 @@ export const routes: Routes = [
     },
     {
         path: 'admin',
-        canActivate: [AuthGuard],
+        canActivate: [AdminGuard],
         children: [
             { path: '', redirectTo: 'categories', pathMatch: 'full' },
             { 
@@ -36,9 +37,42 @@ export const routes: Routes = [
                 path: 'products/new', 
                 loadComponent: () => import('./features/admin-management/product-form/product-form.component').then(m => m.ProductFormComponent) 
             },
-            { 
-                path: 'products/edit/:id', 
-                loadComponent: () => import('./features/admin-management/product-form/product-form.component').then(m => m.ProductFormComponent) 
+                        { 
+                            path: 'products/edit/:id', 
+                            loadComponent: () => import('./features/admin-management/product-form/product-form.component').then(m => m.ProductFormComponent) 
+                        },
+                        {
+                            path: 'analytics-report',
+                            loadComponent: () => import('./features/admin-management/analytics report/analytics-report.component').then(m => m.AnalyticsReportComponent)
+                        },
+                        {
+                            path: 'analytics-orders',
+                            loadComponent: () => import('./features/admin-management/analytics-orders/analytics-orders.component').then(m => m.AnalyticsOrdersComponent)
+                        },
+                        {
+                            path: 'analytics-products',
+                            loadComponent: () => import('./features/admin-management/analytics-products/analytics-products.component').then(m => m.AnalyticsProductsComponent)
+                        },
+            {
+                path: 'analytics',
+                children: [
+                    { path: '', redirectTo: 'reports', pathMatch: 'full' },
+                    {
+                        path: 'reports',
+                        loadComponent: () => import('./features/admin-management/analytics report/analytics-report.component').then(m => m.AnalyticsReportComponent),
+                        canActivate: [AuthGuard]
+                    },
+                    {
+                        path: 'products',
+                        loadComponent: () => import('./features/admin-management/analytics-products/analytics-products.component').then(m => m.AnalyticsProductsComponent),
+                        canActivate: [AuthGuard]
+                    },
+                    {
+                        path: 'orders',
+                        loadComponent: () => import('./features/admin-management/analytics-orders/analytics-orders.component').then(m => m.AnalyticsOrdersComponent),
+                        canActivate: [AuthGuard]
+                    }
+                ]
             }
         ]
     },
@@ -46,6 +80,11 @@ export const routes: Routes = [
         path: 'orders', 
         loadComponent: () => import('./features/orders/orders.component').then(c => c.OrdersComponent), 
         canActivate: [AuthGuard] 
+    },
+    {
+        path: 'profile',
+        loadComponent: () => import('./features/user-profile/user-profile.component').then(c => c.UserProfileComponent),
+        canActivate: [AuthGuard]
     },
     { 
         path: 'cart', 
@@ -55,5 +94,20 @@ export const routes: Routes = [
         path: 'login', 
         loadComponent: () => import('./features/login/login.component').then(c => c.LoginComponent) 
     },
-   
+
+    {
+        path: 'register',
+        loadComponent: () => import('./features/register/register.component').then(m => m.RegisterComponent)
+
+    },
+    {
+        path: 'forgot-password',
+        loadComponent: () => import('./features/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)
+    },
+    {
+        path: 'reset-password',
+        loadComponent: () => import('./features/reset-password/reset-password.component').then(m => m.ResetPasswordComponent)
+    }
+
+
 ];

@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { CartService } from '../../../core/services/cart.service'; // Import CartService
 import { CartResponse } from '../../../core/models/cart'; // Import CartResponse
+import { AuthService } from '../../../core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -14,10 +16,18 @@ import { CartResponse } from '../../../core/models/cart'; // Import CartResponse
 export class NavbarComponent implements OnInit {
   isScrolled = false;
   cartItemCount = 0; // New property
+  isLoggedIn = false;
+  isAdmin = false; // New property
   private cartService = inject(CartService); // Inject CartService
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   ngOnInit(): void { // Implemented OnInit
     this.loadCartItemCount();
+    this.authService.loggedIn$.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+      this.isAdmin = this.authService.getUserRole() === 'ROLE_ADMIN';
+    });
   }
 
   @HostListener('window:scroll', [])
@@ -35,5 +45,10 @@ export class NavbarComponent implements OnInit {
             this.cartItemCount = 0;
         }
     });
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/']);
   }
 }
