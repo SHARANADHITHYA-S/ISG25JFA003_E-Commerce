@@ -52,14 +52,8 @@ public class WebSecurityConfig {
                                         // Product management
                                         "/api/products/admin/**",
 
-                                        // Payment management
-                                        "/api/payments/admin/**",
 
-                                        // Order management
-                                        "/api/orders/admin/**",
 
-                                        // Order item management
-                                        "/api/order-items/admin/**",
 
                                         // Category management
                                         "/api/categories/admin/**",
@@ -75,6 +69,9 @@ public class WebSecurityConfig {
                                 .requestMatchers(
                                         // User profile
                                         "/api/user/**",
+
+
+
 
                                         // Payment methods
                                         "/api/payment-methods/**",
@@ -108,6 +105,13 @@ public class WebSecurityConfig {
                                 ).hasAnyRole("USER", "ADMIN")
                                 // Public
                                 .requestMatchers(
+                                        // Payment management
+                                        // Order management
+                                        "/api/orders/admin/**",
+
+                                        // Order item management
+                                        "/api/order-items/admin/**",
+                                        "/api/payments/admin/**",
                                         "/api/auth/register",
                                         "/api/auth/login",
                                         "/api/auth/forgot-password",

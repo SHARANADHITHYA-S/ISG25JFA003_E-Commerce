@@ -52,13 +52,16 @@ public class OrderItemServiceImpl implements OrderItemService {
                 .order(order)
                 .product(product)
                 .quantity(dto.getQuantity())
+                .image_url(product.getImage_url())
                 .price(dto.getPrice())
                 .build();
 
         OrderItem savedItem = orderItemRepository.save(item);
         log.debug("Order item saved: {}", savedItem);
 
-        return modelMapper.map(savedItem, OrderItemResponseDTO.class);
+        OrderItemResponseDTO response = modelMapper.map(savedItem, OrderItemResponseDTO.class);
+        response.setImage_url(savedItem.getImage_url());
+        return response;
     }
 
     @Override

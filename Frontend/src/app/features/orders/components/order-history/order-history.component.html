@@ -45,9 +45,8 @@
           <!-- Quick Items Preview -->
           <div class="order-items-preview" *ngIf="order.orderItems.length > 0">
             <div class="preview-item" *ngFor="let item of order.orderItems.slice(0, 3)">
-              <img [src]="getProductImage(item.productName)"
+              <img [src]="getProductImage(item)"
                    [alt]="item.productName"
-                   onerror="this.src='/favicon.ico'"
                    class="preview-image">
               <span class="preview-quantity">{{ item.quantity }}</span>
             </div>
@@ -79,6 +78,12 @@
         <div class="expanded-details" *ngIf="expandedOrderId === order.id">
           <div class="details-divider"></div>
 
+          <!-- Shipping Timeline -->
+          <div *ngIf="order.status !== 'PENDING'" class="timeline-section">
+            <h6 class="section-title"><i class="bi bi-truck me-2"></i>Order Progress</h6>
+            <app-shipping-timeline [timelineEvents]="buildTimeline(order)"></app-shipping-timeline>
+          </div>
+
           <div class="order-details-content">
             <!-- Order Items Section -->
             <div class="items-section">
@@ -88,9 +93,8 @@
               <div class="order-items-list">
                 <div class="history-item" *ngFor="let item of order.orderItems">
                   <div class="item-image-wrapper">
-                    <img [src]="getProductImage(item.productName)"
+                    <img [src]="getProductImage(item)"
                          [alt]="item.productName"
-                         onerror="this.src='/favicon.ico'"
                          class="item-image">
                   </div>
                   <div class="item-details">

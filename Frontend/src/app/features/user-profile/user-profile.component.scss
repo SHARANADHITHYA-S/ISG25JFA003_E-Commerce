@@ -1,7 +1,9 @@
 .profile-container {
   display: flex;
   min-height: calc(100vh - 80px);
-  background-color: #f8f9fa;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 }
 
 .sidebar {
@@ -12,6 +14,7 @@
   position: sticky;
   top: 80px;
   height: calc(100vh - 80px);
+  border-radius: 12px;
 }
 
 .sidebar h3 {

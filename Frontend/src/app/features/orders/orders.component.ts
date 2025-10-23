@@ -3,7 +3,8 @@ import { CurrentOrderComponent } from './components/current-order.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 import { PaymentService } from '../../core/services/payment.service';
 import { OrderService } from '../../core/services/order.service';
 import { Payment, PaymentStatus, PaymentType } from '../../core/models/payment.model';
@@ -18,7 +19,7 @@ import { RazorpayService, RazorpayPaymentResponse } from '../../core/services/ra
         CurrentOrderComponent,
         OrderHistoryComponent,
         MatButtonModule,
-        MatSnackBarModule
+        ToastModule
     ],
     template: `
         <div class="container py-4">
@@ -27,12 +28,13 @@ import { RazorpayService, RazorpayPaymentResponse } from '../../core/services/ra
                     <i class="bi bi-box-seam me-2"></i>My Orders
                 </h3>
             </div>
-            <app-current-order 
+            <p-toast></p-toast>
+            <app-current-order
                 (makePayment)="openPaymentDialog($event)"
                 #currentOrderComponent>
             </app-current-order>
             <hr class="my-5">
-            <app-order-history></app-order-history>
+            <app-order-history #orderHistoryComponent></app-order-history>
         </div>
     `,
     styles: [`
@@ -45,7 +47,8 @@ import { RazorpayService, RazorpayPaymentResponse } from '../../core/services/ra
 })
 export class OrdersComponent {
     @ViewChild('currentOrderComponent') currentOrderComponent!: CurrentOrderComponent;
-    
+    @ViewChild(OrderHistoryComponent) orderHistoryComponent!: OrderHistoryComponent;
+
     private userId: number;
 
     constructor(
@@ -53,7 +56,7 @@ export class OrdersComponent {
         private paymentService: PaymentService,
         private orderService: OrderService,
         private authService: AuthService,
-        private snackBar: MatSnackBar
+        private messageService: MessageService
     ) {
         const user = this.authService.getCurrentUser();
         this.userId = user?.id || 0;
@@ -61,7 +64,7 @@ export class OrdersComponent {
 
     openPaymentDialog(event: { orderId: number; amount: number }): void {
         console.log('Opening Razorpay payment for order:', event);
-        
+
         // Get user details
         const user = this.authService.getCurrentUser();
         const userName = user ? user.name : 'Guest User';
@@ -107,7 +110,7 @@ export class OrdersComponent {
 
     private processPayment(paymentData: any): void {
         console.log('Processing payment with data:', paymentData);
-        
+
         this.showInfoMessage('⏳ Processing your payment...');
 
         // First, create the payment record
@@ -119,16 +122,14 @@ export class OrdersComponent {
         this.paymentService.createPayment(request).subscribe({
             next: (response: Payment) => {
                 console.log('Payment record created:', response);
-                
-                // Update payment status to SUCCESS
-                setTimeout(() => {
-                    const paymentId = response.id || response.paymentId;
-                    if (paymentId) {
-                        this.updatePaymentToSuccess(paymentId, paymentData.orderId);
-                    } else {
-                        this.showErrorMessage('Payment ID not found. Please contact support.');
-                    }
-                }, 1000);
+
+                // Add verification step before marking as SUCCESS
+                const paymentId = response.id || response.paymentId;
+                if (paymentId) {
+                    this.verifyPayment(paymentId, paymentData);
+                } else {
+                    this.showErrorMessage('Payment ID not found. Please contact support.');
+                }
             },
             error: (error) => {
                 console.error('Payment error:', error);
@@ -137,34 +138,38 @@ export class OrdersComponent {
         });
     }
 
-    private updatePaymentToSuccess(paymentId: number, orderId: number): void {
-        // Update payment status to SUCCESS
-        this.paymentService.updatePaymentStatus(paymentId, 'SUCCESS').subscribe({
-            next: (updatedPayment) => {
-                console.log('Payment status updated to SUCCESS:', updatedPayment);
-                
-                // Update order to PROCESSING
-                this.updateOrderStatus(orderId, 'PROCESSING');
-                
-                // After 2 seconds, update to SHIPPED
-                setTimeout(() => {
-                    this.updateOrderStatus(orderId, 'SHIPPED');
-                    this.showSuccessMessage();
-                    
-                    // Refresh the current order view to show next pending order
-                    if (this.currentOrderComponent) {
-                        setTimeout(() => {
-                            this.currentOrderComponent.refreshOrder();
-                        }, 1000);
-                    }
-                }, 2000);
+    private verifyPayment(paymentId: number, paymentData: any): void {
+        console.log('Verifying payment with Razorpay test mode...');
+
+        this.showInfoMessage('🔍 Verifying payment with Razorpay...');
+
+        // Use test mode verification
+        this.paymentService.verifyPaymentTestMode(paymentId, paymentData).subscribe({
+            next: (verifiedPayment) => {
+                console.log('Payment verification successful:', verifiedPayment);
+
+                // Update order status to PAID
+                this.updateOrderStatus(paymentData.orderId, 'PAID');
+                this.showSuccessMessage();
+
+                // Refresh both the current order and order history views
+                if (this.currentOrderComponent) {
+                    this.currentOrderComponent.refreshOrder();
+                }
+                if (this.orderHistoryComponent) {
+                    this.orderHistoryComponent.refreshOrders();
+                }
             },
             error: (error) => {
-                console.error('Error updating payment status:', error);
-                this.showErrorMessage('Payment processing failed. Please try again.');
+                console.error('Payment verification failed:', error);
+                this.showErrorMessage('Payment verification failed. Your payment may not have been processed. Please contact support.');
+
+                // Optionally, you could mark the payment as FAILED here
+                // this.paymentService.updatePaymentStatus(paymentId, 'FAILED').subscribe(...);
             }
         });
     }
+
 
     private updateOrderStatus(orderId: number, status: string): void {
         this.orderService.updateOrderStatus(orderId, status).subscribe({
@@ -178,29 +183,29 @@ export class OrdersComponent {
     }
 
     private showSuccessMessage(): void {
-        this.snackBar.open('✅ Payment processed successfully! Your order is being prepared.', 'Close', {
-            duration: 5000,
-            panelClass: ['success-snackbar'],
-            horizontalPosition: 'center',
-            verticalPosition: 'top'
+        this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: '✅ Payment processed successfully! Your order is being prepared.',
+            life: 5000
         });
     }
 
     private showInfoMessage(message: string): void {
-        this.snackBar.open(message, 'Close', {
-            duration: 3000,
-            panelClass: ['info-snackbar'],
-            horizontalPosition: 'center',
-            verticalPosition: 'top'
+        this.messageService.add({
+            severity: 'info',
+            summary: 'Info',
+            detail: message,
+            life: 3000
         });
     }
 
     private showErrorMessage(message: string): void {
-        this.snackBar.open(message, 'Close', {
-            duration: 5000,
-            panelClass: ['error-snackbar'],
-            horizontalPosition: 'center',
-            verticalPosition: 'top'
+        this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: message,
+            life: 5000
         });
     }
 }

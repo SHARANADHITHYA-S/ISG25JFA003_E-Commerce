@@ -100,6 +100,7 @@ public class OrderServiceImpl implements OrderService {
                     .order(order)
                     .product(product)
                     .quantity(cartItem.getQuantity())
+                    .image_url(product.getImage_url())
                     .price(product.getPrice())
                     .build();
 

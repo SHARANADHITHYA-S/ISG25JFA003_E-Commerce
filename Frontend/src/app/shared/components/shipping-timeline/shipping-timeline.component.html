@@ -1,0 +1,10 @@
+<div class="timeline-wrapper">
+  <div class="timeline-line"></div>
+  <div *ngFor="let event of timelineEvents" class="timeline-event">
+    <div class="timeline-marker" [class]="getMarkerClass(event)"></div>
+    <div class="timeline-content">
+      <div class="status">{{ event.status }}</div>
+      <div class="date">{{ event.date }}</div>
+    </div>
+  </div>
+</div>
