@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CategoryService } from '../../../../core/services/category.service';
 import { CategoryResponseDTO } from '../../../../core/models/category';
 
@@ -17,7 +18,7 @@ export class CategoryFilterComponent implements OnInit {
 
   @Output() categorySelected = new EventEmitter<number | null>();
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService, private router: Router) { }
 
   ngOnInit(): void {
     this.categoryService.getAllCategories().subscribe((data: CategoryResponseDTO[]) => {
@@ -28,5 +29,6 @@ export class CategoryFilterComponent implements OnInit {
   selectCategory(categoryId: number | null): void {
     this.selectedCategoryId = categoryId;
     this.categorySelected.emit(categoryId);
+    this.router.navigate(['/products'], { queryParams: { categoryId: categoryId } });
   }
 }

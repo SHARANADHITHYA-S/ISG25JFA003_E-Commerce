@@ -141,8 +141,6 @@ export class OrdersComponent {
     private verifyPayment(paymentId: number, paymentData: any): void {
         console.log('Verifying payment with Razorpay test mode...');
 
-        this.showInfoMessage('🔍 Verifying payment with Razorpay...');
-
         // Use test mode verification
         this.paymentService.verifyPaymentTestMode(paymentId, paymentData).subscribe({
             next: (verifiedPayment) => {
