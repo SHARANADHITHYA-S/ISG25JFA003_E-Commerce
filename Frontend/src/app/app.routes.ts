@@ -55,16 +55,6 @@ export const routes: Routes = [
                         path: 'reports',
                         loadComponent: () => import('./features/admin-management/analytics report/analytics-report.component').then(m => m.AnalyticsReportComponent),
                         canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'products',
-                        loadComponent: () => import('./features/admin-management/analytics-products/analytics-products.component').then(m => m.AnalyticsProductsComponent),
-                        canActivate: [AuthGuard]
-                    },
-                    {
-                        path: 'orders',
-                        loadComponent: () => import('./features/admin-management/analytics-orders/analytics-orders.component').then(m => m.AnalyticsOrdersComponent),
-                        canActivate: [AuthGuard]
                     }
                 ]
             }
