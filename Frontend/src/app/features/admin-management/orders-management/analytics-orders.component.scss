@@ -1,4 +1,4 @@
-.analytics-products-container {
+.analytics-orders-container {
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
@@ -69,14 +69,14 @@ h1 {
   margin: 0;
 }
 
-.products-table-section {
+.orders-table-section {
   background-color: white;
   border-radius: 12px;
   padding: 30px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.products-table-section h2 {
+.orders-table-section h2 {
   color: #2c3e50;
   margin-bottom: 25px;
   font-size: 1.8rem;
@@ -87,20 +87,20 @@ h1 {
   overflow-x: auto;
 }
 
-.products-table {
+.orders-table {
   width: 100%;
   border-collapse: collapse;
   background-color: white;
 }
 
-.products-table th,
-.products-table td {
+.orders-table th,
+.orders-table td {
   padding: 15px;
   text-align: left;
   border-bottom: 1px solid #ecf0f1;
 }
 
-.products-table th {
+.orders-table th {
   background-color: #3498db;
   color: white;
   font-weight: 600;
@@ -110,11 +110,11 @@ h1 {
   top: 0;
 }
 
-.products-table tr:nth-child(even) {
+.orders-table tr:nth-child(even) {
   background-color: #f8f9fa;
 }
 
-.products-table tr:hover {
+.orders-table tr:hover {
   background-color: #e8f4fd;
 }
 
@@ -126,23 +126,64 @@ h1 {
   text-transform: uppercase;
 }
 
-.status-good {
+.status-shipped {
   background-color: #d4edda;
   color: #155724;
 }
 
-.status-low {
+.status-placed {
   background-color: #fff3cd;
   color: #856404;
 }
 
-.status-out {
+.status-delivered {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.status-cancelled {
   background-color: #f8d7da;
   color: #721c24;
 }
 
+.status-pending {
+  background-color: #e2e3e5;
+  color: #383d41;
+}
+
+.status-paid {
+  background-color: #cfe2ff;
+  color: #084298;
+}
+
+.status-processing {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.form-select-sm {
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+  min-width: 120px;
+  cursor: pointer;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background-color: white;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-select-sm:hover {
+  border-color: #86b7fe;
+}
+
+.form-select-sm:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
 @media (max-width: 768px) {
-  .analytics-products-container {
+  .analytics-orders-container {
     padding: 15px;
   }
 
@@ -154,13 +195,13 @@ h1 {
     grid-template-columns: 1fr;
   }
 
-  .products-table th,
-  .products-table td {
+  .orders-table th,
+  .orders-table td {
     padding: 10px 8px;
     font-size: 14px;
   }
 
-  .products-table-section {
+  .orders-table-section {
     padding: 20px;
   }
 }

@@ -157,6 +157,7 @@ export class OrderService {
         );
     }
 
+<<<<<<< HEAD
     updateOrderStatus(orderId: number, status: string, deliveryDate?: string): Observable<Order> {
         const body: any = { status };
         if (deliveryDate) {
@@ -164,6 +165,15 @@ export class OrderService {
         }
         return this.http.put<Order>(`${this.apiUrl}/admin/${orderId}/status`, body).pipe(
             catchError(this.handleError)
+=======
+    updateOrderStatus(orderId: number, status: string): Observable<Order> {
+        return this.http.put<Order>(`${this.apiUrl}/admin/${orderId}/status?status=${status}`, {}).pipe(
+            tap(() => this.notificationService.showSuccess(`Order status updated to ${status}`)),
+            catchError(err => {
+                this.notificationService.showError('Failed to update order status');
+                return this.handleError(err);
+            })
+>>>>>>> 284f546eeb7577fdd6daffb46a4bf8d7ac28ffcc
         );
     }
 
@@ -230,6 +240,13 @@ export class OrderService {
                     });
                 }
             }),
+            catchError(this.handleError)
+        );
+    }
+
+    // Get all orders for admin
+    getAllOrdersForAdmin(): Observable<OrderResponseDTO[]> {
+        return this.http.get<OrderResponseDTO[]>(`${this.apiUrl}/admin`).pipe(
             catchError(this.handleError)
         );
     }

@@ -8,6 +8,8 @@ export interface PaymentMethod {
   cardType: string;
   lastFourDigits: string;
   cardholderName: string;
+  expiryDate: string;
+  isDefault: boolean;
 }
 
 export interface PaymentMethodRequest {

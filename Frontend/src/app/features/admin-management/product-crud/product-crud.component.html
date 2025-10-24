@@ -27,7 +27,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of products">
+      <tr *ngFor="let product of products" [ngClass]="{'table-warning': product.quantity < 10}">
         <td class="align-middle">{{ product.id }}</td>
         <td class="align-middle">
           <img *ngIf="product.image_url" 
@@ -40,7 +40,10 @@
         </td>
         <td class="align-middle">{{ product.name }}</td>
         <td class="align-middle">₹{{ product.price }}</td>
-        <td class="align-middle">{{ product.quantity }}</td>
+        <td class="align-middle">
+          {{ product.quantity }}
+          <i *ngIf="product.quantity < 10" class="bi bi-exclamation-triangle-fill text-warning ms-1" title="Low stock"></i>
+        </td>
         <td class="align-middle"><span class="badge" [ngClass]="{'bg-success': product.is_active, 'bg-danger': !product.is_active}">
             {{ product.is_active ? 'Yes' : 'No' }}
           </span></td>

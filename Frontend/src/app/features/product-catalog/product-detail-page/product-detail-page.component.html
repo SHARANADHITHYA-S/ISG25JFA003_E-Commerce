@@ -18,6 +18,12 @@
           <span class="text-muted ms-3">Qty available: {{ p.quantity }}</span>
         </div>
 
+        <!-- Low Stock Warning -->
+        <div *ngIf="p.quantity < 10 && p.quantity > 0" class="alert alert-warning py-2 px-3 mb-3" role="alert">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>
+          <strong>Hurry up!! Only {{ p.quantity }} stocks left</strong>
+        </div>
+
         <h4 class="mt-4">Description</h4>
         <p>{{ p.description }}</p>
 

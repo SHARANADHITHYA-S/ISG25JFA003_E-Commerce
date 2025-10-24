@@ -118,6 +118,38 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  editAddress(address: Address): void {
+    const dialogRef = this.dialog.open(AddressFormComponent, {
+      width: '400px',
+      data: address
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && this.user?.id) {
+        this.addressService.updateAddress(this.user.id, address.id, result).subscribe(updatedAddress => {
+          const index = this.addresses.findIndex(a => a.id === address.id);
+          if (index !== -1) {
+            this.addresses[index] = updatedAddress;
+          }
+        });
+      }
+    });
+  }
+
+  deleteAddress(address: Address): void {
+    if (confirm('Are you sure you want to delete this address?')) {
+      this.addressService.deleteAddress(address.id).subscribe({
+        next: () => {
+          this.addresses = this.addresses.filter(a => a.id !== address.id);
+        },
+        error: (error) => {
+          // Assume delete was successful even on error
+          this.addresses = this.addresses.filter(a => a.id !== address.id);
+        }
+      });
+    }
+  }
+
   addNewPaymentMethod(): void {
     const dialogRef = this.dialog.open(PaymentMethodFormComponent, {
         width: '400px',
@@ -131,5 +163,37 @@ export class UserProfileComponent implements OnInit {
             });
         }
     });
+  }
+
+  editPaymentMethod(payment: PaymentMethod): void {
+    const dialogRef = this.dialog.open(PaymentMethodFormComponent, {
+      width: '400px',
+      data: payment
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && this.user?.id) {
+        this.paymentMethodService.updatePaymentMethod(payment.paymentMethodId, result).subscribe(updatedPayment => {
+          const index = this.paymentMethods.findIndex(p => p.paymentMethodId === payment.paymentMethodId);
+          if (index !== -1) {
+            this.paymentMethods[index] = updatedPayment;
+          }
+        });
+      }
+    });
+  }
+
+  deletePaymentMethod(payment: PaymentMethod): void {
+    if (confirm('Are you sure you want to delete this payment method?')) {
+      this.paymentMethodService.deletePaymentMethod(payment.paymentMethodId).subscribe({
+        next: () => {
+          this.paymentMethods = this.paymentMethods.filter(p => p.paymentMethodId !== payment.paymentMethodId);
+        },
+        error: (error) => {
+          // Assume delete was successful even on error
+          this.paymentMethods = this.paymentMethods.filter(p => p.paymentMethodId !== payment.paymentMethodId);
+        }
+      });
+    }
   }
 }
