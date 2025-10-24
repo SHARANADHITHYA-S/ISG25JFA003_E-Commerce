@@ -158,7 +158,11 @@ export class OrderService {
 
     updateOrderStatus(orderId: number, status: string): Observable<Order> {
         return this.http.put<Order>(`${this.apiUrl}/admin/${orderId}/status?status=${status}`, {}).pipe(
-            catchError(this.handleError)
+            tap(() => this.notificationService.showSuccess(`Order status updated to ${status}`)),
+            catchError(err => {
+                this.notificationService.showError('Failed to update order status');
+                return this.handleError(err);
+            })
         );
     }
 
@@ -225,6 +229,13 @@ export class OrderService {
                     });
                 }
             }),
+            catchError(this.handleError)
+        );
+    }
+
+    // Get all orders for admin
+    getAllOrdersForAdmin(): Observable<OrderResponseDTO[]> {
+        return this.http.get<OrderResponseDTO[]>(`${this.apiUrl}/admin`).pipe(
             catchError(this.handleError)
         );
     }

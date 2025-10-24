@@ -39,13 +39,25 @@ INSERT INTO payment_methods (id, type, provider, account_number, cardholder_name
 -- ORDERS
 INSERT INTO orders (id, user_id, address_id, payment_method_id, status, total_amount, placed_at, updated_at) VALUES
 (1, 1, 1, 1, 'PLACED', 80000.00, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-(2, 2, 2, 3, 'SHIPPED', 10000.00, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+(2, 2, 2, 3, 'SHIPPED', 10000.00, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(3, 1, 1, 1, 'PENDING', 5400.00, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(4, 2, 2, 3, 'PAID', 15000.00, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(5, 1, 1, 2, 'PROCESSING', 7500.00, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(6, 2, 2, 3, 'DELIVERED', 12000.00, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+(7, 1, 1, 1, 'CANCELLED', 3000.00, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- ORDER ITEMS
 INSERT INTO order_items (id, order_id, product_id, quantity, price) VALUES
 (1, 1, 1, 1, 75000.00),
 (2, 1, 2, 1, 5000.00),
-(3, 2, 2, 2, 10000.00);
+(3, 2, 2, 2, 10000.00),
+(4, 3, 3, 10, 400.00),
+(5, 3, 2, 1, 5000.00),
+(6, 4, 1, 1, 75000.00),
+(7, 5, 2, 1, 5000.00),
+(8, 6, 3, 30, 400.00),
+(9, 7, 3, 5, 400.00),
+(10, 7, 2, 1, 5000.00);
 
 -- PAYMENTS
 INSERT INTO payments (id, order_id, payment_method_id, amount, status, transaction_reference, created_at) VALUES

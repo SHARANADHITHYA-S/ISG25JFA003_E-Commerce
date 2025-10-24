@@ -1,0 +1,81 @@
+<div class="analytics-orders-container">
+  <h1>Order Analytics</h1>
+
+  <div *ngIf="loading" class="loading">
+    <p>Loading Order Management Data...</p>
+  </div>
+
+  <div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+    <button (click)="fetchOrderAnalytics()">Retry</button>
+  </div>
+
+  <div *ngIf="!loading && !error" class="orders-section">
+    <div class="summary-cards">
+      <div class="summary-card">
+        <h3>Total Orders</h3>
+        <p class="metric">{{ orders.length }}</p>
+      </div>
+      <div class="summary-card">
+        <h3>Total Revenue</h3>
+        <p class="metric">₹{{ getTotalRevenue().toFixed(2) }}</p>
+      </div>
+      <div class="summary-card">
+        <h3>Shipped Orders</h3>
+        <p class="metric">{{ getOrderCountByStatus('shipped') }}</p>
+      </div>
+      <div class="summary-card">
+        <h3>Pending Orders</h3>
+        <p class="metric">{{ getOrderCountByStatus('placed') }}</p>
+      </div>
+    </div>
+
+    <div class="orders-table-section">
+      <h2>Order Details</h2>
+      <div class="table-responsive">
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th class="align-middle">Order ID</th>
+              <th class="align-middle">Customer Name</th>
+              <th class="align-middle">Order Date</th>
+              <th class="align-middle">Items Count</th>
+              <th class="align-middle">Total Amount</th>
+              <th class="align-middle">Status</th>
+              <th class="align-middle">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of orders">
+              <td class="align-middle">#{{ order.orderId }}</td>
+              <td class="align-middle">{{ order.customerName }}</td>
+              <td class="align-middle">{{ order.orderDate | date:'mediumDate' }}</td>
+              <td class="align-middle">{{ order.itemsCount }}</td>
+              <td class="align-middle">₹{{ order.totalAmount.toFixed(2) }}</td>
+              <td class="align-middle">
+                <span class="status-badge" [ngClass]="getStatusClass(order.status)">
+                  {{ order.status }}
+                </span>
+              </td>
+              <td class="align-middle">
+                <select 
+                  *ngIf="canUpdateStatus(order.status)" 
+                  class="form-select form-select-sm"
+                  [(ngModel)]="order.status"
+                  (change)="onStatusChange(order.orderId, order.status)"
+                  [value]="order.status">
+                  <option *ngFor="let status of getStatusOptions()" [value]="status">
+                    {{ status }}
+                  </option>
+                </select>
+                <span *ngIf="!canUpdateStatus(order.status)" class="text-muted">
+                  No actions available
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
