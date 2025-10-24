@@ -61,8 +61,6 @@
           <div class="address-header">
             <h4>{{ address.address_line1 }}</h4>
             <span *ngIf="address.default" class="default-badge">Default</span>
-            <button class="btn btn-sm btn-outline-secondary ml-2" (click)="editAddress(address)">Edit</button>
-            <button class="btn btn-sm btn-outline-danger ml-2" (click)="deleteAddress(address)">Delete</button>
           </div>
           <div class="address-details">
             <p>{{ address.address_line2 }}</p>
@@ -88,8 +86,6 @@
           <div class="payment-header">
             <i class="fas fa-credit-card"></i>
             <span class="card-type">{{ payment.cardType }}</span>
-            <button class="btn btn-sm btn-outline-secondary ml-2" (click)="editPaymentMethod(payment)">Edit</button>
-            <button class="btn btn-sm btn-outline-danger ml-2" (click)="deletePaymentMethod(payment)">Delete</button>
           </div>
           <div class="payment-details">
             <p>**** **** **** {{ payment.lastFourDigits }}</p>

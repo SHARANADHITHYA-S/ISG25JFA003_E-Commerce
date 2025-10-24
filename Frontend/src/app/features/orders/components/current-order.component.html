@@ -12,11 +12,7 @@
 
   <div *ngIf="!loading && !error">
     <!-- Header -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
-      <h3>
-        <i class="bi bi-cart-check me-2"></i>Current Order
-      </h3>
-    </div>
+    
 
     <!-- Single Big Order Card -->
     <div *ngIf="currentOrder" class="order-big-card">
@@ -37,6 +33,11 @@
         </div>
       </div>
 
+      <!-- Shipping Timeline -->
+      <div *ngIf="currentOrder.status !== 'PENDING'" class="timeline-section">
+        <app-shipping-timeline [timelineEvents]="timelineEvents"></app-shipping-timeline>
+      </div>
+
       <!-- Main Content Layout -->
       <div class="order-main-content">
         <!-- Order Items Section (Left Side) -->
@@ -45,11 +46,10 @@
             <i class="bi bi-box-seam me-2"></i>Order Items ({{ currentOrder.orderItems.length }})
           </h5>
           <div class="items-list">
-            <div class="item-card" *ngFor="let item of currentOrder.orderItems">
+            <div class="item-card" *ngFor="let item of currentOrder.orderItems" (click)="navigateToProduct(item.productId)">
               <div class="item-image-container">
-                <img [src]="getProductImage(item.productName)"
+                <img [src]="getProductImage(item)"
                      [alt]="item.productName"
-                     onerror="this.src='/favicon.ico'"
                      class="item-image">
               </div>
               <div class="item-content">
@@ -58,11 +58,11 @@
                   <span class="quantity">
                     <i class="bi bi-dash-circle me-1"></i>Qty: {{ item.quantity }}
                   </span>
-                  <span class="price">{{ item.price | currency }}</span>
+                  <span class="price">{{ item.price | currency:'INR':'symbol' }}</span>
                 </div>
                 <div class="item-total">
                   <span class="total-label">Subtotal:</span>
-                  <span class="total-value">{{ (item.price * item.quantity) | currency }}</span>
+                  <span class="total-value">{{ (item.price * item.quantity) | currency:'INR':'symbol' }}</span>
                 </div>
               </div>
             </div>
@@ -71,6 +71,32 @@
 
         <!-- Order Details Section (Right Side) -->
         <div class="order-details-section">
+          <!-- Estimated Delivery Section -->
+          <div class="detail-card delivery-section">
+            <h6 class="detail-title">
+              <i class="bi bi-calendar-check me-2"></i>Estimated Delivery
+            </h6>
+            <div class="detail-content">
+              <div *ngIf="currentOrder.status === 'PENDING'" class="delivery-options">
+                <div class="delivery-option" *ngFor="let option of deliveryOptions">
+                  <input type="radio"
+                         [id]="option"
+                         [value]="option"
+                         [(ngModel)]="selectedDeliveryDate"
+                         name="deliveryDate">
+                  <label [for]="option" class="delivery-label">
+                    <span class="delivery-date">{{ option }}</span>
+                    <span class="delivery-price" *ngIf="option === deliveryOptions[0]">FREE</span>
+                    <span class="delivery-price" *ngIf="option === deliveryOptions[1]">₹5.99</span>
+                  </label>
+                </div>
+              </div>
+              <div *ngIf="currentOrder.status !== 'PENDING'" class="delivery-info">
+                <p class="delivery-date-display">{{ currentOrder.deliveryDate || getEstimatedDeliveryDate() }}</p>
+              </div>
+            </div>
+          </div>
+
           <!-- Order Details Grid -->
           <div class="order-details-grid">
             <!-- Shipping Information -->
@@ -79,9 +105,8 @@
                 <i class="bi bi-geo-alt me-2"></i>Shipping Address
               </h6>
               <div class="detail-content">
-                <p class="detail-text">Address ID: {{ currentOrder.addressId }}</p>
-                <p class="detail-text">Estimated Shipping: {{ getEstimatedShippingDate() | date:'MMM d, y' }}</p>
-                <p class="detail-text">Expected Arrival: {{ getArrivalDate() | date:'MMM d, y' }}</p>
+                <p class="detail-text" *ngIf="selectedAddress">{{ selectedAddress.address_line1 }}, {{ selectedAddress.city }}, {{ selectedAddress.state }} {{ selectedAddress.postal_code }}, {{ selectedAddress.country }}</p>
+                <p class="detail-text" *ngIf="!selectedAddress">Loading address...</p>
               </div>
             </div>
 
@@ -91,7 +116,8 @@
                 <i class="bi bi-credit-card me-2"></i>Payment Method
               </h6>
               <div class="detail-content">
-                <p class="detail-text">Payment Method ID: {{ currentOrder.paymentMethodId }}</p>
+                <p class="detail-text" *ngIf="selectedPaymentMethod">{{ selectedPaymentMethod.cardType }} ending in {{ selectedPaymentMethod.lastFourDigits }}</p>
+                <p class="detail-text" *ngIf="!selectedPaymentMethod">Loading payment method...</p>
                 <p class="detail-text">Status: {{ currentOrder.status }}</p>
               </div>
             </div>
@@ -104,20 +130,24 @@
               <div class="summary-content">
                 <div class="summary-row">
                   <span>Subtotal:</span>
-                  <span class="summary-value">{{ currentOrder.totalAmount | currency }}</span>
+                  <span class="summary-value">{{ currentOrder.totalAmount | currency:'INR':'symbol' }}</span>
                 </div>
                 <div class="summary-row">
                   <span>Shipping:</span>
                   <span class="summary-value free">FREE</span>
                 </div>
                 <div class="summary-row">
+                  <span>Delivery:</span>
+                  <span class="summary-value">{{ selectedDeliveryDate === deliveryOptions[0] ? 'FREE' : '₹5.99' }}</span>
+                </div>
+                <div class="summary-row">
                   <span>Tax (9%):</span>
-                  <span class="summary-value">{{ currentOrder.totalAmount * 0.09 | currency }}</span>
+                  <span class="summary-value">{{ currentOrder.totalAmount * 0.09 | currency:'INR':'symbol' }}</span>
                 </div>
                 <hr class="summary-divider">
                 <div class="summary-row total">
                   <span>Total:</span>
-                  <span class="total-value">{{ currentOrder.totalAmount * 1.09 | currency }}</span>
+                  <span class="total-value">{{ (currentOrder.totalAmount * 1.09 + (selectedDeliveryDate === deliveryOptions[1] ? 5.99 : 0)) | currency:'INR':'symbol' }}</span>
                 </div>
               </div>
             </div>
@@ -125,9 +155,13 @@
 
           <!-- Action Buttons -->
           <div class="order-actions">
-            <button class="btn btn-payment" (click)="onMakePayment()">
+            <button *ngIf="currentOrder.status === 'PENDING'" class="btn btn-payment" (click)="onMakePayment()">
               <i class="bi bi-credit-card-2-front me-2"></i>
               Proceed to Payment
+            </button>
+            <button *ngIf="currentOrder.status !== 'PENDING'" class="btn btn-support">
+              <i class="bi bi-headset me-2"></i>
+              Contact Support
             </button>
             <button class="btn btn-cancel" (click)="onCancelOrder()">
               <i class="bi bi-x-circle me-2"></i>
@@ -135,21 +169,7 @@
             </button>
           </div>
 
-          <!-- Trust Badges -->
-          <div class="trust-badges">
-            <div class="badge-item">
-              <i class="bi bi-shield-check"></i>
-              <span>Secure Payment</span>
-            </div>
-            <div class="badge-item">
-              <i class="bi bi-truck"></i>
-              <span>Fast Delivery</span>
-            </div>
-            <div class="badge-item">
-              <i class="bi bi-arrow-clockwise"></i>
-              <span>Easy Returns</span>
-            </div>
-          </div>
+
         </div>
       </div>
     </div>

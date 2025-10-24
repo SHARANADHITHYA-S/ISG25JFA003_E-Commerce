@@ -4,11 +4,12 @@ import { Order, OrderItem, OrderStatus } from '../../../../shared/models/order.m
 import { CommonModule } from '@angular/common';
 import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
 import { ErrorMessageComponent } from '../../../../shared/components/error-message/error-message.component';
+import { ShippingTimelineComponent, TimelineEvent } from '../../../../shared/components/shipping-timeline/shipping-timeline.component';
 
 @Component({
     selector: 'app-order-history',
     standalone: true,
-    imports: [CommonModule, LoaderComponent, ErrorMessageComponent],
+    imports: [CommonModule, LoaderComponent, ErrorMessageComponent, ShippingTimelineComponent],
     templateUrl: './order-history.component.html',
     styleUrl: './order-history.component.scss'
 })
@@ -21,6 +22,10 @@ export class OrderHistoryComponent implements OnInit {
     constructor(private orderService: OrderService) { }
 
     ngOnInit(): void {
+        this.loadOrders();
+    }
+
+    refreshOrders(): void {
         this.loadOrders();
     }
 
@@ -40,11 +45,38 @@ export class OrderHistoryComponent implements OnInit {
         });
     }
 
+    buildTimeline(order: Order): TimelineEvent[] {
+        if (!order || order.status === 'PENDING') return [];
+
+        const statuses: OrderStatus[] = ['PAID', 'PROCESSING', 'SHIPPED', 'DELIVERED'];
+        const statusOrder = statuses.indexOf(order.status);
+        return statuses.map((status, index) => {
+            const event: TimelineEvent = {
+                status: status,
+                date: this.getEstimatedDate(order, index),
+                isCurrent: order.status === status,
+                isCompleted: index < statusOrder
+            };
+            return event;
+        });
+    }
+
+    getEstimatedDate(order: Order, step: number): string {
+        const date = new Date(order.placed_at);
+        date.setDate(date.getDate() + (step * 2)); // Add 2 days for each step
+        return date.toLocaleDateString();
+    }
+
     toggleOrderDetails(orderId: number): void {
         this.expandedOrderId = this.expandedOrderId === orderId ? null : orderId;
     }
 
-    getProductImage(productName: string): string {
+    getProductImage(item: OrderItem): string {
+        if (item && item.product && item.product.image_url) {
+            return item.product.image_url;
+        }
+
+        // Fallback to hardcoded mapping
         const imageMap: { [key: string]: string } = {
             'Atomic Habits': '/atomichabitsbk.jpg',
             'The Alchemist': '/thealchemistbk.jpg',
@@ -59,17 +91,17 @@ export class OrderHistoryComponent implements OnInit {
             'Shampoo': '/shampoo.jpg',
             'Smartwatch': '/smartwatch.jpg'
         };
-        
-        if (imageMap[productName]) {
-            return imageMap[productName];
+
+        if (imageMap[item.productName]) {
+            return imageMap[item.productName];
         }
-        
+
         for (const key in imageMap) {
-            if (productName.toLowerCase().includes(key.toLowerCase())) {
+            if (item.productName.toLowerCase().includes(key.toLowerCase())) {
                 return imageMap[key];
             }
         }
-        
+
         return '/favicon.ico';
     }
 
@@ -77,6 +109,8 @@ export class OrderHistoryComponent implements OnInit {
         switch (status) {
             case 'PENDING':
                 return 'status-pending';
+            case 'PAID':
+                return 'status-paid';
             case 'PROCESSING':
                 return 'status-processing';
             case 'SHIPPED':
@@ -100,6 +134,8 @@ export class OrderHistoryComponent implements OnInit {
         switch (status) {
             case 'PENDING':
                 return 'rgba(255, 193, 7, 0.3)'; // Yellowish for pending
+            case 'PAID':
+                return 'rgba(0, 128, 0, 0.3)'; // Greenish for paid
             case 'PROCESSING':
                 return 'rgba(23, 162, 184, 0.3)'; // Bluish for processing
             case 'SHIPPED':

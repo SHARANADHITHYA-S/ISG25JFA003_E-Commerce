@@ -29,31 +29,23 @@
   color: #EE7B30;
 }
 
-.navbar-nav .nav-item.active-orders .nav-link {
-  background-color: #EE7B30;
-  color: #0B2545;
-  border-radius: 0.25rem;
-  padding: 0.5rem 1rem;
+.navbar-nav .nav-item .nav-link.active-link {
+  color: #ef650a !important; /* Orange color for the text */
+  font-weight: 700 !important;
+   /* Bold text */
 }
 
-.navbar-nav .nav-item.active-orders .nav-link:hover {
-  color: #0B2545;
+.navbar-nav .nav-item .nav-link.active-link::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }
+
 
 .fa-user-circle,
 .fa-shopping-cart {
   color: #333 !important;
   font-size: 1.5rem;
   margin-left: 1rem;
-  transition: transform 0.2s ease-in-out;
-}
-
-.profile-dropdown-btn:hover .fa-user-circle {
-  transform: scale(1.15);
-}
-
-.profile-dropdown-btn.nav-link::after {
-  display: none;
 }
 
 /* Override bootstrap navbar default styles */
@@ -256,15 +248,18 @@
   transition: all 0.3s ease !important;
 }
 
-// .profile-dropdown-btn:hover {
-//   background-color: rgba(255, 255, 255, 0.1) !important;
-//   color: #333 !important;
-// }
+.profile-dropdown-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #333 !important;
+}
 
 .dropdown-menu {
   border: none !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-  border-radius: 8px !important;
+  border-radius: 12px !important;
   min-width: 180px !important;
 }
 

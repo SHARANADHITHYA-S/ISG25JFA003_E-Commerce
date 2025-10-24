@@ -34,9 +34,8 @@
       <div class="cart-items-section">
         <div class="cart-item" *ngFor="let item of cart.items" (click)="navigateToProduct(item.productId)">
           <div class="item-image-wrapper">
-            <img [src]="getProductImage(item.productName)" 
+            <img [src]="getProductImage(item)" 
                  [alt]="item.productName"
-                 onerror="this.src='/favicon.ico'"
                  class="item-image">
           </div>
           
@@ -51,7 +50,7 @@
           <div class="item-quantity">
             <label>Quantity</label>
             <div class="quantity-controls">
-              <button class="qty-btn" (click)="decrementQuantity(item)">
+              <button class="qty-btn" (click)="decrementQuantity(item, $event)">
                 <i class="bi bi-dash"></i>
               </button>
               <input type="number" 
@@ -60,7 +59,7 @@
                      min="1" 
                      max="99"
                      (change)="updateQuantity(item, $event)">
-              <button class="qty-btn" (click)="incrementQuantity(item)">
+              <button class="qty-btn" (click)="incrementQuantity(item, $event)">
                 <i class="bi bi-plus"></i>
               </button>
             </div>

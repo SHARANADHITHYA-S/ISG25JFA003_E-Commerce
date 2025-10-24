@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { Observable, throwError, forkJoin, of } from 'rxjs';
+import { catchError, tap, switchMap, map } from 'rxjs/operators';
 import { CartResponse, CartItemRequest, CartItemResponse } from '../models/cart';
 import { AuthService } from './auth.service'; // Import AuthService
 import { NotificationService } from './notification.service';
+import { ProductService } from './product.service'; // Import ProductService
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { NotificationService } from './notification.service';
 export class CartService {
   private apiUrl = 'http://localhost:8080/api';
 
-  constructor(private http: HttpClient, private authService: AuthService, private notificationService: NotificationService) { }
+  constructor(private http: HttpClient, private authService: AuthService, private notificationService: NotificationService, private productService: ProductService) { }
 
   private getUserIdFromAuth(): number {
     const user = this.authService.getCurrentUser();
@@ -25,6 +26,20 @@ export class CartService {
   getCart(): Observable<CartResponse> {
     const userId = this.getUserIdFromAuth();
     return this.http.get<CartResponse>(`${this.apiUrl}/carts/user/${userId}`).pipe(
+      switchMap(cart => {
+        if (cart && cart.items && cart.items.length > 0) {
+          const productDetailsRequests = cart.items.map(item =>
+            this.productService.getProductById(item.productId).pipe(
+              map(product => ({ ...item, product }))
+            )
+          );
+          return forkJoin(productDetailsRequests).pipe(
+            map(itemsWithProduct => ({ ...cart, items: itemsWithProduct }))
+          );
+        } else {
+          return of(cart);
+        }
+      }),
       catchError(this.handleError)
     );
   }
@@ -43,6 +58,11 @@ export class CartService {
 
   updateCartItem(itemId: number, itemRequest: CartItemRequest): Observable<CartItemResponse> {
     return this.http.put<CartItemResponse>(`${this.apiUrl}/cart-items/${itemId}`, itemRequest).pipe(
+      switchMap(updatedItem => {
+        return this.productService.getProductById(updatedItem.productId).pipe(
+          map(product => ({ ...updatedItem, product }))
+        );
+      }),
       catchError(this.handleError)
     );
   }

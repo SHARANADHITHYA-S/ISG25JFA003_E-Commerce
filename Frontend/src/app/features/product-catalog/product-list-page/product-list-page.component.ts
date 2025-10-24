@@ -28,7 +28,7 @@ export class ProductListPageComponent implements OnInit {
 
   ngOnInit(): void {
     // Subscribe to route changes to handle filtering when the category ID changes
-    this.route.paramMap.subscribe(params => {
+    this.route.queryParamMap.subscribe(params => {
       const categoryIdParam = params.get('categoryId');
       this.currentCategoryId = categoryIdParam ? Number(categoryIdParam) : null;
       this.loadProducts();

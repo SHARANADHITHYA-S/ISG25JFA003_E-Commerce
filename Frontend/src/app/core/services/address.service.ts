@@ -44,6 +44,12 @@ export class AddressService {
     );
   }
 
+  getAddress(addressId: number): Observable<Address> {
+    return this.http.get<Address>(`${this.apiUrl}/${addressId}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   deleteAddress(addressId: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${addressId}`).pipe(
       catchError(this.handleError)

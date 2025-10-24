@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { map, catchError, tap } from 'rxjs/operators';
+import { Observable, of, throwError, forkJoin } from 'rxjs';
+import { map, catchError, tap, switchMap } from 'rxjs/operators';
 import { Order } from '../../shared/models/order.model';
 import { AuthService } from './auth.service';
 import { NotificationService } from './notification.service';
+import { ProductService } from './product.service';
 
 export interface PaginatedOrderResponse {
     content: Order[];
@@ -32,7 +33,7 @@ export interface OrderResponseDTO {
 export class OrderService {
     private apiUrl = 'http://localhost:8080/api/orders';
 
-    constructor(private http: HttpClient, private authService: AuthService, private notificationService: NotificationService) { }
+    constructor(private http: HttpClient, private authService: AuthService, private notificationService: NotificationService, private productService: ProductService) { }
 
     private getUserIdFromAuth(): number {
         const user = this.authService.getCurrentUser();
@@ -73,14 +74,28 @@ export class OrderService {
         } catch (error: any) {
             return throwError(() => new Error('Authentication required to load current order. Please log in.'));
         }
-
+    
         return this.http.get<Order[]>(`${this.apiUrl}/user/${userId}`).pipe(
-            map(orders => {
-                const order = orders.find(o => o.status !== 'COMPLETED' && o.status !== 'CANCELLED');
-                if (!order) {
-                    return null;
+            switchMap(orders => {
+                if (orders && orders.length > 0) {
+                    const sortedOrders = orders.sort((a, b) => new Date(b.placed_at).getTime() - new Date(a.placed_at).getTime());
+                    const currentOrder = sortedOrders.find(o => o.status !== 'COMPLETED' && o.status !== 'CANCELLED');
+
+                    if (currentOrder && currentOrder.orderItems && currentOrder.orderItems.length > 0) {
+                        const productDetailsRequests = currentOrder.orderItems.map(item =>
+                            this.productService.getProductById(item.productId).pipe(
+                                map(product => ({ ...item, product }))
+                            )
+                        );
+                        return forkJoin(productDetailsRequests).pipe(
+                            map(itemsWithProduct => ({ ...currentOrder, orderItems: itemsWithProduct }))
+                        );
+                    } else {
+                        return of(currentOrder || null);
+                    }
+                } else {
+                    return of(null);
                 }
-                return order;
             }),
             catchError(this.handleError)
         );
@@ -95,12 +110,48 @@ export class OrderService {
         }
 
         return this.http.get<Order[]>(`${this.apiUrl}/user/${userId}`).pipe(
-            map(orders => orders.filter(o => o.status === 'COMPLETED' || o.status === 'CANCELLED'))
+            switchMap(orders => {
+                const previousOrders = orders.filter(o => o.status === 'COMPLETED' || o.status === 'CANCELLED');
+                if (previousOrders && previousOrders.length > 0) {
+                    const productDetailsRequests = previousOrders.map(order => {
+                        if (order.orderItems && order.orderItems.length > 0) {
+                            const itemRequests = order.orderItems.map(item =>
+                                this.productService.getProductById(item.productId).pipe(
+                                    map(product => ({ ...item, product }))
+                                )
+                            );
+                            return forkJoin(itemRequests).pipe(
+                                map(itemsWithProduct => ({ ...order, orderItems: itemsWithProduct }))
+                            );
+                        } else {
+                            return of(order);
+                        }
+                    });
+                    return forkJoin(productDetailsRequests);
+                } else {
+                    return of([]);
+                }
+            }),
+            catchError(this.handleError)
         );
     }
 
     getOrderDetails(orderId: number): Observable<Order> {
         return this.http.get<Order>(`${this.apiUrl}/${orderId}`).pipe(
+            switchMap(order => {
+                if (order && order.orderItems && order.orderItems.length > 0) {
+                    const productDetailsRequests = order.orderItems.map(item =>
+                        this.productService.getProductById(item.productId).pipe(
+                            map(product => ({ ...item, product }))
+                        )
+                    );
+                    return forkJoin(productDetailsRequests).pipe(
+                        map(itemsWithProduct => ({ ...order, orderItems: itemsWithProduct }))
+                    );
+                } else {
+                    return of(order);
+                }
+            }),
             catchError(this.handleError)
         );
     }
@@ -120,17 +171,45 @@ export class OrderService {
         }
 
         return this.http.get<Order[]>(`${this.apiUrl}/user/${userId}`).pipe(
-            map(orders => {
-                const startIndex = page * size;
-                const endIndex = startIndex + size;
-                const content = orders.slice(startIndex, endIndex);
-                return {
-                    content,
-                    totalElements: orders.length,
-                    totalPages: Math.ceil(orders.length / size),
-                    size,
-                    number: page
-                };
+            switchMap(orders => {
+                if (orders && orders.length > 0) {
+                    const ordersWithProductDetails = orders.map(order => {
+                        if (order.orderItems && order.orderItems.length > 0) {
+                            const productDetailsRequests = order.orderItems.map(item =>
+                                this.productService.getProductById(item.productId).pipe(
+                                    map(product => ({ ...item, product }))
+                                )
+                            );
+                            return forkJoin(productDetailsRequests).pipe(
+                                map(itemsWithProduct => ({ ...order, orderItems: itemsWithProduct }))
+                            );
+                        } else {
+                            return of(order);
+                        }
+                    });
+                    return forkJoin(ordersWithProductDetails).pipe(
+                        map(resolvedOrders => {
+                            const startIndex = page * size;
+                            const endIndex = startIndex + size;
+                            const content = resolvedOrders.slice(startIndex, endIndex);
+                            return {
+                                content,
+                                totalElements: resolvedOrders.length,
+                                totalPages: Math.ceil(resolvedOrders.length / size),
+                                size,
+                                number: page
+                            };
+                        })
+                    );
+                } else {
+                    return of({
+                        content: [],
+                        totalElements: 0,
+                        totalPages: 0,
+                        size,
+                        number: page
+                    });
+                }
             }),
             catchError(this.handleError)
         );

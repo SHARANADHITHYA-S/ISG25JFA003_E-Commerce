@@ -23,6 +23,8 @@ public class OrderItem {
     @Column(nullable = false)
     private BigDecimal price;
 
+    private String image_url;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", referencedColumnName = "id", nullable = false)
     private Order order;
