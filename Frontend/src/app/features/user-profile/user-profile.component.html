@@ -19,18 +19,19 @@
     <div *ngIf="activeSection === 'profile'" class="section">
       <div class="section-header">
         <h2>Profile Information</h2>
+        <i class="fas fa-edit edit-icon" (click)="toggleEditMode()" title="Edit Profile"></i>
         <button class="btn btn-secondary" (click)="toggleEditMode()">{{ editMode ? 'Cancel' : 'Edit' }}</button>
       </div>
       <div *ngIf="user" class="profile-info">
         <div class="info-group">
           <label>Username:</label>
           <span *ngIf="!editMode">{{ user.name }}</span>
-          <input *ngIf="editMode" [(ngModel)]="editableUser.name" class="form-control">
+          <input *ngIf="editMode" [(ngModel)]="editableUser!.name" class="form-control">
         </div>
         <div class="info-group">
           <label>Email:</label>
           <span *ngIf="!editMode">{{ user.email || 'Not provided' }}</span>
-          <input *ngIf="editMode" [(ngModel)]="editableUser.email" class="form-control">
+          <input *ngIf="editMode" [(ngModel)]="editableUser!.email" class="form-control">
         </div>
         <div class="info-group">
           <label>Role:</label>
