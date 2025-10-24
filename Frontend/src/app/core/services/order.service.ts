@@ -162,6 +162,16 @@ export class OrderService {
         );
     }
 
+    cancelOrder(orderId: number): Observable<Order> {
+        return this.http.delete<Order>(`${this.apiUrl}/${orderId}`).pipe(
+            tap(() => this.notificationService.showSuccess('Order cancelled successfully. Items have been returned to your cart.')),
+            catchError(err => {
+                this.notificationService.showError('Failed to cancel order');
+                return this.handleError(err);
+            })
+        );
+    }
+
     getOrdersByPage(page: number, size: number): Observable<PaginatedOrderResponse> {
         let userId: number;
         try {

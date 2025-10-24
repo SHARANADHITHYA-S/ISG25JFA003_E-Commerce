@@ -4,9 +4,11 @@ INSERT INTO users (id, name, email, password_hash, role, created_at, updated_at)
 (2, 'Bob', 'bob@example.com', '$2a$12$TjQkd4Oe0cdOIhnDuUqICO6L6UQ/YGbWff9cM3ZAeCufOyr4TiwDO', 'ROLE_ADMIN', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- CATEGORIES
-INSERT INTO categories (id, name, description) VALUES
-(1, 'Electronics', 'Electronic gadgets and devices'),
-(2, 'Books', 'Printed and digital books');
+INSERT INTO categories (id, name, description, image_url) VALUES
+(1, 'Electronics', 'Electronic gadgets and devices', 'https://images.unsplash.com/photo-1498049794561-7780e7231661?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080'),
+(2, 'Books', 'Printed and digital books', 'https://images.unsplash.com/photo-1512820790803-83ca734da794?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080'),
+(3, 'Home Appliances', 'Home and kitchen appliances', 'https://images.unsplash.com/photo-1556911220-bff31c812dba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080'),
+(4, 'Beauty Products', 'Beauty and personal care items', 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080');
 
 -- PRODUCTS
 INSERT INTO products (id, name, description, price, quantity, image_url, is_active, category_id, created_at, updated_at) VALUES

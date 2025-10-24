@@ -83,7 +83,17 @@ public class OrderController {
         return ResponseEntity.ok(updatedOrder);
     }
 
-    // Delete order
+    // Cancel order (User can cancel their own order)
+    @PreAuthorize("@authService.canAccessOrder(#id)")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<OrderResponseDTO> cancelOrder(@PathVariable Long id) {
+        log.info("User cancelling order with id={}", id);
+        OrderResponseDTO cancelledOrder = orderService.deleteOrder(id);
+        log.info("Order cancelled successfully with id={}, status={}", id, cancelledOrder.getStatus());
+        return ResponseEntity.ok(cancelledOrder);
+    }
+
+    // Delete order (Admin only - keeping for backward compatibility)
     @PutMapping("/admin/{id}")
     public ResponseEntity<String> deleteOrder(@Valid @PathVariable Long id) {
         log.warn("Deleting order with id={}", id);

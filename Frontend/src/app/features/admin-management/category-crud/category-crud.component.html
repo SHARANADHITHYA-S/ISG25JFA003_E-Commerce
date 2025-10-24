@@ -6,18 +6,28 @@
   <table class="table table-bordered table-striped">
     <thead class="thead-dark">
       <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Actions</th>
+        <th class="align-middle">ID</th>
+        <th class="align-middle">Image</th>
+        <th class="align-middle">Name</th>
+        <th class="align-middle">Description</th>
+        <th class="align-middle">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let category of categories">
-        <td>{{ category.id }}</td>
-        <td>{{ category.name }}</td>
-        <td>{{ category.description }}</td>
-        <td>
+        <td class="align-middle">{{ category.id }}</td>
+        <td class="align-middle">
+          <img *ngIf="category.imageUrl" 
+               [src]="category.imageUrl" 
+               [alt]="category.name" 
+               class="img-thumbnail" 
+               style="width: 60px; height: 60px; object-fit: cover;"
+               onerror="this.style.display='none'">
+          <span *ngIf="!category.imageUrl" class="text-muted">No image</span>
+        </td>
+        <td class="align-middle">{{ category.name }}</td>
+        <td class="align-middle">{{ category.description }}</td>
+        <td class="align-middle">
           <button class="btn btn-sm btn-info me-2" [routerLink]="['/admin/categories/edit', category.id]">Edit</button>
           <button class="btn btn-sm btn-danger" (click)="onDelete(category.id)">Delete</button>
         </td>

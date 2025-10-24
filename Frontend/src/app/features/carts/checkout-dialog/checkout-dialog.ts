@@ -1,22 +1,22 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Address, AddressService } from '../../../../core/services/address.service';
-import { PaymentMethod, PaymentMethodService } from '../../../../core/services/payment-method.service';
-import { OrderService } from '../../../../core/services/order.service';
+import { Address, AddressService } from '../../../core/services/address.service';
+import { PaymentMethod, PaymentMethodService } from '../../../core/services/payment-method.service';
+import { OrderService } from '../../../core/services/order.service';
 import { Router } from '@angular/router';
-import { LoaderComponent } from '../../../../shared/components/loader/loader.component';
-import { ErrorMessageComponent } from '../../../../shared/components/error-message/error-message.component';
+import { LoaderComponent } from '../../../shared/components/loader/loader.component';
+import { ErrorMessageComponent } from '../../../shared/components/error-message/error-message.component';
 import { MatDialogRef } from '@angular/material/dialog';
 import { forkJoin } from 'rxjs'; // Import forkJoin
-import { AuthService } from '../../../../core/services/auth.service';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-checkout-dialog',
   standalone: true,
   imports: [CommonModule, FormsModule, LoaderComponent, ErrorMessageComponent],
-  templateUrl: './checkout-dialog.component.html',
-  styleUrls: ['./checkout-dialog.component.scss']
+  templateUrl: './checkout-dialog.html',
+  styleUrls: ['./checkout-dialog.scss']
 })
 export class CheckoutDialogComponent implements OnInit {
   addresses: Address[] = [];

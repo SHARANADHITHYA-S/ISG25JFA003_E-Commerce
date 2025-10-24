@@ -23,7 +23,20 @@
     <!-- Image URL -->
     <div class="mb-3">
       <label for="image_url" class="form-label">Image URL</label>
-      <input type="text" id="image_url" class="form-control" [(ngModel)]="product.image_url" name="image_url" required>
+      <input type="url" id="image_url" class="form-control" [(ngModel)]="product.image_url" name="image_url" placeholder="https://example.com/image.jpg" required>
+      <small class="form-text text-muted">Enter the URL of the product image</small>
+    </div>
+
+    <!-- Image Preview -->
+    <div class="mb-3" *ngIf="product.image_url">
+      <label class="form-label">Image Preview</label>
+      <div class="border rounded p-2 text-center bg-light">
+        <img [src]="product.image_url" [alt]="product.name" class="img-fluid" style="max-height: 200px; object-fit: contain;" 
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <div style="display: none;" class="text-danger">
+          <i class="bi bi-exclamation-triangle"></i> Invalid image URL
+        </div>
+      </div>
     </div>
     
     <!-- Quantity -->
@@ -43,5 +56,6 @@
     
     <!-- Submit Button -->
     <button type="submit" class="btn btn-success">{{ isEditMode ? 'Update Product' : 'Create Product' }}</button>
+    <button type="button" class="btn btn-secondary ms-2" (click)="onCancel()">Cancel</button>
   </form>
 </div>

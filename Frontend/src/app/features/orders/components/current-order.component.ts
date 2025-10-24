@@ -28,6 +28,7 @@ export class CurrentOrderComponent implements OnInit {
     timelineEvents: TimelineEvent[] = [];
 
     @Output() makePayment = new EventEmitter<{ orderId: number; amount: number }>();
+    @Output() orderCancelled = new EventEmitter<void>();
 
     constructor(private orderService: OrderService, private addressService: AddressService, private paymentMethodService: PaymentMethodService, private router: Router) { }
 
@@ -132,9 +133,24 @@ export class CurrentOrderComponent implements OnInit {
 
     onCancelOrder(): void {
         if (this.currentOrder && this.currentOrder.id) {
-            // TODO: Implement cancel order logic
-            console.log('Cancel order:', this.currentOrder.id);
-            // You can emit an event or call a service method here
+            if (confirm('Are you sure you want to cancel this order? The items will be returned to your cart.')) {
+                this.loading = true;
+                this.orderService.cancelOrder(this.currentOrder.id).subscribe({
+                    next: (cancelledOrder) => {
+                        console.log('Order cancelled successfully:', cancelledOrder);
+                        this.loading = false;
+                        // Emit event to parent to refresh order history
+                        this.orderCancelled.emit();
+                        // Refresh the current order view to show the next order or empty state
+                        this.loadCurrentOrder();
+                    },
+                    error: (err) => {
+                        console.error('Error cancelling order:', err);
+                        this.error = 'Failed to cancel order. Please try again.';
+                        this.loading = false;
+                    }
+                });
+            }
         }
     }
 

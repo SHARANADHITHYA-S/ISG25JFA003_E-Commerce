@@ -80,4 +80,8 @@ export class ProductFormComponent implements OnInit {
       });
     }
   }
+
+  onCancel(): void {
+    this.router.navigate(['/admin/products']);
+  }
 }
