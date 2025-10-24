@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { OrderService, PaginatedOrderResponse } from '../../../../core/services/order.service';
 import { Order, OrderItem, OrderStatus } from '../../../../shared/models/order.model';
 import { CommonModule } from '@angular/common';
@@ -19,10 +19,21 @@ export class OrderHistoryComponent implements OnInit {
     error: string | null = null;
     expandedOrderId: number | null = null;
 
+    @Output() completePayment = new EventEmitter<Order>();
+    @Output() cancelOrder = new EventEmitter<Order>();
+
     constructor(private orderService: OrderService) { }
 
     ngOnInit(): void {
         this.loadOrders();
+    }
+
+    onCompletePayment(order: Order): void {
+        this.completePayment.emit(order);
+    }
+
+    onCancelOrder(order: Order): void {
+        this.cancelOrder.emit(order);
     }
 
     refreshOrders(): void {
@@ -46,7 +57,19 @@ export class OrderHistoryComponent implements OnInit {
     }
 
     buildTimeline(order: Order): TimelineEvent[] {
-        if (!order || order.status === 'PENDING') return [];
+        console.log('Building timeline for order in history:', order);
+        if (!order) return [];
+
+        if (order.status === 'CANCELLED') {
+            return [{
+                status: 'CANCELLED',
+                date: order.placed_at.toString(),
+                isCurrent: true,
+                isCompleted: true
+            }];
+        }
+
+        if (order.status === 'PENDING') return [];
 
         const statuses: OrderStatus[] = ['PAID', 'PROCESSING', 'SHIPPED', 'DELIVERED'];
         const statusOrder = statuses.indexOf(order.status);

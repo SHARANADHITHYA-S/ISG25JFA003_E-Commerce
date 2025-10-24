@@ -286,8 +286,18 @@
   top: 0;
   right: 100%;
   margin-top: -1px;
+  margin-left: 0.5rem; /* Add space between dropdowns */
 }
 
 .dropdown-submenu:hover .dropdown-menu {
   display: block;
+}
+
+.admin-dropdown-menu {
+  border: none !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(15px) !important;
+  -webkit-backdrop-filter: blur(15px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 12px !important;
 }

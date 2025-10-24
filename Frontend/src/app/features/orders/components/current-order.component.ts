@@ -99,7 +99,18 @@ export class CurrentOrderComponent implements OnInit {
     }
 
     buildTimeline(): void {
+        console.log('Building timeline for current order:', this.currentOrder);
         if (!this.currentOrder) return;
+
+        if (this.currentOrder.status === 'CANCELLED') {
+            this.timelineEvents = [{
+                status: 'CANCELLED',
+                date: this.currentOrder.placed_at.toString(),
+                isCurrent: true,
+                isCompleted: true
+            }];
+            return;
+        }
 
         const statuses: OrderStatus[] = ['PAID', 'PROCESSING', 'SHIPPED', 'DELIVERED'];
         const statusOrder = statuses.indexOf(this.currentOrder.status);
@@ -135,7 +146,8 @@ export class CurrentOrderComponent implements OnInit {
         if (this.currentOrder && this.currentOrder.id) {
             if (confirm('Are you sure you want to cancel this order? The items will be returned to your cart.')) {
                 this.loading = true;
-                this.orderService.cancelOrder(this.currentOrder.id).subscribe({
+                const isPaid = this.currentOrder.status !== 'PENDING';
+                this.orderService.cancelOrder(this.currentOrder.id, isPaid).subscribe({
                     next: (cancelledOrder) => {
                         console.log('Order cancelled successfully:', cancelledOrder);
                         this.loading = false;

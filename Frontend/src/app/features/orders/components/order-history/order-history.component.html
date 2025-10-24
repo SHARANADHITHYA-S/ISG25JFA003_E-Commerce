@@ -167,6 +167,12 @@
               <button class="btn btn-outline-secondary">
                 <i class="bi bi-file-earmark-text me-2"></i>View Invoice
               </button>
+              <button class="btn btn-outline-success" *ngIf="order.status === 'PENDING'" (click)="onCompletePayment(order)">
+                <i class="bi bi-credit-card me-2"></i>Complete Payment
+              </button>
+              <button class="btn btn-outline-danger" *ngIf="order.status === 'PENDING' || order.status === 'PAID' || order.status === 'PROCESSING' || order.status === 'SHIPPED'" (click)="onCancelOrder(order)">
+                <i class="bi bi-x-circle me-2"></i>Cancel Order
+              </button>
               <button class="btn btn-outline-info">
                 <i class="bi bi-headset me-2"></i>Contact Support
               </button>

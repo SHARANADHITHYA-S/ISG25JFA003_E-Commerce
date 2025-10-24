@@ -10,6 +10,7 @@ import { OrderService } from '../../core/services/order.service';
 import { Payment, PaymentStatus, PaymentType } from '../../core/models/payment.model';
 import { AuthService } from '../../core/services/auth.service';
 import { RazorpayService, RazorpayPaymentResponse } from '../../core/services/razorpay.service';
+import { Order } from '../../shared/models/order.model';
 
 @Component({
     selector: 'app-orders',
@@ -35,7 +36,7 @@ import { RazorpayService, RazorpayPaymentResponse } from '../../core/services/ra
                 #currentOrderComponent>
             </app-current-order>
             <hr class="my-5">
-            <app-order-history #orderHistoryComponent></app-order-history>
+            <app-order-history #orderHistoryComponent (completePayment)="openPaymentDialog({orderId: $event.id, amount: $event.totalAmount})" (cancelOrder)="onCancelOrder($event)"></app-order-history>
         </div>
     `,
     styles: [`
@@ -179,6 +180,20 @@ export class OrdersComponent {
                 console.error('Error updating order status:', error);
             }
         });
+    }
+
+    onCancelOrder(order: Order): void {
+        if (confirm('Are you sure you want to cancel this order?')) {
+            const isPaid = order.status !== 'PENDING';
+            this.orderService.cancelOrder(order.id, isPaid).subscribe(() => {
+                if (this.currentOrderComponent) {
+                    this.currentOrderComponent.refreshOrder();
+                }
+                if (this.orderHistoryComponent) {
+                    this.orderHistoryComponent.refreshOrders();
+                }
+            });
+        }
     }
 
     onOrderCancelled(): void {

@@ -51,7 +51,7 @@
           <div class="item-quantity">
             <label>Quantity</label>
             <div class="quantity-controls">
-              <button class="qty-btn" (click)="decrementQuantity(item)">
+              <button class="qty-btn" (click)="decrementQuantity(item, $event)">
                 <i class="bi bi-dash"></i>
               </button>
               <input type="number" 
@@ -60,7 +60,7 @@
                      min="1" 
                      max="99"
                      (change)="updateQuantity(item, $event)">
-              <button class="qty-btn" (click)="incrementQuantity(item)">
+              <button class="qty-btn" (click)="incrementQuantity(item, $event)">
                 <i class="bi bi-plus"></i>
               </button>
             </div>
@@ -71,7 +71,7 @@
             <div class="total-value">{{ item.totalPrice | currency:'INR' }}</div>
           </div>
 
-          <button class="item-remove" (click)="removeItem(item.id)" title="Remove item">
+          <button class="item-remove" (click)="removeItem(item.id, $event)" title="Remove item">
             <i class="bi bi-trash3"></i>
           </button>
         </div>

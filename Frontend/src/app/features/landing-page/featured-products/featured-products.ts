@@ -46,16 +46,6 @@ export class FeaturedProductsComponent implements OnInit {
     });
   }
 
-  // Helper function to create an array for the star rating loop
-  getStarArray(count: number): number[] {
-    return Array(count).fill(0);
-  }
-
-  // Helper function to determine how many stars should be filled (default 4 stars for all products)
-  getFullStars(): number {
-    return 4;
-  }
-
   navigateToProduct(productId: number): void {
     this.router.navigate(['/products', productId]);
   }

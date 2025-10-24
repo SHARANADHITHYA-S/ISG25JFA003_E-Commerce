@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../core/services/product.service';
 import { ProductResponseDTO } from '../../../core/models/product';
@@ -24,8 +24,13 @@ export class ProductDetailPageComponent implements OnInit {
     private messageService: MessageService,
     private route: ActivatedRoute,
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private location: Location
   ) { }
+
+  goBack(): void {
+    this.location.back();
+  }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -38,11 +43,22 @@ export class ProductDetailPageComponent implements OnInit {
 
   addToCart(): void {
     if (this.product) {
-      this.cartService.addCartItem(this.product.id, this.quantity).subscribe(() => {
-
-        alert('Product added to cart successfully!');
-        
-        // Toast notification is handled by CartService
+      this.cartService.addCartItem(this.product.id, this.quantity).subscribe({
+        next: () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: 'Success',
+            detail: 'Product added to cart successfully!'
+          });
+        },
+        error: (err) => {
+          console.error('Error adding to cart:', err);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Failed to add product to cart'
+          });
+        }
       });
     }
   }

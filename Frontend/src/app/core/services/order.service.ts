@@ -162,9 +162,13 @@ export class OrderService {
         );
     }
 
-    cancelOrder(orderId: number): Observable<Order> {
+    cancelOrder(orderId: number, isPaid: boolean): Observable<Order> {
+        const message = isPaid 
+            ? 'Order cancelled and amount refunded.' 
+            : 'Order cancelled successfully. Items have been returned to your cart.';
+
         return this.http.delete<Order>(`${this.apiUrl}/${orderId}`).pipe(
-            tap(() => this.notificationService.showSuccess('Order cancelled successfully. Items have been returned to your cart.')),
+            tap(() => this.notificationService.showSuccess(message)),
             catchError(err => {
                 this.notificationService.showError('Failed to cancel order');
                 return this.handleError(err);
