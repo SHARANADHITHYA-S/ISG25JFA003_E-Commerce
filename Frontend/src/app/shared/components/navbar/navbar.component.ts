@@ -26,7 +26,8 @@ export class NavbarComponent implements OnInit {
     this.loadCartItemCount();
     this.authService.loggedIn$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
-      this.isAdmin = this.authService.getUserRole() === 'ROLE_ADMIN';
+      const user = this.authService.getCurrentUser();
+      this.isAdmin = !!(user && (user.role === 'ADMIN' || user.role === 'ROLE_ADMIN'));
     });
   }
 

@@ -61,6 +61,28 @@ export class AnalyticsReportComponent implements OnInit {
     });
   }
 
+  editReport(report: AnalyticsData): void {
+    const newReportType = prompt('Enter new report type:', report.reportData.split(':')[0] || '');
+    if (newReportType && newReportType.trim()) {
+      this.loading = true;
+      this.error = null;
+      this.analyticsService.updateReport(report.reportId, newReportType.trim()).subscribe({
+        next: (updatedReport: AnalyticsData) => {
+          const index = this.analyticsData.findIndex(r => r.reportId === report.reportId);
+          if (index !== -1) {
+            this.analyticsData[index] = updatedReport;
+          }
+          this.loading = false;
+        },
+        error: (err: any) => {
+          this.error = 'Failed to update report. Please try again.';
+          this.loading = false;
+          console.error('Error updating report:', err);
+        }
+      });
+    }
+  }
+
   deleteReport(reportId: number): void {
     if (confirm('Are you sure you want to delete this report?')) {
       this.loading = true;

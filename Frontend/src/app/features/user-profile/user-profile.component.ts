@@ -23,6 +23,8 @@ export class UserProfileComponent implements OnInit {
   paymentMethods: PaymentMethod[] = [];
   activeSection: string = 'profile';
   successMessage: string = '';
+  editMode: boolean = false;
+  editableUser: User | null = null;
 
 
   constructor(

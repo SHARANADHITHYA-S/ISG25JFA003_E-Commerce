@@ -29,7 +29,10 @@
     <div class="report-card" *ngFor="let report of analyticsData">
       <div class="report-header">
         <h3>{{ report.reportName }}</h3>
-        <button (click)="deleteReport(report.reportId)" class="btn btn-danger btn-sm">Delete</button>
+        <div class="report-actions">
+          <button (click)="editReport(report)" class="btn btn-secondary btn-sm">Edit</button>
+          <button (click)="deleteReport(report.reportId)" class="btn btn-danger btn-sm">Delete</button>
+        </div>
       </div>
       <div class="report-details">
         <p><strong>Report ID:</strong> {{ report.reportId }}</p>
