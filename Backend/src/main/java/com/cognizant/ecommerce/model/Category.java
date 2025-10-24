@@ -24,6 +24,7 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
     private String description;
+    private String image_url;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore

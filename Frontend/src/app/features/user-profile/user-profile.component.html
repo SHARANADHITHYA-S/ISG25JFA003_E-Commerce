@@ -20,7 +20,7 @@
       <div class="section-header">
         <h2>Profile Information</h2>
         <i class="fas fa-edit edit-icon" (click)="toggleEditMode()" title="Edit Profile"></i>
-        <button class="btn btn-secondary" (click)="toggleEditMode()">{{ editMode ? 'Cancel' : 'Edit' }}</button>
+        <!-- <button class="btn btn-secondary" (click)="toggleEditMode()">{{ editMode ? 'Cancel' : 'Edit' }}</button> -->
       </div>
       <div *ngIf="user" class="profile-info">
         <div class="info-group">
@@ -61,8 +61,6 @@
           <div class="address-header">
             <h4>{{ address.address_line1 }}</h4>
             <span *ngIf="address.default" class="default-badge">Default</span>
-            <button class="btn btn-sm btn-outline-secondary ml-2" (click)="editAddress(address)">Edit</button>
-            <button class="btn btn-sm btn-outline-danger ml-2" (click)="deleteAddress(address)">Delete</button>
           </div>
           <div class="address-details">
             <p>{{ address.address_line2 }}</p>
@@ -88,9 +86,12 @@
           <div class="payment-header">
             <i class="fas fa-credit-card"></i>
             <span class="card-type">{{ payment.cardType }}</span>
+<<<<<<< HEAD
             <span *ngIf="payment.isDefault" class="default-badge">Default</span>
             <button class="btn btn-sm btn-outline-secondary ml-2" (click)="editPaymentMethod(payment)">Edit</button>
             <button class="btn btn-sm btn-outline-danger ml-2" (click)="deletePaymentMethod(payment)">Delete</button>
+=======
+>>>>>>> 637368f6849ae858e2d42f94368a4d2a348bf0b4
           </div>
           <div class="payment-details">
             <p>**** **** **** {{ payment.lastFourDigits }}</p>

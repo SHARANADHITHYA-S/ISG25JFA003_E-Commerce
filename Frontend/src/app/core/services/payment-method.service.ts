@@ -28,6 +28,12 @@ export class PaymentMethodService {
 
   constructor(private http: HttpClient) { }
 
+  getPaymentMethod(paymentMethodId: number): Observable<PaymentMethod> {
+    return this.http.get<PaymentMethod>(`${this.apiUrl}/${paymentMethodId}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   getPaymentMethodsByUserId(userId: number): Observable<PaymentMethod[]> {
     return this.http.get<PaymentMethod[]>(`${this.apiUrl}/user/${userId}`).pipe(
       catchError(this.handleError)

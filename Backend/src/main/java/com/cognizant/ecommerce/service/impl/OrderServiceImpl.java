@@ -100,6 +100,7 @@ public class OrderServiceImpl implements OrderService {
                     .order(order)
                     .product(product)
                     .quantity(cartItem.getQuantity())
+                    .image_url(product.getImage_url())
                     .price(product.getPrice())
                     .build();
 
@@ -181,17 +182,58 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public OrderResponseDTO deleteOrder(Long orderId) {
-        log.info("Deleting order with id={}", orderId);
+        log.info("Cancelling order with id={}", orderId);
 
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> {
                     log.error("Order not found with id={}", orderId);
                     return new ResourceNotFoundException("Order not found");
                 });
+        
+        // Get user
+        User user = order.getUser();
+        
+        // Get or create cart for user
+        Cart cart = cartRepository.findByUserId(user.getId())
+                .orElseGet(() -> {
+                    Cart newCart = new Cart();
+                    newCart.setUser(user);
+                    return cartRepository.save(newCart);
+                });
+        
+        // Return order items back to cart
+        for (OrderItem orderItem : order.getOrderItems()) {
+            Product product = orderItem.getProduct();
+            
+            // Restore product stock
+            product.setQuantity(product.getQuantity() + orderItem.getQuantity());
+            productRepository.save(product);
+            
+            // Add back to cart (check if product already exists in cart)
+            CartItem existingCartItem = cartItemRepository.findByCartIdAndProductId(cart.getId(), product.getId())
+                    .orElse(null);
+            
+            if (existingCartItem != null) {
+                // Update existing cart item quantity
+                existingCartItem.setQuantity(existingCartItem.getQuantity() + orderItem.getQuantity());
+                cartItemRepository.save(existingCartItem);
+            } else {
+                // Create new cart item
+                CartItem newCartItem = new CartItem();
+                newCartItem.setCart(cart);
+                newCartItem.setProduct(product);
+                newCartItem.setQuantity(orderItem.getQuantity());
+                cartItemRepository.save(newCartItem);
+            }
+        }
+        
+        // Set order status to CANCELLED
         order.setStatus("CANCELLED");
-        Order deleted = orderRepository.save(order);
-        log.debug("Order deleted: {}", deleted);
-        return modelMapper.map(deleted, OrderResponseDTO.class);
+        Order cancelledOrder = orderRepository.save(order);
+        
+        log.info("Order cancelled successfully, items returned to cart for orderId={}", orderId);
+        return modelMapper.map(cancelledOrder, OrderResponseDTO.class);
     }
 }

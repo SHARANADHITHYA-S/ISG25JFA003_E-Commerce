@@ -1,3 +1,5 @@
+import { ProductResponseDTO } from './product';
+
 export interface CartItemRequest {
   productId: number;
   quantity: number;
@@ -12,6 +14,8 @@ export interface CartItemResponse {
   price: number;
   quantity: number;
   totalPrice: number;
+  image_url: string;
+  product: ProductResponseDTO; // Add product details
 }
 
 export interface CartResponse {

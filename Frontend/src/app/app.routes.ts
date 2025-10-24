@@ -5,6 +5,8 @@ import { AdminGuard } from './core/guards/admin.guard';
 export const routes: Routes = [
     { path: '', loadComponent: () => import('./features/landing-page/landing-page').then(m => m.LandingPageComponent) },
     { path: 'shop', redirectTo: 'products', pathMatch: 'full' },
+    { path: 'categories', loadComponent: () => import('./features/categories/categories-page.component').then(m => m.CategoriesPageComponent) },
+    // { path: 'deals', loadComponent: () => import('./features/deals/deals').then(m => m.DealsComponent) },
     {
         path: 'products',
         children: [
@@ -70,7 +72,7 @@ export const routes: Routes = [
     },
     { 
         path: 'cart', 
-        loadComponent: () => import('./features/carts/component/component').then(c => c.CartComponent) 
+        loadComponent: () => import('./features/carts/cart/cart').then(c => c.CartComponent) 
     },
     { 
         path: 'login', 

@@ -1,10 +1,46 @@
-/* Defines a CSS variable for the primary orange color */
 :host {
-  --primary-orange: #fd7e14; /* A vibrant orange */
+  --primary-orange: #fd7e14;
 }
 
-/* Changes the link color on hover and adds a smooth transition */
-.footer-link:hover {
-  color: var(--primary-orange) !important;
+.footer-container {
+  background-color: #1c1c1e; /* Dark background */
+  padding: 2rem 0;
+  margin-top: 4rem; /* Adds space between page content and footer */
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.footer-logo img {
+  height: 40px;
+  filter: brightness(0) invert(1); /* Make logo white */
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-link {
+  color: #adb5bd; /* Lighter text color */
+  text-decoration: none;
   transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: var(--primary-orange);
+}
+
+.footer-divider {
+  border-color: #343a40; /* Darker divider */
+}
+
+.footer-copyright {
+  text-align: center;
+  color: #6c757d; /* Muted copyright text */
+  font-size: 0.9rem;
 }

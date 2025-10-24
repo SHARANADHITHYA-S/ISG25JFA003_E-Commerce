@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CartService } from '../../../core/services/cart.service';
 import { CartResponse, CartItemResponse, CartItemRequest } from '../../../core/models/cart';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog'; // Import MatDialog and MatDialogModule
-import { CheckoutDialogComponent } from '../components/checkout-dialog/checkout-dialog.component'; // Import CheckoutDialogComponent
+import { CheckoutDialogComponent } from '../checkout-dialog/checkout-dialog'; // Import CheckoutDialogComponent
 import { Router } from '@angular/router'; // Import Router
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSnackBar and MatSnackBarModule
 
@@ -11,8 +11,8 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; //
   selector: 'app-cart',
   standalone: true,
   imports: [CommonModule, MatDialogModule, MatSnackBarModule], // Add MatSnackBarModule to imports
-  templateUrl: './component.html',
-  styleUrls: ['./component.scss']
+  templateUrl: './cart.html',
+  styleUrls: ['./cart.scss']
 })
 export class CartComponent implements OnInit {
   cart: CartResponse | null = null;
@@ -60,7 +60,8 @@ export class CartComponent implements OnInit {
     });
   }
 
-  removeItem(itemId: number): void {
+  removeItem(itemId: number, event: Event): void {
+    event.stopPropagation();
     if (!confirm('Are you sure you want to remove this item?')) return;
     
     this.cartService.removeCartItem(itemId).subscribe({
@@ -129,7 +130,10 @@ export class CartComponent implements OnInit {
   openCheckoutDialog(): void {
     const dialogRef = this.dialog.open(CheckoutDialogComponent, {
       width: '600px',
-      disableClose: true // Prevent closing by clicking outside or pressing escape
+      height: 'auto',
+      maxHeight: '90vh',
+      disableClose: true, // Prevent closing by clicking outside or pressing escape
+      panelClass: 'checkout-dialog-panel' // Add custom panel class for styling
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -189,7 +193,8 @@ export class CartComponent implements OnInit {
     return '/favicon.ico';
   }
 
-  incrementQuantity(item: CartItemResponse): void {
+  incrementQuantity(item: CartItemResponse, event: Event): void {
+    event.stopPropagation();
     const newQuantity = item.quantity + 1;
     const itemRequest: CartItemRequest = { productId: item.productId, quantity: newQuantity };
 
@@ -209,7 +214,8 @@ export class CartComponent implements OnInit {
     });
   }
 
-  decrementQuantity(item: CartItemResponse): void {
+  decrementQuantity(item: CartItemResponse, event: Event): void {
+    event.stopPropagation();
     if (item.quantity <= 1) return;
     
     const newQuantity = item.quantity - 1;

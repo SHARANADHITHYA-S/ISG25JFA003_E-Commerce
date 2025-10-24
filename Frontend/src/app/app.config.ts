@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSnackBarModule
 import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 import { routes } from './app.routes';
 import { tokenInterceptor } from './core/interceptors/token.interceptor';
@@ -17,6 +18,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([tokenInterceptor, errorInterceptor])),
     provideAnimations(),
     MessageService,
-    importProvidersFrom(NgbModule, MatDialogModule, MatSnackBarModule, BrowserAnimationsModule)
+    importProvidersFrom(NgbModule, MatDialogModule, MatSnackBarModule, BrowserAnimationsModule, ToastModule)
   ]
 };

@@ -1,3 +1,5 @@
+import { ProductResponseDTO } from '../../core/models/product';
+
 export interface Order {
     id: number;
     status: OrderStatus;
@@ -7,6 +9,7 @@ export interface Order {
     addressId: number;
     paymentMethodId: number;
     orderItems: OrderItem[];
+    deliveryDate?: string;
 }
 
 export interface OrderItem {
@@ -16,15 +19,18 @@ export interface OrderItem {
     quantity: number;
     price: number;
     subtotal: number;
+    image_url: string;
+    product: ProductResponseDTO; // Add product details
 }
 
-export type OrderStatus = 'PENDING' | 'PROCESSING' | 'SHIPPED' | 'DELIVERED' | 'COMPLETED' | 'CANCELLED';
+export type OrderStatus = 'PENDING' | 'PAID' | 'PROCESSING' | 'SHIPPED' | 'DELIVERED' | 'COMPLETED' | 'CANCELLED';
 
 export const ORDER_STATUS_HIERARCHY: Record<OrderStatus, number> = {
     PENDING: 1,
-    PROCESSING: 2,
-    SHIPPED: 3,
-    DELIVERED: 4,
-    COMPLETED: 5,
-    CANCELLED: 6,
+    PAID: 2,
+    PROCESSING: 3,
+    SHIPPED: 4,
+    DELIVERED: 5,
+    COMPLETED: 6,
+    CANCELLED: 7,
 };

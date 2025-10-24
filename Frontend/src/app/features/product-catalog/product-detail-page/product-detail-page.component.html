@@ -1,13 +1,16 @@
 <div class="page-container">
-  <div class="container mt-5" *ngIf="product as p">
-    <div class="row justify-content-center g-4">
+  <div class="container mt-5">
+    <a (click)="goBack()" class="back-link mb-3 d-inline-block">
+      <i class="bi bi-arrow-left"></i> 
+    </a>
+    <div *ngIf="product as p" class="row justify-content-center g-4">
       <div class="col-md-5">
         <img [src]="p.image_url" class="img-fluid rounded-lg shadow-sm" [alt]="p.name">
       </div>
       <div class="col-md-5 text-center">
         <h1 class="display-5 mb-3">{{ p.name }}</h1>
         <p class="product-detail-price">₹{{ p.price }}</p>
-        
+
         <div class="mb-4">
           <span class="badge" [ngClass]="{'bg-success': p.is_active && p.quantity > 0, 'bg-danger': !p.is_active || p.quantity <= 0}">
               {{ p.is_active && p.quantity > 0 ? 'In Stock' : 'Out of Stock' }}
@@ -28,3 +31,4 @@
     </div>
   </div>
 </div>
+<p-toast></p-toast>

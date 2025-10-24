@@ -5,15 +5,24 @@
       <p class="text-secondary">Browse through our diverse range of product categories</p>
     </div>
 
-    <div class="row g-4">
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="text-center py-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+
+    <!-- Categories Grid -->
+    <div *ngIf="!isLoading && categories.length > 0" class="row g-4">
       <div *ngFor="let category of categories" class="col-md-6 col-lg-3">
-        <div class="card h-100 border-0 shadow-sm" style="cursor: pointer;">
+        <div class="card h-100 border-0 shadow-sm" style="cursor: pointer;" (click)="navigateToCategory(category.id)">
           <div class="ratio ratio-4x3 overflow-hidden bg-light">
             <img
               [src]="category.image"
               [alt]="category.name"
               class="card-img-top"
               style="object-fit: cover;"
+              onerror="this.src='https://images.unsplash.com/photo-1556740758-90de374c12ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080'"
             />
           </div>
           <div class="card-body text-center">
@@ -22,6 +31,11 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Empty State -->
+    <div *ngIf="!isLoading && categories.length === 0" class="text-center py-5">
+      <p class="text-muted">No categories available at the moment.</p>
     </div>
   </div>
 </section>

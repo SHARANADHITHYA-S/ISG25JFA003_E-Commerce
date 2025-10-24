@@ -1,5 +1,6 @@
 package com.cognizant.ecommerce.dto.cartItem;
 
+import com.cognizant.ecommerce.dto.product.ProductResponseDTO;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -17,5 +18,6 @@ public class CartItemResponseDTO {
     private String productName;
     private BigDecimal price;
     private Integer quantity;
+    private String image_url;
     private BigDecimal totalPrice;
 }

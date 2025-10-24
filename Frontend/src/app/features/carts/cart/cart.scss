@@ -1,4 +1,4 @@
-/* Cart Container */
+ /* Cart Container */
 .cart-container {
   min-height: 100vh;
   padding: 1.5rem 1rem;
@@ -409,6 +409,19 @@
   font-weight: 600;
 }
 
+/* Checkout Dialog Panel Styling */
+.checkout-dialog-panel .mat-mdc-dialog-container {
+  border-radius: 12px !important;
+  width: 100% !important;
+  max-width: 500px !important;
+  overflow: hidden;
+}
+
+.checkout-dialog-panel .mdc-dialog__surface {
+  border-radius: 12px !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
   .cart-layout {
@@ -449,6 +462,4 @@
 
   .item-count {
     font-size: 0.875rem;
-    padding: 0.4rem 1rem;
-  }
-}
+  }}
