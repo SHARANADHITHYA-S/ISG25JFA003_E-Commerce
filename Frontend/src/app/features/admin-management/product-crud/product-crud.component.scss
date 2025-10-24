@@ -1,0 +1,18 @@
+// Low stock warning highlight
+.table-warning {
+  background-color: #fff3cd !important;
+  border-left: 4px solid #ffc107;
+  
+  td {
+    background-color: #fff3cd !important;
+  }
+  
+  &:hover td {
+    background-color: #ffe69c !important;
+  }
+}
+
+// Warning icon styling
+.text-warning {
+  color: #ff9800 !important;
+}

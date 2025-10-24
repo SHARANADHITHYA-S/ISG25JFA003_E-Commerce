@@ -1,4 +1,4 @@
-.analytics-orders-container {
+.order-management-container {
   padding: 20px;
   max-width: 1200px;
   margin: 0 auto;
@@ -151,8 +151,39 @@ h1 {
   color: #383d41;
 }
 
+.status-paid {
+  background-color: #cfe2ff;
+  color: #084298;
+}
+
+.status-processing {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.form-select-sm {
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+  min-width: 120px;
+  cursor: pointer;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background-color: white;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-select-sm:hover {
+  border-color: #86b7fe;
+}
+
+.form-select-sm:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
 @media (max-width: 768px) {
-  .analytics-orders-container {
+  .order-management-container {
     padding: 15px;
   }
 
