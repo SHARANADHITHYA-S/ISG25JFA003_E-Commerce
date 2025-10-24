@@ -28,7 +28,7 @@
         </div>
         <div class="order-status">
           <span class="status-badge" [ngClass]="getStatusClass(currentOrder.status)">
-            {{ currentOrder.status }}
+            {{ getFormattedStatus(currentOrder.status) }}
           </span>
         </div>
       </div>
@@ -80,14 +80,14 @@
               <div *ngIf="currentOrder.status === 'PENDING'" class="delivery-options">
                 <div class="delivery-option" *ngFor="let option of deliveryOptions">
                   <input type="radio"
-                         [id]="option"
+                         [id]="option.date"
                          [value]="option"
                          [(ngModel)]="selectedDeliveryDate"
                          name="deliveryDate">
-                  <label [for]="option" class="delivery-label">
-                    <span class="delivery-date">{{ option }}</span>
-                    <span class="delivery-price" *ngIf="option === deliveryOptions[0]">FREE</span>
-                    <span class="delivery-price" *ngIf="option === deliveryOptions[1]">₹5.99</span>
+                  <label [for]="option.date" class="delivery-label">
+                    <span class="delivery-date">{{ option.date }}</span>
+                    <span class="delivery-price" *ngIf="option.isFree">FREE</span>
+                    <span class="delivery-price" *ngIf="!option.isFree">₹5.99</span>
                   </label>
                 </div>
               </div>
@@ -138,7 +138,7 @@
                 </div>
                 <div class="summary-row">
                   <span>Delivery:</span>
-                  <span class="summary-value">{{ selectedDeliveryDate === deliveryOptions[0] ? 'FREE' : '₹5.99' }}</span>
+                  <span class="summary-value">{{ selectedDeliveryDate.isFree ? 'FREE' : '₹5.99' }}</span>
                 </div>
                 <div class="summary-row">
                   <span>Tax (9%):</span>
@@ -147,7 +147,7 @@
                 <hr class="summary-divider">
                 <div class="summary-row total">
                   <span>Total:</span>
-                  <span class="total-value">{{ (currentOrder.totalAmount * 1.09 + (selectedDeliveryDate === deliveryOptions[1] ? 5.99 : 0)) | currency:'INR':'symbol' }}</span>
+                  <span class="total-value">{{ (currentOrder.totalAmount * 1.09 + (selectedDeliveryDate.isFree ? 0 : 5.99)) | currency:'INR':'symbol' }}</span>
                 </div>
               </div>
             </div>

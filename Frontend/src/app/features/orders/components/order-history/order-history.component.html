@@ -37,7 +37,7 @@
             </div>
             <div class="order-status">
               <span class="status-badge" [ngClass]="getBadgeClass(order.status)">
-                {{ order.status }}
+                {{ getFormattedStatus(order.status) }}
               </span>
             </div>
           </div>

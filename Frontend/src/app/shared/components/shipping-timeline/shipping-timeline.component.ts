@@ -19,14 +19,12 @@ export class ShippingTimelineComponent {
   @Input() timelineEvents: TimelineEvent[] = [];
 
   getMarkerClass(event: TimelineEvent): string {
-    if (event.status === 'PAID') {
+    const currentIndex = this.timelineEvents.findIndex(e => e.isCurrent);
+    const eventIndex = this.timelineEvents.indexOf(event);
+    if (eventIndex <= currentIndex) {
       return 'paid';
-    } else if (event.status === 'PROCESSING') {
+    } else if (eventIndex === currentIndex + 1) {
       return 'processing';
-    } else if (event.isCompleted) {
-      return 'completed';
-    } else if (event.isCurrent) {
-      return 'current';
     } else {
       return 'pending';
     }

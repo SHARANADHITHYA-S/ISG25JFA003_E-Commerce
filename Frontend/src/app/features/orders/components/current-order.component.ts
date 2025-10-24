@@ -21,13 +21,13 @@ export class CurrentOrderComponent implements OnInit {
     currentOrder: Order | null = null;
     selectedAddress: Address | null = null;
     selectedPaymentMethod: PaymentMethod | null = null;
-    selectedDeliveryDate: string = '';
-    deliveryOptions: string[] = [];
+    selectedDeliveryDate: any = null;
+    deliveryOptions: any[] = [];
     loading = false;
     error: string | null = null;
     timelineEvents: TimelineEvent[] = [];
 
-    @Output() makePayment = new EventEmitter<{ orderId: number; amount: number }>();
+    @Output() makePayment = new EventEmitter<{ orderId: number; amount: number; deliveryDate: string }>();
     @Output() orderCancelled = new EventEmitter<void>();
 
     constructor(private orderService: OrderService, private addressService: AddressService, private paymentMethodService: PaymentMethodService, private router: Router) { }
@@ -39,17 +39,37 @@ export class CurrentOrderComponent implements OnInit {
 
     generateDeliveryOptions(): void {
         const today = new Date();
-        this.deliveryOptions = [];
-        for (let i = 1; i <= 2; i++) {
-            const date = new Date(today);
-            date.setDate(today.getDate() + i);
-            this.deliveryOptions.push(date.toLocaleDateString('en-US', {
-                weekday: 'long',
-                month: 'short',
-                day: 'numeric'
-            }));
+        
+        // Next Day Delivery (Paid)
+        const nextDay = new Date(today);
+        nextDay.setDate(today.getDate() + 1);
+        const nextDayString = nextDay.toLocaleDateString('en-US', {
+            weekday: 'long',
+            month: 'short',
+            day: 'numeric'
+        });
+
+        // Nearest Sunday Delivery (Free)
+        const nearestSunday = new Date(today);
+        const dayOfWeek = today.getDay(); // 0=Sun, 1=Mon, ...
+        const daysUntilSunday = (7 - dayOfWeek) % 7;
+        nearestSunday.setDate(today.getDate() + daysUntilSunday);
+        // If today is Sunday, calculate for next Sunday
+        if (daysUntilSunday === 0) {
+            nearestSunday.setDate(today.getDate() + 7);
         }
-        this.selectedDeliveryDate = this.deliveryOptions[0];
+        const nearestSundayString = nearestSunday.toLocaleDateString('en-US', {
+            weekday: 'long',
+            month: 'short',
+            day: 'numeric'
+        });
+
+        this.deliveryOptions = [
+            { date: nearestSundayString, isFree: true },
+            { date: nextDayString, isFree: false }
+        ];
+        // Default to the free option
+        this.selectedDeliveryDate = this.deliveryOptions.find(option => option.isFree);
     }
 
     loadCurrentOrder(): void {
@@ -114,10 +134,25 @@ export class CurrentOrderComponent implements OnInit {
 
         const statuses: OrderStatus[] = ['PAID', 'PROCESSING', 'SHIPPED', 'DELIVERED'];
         const statusOrder = statuses.indexOf(this.currentOrder.status);
+        const placedAt = new Date(this.currentOrder.placed_at);
+
         this.timelineEvents = statuses.map((status, index) => {
+            let date: Date;
+            if (this.currentOrder?.deliveryDate) {
+                // Calculate dates backwards from delivery date
+                const deliveryDate = new Date(this.currentOrder.deliveryDate);
+                const daysBeforeDelivery = statuses.length - 1 - index;
+                date = new Date(deliveryDate);
+                date.setDate(deliveryDate.getDate() - daysBeforeDelivery);
+            } else {
+                // Fallback to original logic
+                date = new Date(placedAt);
+                date.setDate(placedAt.getDate() + (index * 2));
+            }
+
             const event: TimelineEvent = {
                 status: status,
-                date: this.getEstimatedDate(index),
+                date: date.toLocaleDateString(),
                 isCurrent: this.currentOrder!.status === status,
                 isCompleted: index < statusOrder
             };
@@ -125,20 +160,17 @@ export class CurrentOrderComponent implements OnInit {
         });
     }
 
-    getEstimatedDate(step: number): string {
-        if (!this.currentOrder) return '';
-        const date = new Date(this.currentOrder.placed_at);
-        date.setDate(date.getDate() + (step * 2)); // Add 2 days for each step
-        return date.toLocaleDateString();
-    }
-
     refreshOrder(): void {
         this.loadCurrentOrder();
     }
 
     onMakePayment(): void {
-        if (this.currentOrder && this.currentOrder.id && this.currentOrder.totalAmount) {
-            this.makePayment.emit({ orderId: this.currentOrder.id, amount: this.currentOrder.totalAmount });
+        if (this.currentOrder && this.currentOrder.id && this.currentOrder.totalAmount && this.selectedDeliveryDate) {
+            this.makePayment.emit({ 
+                orderId: this.currentOrder.id, 
+                amount: this.currentOrder.totalAmount, 
+                deliveryDate: this.selectedDeliveryDate.date 
+            });
         }
     }
 
@@ -187,6 +219,27 @@ export class CurrentOrderComponent implements OnInit {
         }
     }
 
+    getFormattedStatus(status: OrderStatus): string {
+        switch (status) {
+            case 'PENDING':
+                return 'Payment Pending';
+            case 'PAID':
+                return 'Paid';
+            case 'PROCESSING':
+                return 'Processing';
+            case 'SHIPPED':
+                return 'Shipped';
+            case 'DELIVERED':
+                return 'Delivered';
+            case 'COMPLETED':
+                return 'Completed';
+            case 'CANCELLED':
+                return 'Cancelled';
+            default:
+                return status;
+        }
+    }
+
     navigateToProduct(productId: number): void {
         this.router.navigate(['/products', productId]);
     }
@@ -200,7 +253,7 @@ export class CurrentOrderComponent implements OnInit {
         if (!this.currentOrder) return '';
         // Use the selected delivery date if it exists, otherwise calculate based on order placement
         if (this.selectedDeliveryDate) {
-            return this.selectedDeliveryDate;
+            return this.selectedDeliveryDate.date;
         }
         // Default to 2 days from order placement for paid orders
         const date = new Date(this.currentOrder.placed_at);

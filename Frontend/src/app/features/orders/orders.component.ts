@@ -36,7 +36,7 @@ import { Order } from '../../shared/models/order.model';
                 #currentOrderComponent>
             </app-current-order>
             <hr class="my-5">
-            <app-order-history #orderHistoryComponent (completePayment)="openPaymentDialog({orderId: $event.id, amount: $event.totalAmount})" (cancelOrder)="onCancelOrder($event)"></app-order-history>
+            <app-order-history #orderHistoryComponent (completePayment)="openPaymentDialog({orderId: $event.id, amount: $event.totalAmount, deliveryDate: ''})" (cancelOrder)="onCancelOrder($event)"></app-order-history>
         </div>
     `,
     styles: [`
@@ -64,7 +64,7 @@ export class OrdersComponent {
         this.userId = user?.id || 0;
     }
 
-    openPaymentDialog(event: { orderId: number; amount: number }): void {
+    openPaymentDialog(event: { orderId: number; amount: number; deliveryDate: string }): void {
         console.log('Opening Razorpay payment for order:', event);
 
         // Get user details
@@ -94,7 +94,8 @@ export class OrdersComponent {
                     razorpayPaymentId: response.razorpay_payment_id,
                     razorpayOrderId: response.razorpay_order_id,
                     razorpaySignature: response.razorpay_signature,
-                    paymentMethod: 'Razorpay'
+                    paymentMethod: 'Razorpay',
+                    deliveryDate: event.deliveryDate
                 });
             },
             error: (error: any) => {
@@ -149,7 +150,7 @@ export class OrdersComponent {
                 console.log('Payment verification successful:', verifiedPayment);
 
                 // Update order status to PAID
-                this.updateOrderStatus(paymentData.orderId, 'PAID');
+                this.updateOrderStatus(paymentData.orderId, 'PAID', paymentData.deliveryDate);
                 this.showSuccessMessage();
 
                 // Refresh both the current order and order history views
@@ -171,8 +172,8 @@ export class OrdersComponent {
     }
 
 
-    private updateOrderStatus(orderId: number, status: string): void {
-        this.orderService.updateOrderStatus(orderId, status).subscribe({
+    private updateOrderStatus(orderId: number, status: string, deliveryDate?: string): void {
+        this.orderService.updateOrderStatus(orderId, status, deliveryDate).subscribe({
             next: (order) => {
                 console.log('Order status updated to:', status);
             },

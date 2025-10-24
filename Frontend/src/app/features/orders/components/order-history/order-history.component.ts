@@ -73,21 +73,30 @@ export class OrderHistoryComponent implements OnInit {
 
         const statuses: OrderStatus[] = ['PAID', 'PROCESSING', 'SHIPPED', 'DELIVERED'];
         const statusOrder = statuses.indexOf(order.status);
+        const placedAt = new Date(order.placed_at);
+
         return statuses.map((status, index) => {
+            let date: Date;
+            if (order.deliveryDate) {
+                // Calculate dates backwards from delivery date
+                const deliveryDate = new Date(order.deliveryDate);
+                const daysBeforeDelivery = statuses.length - 1 - index;
+                date = new Date(deliveryDate);
+                date.setDate(deliveryDate.getDate() - daysBeforeDelivery);
+            } else {
+                // Fallback to original logic
+                date = new Date(placedAt);
+                date.setDate(placedAt.getDate() + (index * 2));
+            }
+
             const event: TimelineEvent = {
                 status: status,
-                date: this.getEstimatedDate(order, index),
+                date: date.toLocaleDateString(),
                 isCurrent: order.status === status,
                 isCompleted: index < statusOrder
             };
             return event;
         });
-    }
-
-    getEstimatedDate(order: Order, step: number): string {
-        const date = new Date(order.placed_at);
-        date.setDate(date.getDate() + (step * 2)); // Add 2 days for each step
-        return date.toLocaleDateString();
     }
 
     toggleOrderDetails(orderId: number): void {
@@ -146,6 +155,27 @@ export class OrderHistoryComponent implements OnInit {
                 return 'status-cancelled';
             default:
                 return 'status-default';
+        }
+    }
+
+    getFormattedStatus(status: OrderStatus): string {
+        switch (status) {
+            case 'PENDING':
+                return 'Payment Pending';
+            case 'PAID':
+                return 'Paid';
+            case 'PROCESSING':
+                return 'Processing';
+            case 'SHIPPED':
+                return 'Shipped';
+            case 'DELIVERED':
+                return 'Delivered';
+            case 'COMPLETED':
+                return 'Completed';
+            case 'CANCELLED':
+                return 'Cancelled';
+            default:
+                return status;
         }
     }
 
