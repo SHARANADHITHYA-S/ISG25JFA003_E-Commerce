@@ -40,9 +40,11 @@ public class CategoryServiceImpl implements CategoryService {
 
         Category category = new Category();
         BeanUtils.copyProperties(categoryRequestDTO, category);
+        category.setImage_url(categoryRequestDTO.getImageUrl());
         Category savedCategory = categoryRepository.save(category);
         CategoryResponseDTO responseDTO = new CategoryResponseDTO();
         BeanUtils.copyProperties(savedCategory, responseDTO);
+        responseDTO.setImageUrl(savedCategory.getImage_url());
         return responseDTO;
     }
 
@@ -53,6 +55,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         CategoryResponseDTO dto = new CategoryResponseDTO();
         BeanUtils.copyProperties(category, dto);
+        dto.setImageUrl(category.getImage_url());
 
         List<ProductResponseDTO> productDTOs = productRepository.findByCategoryId(id).stream()
                 .map(product -> {
@@ -77,6 +80,7 @@ public class CategoryServiceImpl implements CategoryService {
                 .map(category -> {
                     CategoryResponseDTO responseDTO = new CategoryResponseDTO();
                     BeanUtils.copyProperties(category, responseDTO);
+                    responseDTO.setImageUrl(category.getImage_url());
                     return responseDTO;
                 })
                 .collect(Collectors.toList());
@@ -95,9 +99,11 @@ public class CategoryServiceImpl implements CategoryService {
         }
 
         BeanUtils.copyProperties(categoryRequestDTO, existingCategory);
+        existingCategory.setImage_url(categoryRequestDTO.getImageUrl());
         Category updatedCategory = categoryRepository.save(existingCategory);
         CategoryResponseDTO responseDTO = new CategoryResponseDTO();
         BeanUtils.copyProperties(updatedCategory, responseDTO);
+        responseDTO.setImageUrl(updatedCategory.getImage_url());
         return responseDTO;
     }
 

@@ -31,6 +31,7 @@ import { RazorpayService, RazorpayPaymentResponse } from '../../core/services/ra
             <p-toast></p-toast>
             <app-current-order
                 (makePayment)="openPaymentDialog($event)"
+                (orderCancelled)="onOrderCancelled()"
                 #currentOrderComponent>
             </app-current-order>
             <hr class="my-5">
@@ -178,6 +179,14 @@ export class OrdersComponent {
                 console.error('Error updating order status:', error);
             }
         });
+    }
+
+    onOrderCancelled(): void {
+        console.log('Order cancelled, refreshing order history...');
+        // Refresh order history to show the cancelled order
+        if (this.orderHistoryComponent) {
+            this.orderHistoryComponent.refreshOrders();
+        }
     }
 
     private showSuccessMessage(): void {

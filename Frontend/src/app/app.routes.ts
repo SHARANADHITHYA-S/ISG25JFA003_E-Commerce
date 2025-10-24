@@ -90,7 +90,7 @@ export const routes: Routes = [
     },
     { 
         path: 'cart', 
-        loadComponent: () => import('./features/carts/component/component').then(c => c.CartComponent) 
+        loadComponent: () => import('./features/carts/cart/cart').then(c => c.CartComponent) 
     },
     { 
         path: 'login', 

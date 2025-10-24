@@ -34,8 +34,9 @@
       <div class="cart-items-section">
         <div class="cart-item" *ngFor="let item of cart.items" (click)="navigateToProduct(item.productId)">
           <div class="item-image-wrapper">
-            <img [src]="getProductImage(item)" 
+            <img [src]="item.image_url || getProductImage(item.productName)" 
                  [alt]="item.productName"
+                 onerror="this.src='/favicon.ico'"
                  class="item-image">
           </div>
           
@@ -43,14 +44,14 @@
             <h3 class="item-name">{{ item.productName }}</h3>
             <p class="item-price">
               <span class="price-label">Price:</span>
-              <span class="price-value">{{ item.price | currency }}</span>
+              <span class="price-value">{{ item.price | currency:'INR' }}</span>
             </p>
           </div>
 
           <div class="item-quantity">
             <label>Quantity</label>
             <div class="quantity-controls">
-              <button class="qty-btn" (click)="decrementQuantity(item, $event)">
+              <button class="qty-btn" (click)="decrementQuantity(item)">
                 <i class="bi bi-dash"></i>
               </button>
               <input type="number" 
@@ -59,7 +60,7 @@
                      min="1" 
                      max="99"
                      (change)="updateQuantity(item, $event)">
-              <button class="qty-btn" (click)="incrementQuantity(item, $event)">
+              <button class="qty-btn" (click)="incrementQuantity(item)">
                 <i class="bi bi-plus"></i>
               </button>
             </div>
@@ -67,7 +68,7 @@
 
           <div class="item-total">
             <label>Subtotal</label>
-            <div class="total-value">{{ item.totalPrice | currency }}</div>
+            <div class="total-value">{{ item.totalPrice | currency:'INR' }}</div>
           </div>
 
           <button class="item-remove" (click)="removeItem(item.id)" title="Remove item">
@@ -86,7 +87,7 @@
           <div class="summary-details">
             <div class="summary-row">
               <span>Subtotal ({{ totalItems }} {{ totalItems === 1 ? 'Item' : 'Items' }}):</span>
-              <span class="summary-value">{{ cart.totalPrice | currency }}</span>
+              <span class="summary-value">{{ cart.totalPrice | currency:'INR' }}</span>
             </div>
             
             <div class="summary-row">
@@ -96,14 +97,14 @@
 
             <div class="summary-row">
               <span>Tax (9%):</span>
-              <span class="summary-value">{{ cart.totalPrice * 0.09 | currency }}</span>
+              <span class="summary-value">{{ cart.totalPrice * 0.09 | currency:'INR' }}</span>
             </div>
 
             <hr class="summary-divider">
 
             <div class="summary-row total">
               <span>Total:</span>
-              <span class="total-value">{{ cart.totalPrice * 1.09 | currency }}</span>
+              <span class="total-value">{{ cart.totalPrice * 1.09 | currency:'INR' }}</span>
             </div>
           </div>
 

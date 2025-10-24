@@ -17,24 +17,34 @@
   <table class="table table-bordered table-striped">
     <thead class="thead-dark">
       <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Active</th>
-        <th>Actions</th>
+        <th class="align-middle">ID</th>
+        <th class="align-middle">Image</th>
+        <th class="align-middle">Name</th>
+        <th class="align-middle">Price</th>
+        <th class="align-middle">Quantity</th>
+        <th class="align-middle">Active</th>
+        <th class="align-middle">Actions</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let product of products">
-        <td>{{ product.id }}</td>
-        <td>{{ product.name }}</td>
-        <td>₹{{ product.price }}</td>
-        <td>{{ product.quantity }}</td>
-        <td><span class="badge" [ngClass]="{'bg-success': product.is_active, 'bg-danger': !product.is_active}">
+        <td class="align-middle">{{ product.id }}</td>
+        <td class="align-middle">
+          <img *ngIf="product.image_url" 
+               [src]="product.image_url" 
+               [alt]="product.name" 
+               class="img-thumbnail" 
+               style="width: 60px; height: 60px; object-fit: cover;"
+               onerror="this.style.display='none'">
+          <span *ngIf="!product.image_url" class="text-muted">No image</span>
+        </td>
+        <td class="align-middle">{{ product.name }}</td>
+        <td class="align-middle">₹{{ product.price }}</td>
+        <td class="align-middle">{{ product.quantity }}</td>
+        <td class="align-middle"><span class="badge" [ngClass]="{'bg-success': product.is_active, 'bg-danger': !product.is_active}">
             {{ product.is_active ? 'Yes' : 'No' }}
           </span></td>
-        <td>
+        <td class="align-middle">
           <button class="btn btn-sm btn-info me-2" [routerLink]="['/admin/products/edit', product.id]">Edit</button>
           <button class="btn btn-sm btn-danger" (click)="onDelete(product.id)">Delete</button>
         </td>

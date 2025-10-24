@@ -3,6 +3,11 @@
   <div class="card-body d-flex flex-column">
     <h5 class="card-title">{{ product.name }}</h5>
     <p class="card-text text-muted mb-2">{{ product.description.substring(0, 50) }}...</p>
-    <p class="product-price mt-auto">₹{{ product.price }}</p>
+    <div class="d-flex align-items-center justify-content-between mt-auto">
+      <p class="product-price mb-0">₹{{ product.price }}</p>
+      <button class="btn btn-warning btn-sm" (click)="addToCart($event)" title="Add to Cart">
+        <i class="fa-solid fa-cart-shopping fa-bounce fa-2xs" style="color: #d59062;"></i>
+      </button>
+    </div>
   </div>
 </div>

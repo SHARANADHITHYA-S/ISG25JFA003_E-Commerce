@@ -15,4 +15,6 @@ public class CategoryRequestDTO {
 
     @NotBlank(message = "Add a description for the category")
     private String description;
+
+    private String imageUrl;
 }

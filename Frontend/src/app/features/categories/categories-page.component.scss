@@ -1,8 +1,22 @@
 .card {
+  max-width: 350px;
+  border-radius: 15px;
+  overflow: hidden;
   transition: transform 0.2s;
 }
 
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+.card-title {
+  color: #333;
 }

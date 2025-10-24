@@ -247,6 +247,17 @@ app-current-order {
     }
 }
 
+.warning-snackbar {
+    background: linear-gradient(135deg, #F39C12 0%, #E67E22 100%) !important;
+    color: white !important;
+    font-weight: 600 !important;
+    
+    .mdc-snackbar__label,
+    .mat-mdc-snack-bar-label {
+        color: white !important;
+    }
+}
+
 /* PrimeNG Toast Glass Blur Styling */
 .p-toast {
   .p-toast-message {
