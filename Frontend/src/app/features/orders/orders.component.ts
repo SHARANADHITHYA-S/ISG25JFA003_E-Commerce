@@ -149,8 +149,8 @@ export class OrdersComponent {
             next: (verifiedPayment) => {
                 console.log('Payment verification successful:', verifiedPayment);
 
-                // Update order status to PAID
-                this.updateOrderStatus(paymentData.orderId, 'PAID', paymentData.deliveryDate);
+                // Update order status to PROCESSING
+                this.updateOrderStatus(paymentData.orderId, 'PROCESSING', paymentData.deliveryDate);
                 this.showSuccessMessage();
 
                 // Refresh both the current order and order history views
@@ -173,7 +173,7 @@ export class OrdersComponent {
 
 
     private updateOrderStatus(orderId: number, status: string, deliveryDate?: string): void {
-        this.orderService.updateOrderStatus(orderId, status, deliveryDate).subscribe({
+        this.orderService.updateOrderStatus(orderId, status).subscribe({
             next: (order) => {
                 console.log('Order status updated to:', status);
             },
