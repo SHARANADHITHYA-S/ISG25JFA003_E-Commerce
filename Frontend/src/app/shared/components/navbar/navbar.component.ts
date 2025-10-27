@@ -24,10 +24,23 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void { // Implemented OnInit
     this.loadCartItemCount();
+    
+    // Subscribe to cart changes for dynamic updates
+    this.cartService.cartChanges$.subscribe(() => {
+      this.loadCartItemCount();
+    });
+    
     this.authService.loggedIn$.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
       const user = this.authService.getCurrentUser();
       this.isAdmin = !!(user && (user.role === 'ADMIN' || user.role === 'ROLE_ADMIN'));
+      
+      // Reload cart count when user logs in/out
+      if (isLoggedIn) {
+        this.loadCartItemCount();
+      } else {
+        this.cartItemCount = 0;
+      }
     });
   }
 

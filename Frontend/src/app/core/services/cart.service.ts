@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError, forkJoin, of } from 'rxjs';
+import { Observable, throwError, forkJoin, of, BehaviorSubject } from 'rxjs';
 import { catchError, tap, switchMap, map } from 'rxjs/operators';
 import { CartResponse, CartItemRequest, CartItemResponse } from '../models/cart';
 import { AuthService } from './auth.service'; // Import AuthService
@@ -12,6 +12,10 @@ import { ProductService } from './product.service'; // Import ProductService
 })
 export class CartService {
   private apiUrl = 'http://localhost:8080/api';
+  private cartUpdated$ = new BehaviorSubject<void>(undefined);
+  
+  // Observable to notify components when cart is updated
+  public cartChanges$ = this.cartUpdated$.asObservable();
 
   constructor(private http: HttpClient, private authService: AuthService, private notificationService: NotificationService, private productService: ProductService) { }
 
@@ -48,7 +52,10 @@ export class CartService {
     const userId = this.getUserIdFromAuth();
     const itemRequest: CartItemRequest = { productId, quantity };
     return this.http.post<CartItemResponse>(`${this.apiUrl}/cart-items/${userId}`, itemRequest).pipe(
-      tap(() => this.notificationService.showSuccess('Item added to cart')),
+      tap(() => {
+        this.notificationService.showSuccess('Item added to cart');
+        this.cartUpdated$.next();
+      }),
       catchError(err => {
         this.notificationService.showError('Failed to add item to cart');
         return this.handleError(err);
@@ -63,13 +70,17 @@ export class CartService {
           map(product => ({ ...updatedItem, product }))
         );
       }),
+      tap(() => this.cartUpdated$.next()),
       catchError(this.handleError)
     );
   }
 
   removeCartItem(itemId: number): Observable<string> {
     return this.http.delete(`${this.apiUrl}/cart-items/${itemId}`, { responseType: 'text' }).pipe(
-      tap(() => this.notificationService.showSuccess('Item removed from cart')),
+      tap(() => {
+        this.notificationService.showSuccess('Item removed from cart');
+        this.cartUpdated$.next();
+      }),
       catchError(err => {
         this.notificationService.showError('Failed to remove item from cart');
         return this.handleError(err);
@@ -80,7 +91,10 @@ export class CartService {
   clearCart(): Observable<string> {
     const userId = this.getUserIdFromAuth();
     return this.http.delete(`${this.apiUrl}/carts/user/${userId}`, { responseType: 'text' }).pipe(
-      tap(() => this.notificationService.showSuccess('Cart cleared')),
+      tap(() => {
+        this.notificationService.showSuccess('Cart cleared');
+        this.cartUpdated$.next();
+      }),
       catchError(err => {
         this.notificationService.showError('Failed to clear cart');
         return this.handleError(err);
