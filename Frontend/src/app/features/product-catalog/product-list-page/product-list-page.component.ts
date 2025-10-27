@@ -7,11 +7,12 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../../core/services/product.service';
 import { ProductResponseDTO } from '../../../core/models/product';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-product-list-page',
   standalone: true,
-  imports: [CommonModule, RouterModule, CategoryFilterComponent, ProductCardComponent, NgbCarouselModule],
+  imports: [CommonModule, RouterModule, CategoryFilterComponent, ProductCardComponent, NgbCarouselModule, ToastModule],
   templateUrl: './product-list-page.component.html',
   styleUrls: ['./product-list-page.component.scss']
 })

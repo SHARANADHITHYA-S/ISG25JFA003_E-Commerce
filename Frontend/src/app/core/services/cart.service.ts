@@ -27,6 +27,11 @@ export class CartService {
     throw new Error('User not logged in or user ID not available.');
   }
 
+  // Public method to notify cart updates from external services (e.g., OrderService)
+  public notifyCartUpdate(): void {
+    this.cartUpdated$.next();
+  }
+
   getCart(): Observable<CartResponse> {
     const userId = this.getUserIdFromAuth();
     return this.http.get<CartResponse>(`${this.apiUrl}/carts/user/${userId}`).pipe(
@@ -53,11 +58,11 @@ export class CartService {
     const itemRequest: CartItemRequest = { productId, quantity };
     return this.http.post<CartItemResponse>(`${this.apiUrl}/cart-items/${userId}`, itemRequest).pipe(
       tap(() => {
-        this.notificationService.showSuccess('Item added to cart');
+        this.notificationService.showSuccess('🛒 Product added to cart successfully!');
         this.cartUpdated$.next();
       }),
       catchError(err => {
-        this.notificationService.showError('Failed to add item to cart');
+        this.notificationService.showError('❌ Failed to add Product to cart. Please try again.');
         return this.handleError(err);
       })
     );
@@ -70,7 +75,10 @@ export class CartService {
           map(product => ({ ...updatedItem, product }))
         );
       }),
-      tap(() => this.cartUpdated$.next()),
+      tap(() => {
+        this.notificationService.showSuccess('✅ Cart updated successfully!');
+        this.cartUpdated$.next();
+      }),
       catchError(this.handleError)
     );
   }
@@ -78,11 +86,11 @@ export class CartService {
   removeCartItem(itemId: number): Observable<string> {
     return this.http.delete(`${this.apiUrl}/cart-items/${itemId}`, { responseType: 'text' }).pipe(
       tap(() => {
-        this.notificationService.showSuccess('Item removed from cart');
+        this.notificationService.showSuccess('🗑️ Product removed from cart');
         this.cartUpdated$.next();
       }),
       catchError(err => {
-        this.notificationService.showError('Failed to remove item from cart');
+        this.notificationService.showError('❌ Failed to remove Product from cart');
         return this.handleError(err);
       })
     );
@@ -92,11 +100,11 @@ export class CartService {
     const userId = this.getUserIdFromAuth();
     return this.http.delete(`${this.apiUrl}/carts/user/${userId}`, { responseType: 'text' }).pipe(
       tap(() => {
-        this.notificationService.showSuccess('Cart cleared');
+        this.notificationService.showSuccess('🧹 Cart cleared successfully!');
         this.cartUpdated$.next();
       }),
       catchError(err => {
-        this.notificationService.showError('Failed to clear cart');
+        this.notificationService.showError('❌ Failed to clear cart');
         return this.handleError(err);
       })
     );

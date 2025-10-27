@@ -4,6 +4,7 @@ import { FeaturesComponent } from './features/features';
 import { FeaturedProductsComponent } from './featured-products/featured-products';
 import { CategoriesComponent } from './categories/categories';
 import { FooterComponent } from '../../shared/components/footer/footer';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-landing-page',
@@ -13,7 +14,8 @@ import { FooterComponent } from '../../shared/components/footer/footer';
     FeaturesComponent,
     FeaturedProductsComponent,
     CategoriesComponent,
-    FooterComponent
+    FooterComponent,
+    ToastModule
   ],
   templateUrl: './landing-page.component.html'
 })

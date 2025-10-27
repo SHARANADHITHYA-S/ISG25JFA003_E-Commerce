@@ -2,12 +2,17 @@
   <app-loader *ngIf="isLoading" [overlay]="true" message="Loading checkout options..."></app-loader>
   <app-error-message *ngIf="error" [message]="error" (retryClick)="loadCheckoutData()"></app-error-message>
 
-  <div *ngIf="!isLoading && !error" class="checkout-card p-3">
-    <h4 class="mb-3">Complete Your Order</h4>
+  <div *ngIf="!isLoading && !error" class="checkout-card p-4">
+    <h4 class="mb-4 text-center">Complete Your Order</h4>
 
-    <div class="mb-3">
-      <h6>Select Shipping Address:</h6>
-      <div *ngIf="addresses.length === 0" class="alert alert-warning">No addresses found. Please add one in your profile.</div>
+    <!-- Shipping Address Section -->
+    <div class="mb-4">
+      <label class="form-label fw-semibold mb-2">
+        <i class="bi bi-geo-alt-fill me-2"></i>Shipping Address
+      </label>
+      <div *ngIf="addresses.length === 0" class="alert alert-warning mb-0">
+        <i class="bi bi-exclamation-triangle me-2"></i>No addresses found. Please add one in your profile.
+      </div>
       <select *ngIf="addresses.length > 0" class="form-select" [(ngModel)]="selectedAddressId">
         <option [ngValue]="null" disabled>Choose an address...</option>
         <option *ngFor="let address of addresses" [ngValue]="address.id">
@@ -16,9 +21,14 @@
       </select>
     </div>
 
-    <div class="mb-3">
-      <h6>Select Payment Method:</h6>
-      <div *ngIf="paymentMethods.length === 0" class="alert alert-warning">No payment methods found. Please add one in your profile.</div>
+    <!-- Payment Method Section -->
+    <div class="mb-4">
+      <label class="form-label fw-semibold mb-2">
+        <i class="bi bi-credit-card-fill me-2"></i>Payment Method
+      </label>
+      <div *ngIf="paymentMethods.length === 0" class="alert alert-warning mb-0">
+        <i class="bi bi-exclamation-triangle me-2"></i>No payment methods found. Please add one in your profile.
+      </div>
       <select *ngIf="paymentMethods.length > 0" class="form-select" [(ngModel)]="selectedPaymentMethodId">
         <option [ngValue]="null" disabled>Choose a payment method...</option>
         <option *ngFor="let method of paymentMethods" [ngValue]="method.paymentMethodId">
@@ -27,10 +37,15 @@
       </select>
     </div>
 
-    <div class="d-flex justify-content-end gap-2">
-      <button class="btn btn-outline-secondary btn-sm" (click)="closeDialog()">Cancel</button>
-      <button class="btn btn-primary btn-sm" (click)="placeOrder()"
-              [disabled]="!selectedAddressId || !selectedPaymentMethodId">Place Order</button>
+    <!-- Action Buttons -->
+    <div class="d-flex justify-content-end gap-3 mt-4">
+      <button class="btn btn-outline-danger px-4" (click)="closeDialog()">
+        <i class="bi bi-x-circle me-1"></i>Cancel
+      </button>
+      <button class="btn btn-success px-4" (click)="placeOrder()"
+              [disabled]="!selectedAddressId || !selectedPaymentMethodId">
+        <i class="bi bi-check-circle me-1"></i>Place Order
+      </button>
     </div>
   </div>
 </div>

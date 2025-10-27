@@ -28,7 +28,7 @@
         <p>{{ p.description }}</p>
 
         <div class="d-flex align-items-center justify-content-center mt-3">
-          <input type="number" class="form-control me-3" style="width: 80px;" [(ngModel)]="quantity" min="1" [max]="p.quantity">
+          Qty:<input type="number" class="form-control me-3" style="width: 80px;" [(ngModel)]="quantity" min="1" [max]="p.quantity">
           <button class="btn btn-primary btn-lg" (click)="addToCart()" [disabled]="!p.is_active || p.quantity <= 0">
               <i class="bi bi-cart-plus-fill"></i> Add to Cart
           </button>
