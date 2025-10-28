@@ -4,12 +4,12 @@ import { Router, RouterModule } from '@angular/router';
 import { ProductResponseDTO } from '../../../../core/models/product';
 import { CartService } from '../../../../core/services/cart.service';
 import { AuthService } from '../../../../core/services/auth.service';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-product-card',
   standalone: true,
-  imports: [CommonModule, RouterModule, MatSnackBarModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.scss']
 })
@@ -20,7 +20,7 @@ export class ProductCardComponent {
     private cartService: CartService,
     private authService: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private messageService: MessageService
   ) {}
 
   addToCart(event: Event): void {
@@ -29,11 +29,11 @@ export class ProductCardComponent {
 
     // Check if user is logged in
     if (!this.authService.isLoggedIn()) {
-      this.snackBar.open('Please login to add items to cart', 'Close', {
-        duration: 3000,
-        horizontalPosition: 'end',
-        verticalPosition: 'top',
-        panelClass: ['warning-snackbar']
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Login Required',
+        detail: '🔒 Please login to add items to cart',
+        life: 3000
       });
       this.router.navigate(['/login']);
       return;
@@ -41,33 +41,23 @@ export class ProductCardComponent {
 
     // Check if product has stock
     if (this.product.quantity <= 0) {
-      this.snackBar.open('Product is out of stock', 'Close', {
-        duration: 3000,
-        horizontalPosition: 'end',
-        verticalPosition: 'top',
-        panelClass: ['error-snackbar']
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Out of Stock',
+        detail: '❌ Product is out of stock',
+        life: 3000
       });
       return;
     }
 
-    // Add to cart
+    // Add to cart - notification is now handled by CartService
     this.cartService.addCartItem(this.product.id, 1).subscribe({
       next: () => {
-        this.snackBar.open('Product added to cart successfully!', 'Close', {
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          panelClass: ['success-snackbar']
-        });
+        // CartService already shows success notification
       },
       error: (err) => {
         console.error('Error adding to cart:', err);
-        this.snackBar.open('Failed to add product to cart', 'Close', {
-          duration: 3000,
-          horizontalPosition: 'end',
-          verticalPosition: 'top',
-          panelClass: ['error-snackbar']
-        });
+        // CartService already shows error notification
       }
     });
   }

@@ -48,7 +48,8 @@ export class ProductDetailPageComponent implements OnInit {
           this.messageService.add({
             severity: 'success',
             summary: 'Success',
-            detail: 'Product added to cart successfully!'
+            detail: '🛒 Product added to cart successfully!',
+            life: 1000
           });
         },
         error: (err) => {
@@ -56,7 +57,8 @@ export class ProductDetailPageComponent implements OnInit {
           this.messageService.add({
             severity: 'error',
             summary: 'Error',
-            detail: 'Failed to add product to cart'
+            detail: 'Failed to add product to cart',
+            life: 5000
           });
         }
       });

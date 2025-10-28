@@ -36,7 +36,7 @@ import { Order } from '../../shared/models/order.model';
                 #currentOrderComponent>
             </app-current-order>
             <hr class="my-5">
-            <app-order-history #orderHistoryComponent (completePayment)="openPaymentDialog({orderId: $event.id, amount: $event.totalAmount, deliveryDate: ''})" (cancelOrder)="onCancelOrder($event)"></app-order-history>
+            <app-order-history #orderHistoryComponent (completePayment)="openPaymentDialog({orderId: $event.id, amount: $event.totalAmount * 1.09, deliveryDate: ''})" (cancelOrder)="onCancelOrder($event)"></app-order-history>
         </div>
     `,
     styles: [`

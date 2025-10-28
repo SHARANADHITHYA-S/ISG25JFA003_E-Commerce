@@ -2,15 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../../core/services/cart.service';
 import { CartResponse, CartItemResponse, CartItemRequest } from '../../../core/models/cart';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog'; // Import MatDialog and MatDialogModule
-import { CheckoutDialogComponent } from '../checkout-dialog/checkout-dialog'; // Import CheckoutDialogComponent
-import { Router } from '@angular/router'; // Import Router
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; // Import MatSnackBar and MatSnackBarModule
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { CheckoutDialogComponent } from '../checkout-dialog/checkout-dialog';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatSnackBarModule], // Add MatSnackBarModule to imports
+  imports: [CommonModule, MatDialogModule, ToastModule],
   templateUrl: './cart.html',
   styleUrls: ['./cart.scss']
 })
@@ -23,7 +24,7 @@ export class CartComponent implements OnInit {
     private cartService: CartService,
     private dialog: MatDialog,
     private router: Router,
-    private snackBar: MatSnackBar // Inject MatSnackBar
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -84,7 +85,12 @@ export class CartComponent implements OnInit {
     const newQuantity = parseInt(inputElement.value, 10);
 
     if (isNaN(newQuantity) || newQuantity < 1) {
-      this.snackBar.open('Quantity must be a positive number.', 'Dismiss', { duration: 3000 });
+      this.messageService.add({
+        severity: 'warn',
+        summary: 'Invalid Quantity',
+        detail: 'Quantity must be a positive number.',
+        life: 3000
+      });
       inputElement.value = item.quantity.toString();
       return;
     }
@@ -103,7 +109,12 @@ export class CartComponent implements OnInit {
         }
       },
       error: (err) => {
-        this.snackBar.open('Failed to update quantity. The item may be out of stock.', 'Dismiss', { duration: 3000 });
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Update Failed',
+          detail: 'Failed to update quantity. The item may be out of stock.',
+          life: 5000
+        });
         inputElement.value = item.quantity.toString(); // Reset the input value
       }
     });
@@ -209,7 +220,12 @@ export class CartComponent implements OnInit {
         }
       },
       error: (err) => {
-        this.snackBar.open('Failed to update quantity.', 'Dismiss', { duration: 3000 });
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Update Failed',
+          detail: 'Failed to update quantity.',
+          life: 5000
+        });
       }
     });
   }
@@ -232,7 +248,12 @@ export class CartComponent implements OnInit {
         }
       },
       error: (err) => {
-        this.snackBar.open('Failed to update quantity.', 'Dismiss', { duration: 3000 });
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Update Failed',
+          detail: 'Failed to update quantity.',
+          life: 5000
+        });
       }
     });
   }

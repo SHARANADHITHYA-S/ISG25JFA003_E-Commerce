@@ -166,9 +166,15 @@ export class CurrentOrderComponent implements OnInit {
 
     onMakePayment(): void {
         if (this.currentOrder && this.currentOrder.id && this.currentOrder.totalAmount && this.selectedDeliveryDate) {
+            // Calculate total with tax (9%) and delivery charges
+            const subtotal = this.currentOrder.totalAmount;
+            const tax = subtotal * 0.09;
+            const deliveryCharge = this.selectedDeliveryDate.isFree ? 0 : 5.99;
+            const totalAmount = subtotal + tax + deliveryCharge;
+            
             this.makePayment.emit({ 
                 orderId: this.currentOrder.id, 
-                amount: this.currentOrder.totalAmount, 
+                amount: totalAmount, // Send total amount including tax and delivery
                 deliveryDate: this.selectedDeliveryDate.date 
             });
         }

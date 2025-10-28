@@ -6,6 +6,7 @@ import { Order } from '../../shared/models/order.model';
 import { AuthService } from './auth.service';
 import { NotificationService } from './notification.service';
 import { ProductService } from './product.service';
+import { CartService } from './cart.service';
 
 export interface PaginatedOrderResponse {
     content: Order[];
@@ -34,7 +35,13 @@ export interface OrderResponseDTO {
 export class OrderService {
     private apiUrl = 'http://localhost:8080/api/orders';
 
-    constructor(private http: HttpClient, private authService: AuthService, private notificationService: NotificationService, private productService: ProductService) { }
+    constructor(
+        private http: HttpClient, 
+        private authService: AuthService, 
+        private notificationService: NotificationService, 
+        private productService: ProductService,
+        private cartService: CartService
+    ) { }
 
     private getUserIdFromAuth(): number {
         const user = this.authService.getCurrentUser();
@@ -60,7 +67,11 @@ export class OrderService {
         };
 
         return this.http.post<OrderResponseDTO>(this.apiUrl, orderRequest).pipe(
-            tap(() => this.notificationService.showSuccess('Order placed successfully')),
+            tap(() => {
+                this.notificationService.showSuccess('Order placed successfully');
+                // Notify cart service that cart has been cleared (order placed)
+                this.cartService.notifyCartUpdate();
+            }),
             catchError(err => {
                 this.notificationService.showError('Failed to place order');
                 return this.handleError(err);
@@ -173,7 +184,11 @@ export class OrderService {
             : 'Order cancelled successfully. Items have been returned to your cart.';
 
         return this.http.delete<Order>(`${this.apiUrl}/${orderId}`).pipe(
-            tap(() => this.notificationService.showSuccess(message)),
+            tap(() => {
+                this.notificationService.showSuccess(message);
+                // Notify cart service that items have been returned to cart
+                this.cartService.notifyCartUpdate();
+            }),
             catchError(err => {
                 this.notificationService.showError('Failed to cancel order');
                 return this.handleError(err);
