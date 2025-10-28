@@ -45,7 +45,7 @@ export class OrderHistoryComponent implements OnInit {
         this.error = null;
         this.orderService.getOrdersByPage(0, 100).subscribe({
             next: (response: PaginatedOrderResponse) => {
-                this.allOrders = response.content;
+                this.allOrders = response.content.sort((a, b) => new Date(b.placed_at).getTime() - new Date(a.placed_at).getTime());
                 this.loading = false;
             },
             error: (error: any) => {

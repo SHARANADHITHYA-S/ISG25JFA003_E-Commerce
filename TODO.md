@@ -1,0 +1,6 @@
+- [ ] Create categories-page.component.ts
+- [ ] Create categories-page.component.html
+- [ ] Create categories-page.component.scss
+- [ ] Update app.routes.ts to load CategoriesPageComponent for /categories
+- [ ] Update product-list-page.component.ts to use queryParamMap for categoryId
+- [ ] Update category-filter.component.ts to navigate with query param categoryId

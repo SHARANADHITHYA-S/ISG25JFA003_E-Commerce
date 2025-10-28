@@ -60,7 +60,7 @@
           <div class="order-total-section">
             <div class="total-info">
               <span class="total-label">Total Amount:</span>
-              <span class="total-amount">{{ order.totalAmount | currency }}</span>
+              <span class="total-amount">{{ order.totalAmount | currency:'INR' }}</span>
             </div>
             <div class="items-count">
               <i class="bi bi-box-seam me-1"></i>{{ order.orderItems.length }} {{ order.orderItems.length === 1 ? 'Item' : 'Items' }}
@@ -103,11 +103,11 @@
                       <span class="quantity">
                         <i class="bi bi-dash-circle me-1"></i>Qty: {{ item.quantity }}
                       </span>
-                      <span class="price">{{ item.price | currency }}</span>
+                      <span class="price">{{ item.price | currency:'INR' }}</span>
                     </div>
                     <div class="item-total">
                       <span class="total-label">Subtotal:</span>
-                      <span class="total-value">{{ (item.price * item.quantity) | currency }}</span>
+                      <span class="total-value">{{ (item.price * item.quantity) | currency:'INR' }}</span>
                     </div>
                   </div>
                 </div>
@@ -122,7 +122,7 @@
               <div class="summary-details">
                 <div class="summary-row">
                   <span>Subtotal:</span>
-                  <span class="summary-value">{{ order.totalAmount | currency }}</span>
+                  <span class="summary-value">{{ order.totalAmount | currency:'INR' }}</span>
                 </div>
                 <div class="summary-row">
                   <span>Shipping:</span>
@@ -130,11 +130,11 @@
                 </div>
                 <div class="summary-row">
                   <span>Tax (9%):</span>
-                  <span class="summary-value">{{ order.totalAmount * 0.09 | currency }}</span>
+                  <span class="summary-value">{{ order.totalAmount * 0.09 | currency:'INR' }}</span>
                 </div>
                 <div class="summary-row total">
                   <span>Grand Total:</span>
-                  <span class="total-value">{{ order.totalAmount * 1.09 | currency }}</span>
+                  <span class="total-value">{{ order.totalAmount * 1.09 | currency:'INR' }}</span>
                 </div>
               </div>
             </div>
@@ -170,7 +170,7 @@
               <button class="btn btn-outline-success" *ngIf="order.status === 'PENDING'" (click)="onCompletePayment(order)">
                 <i class="bi bi-credit-card me-2"></i>Complete Payment
               </button>
-              <button class="btn btn-outline-danger" *ngIf="order.status === 'PENDING' || order.status === 'PAID' || order.status === 'PROCESSING' || order.status === 'SHIPPED'" (click)="onCancelOrder(order)">
+              <button class="btn btn-outline-danger" *ngIf="order.status !== 'DELIVERED' && order.status !== 'COMPLETED' && order.status !== 'CANCELLED'" (click)="onCancelOrder(order)">
                 <i class="bi bi-x-circle me-2"></i>Cancel Order
               </button>
               <button class="btn btn-outline-info">
